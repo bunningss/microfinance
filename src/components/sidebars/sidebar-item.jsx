@@ -18,13 +18,13 @@ export function SidebarItem({ item }) {
           <Icon icon={item?.icon} size={20} />
           <span className="capitalize">{item?.label}</span>
         </div>
-        {item?.children?.length !== 0 && (
+        {item?.children?.length > 0 && (
           <Icon icon={isOpen ? "arrowUp" : "arrowDown"} />
         )}
       </Link>
 
       {/* Children */}
-      {item?.children?.length !== 0 && isOpen && (
+      {item?.children?.length > 0 && isOpen && (
         <div className="flex flex-col ml-12 border-l border-primary border-dashed">
           {item?.children?.map((child, index) => (
             <div

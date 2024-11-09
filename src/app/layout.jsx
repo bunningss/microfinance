@@ -1,4 +1,6 @@
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 import { font } from "@/lib/fonts";
 
 export const metadata = {
@@ -9,7 +11,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={font.className}>{children}</body>
+      <body className={font.className}>
+        <EdgeStoreProvider>{children}</EdgeStoreProvider>
+        <Toaster richColors position="top-right" />
+      </body>
     </html>
   );
 }

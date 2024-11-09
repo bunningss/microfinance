@@ -5,49 +5,19 @@ const sidebarItems = [
     label: "dashboard",
     href: "/dashboard",
     icon: "dashboard",
-    children: [],
   },
   {
-    label: "product",
+    label: "Inventory",
     href: "",
-    icon: "product",
+    icon: "members",
     children: [
       {
-        label: "view products",
-        href: "products",
-        icon: "",
+        label: "view ",
+        href: "members",
       },
       {
-        label: "add product",
-        href: "products/add",
-        icon: "",
-      },
-    ],
-  },
-  {
-    label: "category",
-    href: "",
-    icon: "category",
-    children: [
-      {
-        label: "view categories",
-        href: "categories",
-        icon: "",
-      },
-      {
-        label: "view sub categories",
-        href: "categories/sub-categories",
-        icon: "",
-      },
-      {
-        label: "add category",
-        href: "categories/add",
-        icon: "",
-      },
-      {
-        label: "add sub category",
-        href: "categories/sub-categories/add",
-        icon: "",
+        label: "add ",
+        href: "members/add",
       },
     ],
   },
@@ -69,64 +39,18 @@ const sidebarItems = [
     ],
   },
   {
-    label: "orders",
-    href: "",
-    icon: "order",
-    children: [
-      {
-        label: "view orders",
-        href: "orders",
-        icon: "",
-      },
-      {
-        label: "create order",
-        href: "orders/add",
-        icon: "",
-      },
-    ],
-  },
-  {
-    label: "users",
+    label: "staffs",
     href: "",
     icon: "user",
     children: [
       {
-        label: "view users",
-        href: "users",
+        label: "view staffs",
+        href: "staffs",
         icon: "",
       },
       {
-        label: "add user",
-        href: "users/add",
-        icon: "",
-      },
-    ],
-  },
-  {
-    label: "coupon code",
-    href: "",
-    icon: "coupon",
-    children: [
-      {
-        label: "view coupons",
-        href: "coupons",
-        icon: "",
-      },
-      {
-        label: "add coupon",
-        href: "coupons/add",
-        icon: "",
-      },
-    ],
-  },
-  {
-    label: "withdrawals",
-    href: "",
-    icon: "user",
-    children: [
-      {
-        label: "withdrawal requests",
-        href: "withdrawals",
+        label: "add staff",
+        href: "staffs/add",
         icon: "",
       },
     ],
