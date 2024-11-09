@@ -1,9 +1,9 @@
-import { getRole } from "@/utils/auth";
+import { getSession } from "@/utils/auth";
 import { initEdgeStore } from "@edgestore/server";
 import { createEdgeStoreNextHandler } from "@edgestore/server/adapters/next/app";
 
 async function createContext() {
-  const { id, role, siteId } = await getRole();
+  const { id, role, siteId } = await getSession();
 
   return {
     userId: id ? id : "user-123",

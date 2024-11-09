@@ -3,7 +3,7 @@ import User from "@/lib/models/User";
 import { jwtVerify } from "jose";
 import { getCookie, setCookie } from "./cookie";
 
-export async function decryptToken() {
+export async function getSession() {
   const session = await getCookie("ze-session");
 
   if (!session)
@@ -21,26 +21,20 @@ export async function decryptToken() {
       }
     );
 
+    const user = await User.findById(verifiedToken.payload?._id);
+
     return {
       error: false,
-      payload: verifiedToken.payload,
+      payload: user,
+      role: user.role,
+      id: user._id,
+      siteId: user.siteId,
     };
   } catch (err) {
     return {
       error: true,
       payload: null,
     };
-  }
-}
-
-export async function getRole() {
-  try {
-    const user = await decryptToken();
-    const dbUser = await User.findById(user.payload?._id);
-
-    return { role: dbUser.role, id: dbUser._id, siteId: dbUser.siteId };
-  } catch (err) {
-    return { role: null, id: null };
   }
 }
 
