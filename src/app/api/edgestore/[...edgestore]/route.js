@@ -23,9 +23,9 @@ const handler = createEdgeStoreNextHandler({
     const { siteId, id, role } = await getRole();
 
     return {
-      userId: id,
-      userRole: role,
-      siteId: siteId,
+      userId: id ? id : "invalid-user",
+      userRole: role ? role : "user",
+      siteId: siteId ? siteId : "unavailable",
     };
   },
 });
