@@ -4,8 +4,9 @@ import { useEdgeStore } from "@/lib/edgestore";
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { Progress } from "./ui/progress";
+import { cn } from "@/lib/utils";
 
-export function ImageDropzone({}) {
+export function ImageDropzone({ className }) {
   const [imageUrl, setImageUrl] = useState(null);
   const [progress, setProgress] = useState(0);
   const { edgestore } = useEdgeStore();
@@ -36,7 +37,10 @@ export function ImageDropzone({}) {
     <div className="space-y-2">
       <div
         {...getRootProps()}
-        className="h-36 w-full border border-input border-dashed rounded-md flex items-center justify-center"
+        className={cn(
+          "h-36 w-full border border-input border-dashed rounded-md flex items-center justify-center",
+          className
+        )}
       >
         <input {...getInputProps()} />
         {isDragActive ? (
