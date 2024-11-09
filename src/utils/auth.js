@@ -1,5 +1,4 @@
 "use server";
-import User from "@/lib/models/User";
 import { jwtVerify } from "jose";
 import { getCookie, setCookie } from "./cookie";
 
@@ -21,14 +20,12 @@ export async function getSession() {
       }
     );
 
-    const user = await User.findById(verifiedToken.payload?._id);
-
     return {
       error: false,
-      payload: user,
-      role: user.role,
-      id: user._id,
-      siteId: user.siteId,
+      payload: verifiedToken.payload,
+      role: verifiedToken.payload.role,
+      id: verifiedToken.payload._id,
+      siteId: verifiedToken.payload.siteId,
     };
   } catch (err) {
     return {

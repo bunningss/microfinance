@@ -16,7 +16,7 @@ export async function middleware(request) {
       pathname.startsWith("/forgot-password") ||
       pathname.startsWith("/reset-password")
     ) {
-      return NextResponse.redirect(new URL("/", request.url));
+      return NextResponse.redirect(new URL("/dashboard", request.url));
     }
   }
 
