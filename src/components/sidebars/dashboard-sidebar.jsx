@@ -7,16 +7,16 @@ const sidebarItems = [
     icon: "dashboard",
   },
   {
-    label: "Inventory",
+    label: "members",
     href: "",
     icon: "members",
     children: [
       {
-        label: "view ",
-        href: "members",
+        label: "view members",
+        href: "members?page=1",
       },
       {
-        label: "add ",
+        label: "add members",
         href: "members/add",
       },
     ],
