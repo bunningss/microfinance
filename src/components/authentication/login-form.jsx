@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { FormModal } from "../form/form-modal";
+import { useEdgeStore } from "@/lib/edgestore";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -24,6 +25,7 @@ const formSchema = z.object({
 export function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const { reset } = useEdgeStore();
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -32,6 +34,10 @@ export function LoginForm() {
       password: "",
     },
   });
+
+  async function runAfterAuthChange() {
+    await reset();
+  }
 
   const handleLoginForm = async (data) => {
     setIsLoading(true);
@@ -43,11 +49,14 @@ export function LoginForm() {
         return errorNotification(res.response.msg);
       }
 
-      await setCookie(
-        "ze-session",
-        res.response.session_token,
-        res.response.expiryTime
-      );
+      await Promise.all([
+        setCookie(
+          "ze-session",
+          res.response.session_token,
+          res.response.expiryTime
+        ),
+        runAfterAuthChange(),
+      ]);
 
       router.push("/");
       successNotification(res.response.msg);
