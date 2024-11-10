@@ -1,10 +1,21 @@
-import { ChevronDown, ChevronUp, Eye, User } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronUp,
+  Eye,
+  HandCoins,
+  LayoutDashboard,
+  User,
+  Users,
+} from "lucide-react";
 
 const Icons = {
   arrowUp: ChevronUp,
   arrowDown: ChevronDown,
   view: Eye,
   user: User,
+  members: Users,
+  dashboard: LayoutDashboard,
+  expense: HandCoins,
 };
 
 export function Icon({
