@@ -348,7 +348,7 @@ export function AddMember() {
           <FormInput
             form={form}
             name="introducersName"
-            label="introducersName / পরিচয়কারীর নাম"
+            label="Introducers Name / পরিচয়কারীর নাম"
             placeholder=""
             required
           />

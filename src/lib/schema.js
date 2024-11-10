@@ -45,3 +45,15 @@ export const addMemberFormSchema = z.object({
     message: "Introducer's name is required",
   }),
 });
+
+// Add staff schema
+export const addStaffFormSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email").min(1, "Email is required"),
+  password: z.string().min(1, "Password is required"),
+  confirmPassword: z.string().min(1, "Confirm password is required"),
+  role: z.enum(["staff", "marketing officer", "admin"], {
+    message: "Invalid role",
+  }),
+  salary: z.string().min(1, "Salary is required"),
+});

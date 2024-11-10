@@ -9,7 +9,7 @@ async function Members() {
   const members = res.response.payload;
 
   return (
-    <CardView>
+    <CardView className="grid md:grid-cols-2">
       {members?.map((member, index) => (
         <MemberCard key={index} data={member} />
       ))}

@@ -38,7 +38,7 @@ export async function POST(request) {
     // Creating new user
     const newUser = new User({
       name: body.name,
-      siteId: "shopnotoricom",
+      siteId: process.env.SITE_ID,
       email: body.email,
       password: hashedPassword,
     });

@@ -16,8 +16,8 @@ export async function postData(url, data) {
       "auth-token": `Bearer ${token}`,
     },
   });
-
   const resData = await res.json();
+
   if (!res.ok) {
     return {
       error: true,
