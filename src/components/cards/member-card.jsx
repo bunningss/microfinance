@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 
 export function MemberCard({ data }) {
   return (
-    <Card title={data?.name}>
+    <Card title={data?.name} className="relative">
       <CardContent className="flex items-center gap-2 p-1 md:p-1">
         <figure className="relative h-[100px] w-[120px]">
           <Image
@@ -21,9 +21,21 @@ export function MemberCard({ data }) {
             {data?.name}
           </CardTitle>
           <div className="flex gap-2">
-            <span>Member No: {data.nidNumber}</span>
+            <span>
+              Member No: <b>{data.nidNumber}</b>
+            </span>
+            <span>
+              Mobile No: <b>{data.phone}</b>
+            </span>
           </div>
-          <div className="flex items-center justify-end">
+          <div className="flex gap-2">
+            <p>
+              Area: <b>{data?.currArea}</b>,Village: <b>{data?.currVillage}</b>,
+              Post Office: <b>{data?.currPostOffice}</b>, Police Station:{" "}
+              <b>{data?.currPoliceStation}</b>
+            </p>
+          </div>
+          <div className="absolute top-1 right-1">
             <Link href={`/dashboard/members/${data?.nidNumber}`} passHref>
               <Button size="icon" className="rounded-full" icon="view" />
             </Link>
