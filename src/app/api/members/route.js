@@ -86,3 +86,27 @@ export async function POST(request) {
     session.endSession();
   }
 }
+
+// Get all members
+export async function GET(request) {
+  try {
+    const { error, id } = await verifyToken(request);
+    if (error)
+      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+
+    await connectDb();
+
+    const user = await User.findById(id);
+    if (user.role !== "admin")
+      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+
+    const members = await Member.find().sort({ createdAt: -1 });
+
+    return NextResponse.json(
+      { msg: "Data found.", payload: members },
+      { status: 200 }
+    );
+  } catch (err) {
+    return NextResponse.json({ msg: err.message }, { status: 400 });
+  }
+}

@@ -1,28 +1,28 @@
 import { Block } from "@/components/block";
 import { CardView } from "@/components/card-view";
-import { MemberCard } from "@/components/cards/member-card";
+import { StaffCard } from "@/components/cards/staff-card";
 import { getData } from "@/utils/api-calls";
 import { Suspense } from "react";
 
-async function Members() {
-  const res = await getData("members", 0);
-  const members = res.response.payload;
+async function Staffs() {
+  const res = await getData("staffs", 0);
+  const staffs = res.response.payload;
 
   return (
     <CardView>
-      {members?.map((member, index) => (
-        <MemberCard key={index} data={member} />
+      {staffs?.map((staff, index) => (
+        <StaffCard key={index} user={staff} />
       ))}
     </CardView>
   );
 }
 
-export default async function Page() {
+export default function Page() {
   return (
     <div className="space-y-4">
-      <Block title="View members" />
+      <Block title="staff members" />
       <Suspense fallback={<p>Loading...</p>}>
-        <Members />
+        <Staffs />
       </Suspense>
     </div>
   );

@@ -1,8 +1,10 @@
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, Eye, User } from "lucide-react";
 
 const Icons = {
   arrowUp: ChevronUp,
   arrowDown: ChevronDown,
+  view: Eye,
+  user: User,
 };
 
 export function Icon({
