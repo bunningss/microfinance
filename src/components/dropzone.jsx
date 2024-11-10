@@ -6,7 +6,7 @@ import { useDropzone } from "react-dropzone";
 import { Progress } from "./ui/progress";
 import { cn } from "@/lib/utils";
 
-export function ImageDropzone({ className, file, setFile }) {
+export function ImageDropzone({ className, file, setFile, label }) {
   const [progress, setProgress] = useState(0);
   const { edgestore } = useEdgeStore();
 
@@ -42,13 +42,7 @@ export function ImageDropzone({ className, file, setFile }) {
         )}
       >
         <input {...getInputProps()} />
-        {isDragActive ? (
-          <p>Drop the files here ...</p>
-        ) : (
-          <p>
-            Drag &apos;n&apos; drop some files here, or click to select files
-          </p>
-        )}
+        <p>{label}</p>
       </div>
       {file && (
         <figure className="relative w-32 h-32 border border-input border-dashed rounded-md overflow-hidden">

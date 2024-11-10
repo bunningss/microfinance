@@ -98,7 +98,11 @@ export function AddMember() {
       formLabel="Add"
       onSubmit={handleSubmit}
     >
-      <ImageDropzone file={userImage} setFile={setUserImage} />
+      <ImageDropzone
+        file={userImage}
+        setFile={setUserImage}
+        label="Applicant picture / আবেদনকারীর ছবি"
+      />
       <FormInput
         form={form}
         name="name"
@@ -307,6 +311,7 @@ export function AddMember() {
           className="bg-background"
           setFile={setNomineeImage}
           file={nomineeImage}
+          label="Nominee's picture / মনোনীত ব্যক্তির ছবি"
         />
         <div className="flex flex-col lg:flex-row gap-2">
           <FormInput
