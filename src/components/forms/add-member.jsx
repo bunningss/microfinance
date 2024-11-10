@@ -106,7 +106,7 @@ export function AddMember() {
         placeholder=""
         required
       />
-      <div className="flex gap-2">
+      <div className="flex flex-col lg:flex-row gap-2">
         <FormInput
           form={form}
           name="fathersName"
@@ -128,7 +128,7 @@ export function AddMember() {
           Permanent address / স্থায়ী ঠিকানা
         </span>
 
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid lg:grid-cols-3 gap-2">
           <FormInput
             form={form}
             name="permVillage"
@@ -173,7 +173,7 @@ export function AddMember() {
         <span className="capitalize border-b border-b-input w-full block pb-2 font-bold">
           present address / বর্তমান ঠিকানা
         </span>
-        <div className="grid grid-cols-3 gap-2 gap-y-4">
+        <div className="grid lg:grid-cols-3 gap-2 gap-y-4">
           <FormInput
             form={form}
             name="currVillage"
@@ -265,7 +265,7 @@ export function AddMember() {
           required
         />
       </div>
-      <div className="flex gap-2">
+      <div className="flex flex-col lg:flex-row gap-2">
         <FormSelect
           form={form}
           label="Savings type / সঞ্চয়ের ধরণ"
@@ -308,7 +308,7 @@ export function AddMember() {
           setFile={setNomineeImage}
           file={nomineeImage}
         />
-        <div className="flex gap-2">
+        <div className="flex flex-col lg:flex-row gap-2">
           <FormInput
             form={form}
             name="nomineeName"
@@ -332,7 +332,7 @@ export function AddMember() {
           required
           type="date"
         />
-        <div className="flex gap-2">
+        <div className="flex flex-col lg:flex-row gap-2">
           <FormInput
             form={form}
             name="nomineeNidNumber"
