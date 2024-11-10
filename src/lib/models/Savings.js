@@ -18,6 +18,28 @@ const savingsSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  endDate: {
+    type: Date,
+    required: true,
+  },
+  installments: [
+    {
+      date: {
+        type: Date,
+        required: true,
+      },
+      status: {
+        type: String,
+        required: true,
+        default: "unpaid",
+        enum: ["paid", "unpaid"],
+      },
+      amount: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "member",

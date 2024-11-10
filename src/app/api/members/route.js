@@ -5,6 +5,7 @@ import Savings from "@/lib/models/Savings";
 import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
+import { generateInstallments } from "@/utils/helpers";
 
 export async function POST(request) {
   await connectDb();
@@ -51,16 +52,26 @@ export async function POST(request) {
       memberImage: body.memberImage,
       nomineeImage: body.nomineeImage,
     });
-    await newMember.save({ session });
+
+    // Generate user installments
+    const installments = generateInstallments(
+      new Date(body.startDate).toISOString(),
+      body.savingsType,
+      parseInt(body.savingsDuration),
+      parseInt(body.savingsAmount)
+    );
 
     const newSavings = new Savings({
       savingsType: body.savingsType,
       savingsAmount: body.savingsAmount,
       savingsDuration: body.savingsDuration,
       startDate: body.startDate,
+      endDate: installments.at(-1).date,
       owner: newMember._id,
+      installments,
     });
 
+    await newMember.save({ session });
     await newSavings.save({ session });
 
     await Member.findByIdAndUpdate(
