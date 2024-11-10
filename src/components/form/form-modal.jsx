@@ -19,7 +19,7 @@ export function FormModal({
           icon={icon}
           type="submit"
           className="w-full"
-          loading={loading?.toString()}
+          loading={loading}
           disabled={disabled}
         >
           {formLabel}

@@ -7,9 +7,17 @@ import { ImageDropzone } from "../dropzone";
 import { useState } from "react";
 import { FormSelect } from "../form/form-select";
 import { addMemberFormSchema } from "@/lib/schema";
+import {
+  errorNotification,
+  successNotification,
+  warningNotification,
+} from "@/utils/toast";
+import { postData } from "@/utils/api-calls";
 
 export function AddMember() {
-  const [file, setFile] = useState(null);
+  const [userImage, setUserImage] = useState(null);
+  const [nomineeImage, setNomineeImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm({
     resolver: zodResolver(addMemberFormSchema),
@@ -46,7 +54,26 @@ export function AddMember() {
     },
   });
 
-  const handleSubmit = async (data) => {};
+  const handleSubmit = async (data) => {
+    setIsLoading(true);
+    try {
+      if (!userImage || !nomineeImage)
+        return warningNotification("ছবি যোগ করুন");
+
+      const res = await postData("members", {
+        ...data,
+        memberImage: userImage,
+        nomineeImage,
+      });
+      if (res.error) return errorNotification(res.response.msg);
+
+      successNotification(res.response.msg);
+    } catch (err) {
+      errorNotification(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const savingsTypes = [
     {
@@ -64,8 +91,14 @@ export function AddMember() {
   ];
 
   return (
-    <FormModal form={form} formLabel="Add" onSubmit={handleSubmit}>
-      <ImageDropzone file={file} setFile={setFile} />
+    <FormModal
+      form={form}
+      loading={isLoading}
+      disabled={isLoading}
+      formLabel="Add"
+      onSubmit={handleSubmit}
+    >
+      <ImageDropzone file={userImage} setFile={setUserImage} />
       <FormInput
         form={form}
         name="name"
@@ -270,7 +303,11 @@ export function AddMember() {
         <span className="capitalize border-b border-b-input w-full block pb-2 font-bold">
           Nominee information / নমিনির তথ্য
         </span>
-        <ImageDropzone className="bg-background" />
+        <ImageDropzone
+          className="bg-background"
+          setFile={setNomineeImage}
+          file={nomineeImage}
+        />
         <div className="flex gap-2">
           <FormInput
             form={form}

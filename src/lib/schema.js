@@ -18,14 +18,14 @@ export const addMemberFormSchema = z.object({
   nidNumber: z.string().min(1, "NID number is required"),
   birthCertificateNumber: z.string().nullable(),
   nationality: z.string().min(1, "Nationality is required"),
-  age: z.number().min(1, "Age is required").positive(),
+  age: z.string().min(1, "Age is required"),
   occupation: z.string().min(1, "Occupation is required"),
   religion: z.string().min(1, "Religion is required"),
   savingsType: z.enum(["daily", "weekly", "monthly"], {
     message: "Invalid savings type",
   }),
-  savingsAmount: z.number().min(1, "Savings amount is required").positive(),
-  savingsDuration: z.number().min(1, "Savings duration is required").positive(),
+  savingsAmount: z.string().min(1, "Savings amount is required"),
+  savingsDuration: z.string().min(1, "Savings duration is required"),
   startDate: z
     .string()
     .min(1, "Start date is required")

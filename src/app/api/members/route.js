@@ -1,0 +1,88 @@
+import mongoose from "mongoose";
+import User from "@/lib/models/User";
+import Member from "@/lib/models/Member";
+import Savings from "@/lib/models/Savings";
+import { connectDb } from "@/lib/db/connectDb";
+import { verifyToken } from "@/utils/auth";
+import { NextResponse } from "next/server";
+
+export async function POST(request) {
+  await connectDb();
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
+  try {
+    const { error, id } = await verifyToken(request);
+    if (error)
+      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+
+    const user = await User.findById(id);
+    if (user.role !== "admin")
+      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+
+    const body = await request.json();
+
+    const newMember = new Member({
+      name: body.name,
+      fathersName: body.fathersName,
+      mothersName: body.mothersName,
+      permVillage: body.permVillage,
+      permPostOffice: body.permPostOffice,
+      permPoliceStation: body.permPoliceStation,
+      permDistrict: body.permDistrict,
+      homePhone: body.homePhone,
+      currVillage: body.currVillage,
+      currPostOffice: body.currPostOffice,
+      currArea: body.currArea,
+      currPoliceStation: body.currPoliceStation,
+      currDistrict: body.currDistrict,
+      phone: body.phone,
+      nidNumber: body.nidNumber,
+      birthCertificateNumber: body.birthCertificateNumber,
+      nationality: body.nationality,
+      age: body.age,
+      occupation: body.occupation,
+      religion: body.religion,
+      nomineeName: body.nomineeName,
+      relationWithNominee: body.relationWithNominee,
+      nomineeBirthDate: body.nomineeBirthDate,
+      nomineeNidNumber: body.nomineeNidNumber,
+      introducersName: body.introducersName,
+      memberImage: body.memberImage,
+      nomineeImage: body.nomineeImage,
+    });
+    await newMember.save({ session });
+
+    const newSavings = new Savings({
+      savingsType: body.savingsType,
+      savingsAmount: body.savingsAmount,
+      savingsDuration: body.savingsDuration,
+      startDate: body.startDate,
+      owner: newMember._id,
+    });
+
+    await newSavings.save({ session });
+
+    await Member.findByIdAndUpdate(
+      newMember._id,
+      {
+        $push: { savings: newSavings },
+      },
+      {
+        new: true,
+        session,
+      }
+    );
+    await session.commitTransaction();
+    return NextResponse.json(
+      { msg: "সদস্য তথ্য সফলভাবে সংরক্ষিত" },
+      { status: 200 }
+    );
+  } catch (err) {
+    console.log(err);
+    await session.abortTransaction();
+    return NextResponse.json({ msg: err.message }, { status: 400 });
+  } finally {
+    session.endSession();
+  }
+}

@@ -58,7 +58,7 @@ export function LoginForm() {
         runAfterAuthChange(),
       ]);
 
-      router.push("/");
+      router.push("/dashboard");
       successNotification(res.response.msg);
     } catch (err) {
       errorNotification(err.message);

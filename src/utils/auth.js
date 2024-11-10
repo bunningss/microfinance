@@ -56,6 +56,7 @@ export async function verifyToken(request) {
     return {
       error: false,
       payload: verifiedToken.payload,
+      id: verifiedToken.payload?._id,
     };
   } catch (err) {
     return {

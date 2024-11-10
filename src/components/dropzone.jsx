@@ -6,8 +6,7 @@ import { useDropzone } from "react-dropzone";
 import { Progress } from "./ui/progress";
 import { cn } from "@/lib/utils";
 
-export function ImageDropzone({ className }) {
-  const [imageUrl, setImageUrl] = useState(null);
+export function ImageDropzone({ className, file, setFile }) {
   const [progress, setProgress] = useState(0);
   const { edgestore } = useEdgeStore();
 
@@ -24,7 +23,7 @@ export function ImageDropzone({ className }) {
             setProgress(progress);
           },
         });
-        setImageUrl(res);
+        setFile(res.url);
       } catch (err) {
         console.log(err);
       }
@@ -51,10 +50,10 @@ export function ImageDropzone({ className }) {
           </p>
         )}
       </div>
-      {imageUrl && (
+      {file && (
         <figure className="relative w-32 h-32 border border-input border-dashed rounded-md overflow-hidden">
           <Image
-            src={imageUrl?.url}
+            src={file}
             alt="user image"
             fill
             sizes="100px"
