@@ -4,6 +4,7 @@ import {
   Eye,
   HandCoins,
   LayoutDashboard,
+  Menu,
   User,
   Users,
 } from "lucide-react";
@@ -16,6 +17,7 @@ const Icons = {
   members: Users,
   dashboard: LayoutDashboard,
   expense: HandCoins,
+  menu: Menu,
 };
 
 export function Icon({

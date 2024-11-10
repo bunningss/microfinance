@@ -2,16 +2,27 @@
 import Link from "next/link";
 import { Icon } from "@/components/icon";
 import { useState } from "react";
+import { useDashboardSidebar } from "@/hooks/modal-controllers";
 
 export function SidebarItem({ item }) {
   const [isOpen, setIsOpen] = useState(false);
+  const sidebar = useDashboardSidebar();
+
+  const handleSidebarClose = () => {
+    if (!item.children || item.children?.length <= 0) {
+      sidebar.onClose();
+    }
+  };
 
   return (
     <>
       <Link
         href={item?.href ? item?.href : "#"}
         role="button"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          setIsOpen(!isOpen);
+          handleSidebarClose();
+        }}
         className="flex justify-between items-center p-2 hover:bg-input hover:text-primary rounded-md transition-colors duration-300 select-none"
       >
         <div className="flex gap-2 items-center">
@@ -28,6 +39,7 @@ export function SidebarItem({ item }) {
         <div className="flex flex-col ml-12 border-l border-primary border-dashed">
           {item?.children?.map((child, index) => (
             <div
+              onClick={sidebar.onClose}
               key={index}
               className="pt-2 pb-2 pr-2 flex items-center gap-2 before:content-[''] before:h-[1px] before:w-4 before:border-t before:border-primary before:border-dashed"
             >
