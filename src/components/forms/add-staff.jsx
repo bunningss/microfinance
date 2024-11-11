@@ -72,7 +72,7 @@ export function AddStaff() {
       />
       <FormInput
         form={form}
-        label="email / "
+        label="email / ইমেইল"
         placeholder=""
         name="email"
         required

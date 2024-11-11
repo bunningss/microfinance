@@ -101,7 +101,7 @@ export function AddMember() {
       <ImageDropzone
         file={userImage}
         setFile={setUserImage}
-        label="Applicant picture / আবেদনকারীর ছবি"
+        label="Applicant photo / আবেদনকারীর ছবি"
       />
       <FormInput
         form={form}
@@ -311,7 +311,7 @@ export function AddMember() {
           className="bg-background"
           setFile={setNomineeImage}
           file={nomineeImage}
-          label="Nominee's picture / মনোনীত ব্যক্তির ছবি"
+          label="Nominee's photo / মনোনীত ব্যক্তির ছবি"
         />
         <div className="flex flex-col lg:flex-row gap-2">
           <FormInput

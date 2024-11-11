@@ -21,7 +21,12 @@ export async function middleware(request) {
   }
 
   // Redirect non-admin users from dashboard
-  if (role?.toLowerCase() !== "admin" && pathname.startsWith("/dashboard")) {
+  if (
+    role?.toLowerCase() !== "admin" &&
+    role?.toLowerCase() !== "marketing officer" &&
+    role?.toLowerCase() !== "staff" &&
+    pathname.startsWith("/dashboard")
+  ) {
     return NextResponse.redirect(new URL(SIGN_IN_URL, request.url));
   }
 
