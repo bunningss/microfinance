@@ -34,3 +34,22 @@ export function generateInstallments(
 
   return installments;
 }
+
+export function getMonthNamesWithYear() {
+  const year = new Date().getFullYear();
+  const monthsWithYear = [];
+  for (let i = 0; i < 12; i++) {
+    const date = new Date(year, i, 1);
+    const monthNameWithYear = {
+      name: `${date.toLocaleString("default", {
+        month: "long",
+      })} ${year}`,
+      value: `${date.toLocaleString("default", {
+        month: "long",
+      })} ${year}`,
+    };
+
+    monthsWithYear.push(monthNameWithYear);
+  }
+  return monthsWithYear;
+}

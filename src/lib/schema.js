@@ -60,7 +60,7 @@ export const addStaffFormSchema = z.object({
 
 // Add salary Schema
 export const addSalarySchema = z.object({
-  staffName: z.string().min(1, {
+  staff: z.string().min(1, {
     message: "Please select staff.",
   }),
   month: z.string().min(3, {

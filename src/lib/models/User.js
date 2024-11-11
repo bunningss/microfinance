@@ -69,6 +69,12 @@ const userSchema = new mongoose.Schema(
       type: Number,
       required: false,
     },
+    payments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "salary",
+      },
+    ],
   },
   {
     timestamps: true,
