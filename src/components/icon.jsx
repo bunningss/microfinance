@@ -5,6 +5,7 @@ import {
   HandCoins,
   LayoutDashboard,
   Menu,
+  Plus,
   User,
   Users,
   X,
@@ -20,6 +21,7 @@ const Icons = {
   expense: HandCoins,
   menu: Menu,
   close: X,
+  plus: Plus,
 };
 
 export function Icon({

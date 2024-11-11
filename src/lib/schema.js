@@ -57,3 +57,16 @@ export const addStaffFormSchema = z.object({
   }),
   salary: z.string().min(1, "Salary is required"),
 });
+
+// Add salary Schema
+export const addSalarySchema = z.object({
+  staffName: z.string().min(1, {
+    message: "Please select staff.",
+  }),
+  month: z.string().min(3, {
+    message: "Please select month.",
+  }),
+  amount: z.string().min(2, {
+    message: "Please select amount.",
+  }),
+});
