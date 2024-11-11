@@ -15,7 +15,7 @@ const sidebarItems = [
     children: [
       {
         label: "view members",
-        href: "members?page=1",
+        href: "members",
       },
       {
         label: "add members",

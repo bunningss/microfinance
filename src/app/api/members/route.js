@@ -111,7 +111,16 @@ export async function GET(request) {
     if (user.role !== "admin")
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
-    const members = await Member.find().sort({ createdAt: -1 });
+    const reqUrl = new URL(request.url);
+    const page = reqUrl.searchParams.get("page");
+    const per_page = reqUrl.searchParams.get("per_page");
+
+    const skip = (parseInt(page) - 1) * parseInt(per_page);
+
+    const members = await Member.find()
+      .skip(skip)
+      .limit(parseInt(per_page))
+      .sort({ createdAt: 1 });
 
     return NextResponse.json(
       { msg: "Data found.", payload: members },
