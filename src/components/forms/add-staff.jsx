@@ -77,7 +77,7 @@ export function AddStaff() {
         name="email"
         required
       />
-      <div className="flex gap-2">
+      <div className="md:flex space-y-4 md:space-y-0 gap-2">
         <FormInput
           form={form}
           label="password / পাসওয়ার্ড"

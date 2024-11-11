@@ -20,7 +20,7 @@ export function Navbar() {
         <Button
           variant="ghost"
           size="icon"
-          icon="menu"
+          icon={sidebar.isOpen ? "close" : "menu"}
           className="lg:hidden"
           onClick={handleDashboardSidebar}
         />

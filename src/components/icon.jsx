@@ -7,6 +7,7 @@ import {
   Menu,
   User,
   Users,
+  X,
 } from "lucide-react";
 
 const Icons = {
@@ -18,6 +19,7 @@ const Icons = {
   dashboard: LayoutDashboard,
   expense: HandCoins,
   menu: Menu,
+  close: X,
 };
 
 export function Icon({
