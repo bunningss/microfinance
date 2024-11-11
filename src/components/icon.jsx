@@ -1,6 +1,7 @@
 import {
   ChevronDown,
   ChevronUp,
+  Edit,
   Eye,
   HandCoins,
   LayoutDashboard,
@@ -22,6 +23,7 @@ const Icons = {
   menu: Menu,
   close: X,
   plus: Plus,
+  edit: Edit,
 };
 
 export function Icon({

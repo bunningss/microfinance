@@ -12,6 +12,7 @@ export function MemberCard({ data }) {
             src={data?.memberImage}
             alt={data?.name}
             fill
+            quality={65}
             sizes="100px"
             className="object-contain"
           />

@@ -1,5 +1,6 @@
 import { Card, CardContent, CardTitle } from "../ui/card";
 import { Icon } from "../icon";
+import { UpdateStaff } from "../modals/update-staff";
 
 export function StaffCard({ user }) {
   return (
@@ -20,7 +21,9 @@ export function StaffCard({ user }) {
                 {user?.role}
               </span>
             </span>
-            <div className="space-x-2">{/* <UpdateUser data={user} /> */}</div>
+            <div className="space-x-2">
+              <UpdateStaff data={user} />
+            </div>
           </div>
         </div>
       </CardContent>
