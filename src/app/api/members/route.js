@@ -117,13 +117,17 @@ export async function GET(request) {
 
     const skip = (parseInt(page) - 1) * parseInt(per_page);
 
+    const totalMembers = await Member.countDocuments();
+    const totalPages = Math.ceil(totalMembers / parseInt(per_page));
+    const isLastPage = parseInt(page) >= totalPages;
+
     const members = await Member.find()
       .skip(skip)
       .limit(parseInt(per_page))
       .sort({ createdAt: 1 });
 
     return NextResponse.json(
-      { msg: "Data found.", payload: members },
+      { msg: "Data found.", payload: members, isLastPage, totalPages },
       { status: 200 }
     );
   } catch (err) {

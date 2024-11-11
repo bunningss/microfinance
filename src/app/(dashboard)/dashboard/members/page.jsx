@@ -15,11 +15,18 @@ async function Members({ searchParams }) {
   const members = res.response.payload;
 
   return (
-    <CardView className="grid md:grid-cols-2">
-      {members?.map((member, index) => (
-        <MemberCard key={index} data={member} />
-      ))}
-    </CardView>
+    <>
+      <CardView className="grid md:grid-cols-2">
+        {members?.map((member, index) => (
+          <MemberCard key={index} data={member} />
+        ))}
+      </CardView>
+
+      <PaginationControls
+        isLastPage={res.response.isLastPage}
+        totalPages={res.response.totalPages}
+      />
+    </>
   );
 }
 
@@ -30,7 +37,6 @@ export default async function Page({ searchParams }) {
       <Suspense fallback={<p>Loading...</p>}>
         <Members searchParams={searchParams} />
       </Suspense>
-      <PaginationControls />
     </div>
   );
 }

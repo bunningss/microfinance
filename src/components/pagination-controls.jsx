@@ -2,12 +2,13 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "./ui/button";
 
-export function PaginationControls() {
+export function PaginationControls({ isLastPage, totalPages }) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const page = searchParams.get("page") ?? "1";
 
   const handleNextPage = () => {
+    if (isLastPage) return;
     router.push(`?page=${Number(page) + 1}`);
   };
 
@@ -21,8 +22,12 @@ export function PaginationControls() {
       <Button onClick={handlePrevPage} disabled={Number(page) === 1}>
         Previous
       </Button>
-      <span>{page}</span>
-      <Button onClick={handleNextPage}>Next</Button>
+      <span>
+        {page}/{totalPages}
+      </span>
+      <Button onClick={handleNextPage} disabled={isLastPage}>
+        Next
+      </Button>
     </div>
   );
 }
