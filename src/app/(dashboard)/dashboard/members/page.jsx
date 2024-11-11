@@ -12,13 +12,14 @@ async function Members({ searchParams }) {
   const per_page = searchParams["per_page"] ?? "10";
   const searchKey = searchParams["searchKey"];
 
+  const queryString = new URLSearchParams({
+    page,
+    per_page,
+    ...(searchKey && { searchKey }),
+  }).toString();
+
   // Data fetching
-  const res = await getData(
-    `members?page=${page}&per_page=${per_page}&${
-      searchKey ? `searchKey=${searchKey}` : ""
-    }`,
-    0
-  );
+  const res = await getData(`members?${queryString}`, 0);
   const members = res.response.payload;
 
   return (
