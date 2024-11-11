@@ -66,6 +66,7 @@ export function UpdateStaff({ data }) {
 
       successNotification(res.response.msg);
       setIsModalOpen(false);
+      form.reset();
       router.refresh();
     } catch (err) {
       errorNotification(err.message);

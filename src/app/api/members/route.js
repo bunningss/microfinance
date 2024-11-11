@@ -137,7 +137,7 @@ export async function GET(request) {
     const members = await Member.find(queryFilter)
       .skip(skip)
       .limit(parseInt(per_page))
-      .sort({ createdAt: 1 });
+      .sort({ createdAt: -1 });
 
     return NextResponse.json(
       { msg: "Data found.", payload: members, isLastPage, totalPages },
