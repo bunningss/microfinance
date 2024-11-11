@@ -24,6 +24,8 @@ async function Members({ searchParams }) {
 
   return (
     <>
+      <MembersFilters />
+
       <CardView className="grid md:grid-cols-2">
         {members?.map((member, index) => (
           <MemberCard key={index} data={member} />
@@ -42,8 +44,6 @@ export default async function Page({ searchParams }) {
   return (
     <div className="space-y-4">
       <Block title="View members" />
-
-      <MembersFilters />
 
       <Suspense fallback={<p>Loading...</p>}>
         <Members searchParams={searchParams} />
