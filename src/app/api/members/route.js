@@ -114,6 +114,19 @@ export async function GET(request) {
     const reqUrl = new URL(request.url);
     const page = reqUrl.searchParams.get("page");
     const per_page = reqUrl.searchParams.get("per_page");
+    const searchKey = reqUrl.searchParams.get("searchKey");
+
+    let queryFilter = {};
+
+    if (searchKey) {
+      const searchRegex = new RegExp(searchKey, "i");
+      queryFilter = {
+        $or: [
+          { name: { $regex: searchRegex } },
+          { nidNumber: { $regex: searchRegex } },
+        ],
+      };
+    }
 
     const skip = (parseInt(page) - 1) * parseInt(per_page);
 
@@ -121,7 +134,7 @@ export async function GET(request) {
     const totalPages = Math.ceil(totalMembers / parseInt(per_page));
     const isLastPage = parseInt(page) >= totalPages;
 
-    const members = await Member.find()
+    const members = await Member.find(queryFilter)
       .skip(skip)
       .limit(parseInt(per_page))
       .sort({ createdAt: 1 });
