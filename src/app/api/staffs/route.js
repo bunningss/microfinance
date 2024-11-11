@@ -16,7 +16,9 @@ export async function GET(request) {
     if (user.role !== "admin")
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
-    const staffs = await User.find().sort({ createdAt: -1 });
+    const staffs = await User.find()
+      .sort({ createdAt: -1 })
+      .select("-password");
 
     return NextResponse.json(
       { msg: "Data found.", payload: staffs },
