@@ -5,6 +5,7 @@ import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
 
+// Create salary record
 export async function POST(request) {
   await connectDb();
   const session = await mongoose.startSession();
@@ -48,5 +49,28 @@ export async function POST(request) {
     return NextResponse.json({ msg: err.message }, { status: 400 });
   } finally {
     session.endSession();
+  }
+}
+
+// Get all salary records
+export async function GET(request) {
+  try {
+    const { error, id } = await verifyToken(request);
+    if (error)
+      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+
+    await connectDb();
+    const user = await Staff.findById(id);
+    if (user.role !== "admin")
+      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+
+    const salaries = await Salary.find().populate("staff", "name");
+
+    return NextResponse.json(
+      { msg: "Data found.", payload: salaries },
+      { status: 200 }
+    );
+  } catch (err) {
+    return NextResponse.json({ msg: err.message }, { status: 400 });
   }
 }
