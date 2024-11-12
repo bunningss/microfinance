@@ -1,5 +1,5 @@
-import User from "@/lib/models/User";
 import bcrypt from "bcrypt";
+import Staff from "@/lib/models/Staff";
 import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
@@ -12,11 +12,11 @@ export async function GET(request) {
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
     await connectDb();
-    const user = await User.findById(id);
+    const user = await Staff.findById(id);
     if (user.role !== "admin")
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
-    const staffs = await User.find()
+    const staffs = await Staff.find()
       .sort({ createdAt: -1 })
       .select("-password");
 
@@ -38,7 +38,7 @@ export async function POST(request) {
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
     await connectDb();
-    const user = await User.findById(id);
+    const user = await Staff.findById(id);
     if (user.role !== "admin")
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
@@ -55,7 +55,7 @@ export async function POST(request) {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const newUser = new User({
+    const newUser = new Staff({
       name,
       email,
       password: hashedPassword,

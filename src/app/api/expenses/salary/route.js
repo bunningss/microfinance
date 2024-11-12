@@ -1,6 +1,6 @@
-import Salary from "@/lib/models/Salary";
-import User from "@/lib/models/User";
 import mongoose from "mongoose";
+import Salary from "@/lib/models/Salary";
+import Staff from "@/lib/models/Staff";
 import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
@@ -15,7 +15,7 @@ export async function POST(request) {
     if (error)
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
-    const user = await User.findById(id);
+    const user = await Staff.findById(id);
     if (user.role !== "admin")
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
@@ -29,7 +29,7 @@ export async function POST(request) {
 
     await newSalary.save({ session });
 
-    await User.findByIdAndUpdate(
+    await Staff.findByIdAndUpdate(
       body.staff,
       {
         $push: { payments: newSalary._id },

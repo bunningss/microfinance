@@ -1,4 +1,4 @@
-import User from "@/lib/models/User";
+import Staff from "@/lib/models/Staff";
 import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
@@ -10,13 +10,13 @@ export async function PUT(request, { params }) {
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
     await connectDb();
-    const user = await User.findById(id);
+    const user = await Staff.findById(id);
     if (user.role !== "admin")
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
     const body = await request.json();
 
-    await User.findByIdAndUpdate(
+    await Staff.findByIdAndUpdate(
       params.id,
       {
         name: body.name,

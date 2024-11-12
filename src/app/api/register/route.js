@@ -1,5 +1,5 @@
-import User from "@/lib/models/User";
 import bcrypt from "bcrypt";
+import Staff from "@/lib/models/Staff";
 import { connectDb } from "@/lib/db/connectDb";
 import { NextResponse } from "next/server";
 
@@ -21,7 +21,7 @@ export async function POST(request) {
         { status: 400 }
       );
 
-    const emailExist = await User.findOne({ email: body.email });
+    const emailExist = await Staff.findOne({ email: body.email });
     if (emailExist) {
       return NextResponse.json(
         {
@@ -36,7 +36,7 @@ export async function POST(request) {
     const hashedPassword = await bcrypt.hash(body.password, salt);
 
     // Creating new user
-    const newUser = new User({
+    const newUser = new Staff({
       name: body.name,
       siteId: process.env.SITE_ID,
       email: body.email,

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import User from "@/lib/models/User";
 import Member from "@/lib/models/Member";
+import Staff from "@/lib/models/Staff";
 import Savings from "@/lib/models/Savings";
 import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
@@ -17,7 +17,7 @@ export async function POST(request) {
     if (error)
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
-    const user = await User.findById(id);
+    const user = await Staff.findById(id);
     if (user.role !== "admin")
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
@@ -107,7 +107,7 @@ export async function GET(request) {
 
     await connectDb();
 
-    const user = await User.findById(id);
+    const user = await Staff.findById(id);
     if (user.role !== "admin")
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 

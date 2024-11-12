@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import crypto from "crypto";
 
-const userSchema = new mongoose.Schema(
+const staffSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -81,7 +81,7 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-userSchema.methods.generatePasswordResetToken = function () {
+staffSchema.methods.generatePasswordResetToken = function () {
   const resetToken = crypto.randomBytes(20).toString("hex");
   this.passwordResetToken = crypto
     .createHash("sha256")
@@ -91,6 +91,6 @@ userSchema.methods.generatePasswordResetToken = function () {
   return resetToken;
 };
 
-const User = mongoose.models?.user || mongoose.model("user", userSchema);
+const Staff = mongoose.models?.staff || mongoose.model("staff", staffSchema);
 
-export default User;
+export default Staff;

@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import User from "@/lib/models/User";
+import Staff from "@/lib/models/Staff";
 import { SignJWT } from "jose";
 import { connectDb } from "@/lib/db/connectDb";
 import { NextResponse } from "next/server";
@@ -10,7 +10,7 @@ export async function POST(request) {
 
     let { email, password } = await request.json();
 
-    let userExist = await User.findOne({ email }).collation({
+    let userExist = await Staff.findOne({ email }).collation({
       locale: "en",
       strength: 2,
     });
