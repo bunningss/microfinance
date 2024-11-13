@@ -18,7 +18,7 @@ const formSchema = z.object({
       message: "Name must be at least 3 characters.",
     })
     .max(50),
-  role: z.enum(["admin", "staff", "marketing officer"], {
+  role: z.enum(["user", "admin", "staff", "marketing officer"], {
     required_error: "Please select a role.",
     message: "Please select a role.",
   }),
@@ -26,6 +26,10 @@ const formSchema = z.object({
 });
 
 const roleOptions = [
+  {
+    name: "user",
+    value: "user",
+  },
   {
     name: "admin",
     value: "admin",
