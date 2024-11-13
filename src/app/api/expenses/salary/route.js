@@ -22,6 +22,20 @@ export async function POST(request) {
 
     const body = await request.json();
 
+    const existingSalary = await Salary.findOne({
+      staff: body.staff,
+      month: body.month,
+    }).collation({
+      locale: "en",
+      strength: 2,
+    });
+
+    if (existingSalary)
+      return NextResponse.json(
+        { msg: `ইতিমধ্যে ${body.month} বেতন প্রদান করেছে` },
+        { status: 400 }
+      );
+
     const newSalary = new Salary({
       staff: body.staff,
       month: body.month,
