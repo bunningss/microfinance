@@ -34,6 +34,10 @@ const sidebarItems = [
         icon: "",
       },
       {
+        label: "salary statements",
+        href: "expenses/salary-statements",
+      },
+      {
         label: "add expense",
         href: "expenses/add",
         icon: "",

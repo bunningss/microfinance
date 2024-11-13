@@ -9,6 +9,7 @@ import { addStaffFormSchema } from "@/lib/schema";
 import { useState } from "react";
 import { postData } from "@/utils/api-calls";
 import { errorNotification, successNotification } from "@/utils/toast";
+import { useRouter } from "next/navigation";
 
 const designations = [
   {
@@ -27,6 +28,7 @@ const designations = [
 
 export function AddStaff() {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const form = useForm({
     resolver: zodResolver(addStaffFormSchema),
@@ -48,6 +50,7 @@ export function AddStaff() {
       if (res.error) return errorNotification(res.response.msg);
 
       successNotification(res.response.msg);
+      router.push("/dashboard/staffs");
     } catch (err) {
       errorNotification("something went wrong. Please try again later.");
     } finally {
