@@ -11,13 +11,13 @@ export function SalaryTable({ salaries }) {
     <>
       <Button onClick={reactToPrintFn}>Print Data</Button>
       <table
-        className="w-full rounded-md border border-secondary print:mx-4"
+        className="w-full rounded-md border border-secondary"
         ref={contentRef}
       >
         <thead>
           <tr className="text-center bg-input">
             <th scope="col" className="p-2 border-r border-primary md:border-0">
-              Serial Number
+              Sr Number
             </th>
             <th scope="col" className="p-2 border-r border-primary md:border-0">
               Name

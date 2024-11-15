@@ -1,7 +1,7 @@
 import { Block } from "@/components/block";
 import { CardView } from "@/components/card-view";
 import { MemberCard } from "@/components/cards/member-card";
-import { MembersFilters } from "@/components/members-filters";
+import { MembersFilters } from "@/components/filters/members-filters";
 import { PaginationControls } from "@/components/pagination-controls";
 import { getData } from "@/utils/api-calls";
 import { Suspense } from "react";
