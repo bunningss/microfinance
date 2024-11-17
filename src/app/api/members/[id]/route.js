@@ -3,6 +3,7 @@ import Savings from "@/lib/models/Savings";
 import { connectDb } from "@/lib/db/connectDb";
 import { NextResponse } from "next/server";
 import { verifyToken } from "@/utils/auth";
+import Staff from "@/lib/models/Staff";
 
 export async function GET(request, { params }) {
   try {
@@ -11,6 +12,7 @@ export async function GET(request, { params }) {
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
     await connectDb();
+
     const user = await Staff.findById(id);
     if (user.role !== "admin")
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });

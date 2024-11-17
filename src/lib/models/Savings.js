@@ -23,6 +23,12 @@ const savingsSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
+    savingsStatus: {
+      type: String,
+      required: true,
+      default: "incomplete",
+      enum: ["complete", "incomplete"],
+    },
     installments: [
       {
         date: {

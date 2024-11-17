@@ -13,6 +13,7 @@ import {
   warningNotification,
 } from "@/utils/toast";
 import { postData } from "@/utils/api-calls";
+import { savingsTypes } from "@/lib/static";
 
 export function AddMember() {
   const [userImage, setUserImage] = useState(null);
@@ -74,21 +75,6 @@ export function AddMember() {
       setIsLoading(false);
     }
   };
-
-  const savingsTypes = [
-    {
-      name: "Daily",
-      value: "daily",
-    },
-    {
-      name: "Weekly",
-      value: "weekly",
-    },
-    {
-      name: "Monthly",
-      value: "monthly",
-    },
-  ];
 
   return (
     <FormModal

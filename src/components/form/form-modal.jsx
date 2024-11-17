@@ -10,20 +10,34 @@ export function FormModal({
   icon,
   loading,
   disabled,
+  setIsModalOpen,
 }) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         {children}
-        <Button
-          icon={icon}
-          type="submit"
-          className="w-full"
-          loading={loading}
-          disabled={disabled}
-        >
-          {formLabel}
-        </Button>
+        <div className="grid grid-cols-2 gap-2">
+          <Button
+            icon={icon}
+            type="submit"
+            className="w-full"
+            loading={loading}
+            disabled={disabled}
+          >
+            {formLabel}
+          </Button>
+          <Button
+            icon="close"
+            type="button"
+            variant="destructive"
+            className="w-full"
+            loading={loading}
+            disabled={disabled}
+            onClick={() => setIsModalOpen(false)}
+          >
+            Cancel
+          </Button>
+        </div>
       </form>
     </Form>
   );

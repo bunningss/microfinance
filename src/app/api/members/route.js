@@ -62,6 +62,7 @@ export async function POST(request) {
     );
 
     const newSavings = new Savings({
+      savingsStatus: "incomplete",
       savingsType: body.savingsType,
       savingsAmount: body.savingsAmount,
       savingsDuration: body.savingsDuration,
@@ -84,6 +85,7 @@ export async function POST(request) {
         session,
       }
     );
+
     await session.commitTransaction();
     return NextResponse.json(
       { msg: "সদস্য তথ্য সফলভাবে সংরক্ষিত" },
