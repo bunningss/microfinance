@@ -10,21 +10,7 @@ import { useState } from "react";
 import { postData } from "@/utils/api-calls";
 import { errorNotification, successNotification } from "@/utils/toast";
 import { useRouter } from "next/navigation";
-
-const designations = [
-  {
-    name: "staff",
-    value: "staff",
-  },
-  {
-    name: "marketing officer",
-    value: "marketing officer",
-  },
-  {
-    name: "admin",
-    value: "admin",
-  },
-];
+import { designations } from "@/lib/static";
 
 export function AddStaff() {
   const [isLoading, setIsLoading] = useState(false);

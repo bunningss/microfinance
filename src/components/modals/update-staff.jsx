@@ -10,6 +10,7 @@ import { Modal } from "./modal";
 import { FormModal } from "../form/form-modal";
 import { FormInput } from "../form/form-input";
 import { FormSelect } from "../form/form-select";
+import { designations } from "@/lib/static";
 
 const formSchema = z.object({
   name: z
@@ -24,25 +25,6 @@ const formSchema = z.object({
   }),
   salary: z.union([z.string(), z.number()]),
 });
-
-const roleOptions = [
-  {
-    name: "user",
-    value: "user",
-  },
-  {
-    name: "admin",
-    value: "admin",
-  },
-  {
-    name: "marketing officer",
-    value: "marketing officer",
-  },
-  {
-    name: "staff",
-    value: "staff",
-  },
-];
 
 export function UpdateStaff({ data }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -99,7 +81,7 @@ export function UpdateStaff({ data }) {
         <FormInput form={form} name="name" placeholder="" label="name" />
         <FormSelect
           form={form}
-          options={roleOptions}
+          options={designations}
           placeholder="select role"
           name="role"
           label="role"

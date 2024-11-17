@@ -13,6 +13,25 @@ export const savingsTypes = [
   },
 ];
 
+export const designations = [
+  {
+    name: "user",
+    value: "user",
+  },
+  {
+    name: "staff",
+    value: "staff",
+  },
+  {
+    name: "marketing officer",
+    value: "marketing officer",
+  },
+  {
+    name: "admin",
+    value: "admin",
+  },
+];
+
 // List of savings names
 export const savingsNames = [
   "রজনীগন্ধা",
