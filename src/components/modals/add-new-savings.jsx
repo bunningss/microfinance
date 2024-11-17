@@ -10,10 +10,13 @@ import { postData } from "@/utils/api-calls";
 import { errorNotification, successNotification } from "@/utils/toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addNewSavingsSchema } from "@/lib/schema";
+import { useRouter } from "next/navigation";
 
 export function AddNewSavings({ member }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
   const form = useForm({
     resolver: zodResolver(addNewSavingsSchema),
     defaultValues: {
@@ -36,6 +39,7 @@ export function AddNewSavings({ member }) {
       successNotification(response.msg);
       setIsModalOpen(false);
       form.reset();
+      router.refresh();
     } catch (err) {
     } finally {
       setIsLoading(false);

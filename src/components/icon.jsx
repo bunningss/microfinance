@@ -1,6 +1,7 @@
 import {
   ChevronDown,
   ChevronUp,
+  DollarSign,
   Edit,
   Eye,
   HandCoins,
@@ -24,6 +25,7 @@ const Icons = {
   close: X,
   plus: Plus,
   edit: Edit,
+  money: DollarSign,
 };
 
 export function Icon({

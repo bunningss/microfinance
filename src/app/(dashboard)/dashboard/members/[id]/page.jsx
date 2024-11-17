@@ -3,7 +3,7 @@ import { MemberDetails } from "@/components/member-details";
 import { getData } from "@/utils/api-calls";
 
 async function Member({ id }) {
-  const { response } = await getData(`members/${id}`);
+  const { response } = await getData(`members/${id}`, 0);
 
   return <MemberDetails data={response.payload} />;
 }

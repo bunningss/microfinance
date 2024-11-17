@@ -7,6 +7,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "../ui/button";
+import { cn } from "@/lib/utils";
 
 export function Modal({
   children,
@@ -19,6 +20,7 @@ export function Modal({
   onOpen,
   className,
   modalClassName,
+  childrenClassName,
   triggerSize,
 }) {
   return (
@@ -42,7 +44,7 @@ export function Modal({
           </DialogHeader>
         )}
 
-        <div>{children}</div>
+        <div className={cn(childrenClassName)}>{children}</div>
       </DialogContent>
     </Dialog>
   );
