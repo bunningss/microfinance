@@ -14,11 +14,13 @@ import {
 } from "@/utils/toast";
 import { postData } from "@/utils/api-calls";
 import { savingsTypes } from "@/lib/static";
+import { useEdgeStore } from "@/lib/edgestore";
 
 export function AddMember() {
   const [userImage, setUserImage] = useState(null);
   const [nomineeImage, setNomineeImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { edgestore } = useEdgeStore();
 
   const form = useForm({
     resolver: zodResolver(addMemberFormSchema),
@@ -67,6 +69,15 @@ export function AddMember() {
         nomineeImage,
       });
       if (res.error) return errorNotification(res.response.msg);
+
+      await Promise.all([
+        edgestore.publicImages.confirmUpload({
+          url: userImage,
+        }),
+        edgestore.publicImages.confirmUpload({
+          url: nomineeImage,
+        }),
+      ]);
 
       successNotification(res.response.msg);
     } catch (err) {
