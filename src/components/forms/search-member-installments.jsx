@@ -22,7 +22,7 @@ export function SearchMemberInstallments({ setSavingsData }) {
     try {
       setIsLoading(true);
 
-      const res = await getData(`/savings-installments/${data.nidNumber}`);
+      const res = await getData(`/savings-installments/${data.nidNumber}`, 0);
       if (res.error) {
         setSavingsData(null);
         return errorNotification(res.response.msg);

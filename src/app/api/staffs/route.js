@@ -45,6 +45,13 @@ export async function POST(request) {
     const { name, email, password, confirmPassword, role, salary } =
       await request.json();
 
+    const existingStaff = await Staff.findOne({ email });
+    if (existingStaff)
+      return NextResponse.json(
+        { msg: "Email already exists. " },
+        { status: 400 }
+      );
+
     if (password !== confirmPassword)
       return NextResponse.json(
         { msg: "উভয় পাসওয়ার্ড মেলে না।" },
