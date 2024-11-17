@@ -1,9 +1,9 @@
 import Member from "@/lib/models/Member";
 import Savings from "@/lib/models/Savings";
+import Staff from "@/lib/models/Staff";
 import { connectDb } from "@/lib/db/connectDb";
 import { NextResponse } from "next/server";
 import { verifyToken } from "@/utils/auth";
-import Staff from "@/lib/models/Staff";
 
 export async function GET(request, { params }) {
   try {

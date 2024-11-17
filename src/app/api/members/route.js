@@ -58,6 +58,7 @@ export async function POST(request) {
       introducersName: body.introducersName,
       memberImage: body.memberImage,
       nomineeImage: body.nomineeImage,
+      totalSaved: 0,
     });
 
     // Generate user installments
@@ -80,6 +81,7 @@ export async function POST(request) {
       endDate: installments.at(-1).date,
       owner: newMember._id,
       installments,
+      amountSaved: 0,
     });
 
     await newMember.save({ session });

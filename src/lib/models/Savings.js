@@ -51,6 +51,10 @@ const savingsSchema = new mongoose.Schema(
         },
       },
     ],
+    amountSaved: {
+      type: Number,
+      required: true,
+    },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "member",

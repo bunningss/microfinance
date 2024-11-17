@@ -87,6 +87,10 @@ const memberSchema = new mongoose.Schema(
         ref: "savings",
       },
     ],
+    totalSaved: {
+      type: Number,
+      required: true,
+    },
     nomineeName: {
       type: String,
       required: true,

@@ -50,6 +50,7 @@ export async function POST(request) {
       endDate: installments.at(-1).date,
       owner: body.owner,
       installments,
+      amountSaved: 0,
     });
 
     await Member.findByIdAndUpdate(
