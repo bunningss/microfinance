@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const savingsSchema = new mongoose.Schema(
   {
+    savingsName: {
+      type: String,
+      required: true,
+    },
     savingsType: {
       type: String,
       enum: ["daily", "weekly", "monthly"],

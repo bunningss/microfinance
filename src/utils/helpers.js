@@ -1,3 +1,5 @@
+import { savingsNames } from "@/lib/static";
+
 export function generateInstallments(
   startDate,
   type,
@@ -52,4 +54,11 @@ export function getMonthNamesWithYear() {
     monthsWithYear.push(monthNameWithYear);
   }
   return monthsWithYear;
+}
+
+export function generateSavingsName() {
+  const randomItem =
+    savingsNames[Math.floor(Math.random() * savingsNames.length)];
+
+  return randomItem;
 }

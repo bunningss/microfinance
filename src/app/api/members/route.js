@@ -5,7 +5,7 @@ import Savings from "@/lib/models/Savings";
 import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
-import { generateInstallments } from "@/utils/helpers";
+import { generateInstallments, generateSavingsName } from "@/utils/helpers";
 
 export async function POST(request) {
   await connectDb();
@@ -22,6 +22,13 @@ export async function POST(request) {
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
     const body = await request.json();
+
+    const existingMember = await Member.findOne({ nidNumber: body.nidNumber });
+    if (existingMember)
+      return NextResponse.json(
+        { msg: "এই এনআইডি নম্বর সহ একজন সদস্য আছেন" },
+        { status: 400 }
+      );
 
     const newMember = new Member({
       name: body.name,
@@ -61,7 +68,10 @@ export async function POST(request) {
       parseInt(body.savingsAmount)
     );
 
+    const savingsName = generateSavingsName();
+
     const newSavings = new Savings({
+      savingsName,
       savingsStatus: "incomplete",
       savingsType: body.savingsType,
       savingsAmount: body.savingsAmount,
