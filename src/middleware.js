@@ -27,7 +27,7 @@ export async function middleware(request) {
     role?.toLowerCase() !== "staff" &&
     pathname.startsWith("/dashboard")
   ) {
-    return NextResponse.redirect(new URL(SIGN_IN_URL, request.url));
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   // Allow all other requests to proceed
