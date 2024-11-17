@@ -15,6 +15,7 @@ export function FormInput({
   placeholder,
   description,
   required,
+  disabled,
   type = "text",
 }) {
   return (
@@ -35,7 +36,12 @@ export function FormInput({
             </FormLabel>
           )}
           <FormControl>
-            <Input type={type} placeholder={placeholder || ""} {...field} />
+            <Input
+              type={type}
+              placeholder={placeholder || ""}
+              {...field}
+              disabled={disabled}
+            />
           </FormControl>
           {description && <FormDescription>{description}</FormDescription>}
           <FormMessage />

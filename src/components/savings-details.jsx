@@ -6,14 +6,18 @@ import { CardView } from "./card-view";
 
 export function SavingsDetails() {
   const [savingsData, setSavingsData] = useState(null);
-  // console.log(savingsData);
+
   return (
     <>
       <SearchMemberInstallments setSavingsData={setSavingsData} />
 
       <CardView>
         {savingsData?.savings?.map((item, index) => (
-          <SavingsCard key={index} data={item} />
+          <SavingsCard
+            key={index}
+            data={item}
+            installments={item?.installments}
+          />
         ))}
       </CardView>
     </>

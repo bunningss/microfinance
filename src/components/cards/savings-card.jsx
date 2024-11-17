@@ -2,8 +2,9 @@ import Link from "next/link";
 import { Icon } from "../icon";
 import { Card, CardContent, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
+import { PaySavingsInstallment } from "../modals/pay-savings-installment";
 
-export function SavingsCard({ data }) {
+export function SavingsCard({ data, installments }) {
   return (
     <Card title={data?.savingsName}>
       <CardContent className="flex items-center gap-2 p-1 md:p-1">
@@ -40,7 +41,9 @@ export function SavingsCard({ data }) {
               </span>
             </span>
             <div className="space-x-2">
-              <Button icon="plus" size="icon" className="rounded-full" />
+              {installments && (
+                <PaySavingsInstallment installments={installments} />
+              )}
               <Link href="">
                 <Button icon="view" size="icon" className="rounded-full" />
               </Link>

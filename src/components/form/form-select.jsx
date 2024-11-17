@@ -26,6 +26,7 @@ export function FormSelect({
   required,
   keyName = "name",
   keyValue = "value",
+  keyType,
 }) {
   return (
     <FormField
@@ -58,7 +59,9 @@ export function FormSelect({
                     key={index}
                     className="capitalize"
                   >
-                    {option[keyName]}
+                    {keyType === "date"
+                      ? new Date(option[keyName])?.toDateString()
+                      : option[keyName]}
                   </SelectItem>
                 );
               })}

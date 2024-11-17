@@ -87,9 +87,15 @@ export const addNewSavingsSchema = z.object({
     }, "Invalid date format"),
 });
 
-// Saving installment schema
+// search installment schema
 export const savingInstallmentSchema = z.object({
   nidNumber: z.string().min(3, {
     message: "NID number is required",
   }),
+});
+
+// Pay installment schema
+export const payInstallmentSchema = z.object({
+  installment: z.string(),
+  amount: z.string().optional().nullable(),
 });
