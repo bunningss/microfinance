@@ -4,7 +4,6 @@ import { Card, CardContent, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 
 export function SavingsCard({ data }) {
-  console.log(data);
   return (
     <Card title={data?.savingsName}>
       <CardContent className="flex items-center gap-2 p-1 md:p-1">
@@ -41,6 +40,7 @@ export function SavingsCard({ data }) {
               </span>
             </span>
             <div className="space-x-2">
+              <Button icon="plus" size="icon" className="rounded-full" />
               <Link href="">
                 <Button icon="view" size="icon" className="rounded-full" />
               </Link>

@@ -8,6 +8,7 @@ import {
   LayoutDashboard,
   Menu,
   Plus,
+  Search,
   User,
   Users,
   X,
@@ -26,6 +27,8 @@ const Icons = {
   plus: Plus,
   edit: Edit,
   money: DollarSign,
+  search: Search,
+  loan: HandCoins,
 };
 
 export function Icon({

@@ -86,3 +86,10 @@ export const addNewSavingsSchema = z.object({
       return !isNaN(date.getTime());
     }, "Invalid date format"),
 });
+
+// Saving installment schema
+export const savingInstallmentSchema = z.object({
+  nidNumber: z.string().min(3, {
+    message: "NID number is required",
+  }),
+});
