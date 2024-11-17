@@ -96,6 +96,6 @@ export const savingInstallmentSchema = z.object({
 
 // Pay installment schema
 export const payInstallmentSchema = z.object({
-  installment: z.string(),
-  amount: z.string().optional().nullable(),
+  installmentId: z.string(),
+  amount: z.union([z.string(), z.number()]).optional().nullable(),
 });
