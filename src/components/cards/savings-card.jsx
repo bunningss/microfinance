@@ -4,6 +4,7 @@ import { Card, CardContent, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 
 export function SavingsCard({ data }) {
+  console.log(data);
   return (
     <Card title={data?.savingsName}>
       <CardContent className="flex items-center gap-2 p-1 md:p-1">
@@ -11,9 +12,24 @@ export function SavingsCard({ data }) {
           <Icon icon="money" size={80} />
         </div>
         <div className="py-0 px-1 w-full flex flex-col gap-1">
-          <CardTitle className="capitalize text-base">
-            সঞ্চয়ের নাম: <b>{data?.savingsName}</b>
+          <CardTitle className="capitalize text-base flex justify-between items-center">
+            <span>
+              {" "}
+              সঞ্চয়ের নাম: <b>{data?.savingsName}</b>
+            </span>
           </CardTitle>
+          <span className="capitalize">
+            সঞ্চয়ের স্থিতি:{" "}
+            <b
+              className={`${
+                data?.savingsStatus === "complete"
+                  ? "text-green-600"
+                  : "text-destructive"
+              }`}
+            >
+              {data?.savingsStatus}
+            </b>
+          </span>
           <span className="capitalize">
             সঞ্চয়ের ধরণ: <b>{data?.savingsType}</b>
           </span>
