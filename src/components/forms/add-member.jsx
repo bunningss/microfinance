@@ -15,11 +15,13 @@ import {
 import { postData } from "@/utils/api-calls";
 import { savingsTypes } from "@/lib/static";
 import { useEdgeStore } from "@/lib/edgestore";
+import { useRouter } from "next/navigation";
 
 export function AddMember() {
   const [userImage, setUserImage] = useState(null);
   const [nomineeImage, setNomineeImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const { edgestore } = useEdgeStore();
 
   const form = useForm({
@@ -79,6 +81,7 @@ export function AddMember() {
         }),
       ]);
 
+      router.push(`/dashboard/members/${res.response.payload}`);
       successNotification(res.response.msg);
     } catch (err) {
       errorNotification(err.message);
