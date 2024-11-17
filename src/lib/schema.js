@@ -70,3 +70,19 @@ export const addSalarySchema = z.object({
     message: "Please select amount.",
   }),
 });
+
+// Add savings schema
+export const addNewSavingsSchema = z.object({
+  savingsType: z.enum(["daily", "weekly", "monthly"], {
+    message: "Invalid savings type",
+  }),
+  savingsAmount: z.string().min(1, "Savings amount is required"),
+  savingsDuration: z.string().min(1, "Savings duration is required"),
+  startDate: z
+    .string()
+    .min(1, "Start date is required")
+    .refine((val) => {
+      const date = new Date(val);
+      return !isNaN(date.getTime());
+    }, "Invalid date format"),
+});

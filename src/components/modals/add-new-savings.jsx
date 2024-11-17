@@ -6,17 +6,47 @@ import { FormInput } from "../form/form-input";
 import { useForm } from "react-hook-form";
 import { FormSelect } from "../form/form-select";
 import { savingsTypes } from "@/lib/static";
+import { postData } from "@/utils/api-calls";
+import { errorNotification, successNotification } from "@/utils/toast";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { addNewSavingsSchema } from "@/lib/schema";
 
 export function AddNewSavings({ member }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const form = useForm();
+  const form = useForm({
+    resolver: zodResolver(addNewSavingsSchema),
+    defaultValues: {
+      savingsType: "",
+      savingsAmount: "",
+      savingsDuration: "",
+      startDate: "",
+    },
+  });
+
+  const handleSubmit = async (data) => {
+    setIsLoading(true);
+    try {
+      const { error, response } = await postData("savings", {
+        ...data,
+        owner: member?._id,
+      });
+      if (error) return errorNotification(response.msg);
+
+      successNotification(response.msg);
+      setIsModalOpen(false);
+      form.reset();
+    } catch (err) {
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <Modal
       title="add savings"
       description="Add savings information here. Click save when you're done."
-      triggerLabel="add new saving"
+      triggerLabel="add new savings"
       triggerIcon="plus"
       className="w-full"
       isOpen={isModalOpen}
@@ -25,10 +55,12 @@ export function AddNewSavings({ member }) {
     >
       <FormModal
         form={form}
+        onSubmit={handleSubmit}
         formLabel="save"
         loading={isLoading}
         disabled={isLoading}
         setIsModalOpen={setIsModalOpen}
+        withCancelButton
       >
         <FormInput
           form={form}
