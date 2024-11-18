@@ -25,7 +25,10 @@ export async function GET(request, { params }) {
       .lean();
 
     if (!savings) {
-      return NextResponse.json({ msg: "Savings not found." }, { status: 404 });
+      return NextResponse.json(
+        { msg: "সঞ্চয় পাওয়া যায়নি." },
+        { status: 404 }
+      );
     }
 
     // Find exact installment
@@ -39,7 +42,7 @@ export async function GET(request, { params }) {
 
     if (!installment) {
       return NextResponse.json(
-        { msg: "Installment not found." },
+        { msg: "কিস্তি পাওয়া যায়নি।" },
         { status: 404 }
       );
     }
@@ -50,12 +53,15 @@ export async function GET(request, { params }) {
       .lean();
 
     if (!savingsOwner) {
-      return NextResponse.json({ msg: "Owner not found." }, { status: 404 });
+      return NextResponse.json(
+        { msg: "মালিক পাওয়া যায়নি।" },
+        { status: 404 }
+      );
     }
 
     return NextResponse.json(
       {
-        msg: "Data found.",
+        msg: "তথ্য পাওয়া গেছে।",
         savings,
         owner: savingsOwner,
         installment,

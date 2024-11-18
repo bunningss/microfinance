@@ -24,7 +24,7 @@ export async function PUT(request) {
 
     if (!installmentId) {
       return NextResponse.json(
-        { msg: "Installment ID is required" },
+        { msg: "কিস্তি আইডি প্রদান করুন" },
         { status: 400 }
       );
     }
@@ -35,7 +35,7 @@ export async function PUT(request) {
 
     if (!savings) {
       return NextResponse.json(
-        { msg: "Installment not found" },
+        { msg: "কিস্তি পাওয়া যায়নি" },
         { status: 404 }
       );
     }
@@ -44,22 +44,24 @@ export async function PUT(request) {
 
     if (!installment) {
       return NextResponse.json(
-        { msg: "Installment not found in savings" },
+        { msg: "সঞ্চয়পত্রে কিস্তি পাওয়া যায় না" },
         { status: 404 }
       );
     }
 
     if (installment.status === "paid") {
       return NextResponse.json(
-        { msg: "Installment is already paid" },
+        { msg: "কিস্তি ইতিমধ্যে পরিশোধ করা হয়েছে" },
         { status: 400 }
       );
     }
 
+    // Update savings properties
     installment.status = "paid";
     installment.receivedBy = id;
     savings.amountSaved += installment.amount;
 
+    // Update user total saved money
     await Member.findByIdAndUpdate(
       savings.owner,
       {
@@ -75,7 +77,7 @@ export async function PUT(request) {
 
     await session.commitTransaction();
     return NextResponse.json({
-      msg: "Installment paid successfully.",
+      msg: "সফলভাবে কিস্তি পরিশোধ করা হয়েছে।",
     });
   } catch (err) {
     await session.abortTransaction();

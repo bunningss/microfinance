@@ -68,11 +68,14 @@ export async function GET(request, { params }) {
     ]);
 
     if (!member.length) {
-      return NextResponse.json({ msg: "No data found." }, { status: 404 });
+      return NextResponse.json(
+        { msg: "কোন তথ্য পাওয়া যায়নি." },
+        { status: 404 }
+      );
     }
 
     return NextResponse.json(
-      { msg: "Data Found.", payload: member[0] },
+      { msg: "তথ্য পাওয়া গেছে।", payload: member[0] },
       { status: 200 }
     );
   } catch (err) {
