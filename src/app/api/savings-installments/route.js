@@ -57,6 +57,7 @@ export async function PUT(request) {
     }
 
     installment.status = "paid";
+    installment.receivedBy = id;
     savings.amountSaved += installment.amount;
 
     await Member.findByIdAndUpdate(

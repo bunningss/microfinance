@@ -35,6 +35,9 @@ export function SavingsInstallmentReceipt({ data }) {
             কিস্তির তারিখ: {new Date(data?.installment?.date).toDateString()}
           </p>
           <p>কিস্তি পরিশোধের তারিখ: {new Date(Date.now()).toDateString()}</p>
+          <p>
+            কিস্তি গ্রহণকারী কর্মকর্তা: {data?.installment?.receivedBy?.name}
+          </p>
 
           <p>মোট কিস্তি: {data.totalInstallments}</p>
           <p>কিস্তি পরিশোধ করা হয়েছে: {data.paidInstallments}</p>

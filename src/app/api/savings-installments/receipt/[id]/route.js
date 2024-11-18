@@ -20,7 +20,9 @@ export async function GET(request, { params }) {
     // Find the savings document
     const savings = await Savings.findOne({
       "installments._id": params.id,
-    }).lean();
+    })
+      .populate("installments.receivedBy", "name")
+      .lean();
 
     if (!savings) {
       return NextResponse.json({ msg: "Savings not found." }, { status: 404 });

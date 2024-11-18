@@ -49,6 +49,11 @@ const savingsSchema = new mongoose.Schema(
           type: Number,
           required: true,
         },
+        receivedBy: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "staff",
+          required: false,
+        },
       },
     ],
     amountSaved: {
