@@ -35,7 +35,9 @@ export function PaySavingsInstallment({ installments }) {
       successNotification(response.msg);
       form.reset();
       setIsModalOpen(false);
-      router.refresh();
+      router.push(
+        `/dashboard/savings-installment/receipt/${data.installmentId}`
+      );
     } catch (err) {
       errorNotification(err.message);
     } finally {
