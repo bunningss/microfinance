@@ -44,7 +44,7 @@ export async function POST(request) {
 
     return NextResponse.json(
       {
-        msg: "Login successful.",
+        msg: "লগইন সফল হয়েছে।",
         session_token: token,
         expiryTime: expiry,
       },

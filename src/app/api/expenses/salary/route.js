@@ -81,7 +81,7 @@ export async function GET(request) {
     const salaries = await Salary.find().populate("staff", "name");
 
     return NextResponse.json(
-      { msg: "Data found.", payload: salaries },
+      { msg: "তথ্য পাওয়া গেছে।", payload: salaries },
       { status: 200 }
     );
   } catch (err) {

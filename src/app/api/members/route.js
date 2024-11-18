@@ -154,7 +154,7 @@ export async function GET(request) {
       .sort({ createdAt: -1 });
 
     return NextResponse.json(
-      { msg: "Data found.", payload: members, isLastPage, totalPages },
+      { msg: "তথ্য পাওয়া গেছে।", payload: members, isLastPage, totalPages },
       { status: 200 }
     );
   } catch (err) {

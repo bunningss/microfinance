@@ -48,7 +48,7 @@ export async function POST(request) {
     const existingStaff = await Staff.findOne({ email });
     if (existingStaff)
       return NextResponse.json(
-        { msg: "Email already exists. " },
+        { msg: "এই ইমেলের সাথে যুক্ত একটি অ্যাকাউন্ট আছে।" },
         { status: 400 }
       );
 
@@ -73,7 +73,7 @@ export async function POST(request) {
     await newUser.save();
 
     return NextResponse.json(
-      { msg: "Staff added successfully." },
+      { msg: "স্টাফ সফলভাবে যোগ করা হয়েছে." },
       { status: 200 }
     );
   } catch (err) {

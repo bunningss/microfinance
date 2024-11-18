@@ -21,11 +21,11 @@ export async function GET(request, { params }) {
       "savings"
     );
     if (!member) {
-      return NextResponse.json({ msg: "Data not found." }, { status: 404 });
+      return NextResponse.json({ msg: "তথ্য পাওয়া যায়নি." }, { status: 404 });
     }
 
     return NextResponse.json(
-      { msg: "Data Found.", payload: member },
+      { msg: "তথ্য পাওয়া গেছে।", payload: member },
       { status: 200 }
     );
   } catch (err) {
