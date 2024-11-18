@@ -12,14 +12,14 @@ export function SavingsInstallmentReceipt({ data }) {
       <Button onClick={reactToPrintFn}>print receipt</Button>
 
       <div
-        className="border border-input rounded-sm px-1 print:mx-2 mb-2"
+        className="border border-input rounded-sm px-1 print:pb-4"
         ref={contentRef}
       >
         <h2 className="text-center font-bold py-2 border-b border-input">
-          Shopnotori
+          স্বপ্নতরী শ্রমজীবী সমবায় সমিতি লিমিটেড
         </h2>
         <div className="my-2 space-y-2">
-          <p>নাম: {data?.owner?.name}</p>
+          <p>সদস্যের নাম: {data?.owner?.name}</p>
           <p>ফোন নম্বর: {data?.owner?.phone}</p>
           <p>
             মোট সঞ্চয়: <b>৳{data?.owner?.totalSaved}</b>
@@ -43,11 +43,12 @@ export function SavingsInstallmentReceipt({ data }) {
           <p>কিস্তি পরিশোধ করা হয়েছে: {data.paidInstallments}</p>
           <p>কিস্তি বাকি: {data.totalInstallments - data.paidInstallments}</p>
           <p>
-            <b>{data?.savings?.savingsName}</b> অধীনে সঞ্চয় :
+            <b>{data?.savings?.savingsName}</b> এর অধীনে সঞ্চয়:{" "}
             <b>৳{data?.savings?.amountSaved}</b>
           </p>
         </div>
         <div className="p-2 border-t border-input">
+          <p className="text-center">Software Developed By</p>
           <p className="text-center italic font-bold text-muted-foreground">
             {process.env.NEXT_PUBLIC_COMPANY_NAME}
           </p>
