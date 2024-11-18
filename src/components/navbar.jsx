@@ -14,7 +14,7 @@ export function Navbar() {
   };
 
   return (
-    <nav className="p-2 h-16 sticky top-0 z-10 bg-background shadow-md">
+    <nav className="p-2 h-16 sticky top-0 z-10 bg-background shadow-md print:hidden">
       <div className="flex items-center justify-between h-full">
         <h1 className="h-12 w-12">LOGO</h1>
         <Button
