@@ -61,6 +61,14 @@ export async function PUT(request) {
     installment.receivedBy = id;
     savings.amountSaved += installment.amount;
 
+    const allPaid = savings.installments.every(
+      (inst) => inst.status === "paid"
+    );
+
+    if (allPaid) {
+      savings.savingsStatus = "complete";
+    }
+
     // Update user total saved money
     await Member.findByIdAndUpdate(
       savings.owner,
