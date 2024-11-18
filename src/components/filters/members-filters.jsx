@@ -42,7 +42,7 @@ export function MembersFilters() {
   }, [form, router, pathname]);
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 print:hidden">
       <FormModal form={form} formLabel="search" onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 gap-4">
           <FormInput

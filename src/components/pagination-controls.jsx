@@ -18,7 +18,7 @@ export function PaginationControls({ isLastPage, totalPages }) {
   };
 
   return (
-    <div className="flex items-center justify-end gap-4">
+    <div className="flex items-center justify-end gap-4 print:hidden">
       <Button onClick={handlePrevPage} disabled={Number(page) === 1}>
         Previous
       </Button>

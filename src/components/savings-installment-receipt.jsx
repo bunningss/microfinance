@@ -9,9 +9,7 @@ export function SavingsInstallmentReceipt({ data }) {
 
   return (
     <div className="space-y-4">
-      <Button onClick={reactToPrintFn} className="print:hidden">
-        print receipt
-      </Button>
+      <Button onClick={reactToPrintFn}>print receipt</Button>
 
       <div
         className="border border-input rounded-sm px-1 text-xs"

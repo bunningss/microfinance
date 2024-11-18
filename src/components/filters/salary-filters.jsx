@@ -66,11 +66,13 @@ export function SalaryFilters({ staffs }) {
   }
 
   return (
-    <FormModal form={form} onSubmit={handleSubmit} formLabel="apply">
-      <div className="grid grid-cols-2 gap-2">
-        <FormSelect form={form} placeholder="select month" options={months} />
-        <FormSelect form={form} placeholder="select year" options={years} />
-      </div>
-    </FormModal>
+    <div className="print:hidden">
+      <FormModal form={form} onSubmit={handleSubmit} formLabel="apply">
+        <div className="grid grid-cols-2 gap-2">
+          <FormSelect form={form} placeholder="select month" options={months} />
+          <FormSelect form={form} placeholder="select year" options={years} />
+        </div>
+      </FormModal>
+    </div>
   );
 }
