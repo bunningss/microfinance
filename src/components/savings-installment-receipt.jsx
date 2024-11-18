@@ -19,26 +19,29 @@ export function SavingsInstallmentReceipt({ data }) {
           Shopnotori
         </h2>
         <div className="my-2 space-y-2">
-          <p>Owner name: {data?.owner?.name}</p>
-          <p>Owner phone: {data?.owner?.phone}</p>
-          <p>total saved: {data?.owner?.totalSaved}</p>
-
-          <p>Savings name: {data?.savings?.savingsName}</p>
-
+          <p>নাম: {data?.owner?.name}</p>
+          <p>ফোন নম্বর: {data?.owner?.phone}</p>
           <p>
-            Installment date: {new Date(data?.installment?.date).toDateString()}
+            মোট সঞ্চয়: <b>৳{data?.owner?.totalSaved}</b>
           </p>
-          <p>Installment payment date: {new Date(Date.now()).toDateString()}</p>
 
-          <p>Total installments: {data.totalInstallments}</p>
-          <p>Installments paid: {data.paidInstallments}</p>
           <p>
-            Installments remaining:{" "}
-            {data.totalInstallments - data.paidInstallments}
+            সঞ্চয়ের নাম: <b>{data?.savings?.savingsName}</b>
           </p>
           <p>
-            Amount saved under {data?.savings?.savingsName}:{" "}
-            {data?.savings?.amountSaved}
+            কিস্তির পরিমাণ: <b>৳{data.savings.savingsAmount}</b>
+          </p>
+          <p>
+            কিস্তির তারিখ: {new Date(data?.installment?.date).toDateString()}
+          </p>
+          <p>কিস্তি পরিশোধের তারিখ: {new Date(Date.now()).toDateString()}</p>
+
+          <p>মোট কিস্তি: {data.totalInstallments}</p>
+          <p>কিস্তি পরিশোধ করা হয়েছে: {data.paidInstallments}</p>
+          <p>কিস্তি বাকি: {data.totalInstallments - data.paidInstallments}</p>
+          <p>
+            <b>{data?.savings?.savingsName}</b> অধীনে সঞ্চয় :
+            <b>৳{data?.savings?.amountSaved}</b>
           </p>
         </div>
         <div className="p-2 border-t border-input">
