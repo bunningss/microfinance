@@ -6,6 +6,8 @@ import {
   Eye,
   HandCoins,
   LayoutDashboard,
+  LogIn,
+  LogOut,
   Menu,
   Plus,
   Search,
@@ -29,6 +31,8 @@ const Icons = {
   money: DollarSign,
   search: Search,
   loan: HandCoins,
+  login: LogIn,
+  logout: LogOut,
 };
 
 export function Icon({

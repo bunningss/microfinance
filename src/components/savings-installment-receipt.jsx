@@ -29,7 +29,7 @@ export function SavingsInstallmentReceipt({ data }) {
             সঞ্চয়ের নাম: <b>{data?.savings?.savingsName}</b>
           </p>
           <p>
-            কিস্তির পরিমাণ: <b>৳{data.savings.savingsAmount}</b>
+            কিস্তির পরিমাণ: <b>৳{data.savings?.savingsAmount}</b>
           </p>
           <p>
             কিস্তির তারিখ: {new Date(data?.installment?.date).toDateString()}

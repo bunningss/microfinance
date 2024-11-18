@@ -67,5 +67,5 @@ export async function verifyToken(request) {
 }
 
 export async function logout() {
-  await Promise.all([setCookie("ze-session", "", 0)]);
+  await setCookie("ze-session", "", 0);
 }

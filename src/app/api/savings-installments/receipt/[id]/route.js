@@ -71,6 +71,7 @@ export async function GET(request, { params }) {
       { status: 200 }
     );
   } catch (err) {
+    console.log(err);
     return NextResponse.json({ msg: err.message }, { status: 400 });
   }
 }
