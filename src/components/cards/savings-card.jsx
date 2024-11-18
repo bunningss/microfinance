@@ -33,7 +33,7 @@ export function SavingsCard({ data, installments }) {
           <span className="capitalize">
             সঞ্চয়ের ধরণ: <b>{data?.savingsType}</b>
           </span>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between flex-wrap lg:flex-nowrap">
             <span className="capitalize">
               {data?.savingsType} সঞ্চয় পরিমাণ:{" "}
               <span className="text-primary font-bold uppercase">
