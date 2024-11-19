@@ -46,7 +46,6 @@ export function AddSalary({ staffs }) {
 
     try {
       const res = await postData("expenses/salary", data);
-      console.log(res);
       if (res.error) return errorNotification(res.response.msg);
 
       successNotification(res.response.msg);
@@ -63,7 +62,7 @@ export function AddSalary({ staffs }) {
     <Modal
       title="add salary"
       description="Add salary information here. Click save when you're done."
-      triggerLabel="add salary"
+      triggerLabel="বেতন"
       triggerIcon="plus"
       className="w-full"
       isOpen={isModalOpen}
@@ -80,7 +79,7 @@ export function AddSalary({ staffs }) {
         <FormSelect
           form={form}
           name="staff"
-          label="select staff"
+          label="select staff / কর্মী নির্বাচন করুন"
           placeholder="select staff"
           required
           options={staffs}
@@ -90,12 +89,12 @@ export function AddSalary({ staffs }) {
         <FormSelect
           form={form}
           name="month"
-          label="select month"
+          label="select month / মাস নির্বাচন করুন"
           placeholder="select month"
           required
           options={monthNamesWithYear}
         />
-        <FormInput form={form} name="amount" label="amount" required />
+        <FormInput form={form} name="amount" label="salary / বেতন" required />
       </FormModal>
     </Modal>
   );

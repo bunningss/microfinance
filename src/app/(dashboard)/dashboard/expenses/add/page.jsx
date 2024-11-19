@@ -1,6 +1,6 @@
 import { Block } from "@/components/block";
+import { AddOtherExpense } from "@/components/modals/add-other-expense";
 import { AddSalary } from "@/components/modals/add-salary";
-import { Button } from "@/components/ui/button";
 import { getData } from "@/utils/api-calls";
 import { Suspense } from "react";
 
@@ -18,7 +18,7 @@ export default function Page() {
         <Suspense fallback={<p>Loading...</p>}>
           <SalaryForm />
         </Suspense>
-        <Button>Other</Button>
+        <AddOtherExpense />
       </div>
     </div>
   );
