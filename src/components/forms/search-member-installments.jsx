@@ -42,7 +42,7 @@ export function SearchMemberInstallments({ setSavingsData }) {
       form={form}
       onSubmit={handleSubmit}
       icon="search"
-      formLabel="search member"
+      formLabel="search"
       loading={isLoading}
       disabled={isLoading}
     >

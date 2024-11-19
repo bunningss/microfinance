@@ -21,7 +21,7 @@ export function MemberCard({ data }) {
           <CardTitle className="capitalize font-bold text-base">
             {data?.name}
           </CardTitle>
-          <div className="flex gap-2">
+          <div className="flex gap-2 text-xs md:text-sm lg:text-sm xl:text-base">
             <span>
               Member No: <b>{data.nidNumber}</b>
             </span>
@@ -29,14 +29,14 @@ export function MemberCard({ data }) {
               Mobile No: <b>{data.phone}</b>
             </span>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 text-xs md:text-sm lg:text-sm xl:text-base">
             <p>
               Area: <b>{data?.currArea}</b>,Village: <b>{data?.currVillage}</b>,
               Post Office: <b>{data?.currPostOffice}</b>, Police Station:{" "}
               <b>{data?.currPoliceStation}</b>
             </p>
           </div>
-          <div className="absolute top-1 right-1">
+          <div className="absolute top-1 right-1 text-xs md:text-sm lg:text-sm xl:text-base">
             <Link href={`/dashboard/members/${data?.nidNumber}`} passHref>
               <Button size="icon" className="rounded-full" icon="view" />
             </Link>

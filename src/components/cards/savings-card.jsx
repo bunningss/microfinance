@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Icon } from "../icon";
 import { Card, CardContent, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { PaySavingsInstallment } from "../modals/pay-savings-installment";
@@ -7,10 +6,7 @@ import { PaySavingsInstallment } from "../modals/pay-savings-installment";
 export function SavingsCard({ data, installments }) {
   return (
     <Card title={data?.savingsName}>
-      <CardContent className="flex items-center gap-2 p-1 md:p-1">
-        <div className="bg-slate-100 px-1">
-          <Icon icon="money" size={80} />
-        </div>
+      <CardContent className="p-1">
         <div className="py-0 px-1 w-full flex flex-col gap-1">
           <CardTitle className="capitalize text-base flex justify-between items-center">
             <span>
