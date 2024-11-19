@@ -46,7 +46,7 @@ export function SearchMemberInstallments({ setSavingsData }) {
       loading={isLoading}
       disabled={isLoading}
     >
-      <FormInput form={form} name="nidNumber" />
+      <FormInput form={form} name="nidNumber" placeholder="সদস্যের NID নম্বর" />
     </FormModal>
   );
 }
