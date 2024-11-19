@@ -1,9 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "./modal";
 import { FormModal } from "../form/form-modal";
 import { FormInput } from "../form/form-input";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { FormSelect } from "../form/form-select";
 import { savingsTypes } from "@/lib/static";
 import { postData } from "@/utils/api-calls";
@@ -11,10 +11,16 @@ import { errorNotification, successNotification } from "@/utils/toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addNewSavingsSchema } from "@/lib/schema";
 import { useRouter } from "next/navigation";
+import { generateInstallments } from "@/utils/helpers";
 
 export function AddNewSavings({ member }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [installmentDetails, setInstallmentDetails] = useState({
+    count: 0,
+    totalAmount: 0,
+    lastDate: "",
+  });
   const router = useRouter();
 
   const form = useForm({
@@ -26,6 +32,44 @@ export function AddNewSavings({ member }) {
       startDate: "",
     },
   });
+
+  const { control } = form;
+
+  // Watch form inputs
+  const watchSavingsType = useWatch({ control, name: "savingsType" });
+  const watchSavingsAmount = useWatch({ control, name: "savingsAmount" });
+  const watchSavingsDuration = useWatch({ control, name: "savingsDuration" });
+  const watchStartDate = useWatch({ control, name: "startDate" });
+
+  useEffect(() => {
+    if (
+      watchSavingsType &&
+      watchSavingsAmount &&
+      watchSavingsDuration &&
+      watchStartDate
+    ) {
+      const installments = generateInstallments(
+        watchStartDate,
+        watchSavingsType,
+        parseInt(watchSavingsDuration),
+        parseFloat(watchSavingsAmount)
+      );
+
+      setInstallmentDetails({
+        count: installments.length,
+        totalAmount: installments.reduce(
+          (sum, installment) => sum + installment.amount,
+          0
+        ),
+        lastDate: installments[installments.length - 1]?.date || "",
+      });
+    }
+  }, [
+    watchSavingsType,
+    watchSavingsAmount,
+    watchSavingsDuration,
+    watchStartDate,
+  ]);
 
   const handleSubmit = async (data) => {
     setIsLoading(true);
@@ -97,6 +141,20 @@ export function AddNewSavings({ member }) {
           type="date"
         />
       </FormModal>
+      <ul className="mt-4 list-disc">
+        <li>
+          <span className="text-muted-foreground">কিস্তির সংখ্যা:</span>{" "}
+          {installmentDetails.count}
+        </li>
+        <li>
+          <span className="text-muted-foreground">মোট সঞ্চয়ের পরিমাণ:</span> ৳
+          {installmentDetails.totalAmount.toFixed(0)}
+        </li>
+        <li>
+          <span className="text-muted-foreground">শেষ কিস্তির তারিখ:</span>{" "}
+          {new Date(installmentDetails.lastDate).toDateString()}
+        </li>
+      </ul>
     </Modal>
   );
 }
