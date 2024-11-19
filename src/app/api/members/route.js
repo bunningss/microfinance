@@ -115,15 +115,15 @@ export async function POST(request) {
 // Get all members
 export async function GET(request) {
   try {
-    // const { error, id } = await verifyToken(request);
-    // if (error)
-    //   return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+    const { error, id } = await verifyToken(request);
+    if (error)
+      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
     await connectDb();
 
-    // const user = await Staff.findById(id);
-    // if (user.role !== "admin")
-    //   return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+    const user = await Staff.findById(id);
+    if (user.role !== "admin")
+      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
     const reqUrl = new URL(request.url);
     const page = reqUrl.searchParams.get("page");
