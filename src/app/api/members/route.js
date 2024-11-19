@@ -119,7 +119,7 @@ export async function GET(request) {
     // if (error)
     //   return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
-    // await connectDb();
+    await connectDb();
 
     // const user = await Staff.findById(id);
     // if (user.role !== "admin")
