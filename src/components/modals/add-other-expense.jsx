@@ -8,20 +8,41 @@ import { FormTextarea } from "../form/form-textarea";
 import { FormCalendar } from "../form/form-calendar";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addExpenseSchema } from "@/lib/schema";
+import { errorNotification, successNotification } from "@/utils/toast";
+import { postData } from "@/utils/api-calls";
+import { useRouter } from "next/navigation";
 
 export function AddOtherExpense() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const form = useForm({
     resolver: zodResolver(addExpenseSchema),
     defaultValues: {
       name: "",
       description: "",
       date: "",
+      amount: "",
     },
   });
 
-  const handleSubmit = async (data) => {};
+  const handleSubmit = async (data) => {
+    try {
+      setIsLoading(true);
+
+      const { error, response } = await postData("expenses", data);
+      if (error) return errorNotification(response.msg);
+
+      form.reset();
+      router.refresh();
+      successNotification(response.msg);
+      setIsModalOpen(false);
+    } catch (err) {
+      errorNotification(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <Modal

@@ -111,7 +111,7 @@ export const addExpenseSchema = z.object({
   description: z.string().min(3, {
     message: "Description is required.",
   }),
-  date: z.string().min(3, {
-    message: "Date is required.",
+  date: z.date({
+    message: "Please select date.",
   }),
 });
