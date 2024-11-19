@@ -51,7 +51,7 @@ export function SalaryTable({ salaries }) {
               <td className="p-2 border-r border-primary md:border-0">
                 {new Date(salary.createdAt).toDateString()}
               </td>
-              <td className="p-2 md:border-0">৳ {salary.amount}</td>
+              <td className="p-2 md:border-0">৳{salary.amount}</td>
             </tr>
           ))}
         </tbody>

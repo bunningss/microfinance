@@ -66,8 +66,14 @@ export async function GET(request, { params }) {
         },
       },
     ]);
-
     if (!member.length) {
+      return NextResponse.json(
+        { msg: "কোন তথ্য পাওয়া যায়নি." },
+        { status: 404 }
+      );
+    }
+
+    if (!member[0].savings.length) {
       return NextResponse.json(
         { msg: "কোন তথ্য পাওয়া যায়নি." },
         { status: 404 }
