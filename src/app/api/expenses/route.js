@@ -51,7 +51,10 @@ export async function GET(request) {
       .populate("addedBy", "name")
       .lean();
 
-    return NextResponse.json({ msg: "", payload: expenses }, { status: 200 });
+    return NextResponse.json(
+      { msg: "তথ্য পাওয়া গেছে।", payload: expenses },
+      { status: 200 }
+    );
   } catch (err) {
     return NextResponse.json({ msg: err.message }, { status: 400 });
   }

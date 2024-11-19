@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { Modal } from "./modal";
 import { FormSelect } from "../form/form-select";
@@ -22,7 +21,7 @@ export function PaySavingsInstallment({ installments }) {
     resolver: zodResolver(payInstallmentSchema),
     defaultValues: {
       installmentId: "",
-      amount: formatNumber(installments[0]?.amount),
+      amount: formatNumber(installments ? installments[0]?.amount : ""),
     },
   });
 
@@ -58,7 +57,9 @@ export function PaySavingsInstallment({ installments }) {
       onOpen={() => setIsModalOpen(true)}
     >
       <div className="space-y-4">
-        <span>Remaining installments / বাকি কিস্তি: {installments.length}</span>
+        <span>
+          Remaining installments / বাকি কিস্তি: {installments?.length}
+        </span>
 
         <FormModal
           form={form}

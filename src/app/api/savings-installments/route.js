@@ -95,3 +95,65 @@ export async function PUT(request) {
     session.endSession();
   }
 }
+
+// Get savings installments (Today by default)
+export async function GET(request) {
+  try {
+    const { error, id } = await verifyToken(request);
+    if (error)
+      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+
+    await connectDb();
+
+    const user = await Staff.findById(id);
+    if (user.role !== "admin" && user.role !== "marketing officer")
+      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+
+    const today = new Date();
+    const startOfDay = new Date(today.setHours(0, 0, 0, 0));
+    const endOfDay = new Date(today.setHours(23, 59, 59, 999));
+
+    const results = await Savings.aggregate([
+      { $unwind: "$installments" },
+      {
+        $match: {
+          "installments.date": { $gte: startOfDay, $lte: endOfDay },
+          "installments.status": "unpaid",
+        },
+      },
+      {
+        $lookup: {
+          from: "members",
+          localField: "owner",
+          foreignField: "_id",
+          as: "memberDetails",
+        },
+      },
+      { $unwind: "$memberDetails" },
+      {
+        $project: {
+          _id: 0,
+          "memberDetails.name": 1,
+          "memberDetails.phone": 1,
+          "memberDetails.nidNumber": 1,
+          savingsName: 1,
+          savingsAmount: 1,
+          installmentDate: "$installments.date",
+        },
+      },
+    ]);
+
+    if (!results.length)
+      return NextResponse.json(
+        { msg: "কিস্তি পাওয়া যায় নি" },
+        { status: 404 }
+      );
+
+    return NextResponse.json(
+      { msg: "তথ্য পাওয়া গেছে।", payload: results },
+      { status: 200 }
+    );
+  } catch (err) {
+    return NextResponse.json({ msg: err.message }, { status: 500 });
+  }
+}
