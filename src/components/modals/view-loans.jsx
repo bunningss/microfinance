@@ -8,7 +8,7 @@ export function ViewLoans() {
     <Modal
       title="view loans"
       description="view loan information here."
-      triggerLabel="view loans"
+      triggerLabel="ঋণ দেখুন"
       triggerIcon="view"
       className="w-full"
       isOpen={isModalOpen}

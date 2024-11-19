@@ -12,7 +12,7 @@ export function AddLoan() {
     <Modal
       title="add loan"
       description="Add loan here. Click save when you're done."
-      triggerLabel="add new loan"
+      triggerLabel="নতুন ঋণ"
       triggerIcon="plus"
       className="w-full"
       isOpen={isModalOpen}

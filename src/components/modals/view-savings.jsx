@@ -11,7 +11,7 @@ export function ViewSavings({ savings }) {
     <Modal
       title="view savings"
       description="View savings information here."
-      triggerLabel="view savings"
+      triggerLabel="সঞ্চয় দেখুন"
       triggerIcon="view"
       className="w-full"
       childrenClassName="overflow-auto max-h-[80vh]"

@@ -1,6 +1,7 @@
 import { Block } from "@/components/block";
 import { MemberDetails } from "@/components/member-details";
 import { getData } from "@/utils/api-calls";
+import { Suspense } from "react";
 
 async function Member({ id }) {
   const { response } = await getData(`members/${id}`, 0);
@@ -14,7 +15,9 @@ export default async function Page({ params }) {
       <Block title="Member details" />
 
       {/* Member information */}
-      <Member id={params.id} />
+      <Suspense fallback={<p>Loading...</p>}>
+        <Member id={params.id} />
+      </Suspense>
     </div>
   );
 }

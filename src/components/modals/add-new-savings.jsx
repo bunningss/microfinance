@@ -50,7 +50,7 @@ export function AddNewSavings({ member }) {
     <Modal
       title="add savings"
       description="Add savings information here. Click save when you're done."
-      triggerLabel="add new savings"
+      triggerLabel="নতুন সঞ্চয়"
       triggerIcon="plus"
       className="w-full"
       isOpen={isModalOpen}
