@@ -4,6 +4,7 @@ import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
 
+// Add new expense
 export async function POST(request) {
   try {
     const { error, id } = await verifyToken(request);
@@ -28,6 +29,29 @@ export async function POST(request) {
     await newExpense.save();
 
     return NextResponse.json({ msg: "তথ্য সফলভাবে সংরক্ষিত" }, { status: 200 });
+  } catch (err) {
+    return NextResponse.json({ msg: err.message }, { status: 400 });
+  }
+}
+
+// Get all expense
+export async function GET(request) {
+  try {
+    const { error, id } = await verifyToken(request);
+    if (error)
+      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+
+    await connectDb();
+    const user = await Staff.findById(id).lean();
+    if (user.role !== "admin")
+      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+
+    const expenses = await Expense.find()
+      .sort({ createdAt: -1 })
+      .populate("addedBy", "name")
+      .lean();
+
+    return NextResponse.json({ msg: "", payload: expenses }, { status: 200 });
   } catch (err) {
     return NextResponse.json({ msg: err.message }, { status: 400 });
   }
