@@ -71,6 +71,7 @@ export function SalaryFilters({ staffs }) {
         <div className="grid grid-cols-2 gap-2">
           <FormSelect form={form} placeholder="select month" options={months} />
           <FormSelect form={form} placeholder="select year" options={years} />
+          <FormSelect form={form} placeholder="select staff" options={[]} />
         </div>
       </FormModal>
     </div>

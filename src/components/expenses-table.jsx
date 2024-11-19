@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { Button } from "./ui/button";
 import { useReactToPrint } from "react-to-print";
 import { formatNumber } from "@/utils/helpers";
+import Link from "next/link";
 
 export function ExpensesTable({ expenses }) {
   const contentRef = useRef(null);
@@ -41,9 +42,13 @@ export function ExpensesTable({ expenses }) {
             >
               পরিমাণ
             </th>
-            <th scope="col" className="p-2 md:border-0">
+            <th
+              scope="col"
+              className="p-2 border-r border-primary md:border-secondary"
+            >
               যোগ করেছেন
             </th>
+            <th scope="col" className="p-2 md:border-0 print:hidden"></th>
           </tr>
         </thead>
         <tbody>
@@ -64,7 +69,14 @@ export function ExpensesTable({ expenses }) {
               <td className="p-2 border-r border-primary md:border-secondary">
                 {formatNumber(expense?.amount)}
               </td>
-              <td className="p-2 md:border-0">{expense.addedBy?.name}</td>
+              <td className="p-2 border-r border-primary md:border-secondary">
+                {expense.addedBy?.name}
+              </td>
+              <td className="p-2 md:border-0 print:hidden">
+                <Link href="" className="underline text-cyan-800 font-bold">
+                  বিস্তারিত
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>
