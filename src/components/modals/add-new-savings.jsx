@@ -12,6 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { addNewSavingsSchema } from "@/lib/schema";
 import { useRouter } from "next/navigation";
 import { generateInstallments } from "@/utils/helpers";
+import { SavingsInstallmentDetails } from "../savings-installment-details";
 
 export function AddNewSavings({ member }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -141,20 +142,10 @@ export function AddNewSavings({ member }) {
           type="date"
         />
       </FormModal>
-      <ul className="mt-4 list-disc">
-        <li>
-          <span className="text-muted-foreground">কিস্তির সংখ্যা:</span>{" "}
-          {installmentDetails.count}
-        </li>
-        <li>
-          <span className="text-muted-foreground">মোট সঞ্চয়ের পরিমাণ:</span> ৳
-          {installmentDetails.totalAmount.toFixed(0)}
-        </li>
-        <li>
-          <span className="text-muted-foreground">শেষ কিস্তির তারিখ:</span>{" "}
-          {new Date(installmentDetails.lastDate).toDateString()}
-        </li>
-      </ul>
+      <SavingsInstallmentDetails
+        installmentDetails={installmentDetails}
+        className="static mt-4"
+      />
     </Modal>
   );
 }
