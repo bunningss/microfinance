@@ -19,13 +19,13 @@ const sidebarItems = [
     icon: "installment",
   },
   {
-    label: "savings installment",
-    href: "/dashboard/savings-installment",
+    label: "pay savings installment",
+    href: "/dashboard/search-savings-installment",
     icon: "money",
   },
   {
-    label: "loan installment",
-    href: "/dashboard/loan-installment",
+    label: "pay loan installment",
+    href: "/dashboard/search-loan-installment",
     icon: "loan",
   },
   {

@@ -34,7 +34,7 @@ export function PaySavingsInstallment({ installments }) {
       if (error) return errorNotification(response.msg);
 
       router.push(
-        `/dashboard/savings-installment/receipt/${data.installmentId}`
+        `/dashboard/savings-installments/receipt/${data.installmentId}`
       );
       successNotification(response.msg);
       form.reset();
