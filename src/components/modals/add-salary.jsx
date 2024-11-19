@@ -77,7 +77,8 @@ export function AddSalary({ staffs }) {
         onSubmit={handleSubmit}
         loading={isLoading}
         disabled={setIsLoading}
-        formLabel="add salary"
+        formLabel="save"
+        icon="save"
       >
         <FormSelect
           form={form}

@@ -76,7 +76,8 @@ export function UpdateStaff({ data }) {
         form={form}
         loading={isLoading}
         disabled={isLoading}
-        formLabel="update"
+        formLabel="save"
+        icon="save"
       >
         <FormInput form={form} name="name" placeholder="" label="name" />
         <FormSelect

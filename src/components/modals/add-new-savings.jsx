@@ -106,6 +106,7 @@ export function AddNewSavings({ member }) {
         form={form}
         onSubmit={handleSubmit}
         formLabel="save"
+        icon="save"
         loading={isLoading}
         disabled={isLoading}
         setIsModalOpen={setIsModalOpen}

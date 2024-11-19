@@ -61,6 +61,7 @@ export function AddOtherExpense() {
         loading={isLoading}
         disabled={isLoading}
         formLabel="save"
+        icon="save"
         setIsModalOpen={setIsModalOpen}
         withCancelButton
       >

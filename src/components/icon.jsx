@@ -1,4 +1,5 @@
 import {
+  CalendarArrowDown,
   ChevronDown,
   ChevronUp,
   Edit,
@@ -9,6 +10,7 @@ import {
   LogOut,
   Menu,
   Plus,
+  Save,
   Search,
   User,
   Users,
@@ -33,6 +35,8 @@ const Icons = {
   loan: HandCoins,
   login: LogIn,
   logout: LogOut,
+  installment: CalendarArrowDown,
+  save: Save,
 };
 
 export function Icon({

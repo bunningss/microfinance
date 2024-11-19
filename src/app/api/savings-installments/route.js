@@ -6,6 +6,7 @@ import { connectDb } from "@/lib/db/connectDb";
 import { NextResponse } from "next/server";
 import { verifyToken } from "@/utils/auth";
 
+// Pay savings installment
 export async function PUT(request) {
   await connectDb();
   const session = await mongoose.startSession();

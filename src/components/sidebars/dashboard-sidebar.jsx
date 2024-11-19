@@ -9,6 +9,16 @@ const sidebarItems = [
     icon: "dashboard",
   },
   {
+    label: "todays savings installments",
+    href: "/dashboard/savings-installments",
+    icon: "installment",
+  },
+  {
+    label: "todays loan installments",
+    href: "/dashboard/loan-installments",
+    icon: "installment",
+  },
+  {
     label: "savings installment",
     href: "/dashboard/savings-installment",
     icon: "money",

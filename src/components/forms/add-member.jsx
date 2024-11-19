@@ -142,7 +142,8 @@ export function AddMember() {
         form={form}
         loading={isLoading}
         disabled={isLoading}
-        formLabel="Add"
+        formLabel="save member"
+        icon="save"
         onSubmit={handleSubmit}
       >
         <ImageDropzone

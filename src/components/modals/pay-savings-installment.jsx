@@ -66,6 +66,7 @@ export function PaySavingsInstallment({ installments }) {
           loading={isLoading}
           disabled={isLoading}
           formLabel="pay installment"
+          icon="save"
         >
           <FormSelect
             form={form}

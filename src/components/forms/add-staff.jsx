@@ -50,6 +50,7 @@ export function AddStaff() {
       loading={isLoading}
       disabled={isLoading}
       formLabel="add staff member"
+      icon="save"
       onSubmit={handleSubmit}
     >
       <FormInput
