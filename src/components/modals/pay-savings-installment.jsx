@@ -32,12 +32,12 @@ export function PaySavingsInstallment({ installments }) {
       const { error, response } = await putData("savings-installments", data);
       if (error) return errorNotification(response.msg);
 
-      successNotification(response.msg);
-      form.reset();
-      setIsModalOpen(false);
       router.push(
         `/dashboard/savings-installment/receipt/${data.installmentId}`
       );
+      successNotification(response.msg);
+      form.reset();
+      setIsModalOpen(false);
     } catch (err) {
       errorNotification(err.message);
     } finally {

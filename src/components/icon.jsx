@@ -1,7 +1,6 @@
 import {
   ChevronDown,
   ChevronUp,
-  DollarSign,
   Edit,
   Eye,
   HandCoins,
@@ -13,6 +12,7 @@ import {
   Search,
   User,
   Users,
+  Wallet,
   X,
 } from "lucide-react";
 
@@ -28,7 +28,7 @@ const Icons = {
   close: X,
   plus: Plus,
   edit: Edit,
-  money: DollarSign,
+  money: Wallet,
   search: Search,
   loan: HandCoins,
   login: LogIn,
