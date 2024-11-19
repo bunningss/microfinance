@@ -99,3 +99,19 @@ export const payInstallmentSchema = z.object({
   installmentId: z.string(),
   amount: z.union([z.string(), z.number()]).optional().nullable(),
 });
+
+// Add expense schema
+export const addExpenseSchema = z.object({
+  name: z.string().min(3, {
+    message: "Name is required.",
+  }),
+  amount: z.string().min(1, {
+    message: "Amount is required.",
+  }),
+  description: z.string().min(3, {
+    message: "Description is required.",
+  }),
+  date: z.string().min(3, {
+    message: "Date is required.",
+  }),
+});

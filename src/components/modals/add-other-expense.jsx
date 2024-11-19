@@ -6,11 +6,20 @@ import { useForm } from "react-hook-form";
 import { FormInput } from "../form/form-input";
 import { FormTextarea } from "../form/form-textarea";
 import { FormCalendar } from "../form/form-calendar";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { addExpenseSchema } from "@/lib/schema";
 
 export function AddOtherExpense() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const form = useForm();
+  const form = useForm({
+    resolver: zodResolver(addExpenseSchema),
+    defaultValues: {
+      name: "",
+      description: "",
+      date: "",
+    },
+  });
 
   const handleSubmit = async (data) => {};
 
@@ -35,6 +44,7 @@ export function AddOtherExpense() {
         withCancelButton
       >
         <FormInput form={form} name="name" label="Name / নাম" />
+        <FormInput form={form} name="amount" label="Amount / টাকার পরিমাণ" />
         <FormCalendar form={form} name="date" label="Date / তারিখ" />
         <FormTextarea
           form={form}
