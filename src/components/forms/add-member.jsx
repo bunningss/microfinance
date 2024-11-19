@@ -289,7 +289,7 @@ export function AddMember() {
         <FormInput
           form={form}
           name="savingsDuration"
-          label="savings Duration / সঞ্চয়ের সময়কাল"
+          label="savings Duration / সঞ্চয়ের সময়কাল (মাসের সংখ্যা)"
           placeholder=""
           required
         />
