@@ -1,3 +1,84 @@
+export const sidebarItems = [
+  {
+    label: "dashboard",
+    href: "/dashboard",
+    icon: "dashboard",
+  },
+  {
+    label: "todays savings installments",
+    href: "/dashboard/savings-installments",
+    icon: "installment",
+  },
+  {
+    label: "todays loan installments",
+    href: "/dashboard/loan-installments",
+    icon: "installment",
+  },
+  {
+    label: "pay savings installment",
+    href: "/dashboard/search-savings-installment",
+    icon: "money",
+  },
+  {
+    label: "pay loan installment",
+    href: "/dashboard/search-loan-installment",
+    icon: "loan",
+  },
+  {
+    label: "members",
+    href: "",
+    icon: "members",
+    children: [
+      {
+        label: "view members",
+        href: "members",
+      },
+      {
+        label: "add members",
+        href: "members/add",
+      },
+    ],
+  },
+  {
+    label: "expenses",
+    href: "",
+    icon: "expense",
+    children: [
+      {
+        label: "view expenses",
+        href: "expenses",
+        icon: "",
+      },
+      {
+        label: "salary statements",
+        href: "expenses/salary-statements",
+      },
+      {
+        label: "add expense",
+        href: "expenses/add",
+        icon: "",
+      },
+    ],
+  },
+  {
+    label: "staffs",
+    href: "",
+    icon: "user",
+    children: [
+      {
+        label: "view staffs",
+        href: "staffs",
+        icon: "",
+      },
+      {
+        label: "add staff",
+        href: "staffs/add",
+        icon: "",
+      },
+    ],
+  },
+];
+
 export const savingsTypes = [
   {
     name: "Daily / প্রতিদিন",

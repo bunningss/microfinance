@@ -1,6 +1,7 @@
 import { Container } from "@/components/container";
 import { Navbar } from "@/components/navbars/navbar";
 import { DashboardSidebar } from "@/components/sidebars/dashboard-sidebar";
+import { MobileDashboardSidebar } from "@/components/sidebars/mobile-dashboard-sidebar";
 import { getSession } from "@/utils/auth";
 
 export default async function DashboardLayout({ children }) {
@@ -12,6 +13,7 @@ export default async function DashboardLayout({ children }) {
       <Container>
         <div className="flex gap-2">
           <DashboardSidebar />
+          <MobileDashboardSidebar />
           <main className="w-full">{children}</main>
         </div>
       </Container>

@@ -47,7 +47,7 @@ export function SidebarItem({ item }) {
                 href={`/dashboard/${child?.href}`}
                 className="w-full h-full hover:text-primary transition-colors duration-300"
               >
-                <span className="capitalize">{child.label}</span>
+                <span className="capitalize">{child?.label}</span>
               </Link>
             </div>
           ))}

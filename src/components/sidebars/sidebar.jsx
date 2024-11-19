@@ -9,7 +9,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 
-export function SidebarModal({
+export function Sidebar({
   children,
   footer,
   isOpen,
