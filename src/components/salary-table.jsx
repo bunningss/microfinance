@@ -16,42 +16,63 @@ export function SalaryTable({ salaries }) {
       >
         <thead>
           <tr className="text-center bg-input">
-            <th scope="col" className="p-2 border-r border-primary md:border-0">
+            <th
+              scope="col"
+              className="p-2 border-r border-primary md:border-secondary"
+            >
               SN
             </th>
-            <th scope="col" className="p-2 border-r border-primary md:border-0">
-              Name
+            <th
+              scope="col"
+              className="p-2 border-r border-primary md:border-secondary"
+            >
+              কর্মচারীর নাম
             </th>
-            <th scope="col" className="p-2 border-r border-primary md:border-0">
-              Month
+            <th
+              scope="col"
+              className="p-2 border-r border-primary md:border-secondary"
+            >
+              মাস
             </th>
-            <th scope="col" className="p-2 border-r border-primary md:border-0">
-              Date
+            <th
+              scope="col"
+              className="p-2 border-r border-primary md:border-secondary"
+            >
+              তারিখ
+            </th>
+            <th
+              scope="col"
+              className="p-2 border-r border-primary md:border-secondary"
+            >
+              বেতন
             </th>
             <th scope="col" className="p-2 md:border-0">
-              Amount
+              প্রদানকারীর নাম
             </th>
           </tr>
         </thead>
         <tbody>
           {salaries?.map((salary, index) => (
             <tr key={index} className="text-center even:bg-secondary">
-              <td className="p-2 border-r border-primary md:border-0">
+              <td className="p-2 border-r border-primary md:border-secondary">
                 {index + 1}
               </td>
               <th
                 scope="row"
-                className="p-2 border-r border-primary md:border-0"
+                className="p-2 border-r border-primary md:border-secondary"
               >
                 {salary.staff?.name}
               </th>
-              <td className="p-2 border-r border-primary md:border-0">
+              <td className="p-2 border-r border-primary md:border-secondary">
                 {salary?.month}
               </td>
-              <td className="p-2 border-r border-primary md:border-0">
+              <td className="p-2 border-r border-primary md:border-secondary">
                 {new Date(salary.createdAt).toDateString()}
               </td>
-              <td className="p-2 md:border-0">৳{salary.amount}</td>
+              <td className="p-2 border-r border-primary md:border-secondary">
+                ৳{salary.amount}
+              </td>
+              <td className="p-2 md:border-0">{salary.addedBy?.name}</td>
             </tr>
           ))}
         </tbody>

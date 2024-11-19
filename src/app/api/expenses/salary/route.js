@@ -40,6 +40,7 @@ export async function POST(request) {
       staff: body.staff,
       month: body.month,
       amount: body.amount,
+      addedBy: id,
     });
 
     await newSalary.save({ session });
@@ -74,11 +75,14 @@ export async function GET(request) {
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
     await connectDb();
-    const user = await Staff.findById(id);
+    const user = await Staff.findById(id).lean();
     if (user.role !== "admin")
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
-    const salaries = await Salary.find().populate("staff", "name");
+    const salaries = await Salary.find()
+      .populate("staff", "name")
+      .populate("addedBy", "name")
+      .lean();
 
     return NextResponse.json(
       { msg: "তথ্য পাওয়া গেছে।", payload: salaries },

@@ -10,10 +10,12 @@ import { addSalarySchema } from "@/lib/schema";
 import { getMonthNamesWithYear } from "@/utils/helpers";
 import { errorNotification, successNotification } from "@/utils/toast";
 import { postData } from "@/utils/api-calls";
+import { useRouter } from "next/navigation";
 
 export function AddSalary({ staffs }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const form = useForm({
     resolver: zodResolver(addSalarySchema),
     defaultValues: {
@@ -49,6 +51,7 @@ export function AddSalary({ staffs }) {
       if (res.error) return errorNotification(res.response.msg);
 
       successNotification(res.response.msg);
+      router.refresh();
       form.reset();
       setIsModalOpen(false);
     } catch (err) {
