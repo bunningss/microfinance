@@ -2,6 +2,7 @@
 import { useRef } from "react";
 import { Button } from "./ui/button";
 import { useReactToPrint } from "react-to-print";
+import { formatNumber } from "@/utils/helpers";
 
 export function ExpensesTable({ expenses }) {
   const contentRef = useRef(null);
@@ -61,7 +62,7 @@ export function ExpensesTable({ expenses }) {
                 {new Date(expense.createdAt).toDateString()}
               </td>
               <td className="p-2 border-r border-primary md:border-secondary">
-                ৳{expense.amount}
+                {formatNumber(expense?.amount)}
               </td>
               <td className="p-2 md:border-0">{expense.addedBy?.name}</td>
             </tr>

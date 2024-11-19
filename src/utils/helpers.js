@@ -62,3 +62,10 @@ export function generateSavingsName() {
 
   return randomItem;
 }
+
+export function formatNumber(number) {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "BDT",
+  }).format(number);
+}

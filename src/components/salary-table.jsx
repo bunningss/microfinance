@@ -2,6 +2,7 @@
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { Button } from "./ui/button";
+import { formatNumber } from "@/utils/helpers";
 
 export function SalaryTable({ salaries }) {
   const contentRef = useRef(null);
@@ -70,7 +71,7 @@ export function SalaryTable({ salaries }) {
                 {new Date(salary.createdAt).toDateString()}
               </td>
               <td className="p-2 border-r border-primary md:border-secondary">
-                ৳{salary.amount}
+                {formatNumber(salary?.amount)}
               </td>
               <td className="p-2 md:border-0">{salary.addedBy?.name}</td>
             </tr>

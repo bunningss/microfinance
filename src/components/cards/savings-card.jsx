@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Card, CardContent, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { PaySavingsInstallment } from "../modals/pay-savings-installment";
+import { formatNumber } from "@/utils/helpers";
 
 export function SavingsCard({ data, installments }) {
   return (
@@ -33,7 +34,7 @@ export function SavingsCard({ data, installments }) {
             <span className="capitalize">
               {data?.savingsType} সঞ্চয় পরিমাণ:{" "}
               <span className="text-primary font-bold uppercase">
-                ৳{data?.savingsAmount}
+                {formatNumber(data?.savingsAmount)}
               </span>
             </span>
             <div className="space-x-2">

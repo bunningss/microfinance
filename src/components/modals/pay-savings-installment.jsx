@@ -11,6 +11,7 @@ import { payInstallmentSchema } from "@/lib/schema";
 import { errorNotification, successNotification } from "@/utils/toast";
 import { putData } from "@/utils/api-calls";
 import { useRouter } from "next/navigation";
+import { formatNumber } from "@/utils/helpers";
 
 export function PaySavingsInstallment({ installments }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,7 +22,7 @@ export function PaySavingsInstallment({ installments }) {
     resolver: zodResolver(payInstallmentSchema),
     defaultValues: {
       installmentId: "",
-      amount: installments[0]?.amount,
+      amount: formatNumber(installments[0]?.amount),
     },
   });
 
