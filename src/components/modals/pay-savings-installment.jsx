@@ -4,7 +4,6 @@ import { Modal } from "./modal";
 import { FormSelect } from "../form/form-select";
 import { FormModal } from "../form/form-modal";
 import { useForm } from "react-hook-form";
-import { FormInput } from "../form/form-input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { payInstallmentSchema } from "@/lib/schema";
 import { errorNotification, successNotification } from "@/utils/toast";
@@ -21,7 +20,6 @@ export function PaySavingsInstallment({ installments, label }) {
     resolver: zodResolver(payInstallmentSchema),
     defaultValues: {
       installmentId: "",
-      amount: formatNumber(installments ? installments[0]?.amount : ""),
     },
   });
 
@@ -75,7 +73,10 @@ export function PaySavingsInstallment({ installments, label }) {
           keyType="date"
           placeholder="select installment"
         />
-        <FormInput form={form} label="amount" name="amount" disabled />
+        <p>
+          <span className="text-muted-foreground">Amount:</span>{" "}
+          {formatNumber(installments ? installments[0]?.amount : "")}
+        </p>
       </FormModal>
     </Modal>
   );

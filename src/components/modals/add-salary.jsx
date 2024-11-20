@@ -76,7 +76,7 @@ export function AddSalary({ staffs }) {
         form={form}
         onSubmit={handleSubmit}
         loading={isLoading}
-        disabled={setIsLoading}
+        disabled={isLoading}
         formLabel="save"
         icon="save"
       >
