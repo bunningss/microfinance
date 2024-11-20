@@ -44,7 +44,7 @@ export function MembersFilters() {
   return (
     <div className="space-y-2 print:hidden">
       <FormModal form={form} formLabel="search" onSubmit={handleSubmit}>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-2 gap-4">
           <FormInput
             form={form}
             name="searchKey"

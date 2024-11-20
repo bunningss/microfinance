@@ -1,77 +1,77 @@
 export const sidebarItems = [
   {
-    label: "dashboard",
+    label: "ড্যাশবোর্ড",
     href: "/dashboard",
     icon: "dashboard",
   },
   {
-    label: "todays savings installments",
+    label: "আজকের সঞ্চয় কিস্তি",
     href: "/dashboard/savings-installments",
     icon: "installment",
   },
   {
-    label: "todays loan installments",
+    label: "আজকের ঋণের কিস্তি",
     href: "/dashboard/loan-installments",
     icon: "installment",
   },
   {
-    label: "pay savings installment",
+    label: "সঞ্চয় কিস্তি পরিশোধ করুন",
     href: "/dashboard/search-savings-installment",
     icon: "money",
   },
   {
-    label: "pay loan installment",
+    label: "ঋণের কিস্তি পরিশোধ করুন",
     href: "/dashboard/search-loan-installment",
     icon: "loan",
   },
   {
-    label: "members",
+    label: "সদস্য",
     href: "",
     icon: "members",
     children: [
       {
-        label: "view members",
+        label: "সদস্যদের তালিকা দেখুন",
         href: "members",
       },
       {
-        label: "add members",
+        label: "সদস্য যোগ করুন",
         href: "members/add",
       },
     ],
   },
   {
-    label: "expenses",
+    label: "খরচ",
     href: "",
     icon: "expense",
     children: [
       {
-        label: "view expenses",
+        label: "খরচ তালিকা দেখুন",
         href: "expenses",
         icon: "",
       },
       {
-        label: "salary statements",
+        label: "বেতন বিবরণী তালিকা",
         href: "expenses/salary-statements",
       },
       {
-        label: "add expense",
+        label: "খরচ যোগ করুন",
         href: "expenses/add",
         icon: "",
       },
     ],
   },
   {
-    label: "staffs",
+    label: "কর্মী",
     href: "",
     icon: "user",
     children: [
       {
-        label: "view staffs",
+        label: "কর্মচারী তালিকা দেখুন",
         href: "staffs",
         icon: "",
       },
       {
-        label: "add staff",
+        label: "কর্মচারী যোগ করুন",
         href: "staffs/add",
         icon: "",
       },

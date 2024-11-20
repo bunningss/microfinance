@@ -6,7 +6,7 @@ export function StaffCard({ user }) {
   return (
     <Card title={user?.title}>
       <CardContent className="flex items-center gap-2 p-1 md:p-1">
-        <div className="bg-slate-100 px-1">
+        <div className="bg-secondary px-1">
           <Icon icon="user" size={80} />
         </div>
         <div className="py-0 px-1 w-full flex flex-col gap-1">
