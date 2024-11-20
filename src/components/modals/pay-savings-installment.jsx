@@ -57,32 +57,26 @@ export function PaySavingsInstallment({ installments, label }) {
       onClose={() => setIsModalOpen(false)}
       onOpen={() => setIsModalOpen(true)}
     >
-      <div className="space-y-4">
-        <span>
-          Remaining installments / বাকি কিস্তি: {installments?.length}
-        </span>
-
-        <FormModal
+      <FormModal
+        form={form}
+        onSubmit={handleSubmit}
+        loading={isLoading}
+        disabled={isLoading}
+        formLabel="pay installment"
+        icon="save"
+      >
+        <FormSelect
           form={form}
-          onSubmit={handleSubmit}
-          loading={isLoading}
-          disabled={isLoading}
-          formLabel="pay installment"
-          icon="save"
-        >
-          <FormSelect
-            form={form}
-            options={installments}
-            label="select installment"
-            name="installmentId"
-            keyName="date"
-            keyValue="_id"
-            keyType="date"
-            placeholder="select installment"
-          />
-          <FormInput form={form} label="amount" name="amount" disabled />
-        </FormModal>
-      </div>
+          options={installments}
+          label="select installment"
+          name="installmentId"
+          keyName="date"
+          keyValue="_id"
+          keyType="date"
+          placeholder="select installment"
+        />
+        <FormInput form={form} label="amount" name="amount" disabled />
+      </FormModal>
     </Modal>
   );
 }

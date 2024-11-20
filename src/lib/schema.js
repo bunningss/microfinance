@@ -115,3 +115,10 @@ export const addExpenseSchema = z.object({
     message: "Please select date.",
   }),
 });
+
+// Filter installments by date schema
+export const filterInstallmentsSchema = z.object({
+  date: z.date({
+    message: "Please select date.",
+  }),
+});

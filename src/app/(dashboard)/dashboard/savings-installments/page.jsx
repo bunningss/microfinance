@@ -1,5 +1,6 @@
 import { Block } from "@/components/block";
 import { EmptyItem } from "@/components/empty-item";
+import { TodaysSavingsInstallmentsFilters } from "@/components/filters/todays-savings-installments-filters";
 import { SavingsInstallmentsTable } from "@/components/savings-installments-table";
 import { getData } from "@/utils/api-calls";
 import { Suspense } from "react";
@@ -24,6 +25,7 @@ export default async function Page() {
     <div className="space-y-4">
       <Block title="Installments" />
       <Suspense fallback={<div>Loading...</div>}>
+        <TodaysSavingsInstallmentsFilters />
         <Installments />
       </Suspense>
     </div>

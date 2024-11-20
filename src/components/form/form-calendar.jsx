@@ -12,7 +12,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 
-export function FormCalendar({ name, form, label }) {
+export function FormCalendar({ name, form, label, allowFuture }) {
   return (
     <FormField
       control={form.control}
@@ -33,7 +33,7 @@ export function FormCalendar({ name, form, label }) {
                   {field.value ? (
                     format(field.value, "PPP")
                   ) : (
-                    <span>Pick a date</span>
+                    <span>Pick a date / তারিখ নির্বাচন করুন</span>
                   )}
                   <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                 </Button>
@@ -44,8 +44,11 @@ export function FormCalendar({ name, form, label }) {
                 mode="single"
                 selected={field.value}
                 onSelect={field.onChange}
-                disabled={(date) =>
-                  date > new Date() || date < new Date("1900-01-01")
+                disabled={
+                  !allowFuture
+                    ? (date) =>
+                        date > new Date() || date < new Date("1900-01-01")
+                    : undefined
                 }
                 initialFocus
               />
