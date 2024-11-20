@@ -7,6 +7,8 @@ import { Suspense } from "react";
 
 async function Salaries() {
   const res = await getData("expenses/salary", 0);
+  if (res.error) throw new Error("আপনি অনুমোদিত নন।");
+
   const salaries = res.response.payload;
 
   return <SalaryTable salaries={salaries} />;
