@@ -1,10 +1,7 @@
 "use client";
-
-import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 export default function GlobalError({ error, reset }) {
-  const router = useRouter();
-
   return (
     <html>
       <body>
@@ -13,7 +10,7 @@ export default function GlobalError({ error, reset }) {
             You do not have permission to view this page. Please contact
             administrator.
           </h2>
-          <button onClick={() => router.back()}>Go Back</button>
+          <Button onClick={() => window.history.back()}>Go Back</Button>
         </div>
       </body>
     </html>
