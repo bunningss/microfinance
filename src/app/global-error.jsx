@@ -5,11 +5,12 @@ export default function GlobalError({ error, reset }) {
   return (
     <html>
       <body>
-        <div className="h-screen w-screen flex justify-center items-center">
+        <div className="h-screen w-screen flex flex-col justify-center items-center gap-4">
           <h2 className="text-xl md:text-3xl text-center">
             You do not have permission to view this page. Please contact
             administrator.
           </h2>
+
           <Button onClick={() => window.history.back()}>Go Back</Button>
         </div>
       </body>
