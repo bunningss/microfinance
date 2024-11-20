@@ -19,7 +19,7 @@ export function Navbar({ isLoggedIn, user }) {
   };
 
   return (
-    <nav className="sticky top-0 z-10 bg-background shadow-md print:hidden">
+    <nav className="sticky top-0 z-10 bg-background dark:bg-secondary shadow-md print:hidden">
       <Container>
         <div className="flex items-center justify-between h-full">
           <Logo />

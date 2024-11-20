@@ -5,22 +5,22 @@ export const sidebarItems = [
     icon: "dashboard",
   },
   {
-    label: "আজকের সঞ্চয় কিস্তি",
+    label: "সঞ্চয় কিস্তি",
     href: "/dashboard/savings-installments",
     icon: "installment",
   },
   {
-    label: "আজকের ঋণের কিস্তি",
+    label: "ঋণের কিস্তি",
     href: "/dashboard/loan-installments",
     icon: "installment",
   },
   {
-    label: "সঞ্চয় কিস্তি পরিশোধ করুন",
+    label: "সঞ্চয় কিস্তি পরিশোধ",
     href: "/dashboard/search-savings-installment",
     icon: "money",
   },
   {
-    label: "ঋণের কিস্তি পরিশোধ করুন",
+    label: "ঋণের কিস্তি পরিশোধ",
     href: "/dashboard/search-loan-installment",
     icon: "loan",
   },

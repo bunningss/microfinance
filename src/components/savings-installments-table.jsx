@@ -41,6 +41,12 @@ export function SavingsInstallmentsTable({ installments }) {
               scope="col"
               className="p-2 border-r border-primary md:border-secondary"
             >
+              সঞ্চয়ের ধরন
+            </th>
+            <th
+              scope="col"
+              className="p-2 border-r border-primary md:border-secondary"
+            >
               সঞ্চয় পরিমাণ
             </th>
             <th
@@ -72,6 +78,9 @@ export function SavingsInstallmentsTable({ installments }) {
               </td>
               <td className="p-2 border-r border-primary md:border-secondary">
                 {installment?.savingsName}
+              </td>
+              <td className="p-2 border-r border-primary md:border-secondary">
+                {installment?.savingsType}
               </td>
               <td className="p-2 border-r border-primary md:border-secondary">
                 {formatNumber(installment?.savingsAmount)}

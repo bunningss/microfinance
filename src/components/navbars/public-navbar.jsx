@@ -10,7 +10,7 @@ export function PublicNavbar({ isLoggedIn, user }) {
   const router = useRouter();
 
   return (
-    <nav className="shadow-md">
+    <nav className="shadow-md bg-background dark:bg-secondary">
       <Container>
         <div className="flex justify-between">
           <Logo />

@@ -13,7 +13,7 @@ export function SavingsInstallmentReceipt({ data }) {
       <Button onClick={reactToPrintFn}>print receipt</Button>
 
       <div
-        className="border border-input rounded-sm px-1 print:pb-4"
+        className="border border-input rounded-sm px-1 print:mx-2"
         ref={contentRef}
       >
         <h2 className="text-center font-bold py-2 border-b border-input">

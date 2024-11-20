@@ -141,6 +141,7 @@ export async function GET(request) {
           "memberDetails.nidNumber": 1,
           savingsName: 1,
           savingsAmount: 1,
+          savingsType: 1,
           installments: [
             {
               date: "$installments.date",
