@@ -1,13 +1,22 @@
 import { Block } from "@/components/block";
+import { EmptyItem } from "@/components/empty-item";
 import { SavingsInstallmentsTable } from "@/components/savings-installments-table";
 import { getData } from "@/utils/api-calls";
 import { Suspense } from "react";
 
 async function Installments() {
-  const { error, response } = await getData("savings-installments", 0);
-  if (error) throw new Error("Failed to fetch data.");
+  const { response } = await getData("savings-installments", 0);
 
-  return <SavingsInstallmentsTable installments={response.payload} />;
+  return (
+    <>
+      {!response.payload?.length && (
+        <EmptyItem message="কোন তথ্য পাওয়া যায়নি" />
+      )}
+      {response.payload?.length > 0 && (
+        <SavingsInstallmentsTable installments={response.payload} />
+      )}
+    </>
+  );
 }
 
 export default async function Page() {
