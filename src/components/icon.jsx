@@ -1,4 +1,5 @@
 import {
+  ArrowLeft,
   CalendarArrowDown,
   ChevronDown,
   ChevronUp,
@@ -21,6 +22,7 @@ import {
 const Icons = {
   arrowUp: ChevronUp,
   arrowDown: ChevronDown,
+  arrowLeft: ArrowLeft,
   view: Eye,
   user: User,
   members: Users,
