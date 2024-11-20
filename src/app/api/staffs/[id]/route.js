@@ -3,6 +3,7 @@ import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
 
+// Update employee details
 export async function PUT(request, { params }) {
   try {
     const { error, id } = await verifyToken(request);

@@ -122,7 +122,11 @@ export async function GET(request) {
     await connectDb();
 
     const user = await Staff.findById(id);
-    if (user.role !== "admin")
+    if (
+      user.role !== "admin" &&
+      user.role !== "marketing officer" &&
+      user.role !== "staff"
+    )
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
     const reqUrl = new URL(request.url);
