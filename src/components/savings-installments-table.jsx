@@ -1,5 +1,5 @@
 import { formatNumber } from "@/utils/helpers";
-import { Button } from "./ui/button";
+import { PaySavingsInstallment } from "./modals/pay-savings-installment";
 
 export function SavingsInstallmentsTable({ installments }) {
   return (
@@ -62,25 +62,28 @@ export function SavingsInstallmentsTable({ installments }) {
                 scope="row"
                 className="p-2 border-r border-primary md:border-secondary"
               >
-                {installment.memberDetails?.name}
+                {installment?.memberDetails?.name}
               </th>
               <td className="p-2 border-r border-primary md:border-secondary">
-                {installment.memberDetails?.phone}
+                {installment?.memberDetails?.phone}
               </td>
               <td className="p-2 border-r border-primary md:border-secondary">
-                {installment.memberDetails?.nidNumber}
+                {installment?.memberDetails?.nidNumber}
               </td>
               <td className="p-2 border-r border-primary md:border-secondary">
                 {installment?.savingsName}
               </td>
               <td className="p-2 border-r border-primary md:border-secondary">
-                {formatNumber(installment.savingsAmount)}
+                {formatNumber(installment?.savingsAmount)}
               </td>
               <td className="p-2 border-r border-primary md:border-secondary">
-                {new Date(installment.installmentDate).toDateString()}
+                {new Date(installment?.installments[0]?.date).toDateString()}
               </td>
               <td className="p-2 md:border-0">
-                <Button variant="outline">Pay</Button>
+                <PaySavingsInstallment
+                  label="pay"
+                  installments={installment?.installments}
+                />
               </td>
             </tr>
           ))}

@@ -12,7 +12,7 @@ import { putData } from "@/utils/api-calls";
 import { useRouter } from "next/navigation";
 import { formatNumber } from "@/utils/helpers";
 
-export function PaySavingsInstallment({ installments }) {
+export function PaySavingsInstallment({ installments, label }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -49,9 +49,10 @@ export function PaySavingsInstallment({ installments }) {
     <Modal
       title="pay installment"
       description="Add installment information here. Click save when you're done."
-      triggerIcon="plus"
-      triggerSize="icon"
-      className="rounded-full"
+      triggerIcon={label ? "" : "plus"}
+      triggerSize={label ? "" : "icon"}
+      className={label ? "" : "rounded-full"}
+      triggerLabel={label}
       isOpen={isModalOpen}
       onClose={() => setIsModalOpen(false)}
       onOpen={() => setIsModalOpen(true)}

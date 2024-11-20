@@ -5,7 +5,7 @@ import { Suspense } from "react";
 
 async function Installments() {
   const { error, response } = await getData("savings-installments", 0);
-  if (error) throw new Error("Failed to fetch data");
+  if (error) throw new Error("Failed to fetch data.");
 
   return <SavingsInstallmentsTable installments={response.payload} />;
 }

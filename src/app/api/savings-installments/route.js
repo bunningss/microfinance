@@ -138,7 +138,13 @@ export async function GET(request) {
           "memberDetails.nidNumber": 1,
           savingsName: 1,
           savingsAmount: 1,
-          installmentDate: "$installments.date",
+          installments: [
+            {
+              date: "$installments.date",
+              _id: "$installments._id",
+              amount: "$installments.amount",
+            },
+          ],
         },
       },
     ]);
