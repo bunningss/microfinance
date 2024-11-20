@@ -69,3 +69,9 @@ export function formatNumber(number) {
     currency: "BDT",
   }).format(number);
 }
+
+export function formatDate(date) {
+  const localISO = new Date(date).toLocaleString("sv-SE").replace(" ", "T");
+
+  return localISO;
+}

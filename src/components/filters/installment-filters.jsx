@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { filterInstallmentsSchema } from "@/lib/schema";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "../ui/button";
+import { formatDate } from "@/utils/helpers";
 
 export function InstallmentsFilters() {
   const router = useRouter();
@@ -22,7 +23,7 @@ export function InstallmentsFilters() {
     : new Date(Date.now()).toDateString();
 
   const handleSubmit = (data) => {
-    router.push(`?date=${new Date(data.date)}`);
+    router.push(`?date=${formatDate(data.date)}`);
   };
 
   const handleClear = () => {
