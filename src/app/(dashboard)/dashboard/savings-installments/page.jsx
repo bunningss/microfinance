@@ -1,12 +1,16 @@
 import { Block } from "@/components/block";
 import { EmptyItem } from "@/components/empty-item";
-import { TodaysSavingsInstallmentsFilters } from "@/components/filters/todays-savings-installments-filters";
+import { InstallmentsFilters } from "@/components/filters/installment-filters";
 import { SavingsInstallmentsTable } from "@/components/savings-installments-table";
 import { getData } from "@/utils/api-calls";
 import { Suspense } from "react";
 
-async function Installments() {
-  const { response } = await getData("savings-installments", 0);
+async function Installments({ searchParams }) {
+  const { date } = searchParams;
+  const queryParams = new URLSearchParams({
+    ...(date && { date }),
+  }).toString();
+  const { response } = await getData(`savings-installments?${queryParams}`, 0);
 
   return (
     <>
@@ -20,13 +24,13 @@ async function Installments() {
   );
 }
 
-export default async function Page() {
+export default async function Page({ searchParams }) {
   return (
     <div className="space-y-4">
       <Block title="Installments" />
       <Suspense fallback={<div>Loading...</div>}>
-        <TodaysSavingsInstallmentsFilters />
-        <Installments />
+        <InstallmentsFilters />
+        <Installments searchParams={searchParams} />
       </Suspense>
     </div>
   );

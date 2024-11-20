@@ -109,9 +109,12 @@ export async function GET(request) {
     if (user.role !== "admin" && user.role !== "marketing officer")
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
-    const today = new Date();
-    const startOfDay = new Date(today.setHours(0, 0, 0, 0));
-    const endOfDay = new Date(today.setHours(23, 59, 59, 999));
+    const reqUrl = new URL(request.url);
+    const date = reqUrl.searchParams.get("date");
+
+    const currentDate = date ? new Date(date) : new Date();
+    const startOfDay = new Date(currentDate.setHours(0, 0, 0, 0));
+    const endOfDay = new Date(currentDate.setHours(23, 59, 59, 999));
 
     const results = await Savings.aggregate([
       { $unwind: "$installments" },
