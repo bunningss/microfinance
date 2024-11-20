@@ -22,7 +22,7 @@ export function InstallmentsFilters() {
     : new Date(Date.now()).toDateString();
 
   const handleSubmit = (data) => {
-    router.push(`?date=${new Date(data.date).toISOString()}`);
+    router.push(`?date=${new Date(data.date).toLocaleDateString()}`);
   };
 
   const handleClear = () => {
