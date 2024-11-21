@@ -11,6 +11,10 @@ const loanSchema = new mongoose.Schema(
       enum: ["daily", "weekly", "monthly"],
       required: true,
     },
+    rate: {
+      type: Number,
+      required: true,
+    },
     loanAmount: {
       type: Number,
       required: true,
@@ -64,6 +68,10 @@ const loanSchema = new mongoose.Schema(
         },
       },
     ],
+    installmentAmount: {
+      type: Number,
+      required: true,
+    },
     amountPaid: {
       type: Number,
       required: true,
@@ -71,6 +79,11 @@ const loanSchema = new mongoose.Schema(
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "member",
+    },
+    approvedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "staff",
+      required: true,
     },
   },
   {

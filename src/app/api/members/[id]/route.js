@@ -1,6 +1,7 @@
 import Member from "@/lib/models/Member";
-import Savings from "@/lib/models/Savings";
 import Staff from "@/lib/models/Staff";
+import Savings from "@/lib/models/Savings";
+import Loan from "@/lib/models/Loan";
 import { connectDb } from "@/lib/db/connectDb";
 import { NextResponse } from "next/server";
 import { verifyToken } from "@/utils/auth";
@@ -21,9 +22,9 @@ export async function GET(request, { params }) {
     )
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
-    const member = await Member.findOne({ nidNumber: params.id }).populate(
-      "savings"
-    );
+    const member = await Member.findOne({ nidNumber: params.id })
+      .populate("savings")
+      .populate("loans");
     if (!member) {
       return NextResponse.json({ msg: "তথ্য পাওয়া যায়নি." }, { status: 404 });
     }

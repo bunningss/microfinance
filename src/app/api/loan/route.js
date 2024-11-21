@@ -38,10 +38,13 @@ export async function POST(request) {
       parseInt(body.loanAmount)
     );
 
+    const rate = body.loanType === "daily" ? 32 : 20;
+
     const newLoan = new Loan({
       loanName,
       loanStatus: "incomplete",
       loanType: body.loanType,
+      rate,
       loanAmount: body.loanAmount,
       repayAmount: installments[0].amount,
       loanDuration: body.loanDuration,
@@ -49,7 +52,9 @@ export async function POST(request) {
       endDate: installments.at(-1).date,
       owner: body.owner,
       installments,
+      installmentAmount: installments[0].amountPerInstallment,
       amountPaid: 0,
+      approvedBy: id,
     });
 
     await Member.findByIdAndUpdate(

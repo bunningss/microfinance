@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
 import { Modal } from "./modal";
+import { LoanCard } from "../cards/loan-card";
+import { CardView } from "../card-view";
 
-export function ViewLoans() {
+export function ViewLoans({ loans }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <Modal
@@ -15,7 +17,11 @@ export function ViewLoans() {
       onClose={() => setIsModalOpen(false)}
       onOpen={() => setIsModalOpen(true)}
     >
-      <div>view Loans</div>
+      <CardView className="md:grid-cols-1">
+        {loans.map((loan, index) => (
+          <LoanCard key={index} data={loan} />
+        ))}
+      </CardView>
     </Modal>
   );
 }

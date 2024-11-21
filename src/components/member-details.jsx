@@ -9,7 +9,7 @@ export function MemberDetails({ data }) {
       {/* Modal Buttons for new Savings and Loans */}
       <div className="grid grid-cols-2 gap-2">
         <ViewSavings savings={data.savings} />
-        <ViewLoans />
+        <ViewLoans loans={data.loans} />
         <AddNewSavings member={data} />
         <AddNewLoan member={data} />
       </div>

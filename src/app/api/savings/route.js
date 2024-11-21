@@ -51,6 +51,7 @@ export async function POST(request) {
       owner: body.owner,
       installments,
       amountSaved: 0,
+      approvedBy: id,
     });
 
     await Member.findByIdAndUpdate(

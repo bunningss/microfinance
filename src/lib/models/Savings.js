@@ -64,6 +64,11 @@ const savingsSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "member",
     },
+    approvedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "staff",
+      required: true,
+    },
   },
   {
     timestamps: true,
