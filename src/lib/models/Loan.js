@@ -15,6 +15,10 @@ const loanSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    repayAmount: {
+      type: Number,
+      required: true,
+    },
     loanDuration: {
       type: String,
       required: true,
@@ -46,6 +50,10 @@ const loanSchema = new mongoose.Schema(
           enum: ["paid", "unpaid"],
         },
         amount: {
+          type: Number,
+          required: true,
+        },
+        amountPerInstallment: {
           type: Number,
           required: true,
         },

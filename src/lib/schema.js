@@ -87,6 +87,22 @@ export const addNewSavingsSchema = z.object({
     }, "Invalid date format"),
 });
 
+// Add loan schema
+export const addNewLoanSchema = z.object({
+  loanType: z.enum(["daily", "weekly", "monthly"], {
+    message: "Invalid loan type",
+  }),
+  loanAmount: z.string().min(1, "Loan amount is required"),
+  loanDuration: z.string().min(1, "Loan duration is required"),
+  startDate: z
+    .string()
+    .min(1, "Start date is required")
+    .refine((val) => {
+      const date = new Date(val);
+      return !isNaN(date.getTime());
+    }, "Invalid date format"),
+});
+
 // search installment schema
 export const savingInstallmentSchema = z.object({
   nidNumber: z.string().min(3, {
