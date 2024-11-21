@@ -13,6 +13,7 @@ export function ViewLoans({ loans }) {
       triggerLabel="ঋণ দেখুন"
       triggerIcon="view"
       className="w-full"
+      childrenClassName="overflow-auto max-h-[80vh]"
       isOpen={isModalOpen}
       onClose={() => setIsModalOpen(false)}
       onOpen={() => setIsModalOpen(true)}
