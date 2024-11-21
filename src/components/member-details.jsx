@@ -1,4 +1,4 @@
-import { AddLoan } from "./modals/add-loan";
+import { AddNewLoan } from "./modals/add-new-loan";
 import { AddNewSavings } from "./modals/add-new-savings";
 import { ViewLoans } from "./modals/view-loans";
 import { ViewSavings } from "./modals/view-savings";
@@ -11,7 +11,7 @@ export function MemberDetails({ data }) {
         <ViewSavings savings={data.savings} />
         <ViewLoans />
         <AddNewSavings member={data} />
-        <AddLoan />
+        <AddNewLoan />
       </div>
     </>
   );

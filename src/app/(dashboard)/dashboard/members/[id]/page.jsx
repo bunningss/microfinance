@@ -1,5 +1,9 @@
+import dynamic from "next/dynamic";
+const MemberDetails = dynamic(
+  () => import("@/components/member-details").then((mod) => mod.MemberDetails),
+  { ssr: false }
+);
 import { Block } from "@/components/block";
-import { MemberDetails } from "@/components/member-details";
 import { getData } from "@/utils/api-calls";
 import { Suspense } from "react";
 

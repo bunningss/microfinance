@@ -4,7 +4,7 @@ import { FormModal } from "../form/form-modal";
 import { Modal } from "./modal";
 import { useForm } from "react-hook-form";
 
-export function AddLoan() {
+export function AddNewLoan() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const form = useForm();
 
