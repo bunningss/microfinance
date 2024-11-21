@@ -34,7 +34,6 @@ const Icons = {
   edit: Edit,
   money: Wallet,
   search: Search,
-  loan: HandCoins,
   login: LogIn,
   logout: LogOut,
   installment: CalendarArrowDown,

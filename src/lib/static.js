@@ -22,7 +22,7 @@ export const sidebarItems = [
   {
     label: "ঋণের কিস্তি পরিশোধ",
     href: "/dashboard/search-loan-installment",
-    icon: "loan",
+    icon: "expense",
   },
   {
     label: "সদস্য",
