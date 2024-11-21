@@ -11,7 +11,7 @@ export function MemberDetails({ data }) {
         <ViewSavings savings={data.savings} />
         <ViewLoans />
         <AddNewSavings member={data} />
-        <AddNewLoan />
+        <AddNewLoan member={data} />
       </div>
     </>
   );

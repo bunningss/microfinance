@@ -87,6 +87,12 @@ const memberSchema = new mongoose.Schema(
         ref: "savings",
       },
     ],
+    loans: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "loan",
+      },
+    ],
     totalSaved: {
       type: Number,
       required: true,
