@@ -24,6 +24,22 @@ export async function POST(request) {
 
     const body = await request.json();
 
+    const existingMember = await Member.findById(body.owner);
+    if (!existingMember)
+      return NextResponse.json(
+        { msg: "দুঃখিত। সদস্য পাওয়া যায়নি" },
+        { status: 400 }
+      );
+
+    if (existingMember.totalSaved * 5 < body.loanAmount) {
+      return NextResponse.json(
+        {
+          msg: `দুঃখিত। সর্বোচ্চ ঋণ পাবে ${existingMember.totalSaved * 5} টাকা`,
+        },
+        { status: 400 }
+      );
+    }
+
     let loanName;
 
     do {
