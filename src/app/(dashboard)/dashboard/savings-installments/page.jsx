@@ -27,7 +27,7 @@ async function Installments({ searchParams }) {
 export default async function Page({ searchParams }) {
   return (
     <div className="space-y-4">
-      <Block title="Installments" />
+      <Block title="Savings Installments / সঞ্চয় কিস্তিসমূহ" />
       <Suspense fallback={<div>Loading...</div>}>
         <InstallmentsFilters />
         <Installments searchParams={searchParams} />

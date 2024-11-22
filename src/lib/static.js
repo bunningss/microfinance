@@ -5,12 +5,12 @@ export const sidebarItems = [
     icon: "dashboard",
   },
   {
-    label: "সঞ্চয় কিস্তি",
+    label: "সঞ্চয় কিস্তিসমূহ",
     href: "/dashboard/savings-installments",
     icon: "installment",
   },
   {
-    label: "ঋণের কিস্তি",
+    label: "ঋণের কিস্তিসমূহ",
     href: "/dashboard/loan-installments",
     icon: "installment",
   },
@@ -25,7 +25,7 @@ export const sidebarItems = [
     icon: "expense",
   },
   {
-    label: "সদস্য",
+    label: "সদস্য তথ্য",
     href: "",
     icon: "members",
     children: [
@@ -66,12 +66,12 @@ export const sidebarItems = [
     icon: "user",
     children: [
       {
-        label: "কর্মচারী তালিকা দেখুন",
+        label: "কর্মীদের তালিকা দেখুন",
         href: "staffs",
         icon: "",
       },
       {
-        label: "কর্মচারী যোগ করুন",
+        label: "কর্মী যোগ করুন",
         href: "staffs/add",
         icon: "",
       },
