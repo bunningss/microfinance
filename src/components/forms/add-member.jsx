@@ -162,14 +162,19 @@ export function AddMember() {
           <FormInput
             form={form}
             name="fathersName"
-            label="Fathers Name / পিতা/স্বামীর নাম"
+            label="Father's Name / পিতার নাম"
             placeholder=""
-            required
+          />
+          <FormInput
+            form={form}
+            name="husbandsName"
+            label="Husband's Name / স্বামীর নাম"
+            placeholder=""
           />
           <FormInput
             form={form}
             name="mothersName"
-            label="Mothers name / মাতার নাম"
+            label="Mother's name / মাতার নাম"
             placeholder=""
             required
           />

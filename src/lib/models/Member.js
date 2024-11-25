@@ -8,7 +8,11 @@ const memberSchema = new mongoose.Schema(
     },
     fathersName: {
       type: String,
-      required: true,
+      required: false,
+    },
+    husbandsName: {
+      type: String,
+      required: false,
     },
     mothersName: {
       type: String,
