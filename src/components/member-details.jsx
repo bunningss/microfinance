@@ -1,3 +1,4 @@
+import { MemberForm } from "./member-form";
 import { AddNewLoan } from "./modals/add-new-loan";
 import { AddNewSavings } from "./modals/add-new-savings";
 import { ViewLoans } from "./modals/view-loans";
@@ -13,6 +14,8 @@ export function MemberDetails({ data }) {
         <AddNewSavings member={data} />
         <AddNewLoan member={data} />
       </div>
+
+      <MemberForm member={data} />
     </>
   );
 }

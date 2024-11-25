@@ -36,7 +36,7 @@ export function LoanCard({ data, installments }) {
           <span className="capitalize">
             পরিশোধ করবে:{" "}
             <b>
-              {formatNumber(data?.repayAmount)} ({data.rate}%)
+              {formatNumber(data?.repayAmount)} (+{data.rate}%)
             </b>
           </span>
 
