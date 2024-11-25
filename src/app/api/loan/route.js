@@ -62,7 +62,7 @@ export async function POST(request) {
       loanType: body.loanType,
       rate,
       loanAmount: body.loanAmount,
-      repayAmount: installments[0].amount,
+      repayAmount: installments[0].totalAmount,
       loanDuration: body.loanDuration,
       startDate: body.startDate,
       endDate: installments.at(-1).date,
