@@ -50,7 +50,8 @@ export function MemberForm({ member }) {
         {/* Member details fields */}
         <div className="mt-2">
           <p>আবেদনকারীর নাম: {member?.name}</p>
-          <p>পিতা / স্বামীর নাম: {member?.fathersName}</p>
+          {member?.fathersName && <p>পিতার নাম: {member?.fathersName}</p>}
+          {member?.husbandsName && <p>স্বামীর নাম: {member?.husbandsName}</p>}
           <p>মাতার নাম: {member?.mothersName}</p>
 
           {/* Permanent address */}

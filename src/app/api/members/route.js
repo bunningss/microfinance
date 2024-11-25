@@ -83,6 +83,7 @@ export async function POST(request) {
       owner: newMember._id,
       installments,
       amountSaved: 0,
+      approvedBy: id,
     });
 
     await newMember.save({ session });

@@ -5,7 +5,7 @@ import { EdgeStoreProvider } from "@/lib/edgestore";
 import { font } from "@/lib/fonts";
 
 export const metadata = {
-  title: "Shopnotori",
+  title: "tt",
   description: "Shopnotori Sromojibi Somobay Somiti Limited",
 };
 
