@@ -1,4 +1,5 @@
 import { formatNumber } from "@/utils/helpers";
+import { PayInstallment } from "./modals/pay-installment";
 
 export function LoanInstallmentsTable({ installments }) {
   return (
@@ -91,19 +92,17 @@ export function LoanInstallmentsTable({ installments }) {
                 {formatNumber(installment?.loanAmount)}
               </td>
               <td className="p-2 border-r border-primary md:border-secondary">
-                {formatNumber(
-                  installment?.installments[0].amountPerInstallment
-                )}
+                {formatNumber(installment?.installments[0].amount)}
               </td>
               <td className="p-2 border-r border-primary md:border-secondary">
                 {new Date(installment?.installments[0]?.date).toDateString()}
               </td>
               <td className="p-2 md:border-0">
-                {/* <PaySavingsInstallment
+                <PayInstallment
                   label="pay"
+                  type="loan"
                   installments={installment?.installments}
-                /> */}
-                pay btn
+                />
               </td>
             </tr>
           ))}

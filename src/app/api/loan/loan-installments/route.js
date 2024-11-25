@@ -1,5 +1,6 @@
 import Loan from "@/lib/models/Loan";
 import Staff from "@/lib/models/Staff";
+import mongoose from "mongoose";
 import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
@@ -58,7 +59,7 @@ export async function GET(request) {
             {
               date: "$installments.date",
               _id: "$installments._id",
-              amountPerInstallment: "$installments.amountPerInstallment",
+              amount: "$installments.amount",
             },
           ],
         },
@@ -77,5 +78,81 @@ export async function GET(request) {
     );
   } catch (err) {
     return NextResponse.json({ msg: err.message }, { status: 500 });
+  }
+}
+
+// Pay loan installment
+export async function PUT(request) {
+  await connectDb();
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
+  try {
+    const { error, id } = await verifyToken(request);
+    if (error)
+      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+
+    const user = await Staff.findById(id);
+    if (user.role !== "admin" && user.role !== "marketing officer")
+      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+
+    const { installmentId } = await request.json();
+
+    if (!installmentId) {
+      return NextResponse.json(
+        { msg: "কিস্তি নির্বাচন করুন" },
+        { status: 400 }
+      );
+    }
+
+    const loan = await Loan.findOne({
+      "installments._id": installmentId,
+    });
+
+    if (!loan) {
+      return NextResponse.json(
+        { msg: "কিস্তি পাওয়া যায়নি" },
+        { status: 404 }
+      );
+    }
+
+    const installment = loan.installments.id(installmentId);
+
+    if (!installment) {
+      return NextResponse.json(
+        { msg: "সঞ্চয়পত্রে কিস্তি পাওয়া যায়নি" },
+        { status: 404 }
+      );
+    }
+
+    if (installment.status === "paid") {
+      return NextResponse.json(
+        { msg: "কিস্তি ইতিমধ্যে পরিশোধ করা হয়েছে" },
+        { status: 400 }
+      );
+    }
+
+    // Update savings properties
+    installment.status = "paid";
+    installment.receivedBy = id;
+    loan.amountPaid += installment.amount;
+
+    const allPaid = loan.installments.every((inst) => inst.status === "paid");
+
+    if (allPaid) {
+      loan.loanStatus = "complete";
+    }
+
+    await loan.save({ session });
+
+    await session.commitTransaction();
+    return NextResponse.json({
+      msg: "সফলভাবে কিস্তি পরিশোধ করা হয়েছে।",
+    });
+  } catch (err) {
+    await session.abortTransaction();
+    return NextResponse.json({ msg: err.message }, { status: 500 });
+  } finally {
+    session.endSession();
   }
 }

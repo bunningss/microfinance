@@ -53,11 +53,11 @@ const loanSchema = new mongoose.Schema(
           default: "unpaid",
           enum: ["paid", "unpaid"],
         },
-        amount: {
+        totalAmount: {
           type: Number,
           required: true,
         },
-        amountPerInstallment: {
+        amount: {
           type: Number,
           required: true,
         },

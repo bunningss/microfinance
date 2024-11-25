@@ -127,8 +127,8 @@ export function generateLoanInstallments(
     installments.push({
       date: currentDate.toISOString().split("T")[0], // Format date as YYYY-MM-DD
       status: "unpaid",
-      amount: repayAmount,
-      amountPerInstallment: amountPerInstallment,
+      totalAmount: repayAmount,
+      amount: amountPerInstallment,
     });
 
     // Increment the currentDate based on the type

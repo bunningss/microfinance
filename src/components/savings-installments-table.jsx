@@ -1,5 +1,5 @@
 import { formatNumber } from "@/utils/helpers";
-import { PaySavingsInstallment } from "./modals/pay-savings-installment";
+import { PayInstallment } from "./modals/pay-installment";
 
 export function SavingsInstallmentsTable({ installments }) {
   return (
@@ -89,9 +89,10 @@ export function SavingsInstallmentsTable({ installments }) {
                 {new Date(installment?.installments[0]?.date).toDateString()}
               </td>
               <td className="p-2 md:border-0">
-                <PaySavingsInstallment
+                <PayInstallment
                   label="pay"
                   installments={installment?.installments}
+                  type="savings"
                 />
               </td>
             </tr>

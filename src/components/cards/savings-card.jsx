@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { Card, CardContent, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
-import { PaySavingsInstallment } from "../modals/pay-savings-installment";
 import { formatNumber } from "@/utils/helpers";
+import { PayInstallment } from "../modals/pay-installment";
 
 export function SavingsCard({ data, installments }) {
   return (
@@ -39,7 +39,7 @@ export function SavingsCard({ data, installments }) {
             </span>
             <div className="space-x-2">
               {installments && (
-                <PaySavingsInstallment installments={installments} />
+                <PayInstallment installments={installments} type="savings" />
               )}
               <Link href="">
                 <Button icon="view" size="icon" className="rounded-full" />

@@ -11,7 +11,7 @@ import { putData } from "@/utils/api-calls";
 import { useRouter } from "next/navigation";
 import { formatNumber } from "@/utils/helpers";
 
-export function PaySavingsInstallment({ installments, label }) {
+export function PayInstallment({ installments, label, type }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -23,11 +23,29 @@ export function PaySavingsInstallment({ installments, label }) {
     },
   });
 
+  let urls = {
+    requestUrl: "",
+    redirectUrl: "",
+  };
+
+  switch (type) {
+    case "loan":
+      urls.redirectUrl = "/dashboard/loan-installments/receipt";
+      urls.requestUrl = "loan/loan-installments";
+      break;
+    case "savings":
+      urls.redirectUrl = "/dashboard/savings-installments/receipt";
+      urls.requestUrl = "savings-installments";
+      break;
+    default:
+      break;
+  }
+
   const handleSubmit = async (data) => {
     try {
       setIsLoading(true);
 
-      const { error, response } = await putData("savings-installments", data);
+      const { error, response } = await putData("loan/loan-installments", data);
       if (error) return errorNotification(response.msg);
 
       router.push(

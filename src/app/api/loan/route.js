@@ -68,7 +68,7 @@ export async function POST(request) {
       endDate: installments.at(-1).date,
       owner: body.owner,
       installments,
-      installmentAmount: installments[0].amountPerInstallment,
+      installmentAmount: installments[0].amount,
       amountPaid: 0,
       approvedBy: id,
     });
