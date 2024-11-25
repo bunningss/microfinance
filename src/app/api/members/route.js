@@ -7,6 +7,7 @@ import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
 import { generateInstallments, generateSavingsName } from "@/utils/helpers";
 
+// Add new member
 export async function POST(request) {
   await connectDb();
   const session = await mongoose.startSession();

@@ -36,6 +36,7 @@ export function AddMember() {
     defaultValues: {
       name: "",
       fathersName: "",
+      husbandsName: "",
       mothersName: "",
       permVillage: "",
       permPostOffice: "",
