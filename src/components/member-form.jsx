@@ -1,6 +1,6 @@
 export function MemberForm({ member }) {
   return (
-    <div className="bg-secondary p-2 rounded-md text-lg">
+    <div className="bg-secondary p-2 rounded-md text-lg leading-loose">
       <header className="pb-2 border-b border-green-700">
         <div className="flex justify-between items-center">
           <span>সঞ্চয়ই</span>
@@ -57,7 +57,7 @@ export function MemberForm({ member }) {
           {/* Permanent address */}
           <div className="mt-2">
             <span className="font-bold">বর্তমান ঠিকানা</span>
-            <div className="flex gap-8 justify-between">
+            <div className="flex justify-between flex-wrap md:flex-nowrap">
               <p>গ্রাম: {member?.permVillage}</p>
               <p>ডাকঘর: {member?.permPostOffice}</p>
               <p>থানা: {member?.permPoliceStation}</p>
@@ -69,7 +69,7 @@ export function MemberForm({ member }) {
           {/* Present address */}
           <div className="my-2">
             <span className="font-bold">বর্তমান ঠিকানা</span>
-            <div className="flex gap-8 justify-between">
+            <div className="flex justify-between flex-wrap md:flex-nowrap">
               <p>গ্রাম: {member?.currVillage}</p>
               <p>ডাকঘর: {member?.currPostOffice}</p>
               <p>থানা: {member?.currPoliceStation}</p>
