@@ -1,23 +1,23 @@
 "use client";
 import { useState } from "react";
 import { SearchMemberInstallments } from "./forms/search-member-installments";
-import { SavingsCard } from "./cards/savings-card";
 import { CardView } from "./card-view";
 import { EmptyItem } from "./empty-item";
+import { LoanCard } from "./cards/loan-card";
 
-export function SavingsDetails() {
-  const [savingsData, setSavingsData] = useState(null);
+export function LoanDetails() {
+  const [loanData, setLoanData] = useState(null);
 
   return (
     <>
-      <SearchMemberInstallments setData={setSavingsData} type="savings" />
-      {!savingsData?.savings?.length && (
+      <SearchMemberInstallments setData={setLoanData} type="loan" />
+      {!loanData?.loans?.length && (
         <EmptyItem message="কোন তথ্য পাওয়া যায়নি" />
       )}
-      {savingsData?.savings?.length && (
+      {loanData?.loans?.length > 0 && (
         <CardView>
-          {savingsData?.savings?.map((item, index) => (
-            <SavingsCard
+          {loanData?.loans?.map((item, index) => (
+            <LoanCard
               key={index}
               data={item}
               installments={item?.installments}

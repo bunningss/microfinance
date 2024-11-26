@@ -8,7 +8,7 @@ import { getData } from "@/utils/api-calls";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { savingInstallmentSchema } from "@/lib/schema";
 
-export function SearchMemberInstallments({ setSavingsData }) {
+export function SearchMemberInstallments({ setData, type }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm({
@@ -18,18 +18,31 @@ export function SearchMemberInstallments({ setSavingsData }) {
     },
   });
 
+  let requestUrl;
+
+  switch (type) {
+    case "loan":
+      requestUrl = "loan/loan-installments";
+      break;
+    case "savings":
+      requestUrl = "savings-installments";
+      break;
+    default:
+      break;
+  }
+
   const handleSubmit = async (data) => {
     try {
       setIsLoading(true);
 
-      const res = await getData(`/savings-installments/${data.nidNumber}`, 0);
+      const res = await getData(`${requestUrl}/${data.nidNumber}`, 0);
       if (res.error) {
-        setSavingsData(null);
+        setData(null);
         return errorNotification(res.response.msg);
       }
 
       successNotification(res.response.msg);
-      setSavingsData(res.response.payload);
+      setData(res.response.payload);
     } catch (err) {
       errorNotification(err.message);
     } finally {
