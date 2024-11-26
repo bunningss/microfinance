@@ -23,8 +23,15 @@ export async function GET(request, { params }) {
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
     const member = await Member.findOne({ nidNumber: params.id })
-      .populate("savings")
-      .populate("loans");
+      .populate({
+        path: "savings",
+        options: { sort: { createdAt: -1 } },
+      })
+      .populate({
+        path: "loans",
+        options: { sort: { createdAt: -1 } },
+      });
+
     if (!member) {
       return NextResponse.json({ msg: "তথ্য পাওয়া যায়নি." }, { status: 404 });
     }
