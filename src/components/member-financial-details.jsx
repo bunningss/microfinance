@@ -28,7 +28,7 @@ export async function MemberFinancialDetails({ data }) {
         <p>
           ঋণ পরিশোধ বাকি আছে:{" "}
           <b>
-            {formatNumber(currentLoan.repayAmount - currentLoan?.amountPaid)}
+            {formatNumber(currentLoan?.repayAmount - currentLoan?.amountPaid)}
           </b>
         </p>
       </div>
