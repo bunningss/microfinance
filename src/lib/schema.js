@@ -18,7 +18,7 @@ export const addMemberFormSchema = z.object({
   phone: z.string().min(1, "Phone number is required"),
   nidNumber: z.string().min(1, "NID number is required"),
   birthCertificateNumber: z.string().nullable(),
-  nationality: z.string().min(1, "Nationality is required"),
+  nationality: z.string().nullable(),
   age: z.string().min(1, "Age is required"),
   occupation: z.string().min(1, "Occupation is required"),
   religion: z.string().min(1, "Religion is required"),

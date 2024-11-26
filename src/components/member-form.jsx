@@ -1,6 +1,6 @@
 export function MemberForm({ member }) {
   return (
-    <div className="bg-secondary p-2 rounded-md text-lg leading-loose">
+    <section className="bg-secondary p-2 rounded-md text-lg leading-loose">
       <header className="pb-2 border-b border-green-700">
         <div className="flex justify-between items-center">
           <span>সঞ্চয়ই</span>
@@ -99,6 +99,6 @@ export function MemberForm({ member }) {
           </h2>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

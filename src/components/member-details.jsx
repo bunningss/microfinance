@@ -1,3 +1,4 @@
+import { MemberFinancialDetails } from "./member-financial-details";
 import { MemberForm } from "./member-form";
 import { AddNewLoan } from "./modals/add-new-loan";
 import { AddNewSavings } from "./modals/add-new-savings";
@@ -14,7 +15,7 @@ export function MemberDetails({ data }) {
         <AddNewSavings member={data} />
         <AddNewLoan member={data} />
       </div>
-
+      <MemberFinancialDetails data={data} />
       <MemberForm member={data} />
     </>
   );

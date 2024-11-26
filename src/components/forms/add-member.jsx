@@ -297,7 +297,6 @@ export function AddMember() {
             name="nationality"
             label="nationality / জাতীয়তা"
             placeholder=""
-            required
           />
           <FormInput
             form={form}
