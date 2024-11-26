@@ -31,6 +31,22 @@ export async function POST(request) {
         { status: 400 }
       );
 
+    // Check if the member already has an incomplete loan
+    const incompleteLoan = await Loan.findOne({
+      owner: existingMember._id,
+      loanStatus: "incomplete",
+    });
+
+    if (incompleteLoan) {
+      return NextResponse.json(
+        {
+          msg: "দুঃখিত। সদস্যের একটি অসম্পূর্ণ ঋণ রয়েছে।",
+        },
+        { status: 400 }
+      );
+    }
+
+    // verify loan amount
     if (existingMember.totalSaved * 5 < body.loanAmount) {
       return NextResponse.json(
         {
