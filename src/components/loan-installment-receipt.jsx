@@ -1,0 +1,66 @@
+"use client";
+import { useRef } from "react";
+import { useReactToPrint } from "react-to-print";
+import { Button } from "./ui/button";
+import { formatNumber } from "@/utils/helpers";
+
+export function LoanInstallmentReceipt({ data }) {
+  const contentRef = useRef(null);
+  const reactToPrintFn = useReactToPrint({ contentRef });
+  console.log(data);
+  return (
+    <div className="space-y-4">
+      <Button onClick={reactToPrintFn}>print receipt</Button>
+
+      <div
+        className="border border-input rounded-sm px-1 print:mx-2"
+        ref={contentRef}
+      >
+        <h2 className="text-center font-bold py-2 border-b border-input">
+          স্বপ্নতরী শ্রমজীবী সমবায় সমিতি লিমিটেড
+        </h2>
+        <div className="my-2 space-y-2">
+          <p>সদস্যের নাম: {data?.owner?.name}</p>
+          <p>ফোন নম্বর: {data?.owner?.phone}</p>
+          <p>
+            মোট ঋণ: <b>{formatNumber(data?.loan.repayAmount)}</b>
+          </p>
+
+          <p>
+            ঋণের নাম: <b>{data?.loan?.loanName}</b>
+          </p>
+          <p>
+            কিস্তির পরিমাণ: <b>{formatNumber(data.loan?.installmentAmount)}</b>
+          </p>
+          <p>
+            কিস্তির তারিখ: {new Date(data?.installment?.date).toDateString()}
+          </p>
+          <p>কিস্তি পরিশোধের তারিখ: {new Date(Date.now()).toDateString()}</p>
+          <p>
+            কিস্তি গ্রহণকারী কর্মকর্তা: {data?.installment?.receivedBy?.name}
+          </p>
+
+          <p>মোট কিস্তি: {data.totalInstallments}</p>
+          <p>কিস্তি পরিশোধ করা হয়েছে: {data.paidInstallments}</p>
+          <p>কিস্তি বাকি: {data.totalInstallments - data.paidInstallments}</p>
+          <p>
+            মোট পরিশোধিত টাকা: <b>{formatNumber(data?.loan?.amountPaid)}</b>
+          </p>
+          <p>
+            টাকা পরিশোধ বাকি:{" "}
+            <b>
+              {formatNumber(data?.loan?.repayAmount - data?.loan?.amountPaid)}
+            </b>
+          </p>
+          <p>পরবর্তী কিস্তির তারিখ:</p>
+        </div>
+        <div className="p-2 border-t border-input">
+          <p className="text-center">Software Developed By</p>
+          <p className="text-center italic font-bold text-muted-foreground">
+            {process.env.NEXT_PUBLIC_COMPANY_NAME}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}

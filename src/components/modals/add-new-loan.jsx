@@ -60,8 +60,8 @@ export function AddNewLoan({ member }) {
 
       setInstallmentDetails({
         count: installments.length,
-        totalAmount: installments[0].amount,
-        amountPerInstallment: installments[0].amountPerInstallment,
+        totalAmount: installments[0].totalAmount,
+        amountPerInstallment: installments[0].amount,
         lastDate: installments.at(-1)?.date || "",
       });
     }

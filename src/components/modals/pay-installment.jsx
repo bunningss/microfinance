@@ -45,12 +45,10 @@ export function PayInstallment({ installments, label, type }) {
     try {
       setIsLoading(true);
 
-      const { error, response } = await putData("loan/loan-installments", data);
+      const { error, response } = await putData(urls.requestUrl, data);
       if (error) return errorNotification(response.msg);
 
-      router.push(
-        `/dashboard/savings-installments/receipt/${data.installmentId}`
-      );
+      router.push(`${urls.redirectUrl}/${data.installmentId}`);
       successNotification(response.msg);
       form.reset();
       setIsModalOpen(false);

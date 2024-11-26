@@ -15,7 +15,7 @@ export function LoanInstallmentDetails({ installmentDetails, className }) {
           {installmentDetails.count}
         </li>
         <li>
-          <span className="text-muted-foreground">মোট সঞ্চয়ের পরিমাণ:</span>{" "}
+          <span className="text-muted-foreground">মোট পরিশোধ করবে:</span>{" "}
           {formatNumber(installmentDetails.totalAmount)}
         </li>
         <li>
