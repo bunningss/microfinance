@@ -52,7 +52,6 @@ export function LoanInstallmentReceipt({ data }) {
               {formatNumber(data?.loan?.repayAmount - data?.loan?.amountPaid)}
             </b>
           </p>
-          <p>পরবর্তী কিস্তির তারিখ:</p>
         </div>
         <div className="p-2 border-t border-input">
           <p className="text-center">Software Developed By</p>
