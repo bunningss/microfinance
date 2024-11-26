@@ -14,6 +14,7 @@ export function ViewSavings({ savings }) {
       triggerLabel="সঞ্চয় দেখুন"
       triggerIcon="view"
       className="w-full"
+      modalClassName="p-2 md:p-6"
       childrenClassName="overflow-auto max-h-[80vh]"
       isOpen={isModalOpen}
       onClose={() => setIsModalOpen(false)}
