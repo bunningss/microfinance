@@ -44,7 +44,7 @@ export function SalaryTable({ salaries }) {
                 scope="col"
                 className="p-2 border-r border-primary md:border-secondary"
               >
-                তারিখ
+                প্রদানের তারিখ
               </th>
               <th
                 scope="col"

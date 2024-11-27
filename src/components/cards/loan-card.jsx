@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Card, CardContent, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
-import { translateCurrency } from "@/utils/helpers";
+import { translateCurrency, translateNumber } from "@/utils/helpers";
 import { PayInstallment } from "../modals/pay-installment";
 
 export function LoanCard({ data, installments }) {
@@ -36,7 +36,8 @@ export function LoanCard({ data, installments }) {
           <span className="capitalize">
             পরিশোধ করবে:{" "}
             <b>
-              {translateCurrency(data?.repayAmount)} (+{data.rate}%)
+              {translateCurrency(data?.repayAmount)} (+
+              {translateNumber(data.rate)}%)
             </b>
           </span>
 

@@ -2,7 +2,7 @@
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { Button } from "./ui/button";
-import { translateCurrency } from "@/utils/helpers";
+import { translateCurrency, translateDate } from "@/utils/helpers";
 
 export function SavingsInstallmentReceipt({ data }) {
   const contentRef = useRef(null);
@@ -20,8 +20,12 @@ export function SavingsInstallmentReceipt({ data }) {
           স্বপ্নতরী শ্রমজীবী সমবায় সমিতি লিমিটেড
         </h2>
         <div className="my-2 space-y-2">
-          <p>সদস্যের নাম: {data?.owner?.name}</p>
-          <p>ফোন নম্বর: {data?.owner?.phone}</p>
+          <p>
+            সদস্যের নাম: <b>{data?.owner?.name}</b>
+          </p>
+          <p>
+            ফোন নম্বর: <b>{data?.owner?.phone}</b>
+          </p>
           <p>
             মোট সঞ্চয়: <b>{translateCurrency(data?.owner?.totalSaved)}</b>
           </p>
@@ -34,16 +38,26 @@ export function SavingsInstallmentReceipt({ data }) {
             <b>{translateCurrency(data.savings?.savingsAmount)}</b>
           </p>
           <p>
-            কিস্তির তারিখ: {new Date(data?.installment?.date).toDateString()}
+            কিস্তির তারিখ: <b>{translateDate(data?.installment?.date)}</b>
           </p>
-          <p>কিস্তি পরিশোধের তারিখ: {new Date(Date.now()).toDateString()}</p>
           <p>
-            কিস্তি গ্রহণকারী কর্মকর্তা: {data?.installment?.receivedBy?.name}
+            কিস্তি পরিশোধের তারিখ: <b>{translateDate(Date.now())}</b>
+          </p>
+          <p>
+            কিস্তি গ্রহণকারী কর্মকর্তা:{" "}
+            <b>{data?.installment?.receivedBy?.name}</b>
           </p>
 
-          <p>মোট কিস্তি: {data.totalInstallments}</p>
-          <p>কিস্তি পরিশোধ করা হয়েছে: {data.paidInstallments}</p>
-          <p>কিস্তি বাকি: {data.totalInstallments - data.paidInstallments}</p>
+          <p>
+            মোট কিস্তি: <b>{data.totalInstallments} টি</b>
+          </p>
+          <p>
+            কিস্তি পরিশোধ করা হয়েছে: <b>{data.paidInstallments} টি</b>
+          </p>
+          <p>
+            কিস্তি বাকি:{" "}
+            <b>{data.totalInstallments - data.paidInstallments} টি</b>
+          </p>
           <p>
             <b>{data?.savings?.savingsName}</b> এর অধীনে সঞ্চয়:{" "}
             <b>{translateCurrency(data?.savings?.amountSaved)}</b>

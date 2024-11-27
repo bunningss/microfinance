@@ -15,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { translateDate } from "@/utils/helpers";
 
 export function FormSelect({
   form,
@@ -60,7 +61,7 @@ export function FormSelect({
                     className="capitalize"
                   >
                     {keyType === "date"
-                      ? new Date(option[keyName])?.toDateString()
+                      ? translateDate(option[keyName])
                       : option[keyName]}
                   </SelectItem>
                 );
