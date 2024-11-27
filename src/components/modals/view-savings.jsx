@@ -20,7 +20,7 @@ export function ViewSavings({ savings }) {
       onClose={() => setIsModalOpen(false)}
       onOpen={() => setIsModalOpen(true)}
     >
-      <CardView className="md:grid-cols-1">
+      <CardView className="md:grid-cols-1 xl:grid-cols-1">
         {savings?.map((saving, index) => (
           <SavingsCard data={saving} key={index} />
         ))}
