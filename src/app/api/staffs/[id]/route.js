@@ -21,6 +21,7 @@ export async function PUT(request, { params }) {
       params.id,
       {
         name: body.name,
+        phone: body.phone,
         role: body.role,
         salary: body.salary,
       },

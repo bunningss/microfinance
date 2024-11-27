@@ -50,7 +50,8 @@ export const addMemberFormSchema = z.object({
 // Add staff schema
 export const addStaffFormSchema = z.object({
   name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email").min(1, "Email is required"),
+  email: z.string().email("Invalid email").min(1, "Email address is required"),
+  phone: z.string().min(11, "Phone number is required"),
   password: z.string().min(1, "Password is required"),
   confirmPassword: z.string().min(1, "Confirm password is required"),
   role: z.enum(["staff", "marketing officer", "admin"], {

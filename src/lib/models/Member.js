@@ -71,7 +71,7 @@ const memberSchema = new mongoose.Schema(
     },
     nationality: {
       type: String,
-      required: false,
+      required: true,
       default: "Bangladeshi",
     },
     age: {

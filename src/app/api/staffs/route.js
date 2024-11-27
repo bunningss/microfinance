@@ -46,7 +46,7 @@ export async function POST(request) {
     if (user.role !== "admin")
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
-    const { name, email, password, confirmPassword, role, salary } =
+    const { name, email, phone, password, confirmPassword, role, salary } =
       await request.json();
 
     const existingStaff = await Staff.findOne({ email });
@@ -69,6 +69,7 @@ export async function POST(request) {
     const newUser = new Staff({
       name,
       email,
+      phone,
       password: hashedPassword,
       role,
       salary,

@@ -13,7 +13,12 @@ export function StaffCard({ user }) {
           <CardTitle className="capitalize font-bold text-base">
             {user?.name}
           </CardTitle>
-          <span>{user?.email}</span>
+          <div className="flex justify-between">
+            <span>{user?.email}</span>
+            <span className="underline decoration-double">
+              <b>{user?.phone}</b>{" "}
+            </span>
+          </div>
           <div className="flex items-center justify-between">
             <span>
               role:{" "}

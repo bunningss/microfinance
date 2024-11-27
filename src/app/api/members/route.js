@@ -48,7 +48,7 @@ export async function POST(request) {
       phone: body.phone,
       nidNumber: body.nidNumber,
       birthCertificateNumber: body.birthCertificateNumber,
-      nationality: body.nationality,
+      nationality: body.nationality ? body.nationality : "Bangladeshi",
       age: body.age,
       occupation: body.occupation,
       religion: body.religion,

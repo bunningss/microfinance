@@ -19,6 +19,9 @@ const formSchema = z.object({
       message: "Name must be at least 3 characters.",
     })
     .max(50),
+  phone: z.string().min(11, {
+    message: "Phone Number is required.",
+  }),
   role: z.enum(["user", "admin", "staff", "marketing officer"], {
     required_error: "Please select a role.",
     message: "Please select a role.",
@@ -35,6 +38,7 @@ export function UpdateStaff({ data }) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: data?.name,
+      phone: data?.phone,
       role: data?.role,
       salary: data?.salary,
     },
@@ -80,6 +84,7 @@ export function UpdateStaff({ data }) {
         icon="save"
       >
         <FormInput form={form} name="name" placeholder="" label="name" />
+        <FormInput form={form} name="phone" placeholder="" label="phone" />
         <FormSelect
           form={form}
           options={designations}

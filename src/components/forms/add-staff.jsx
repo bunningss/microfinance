@@ -21,6 +21,7 @@ export function AddStaff() {
     defaultValues: {
       name: "",
       email: "",
+      phone: "",
       password: "",
       confirmPassword: "",
       role: "",
@@ -60,13 +61,22 @@ export function AddStaff() {
         name="name"
         required
       />
-      <FormInput
-        form={form}
-        label="email / ইমেইল"
-        placeholder=""
-        name="email"
-        required
-      />
+      <div className="md:flex space-y-4 md:space-y-0 gap-2">
+        <FormInput
+          form={form}
+          label="email / ইমেইল"
+          placeholder=""
+          name="email"
+          required
+        />
+        <FormInput
+          form={form}
+          label="phone / ফোন নম্বর"
+          placeholder=""
+          name="phone"
+          required
+        />
+      </div>
       <div className="md:flex space-y-4 md:space-y-0 gap-2">
         <FormInput
           form={form}
