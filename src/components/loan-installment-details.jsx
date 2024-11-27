@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { formatNumber } from "@/utils/helpers";
+import { translateCurrency } from "@/utils/helpers";
 
 export function LoanInstallmentDetails({ installmentDetails, className }) {
   return (
@@ -16,11 +16,11 @@ export function LoanInstallmentDetails({ installmentDetails, className }) {
         </li>
         <li>
           <span className="text-muted-foreground">মোট পরিশোধ করবে:</span>{" "}
-          {formatNumber(installmentDetails.totalAmount)}
+          {translateCurrency(installmentDetails.totalAmount)}
         </li>
         <li>
           <span className="text-muted-foreground">কিস্তিতে পরিমাণ:</span>{" "}
-          {formatNumber(installmentDetails.amountPerInstallment)}
+          {translateCurrency(installmentDetails.amountPerInstallment)}
         </li>
         <li>
           <span className="text-muted-foreground">শেষ কিস্তির তারিখ:</span>{" "}

@@ -1,4 +1,8 @@
-import { formatNumber } from "@/utils/helpers";
+import {
+  translateCurrency,
+  translateDate,
+  translateNumber,
+} from "@/utils/helpers";
 import { Heading } from "./heading";
 import { EmptyItem } from "./empty-item";
 
@@ -20,6 +24,9 @@ export async function MemberFinancialDetails({ data }) {
         {currentSaving && (
           <div className="mt-4 leading-loose">
             <p>
+              বর্তমানে জমা আছে: <b>{translateCurrency(data?.totalSaved)}</b>
+            </p>
+            <p>
               সঞ্চয়ের নাম: <b>{currentSaving?.savingsName}</b>
             </p>
             <p>
@@ -27,21 +34,22 @@ export async function MemberFinancialDetails({ data }) {
             </p>
             <p>
               কিস্তির টাকার পরিমান:{" "}
-              <b>{formatNumber(currentSaving?.savingsAmount)}</b>
+              <b>{translateCurrency(currentSaving?.savingsAmount)}</b>
             </p>
             <p>
-              সঞ্চয় সময়কাল: <b>{currentSaving?.savingsDuration} মাস</b>
+              সঞ্চয় সময়কাল:{" "}
+              <b>{translateNumber(currentSaving?.savingsDuration)} মাস</b>
             </p>
             <p>
               সঞ্চয় শুরুর তারিখ:{" "}
-              <b>{new Date(currentSaving?.startDate).toDateString()}</b>
+              <b>{translateDate(currentSaving?.startDate)}</b>
             </p>
             <p>
-              সঞ্চয় শেষের তারিখ:{" "}
-              <b>{new Date(currentSaving?.endDate).toDateString()}</b>
+              সঞ্চয় শেষের তারিখ: <b>{translateDate(currentSaving?.endDate)}</b>
             </p>
             <p>
-              মোট কিস্তির সংখ্যা: <b>{currentSaving?.installments?.length}</b>
+              মোট কিস্তির সংখ্যা:{" "}
+              <b>{translateNumber(currentSaving?.installments?.length)}</b>
             </p>
           </div>
         )}
@@ -57,25 +65,24 @@ export async function MemberFinancialDetails({ data }) {
         {currentLoan && (
           <div className="mt-4 leading-loose">
             <p>
-              বর্তমানে জমা আছে: <b>{formatNumber(data?.totalSaved)}</b>
-            </p>
-            <p>
               বর্তমান ঋণের নাম: <b>{currentLoan?.loanName}</b>
             </p>
             <p>
               বর্তমানে ঋণ নেয়া আছে:{" "}
-              <b>{formatNumber(currentLoan?.loanAmount)}</b>
+              <b>{translateCurrency(currentLoan?.loanAmount)}</b>
             </p>
             <p>
-              ঋণ পরিশোধ করবে: <b>{formatNumber(currentLoan?.repayAmount)}</b>
+              ঋণ পরিশোধ করবে:{" "}
+              <b>{translateCurrency(currentLoan?.repayAmount)}</b>
             </p>
             <p>
-              ঋণ পরিশোধ করেছে: <b>{formatNumber(currentLoan?.amountPaid)}</b>
+              ঋণ পরিশোধ করেছে:{" "}
+              <b>{translateCurrency(currentLoan?.amountPaid)}</b>
             </p>
             <p>
               ঋণ পরিশোধ বাকি আছে:{" "}
               <b>
-                {formatNumber(
+                {translateCurrency(
                   currentLoan?.repayAmount - currentLoan?.amountPaid
                 )}
               </b>

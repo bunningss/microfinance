@@ -2,7 +2,7 @@
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { Button } from "./ui/button";
-import { formatNumber } from "@/utils/helpers";
+import { translateCurrency } from "@/utils/helpers";
 
 export function SavingsInstallmentReceipt({ data }) {
   const contentRef = useRef(null);
@@ -23,14 +23,15 @@ export function SavingsInstallmentReceipt({ data }) {
           <p>সদস্যের নাম: {data?.owner?.name}</p>
           <p>ফোন নম্বর: {data?.owner?.phone}</p>
           <p>
-            মোট সঞ্চয়: <b>{formatNumber(data?.owner?.totalSaved)}</b>
+            মোট সঞ্চয়: <b>{translateCurrency(data?.owner?.totalSaved)}</b>
           </p>
 
           <p>
             সঞ্চয়ের নাম: <b>{data?.savings?.savingsName}</b>
           </p>
           <p>
-            কিস্তির পরিমাণ: <b>{formatNumber(data.savings?.savingsAmount)}</b>
+            কিস্তির পরিমাণ:{" "}
+            <b>{translateCurrency(data.savings?.savingsAmount)}</b>
           </p>
           <p>
             কিস্তির তারিখ: {new Date(data?.installment?.date).toDateString()}
@@ -45,7 +46,7 @@ export function SavingsInstallmentReceipt({ data }) {
           <p>কিস্তি বাকি: {data.totalInstallments - data.paidInstallments}</p>
           <p>
             <b>{data?.savings?.savingsName}</b> এর অধীনে সঞ্চয়:{" "}
-            <b>{formatNumber(data?.savings?.amountSaved)}</b>
+            <b>{translateCurrency(data?.savings?.amountSaved)}</b>
           </p>
         </div>
         <div className="p-2 border-t border-input">

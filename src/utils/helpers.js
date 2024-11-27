@@ -68,6 +68,8 @@ export function translateCurrency(number) {
   return new Intl.NumberFormat("bn-BD", {
     style: "currency",
     currency: "BDT",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
   }).format(number);
 }
 
@@ -155,4 +157,8 @@ export function translateDate(date) {
   const formattedDate = formatter.format(new Date(date));
 
   return formattedDate;
+}
+
+export function translateNumber(number) {
+  return new Intl.NumberFormat("bn-BD").format(number);
 }

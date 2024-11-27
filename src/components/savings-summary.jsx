@@ -1,4 +1,8 @@
-import { translateCurrency, translateDate } from "@/utils/helpers";
+import {
+  translateCurrency,
+  translateDate,
+  translateNumber,
+} from "@/utils/helpers";
 import {
   Table,
   TableBody,
@@ -41,7 +45,9 @@ export function SavingsSummary({ data }) {
 
                   return (
                     <TableRow key={i}>
-                      <TableCell className="font-medium">{serial}</TableCell>
+                      <TableCell className="font-medium">
+                        {translateNumber(serial)}
+                      </TableCell>
                       <TableCell className="font-medium">
                         {data?.savingsName}
                       </TableCell>

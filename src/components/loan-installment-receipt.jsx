@@ -2,7 +2,7 @@
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { Button } from "./ui/button";
-import { formatNumber } from "@/utils/helpers";
+import { translateCurrency } from "@/utils/helpers";
 
 export function LoanInstallmentReceipt({ data }) {
   const contentRef = useRef(null);
@@ -26,11 +26,12 @@ export function LoanInstallmentReceipt({ data }) {
             ঋণের নাম: <b>{data?.loan?.loanName}</b>
           </p>
           <p>
-            মোট ঋণ: <b>{formatNumber(data?.loan.repayAmount)}</b>
+            মোট ঋণ: <b>{translateCurrency(data?.loan.repayAmount)}</b>
           </p>
 
           <p>
-            কিস্তির পরিমাণ: <b>{formatNumber(data.loan?.installmentAmount)}</b>
+            কিস্তির পরিমাণ:{" "}
+            <b>{translateCurrency(data.loan?.installmentAmount)}</b>
           </p>
           <p>
             কিস্তির তারিখ: {new Date(data?.installment?.date).toDateString()}
@@ -44,12 +45,15 @@ export function LoanInstallmentReceipt({ data }) {
           <p>কিস্তি পরিশোধ করা হয়েছে: {data.paidInstallments}</p>
           <p>কিস্তি বাকি: {data.totalInstallments - data.paidInstallments}</p>
           <p>
-            মোট পরিশোধিত টাকা: <b>{formatNumber(data?.loan?.amountPaid)}</b>
+            মোট পরিশোধিত টাকা:{" "}
+            <b>{translateCurrency(data?.loan?.amountPaid)}</b>
           </p>
           <p>
             টাকা পরিশোধ বাকি:{" "}
             <b>
-              {formatNumber(data?.loan?.repayAmount - data?.loan?.amountPaid)}
+              {translateCurrency(
+                data?.loan?.repayAmount - data?.loan?.amountPaid
+              )}
             </b>
           </p>
         </div>

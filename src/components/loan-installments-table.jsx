@@ -1,4 +1,8 @@
-import { translateCurrency } from "@/utils/helpers";
+import {
+  translateCurrency,
+  translateDate,
+  translateNumber,
+} from "@/utils/helpers";
 import { PayInstallment } from "./modals/pay-installment";
 
 export function LoanInstallmentsTable({ installments }) {
@@ -11,7 +15,7 @@ export function LoanInstallmentsTable({ installments }) {
               scope="col"
               className="p-2 border-r border-primary md:border-secondary"
             >
-              SN
+              সি নং
             </th>
             <th
               scope="col"
@@ -68,7 +72,7 @@ export function LoanInstallmentsTable({ installments }) {
           {installments?.map((installment, index) => (
             <tr key={index} className="text-center even:bg-secondary">
               <td className="p-2 border-r border-primary md:border-secondary">
-                {index + 1}
+                {translateNumber(index + 1)}
               </td>
               <th
                 scope="row"
@@ -95,7 +99,7 @@ export function LoanInstallmentsTable({ installments }) {
                 {translateCurrency(installment?.installments[0].amount)}
               </td>
               <td className="p-2 border-r border-primary md:border-secondary">
-                {new Date(installment?.installments[0]?.date).toDateString()}
+                {translateDate(installment?.installments[0]?.date)}
               </td>
               <td className="p-2 md:border-0">
                 <PayInstallment

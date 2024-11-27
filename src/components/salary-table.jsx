@@ -2,7 +2,11 @@
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { Button } from "./ui/button";
-import { translateCurrency } from "@/utils/helpers";
+import {
+  translateCurrency,
+  translateDate,
+  translateNumber,
+} from "@/utils/helpers";
 
 export function SalaryTable({ salaries }) {
   const contentRef = useRef(null);
@@ -22,7 +26,7 @@ export function SalaryTable({ salaries }) {
                 scope="col"
                 className="p-2 border-r border-primary md:border-secondary"
               >
-                SN
+                সি নং
               </th>
               <th
                 scope="col"
@@ -57,7 +61,7 @@ export function SalaryTable({ salaries }) {
             {salaries?.map((salary, index) => (
               <tr key={index} className="text-center even:bg-secondary">
                 <td className="p-2 border-r border-primary md:border-secondary">
-                  {index + 1}
+                  {translateNumber(index + 1)}
                 </td>
                 <th
                   scope="row"
@@ -69,7 +73,7 @@ export function SalaryTable({ salaries }) {
                   {salary?.month}
                 </td>
                 <td className="p-2 border-r border-primary md:border-secondary">
-                  {new Date(salary.createdAt).toDateString()}
+                  {translateDate(salary.createdAt)}
                 </td>
                 <td className="p-2 border-r border-primary md:border-secondary">
                   {translateCurrency(salary?.amount)}

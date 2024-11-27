@@ -3,7 +3,11 @@ import Link from "next/link";
 import { useRef } from "react";
 import { Button } from "./ui/button";
 import { useReactToPrint } from "react-to-print";
-import { translateCurrency } from "@/utils/helpers";
+import {
+  translateCurrency,
+  translateDate,
+  translateNumber,
+} from "@/utils/helpers";
 
 export function ExpensesTable({ expenses }) {
   const contentRef = useRef(null);
@@ -23,7 +27,7 @@ export function ExpensesTable({ expenses }) {
                 scope="col"
                 className="p-2 border-r border-primary md:border-secondary"
               >
-                SN
+                সি নং
               </th>
               <th
                 scope="col"
@@ -56,7 +60,7 @@ export function ExpensesTable({ expenses }) {
             {expenses?.map((expense, index) => (
               <tr key={index} className="text-center even:bg-secondary">
                 <td className="p-2 border-r border-primary md:border-secondary">
-                  {index + 1}
+                  {translateNumber(index + 1)}
                 </td>
                 <th
                   scope="row"
@@ -65,7 +69,7 @@ export function ExpensesTable({ expenses }) {
                   {expense?.name}
                 </th>
                 <td className="p-2 border-r border-primary md:border-secondary">
-                  {new Date(expense.createdAt).toDateString()}
+                  {translateDate(expense.createdAt)}
                 </td>
                 <td className="p-2 border-r border-primary md:border-secondary">
                   {translateCurrency(expense?.amount)}

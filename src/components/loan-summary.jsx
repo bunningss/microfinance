@@ -1,4 +1,4 @@
-import { formatNumber } from "@/utils/helpers";
+import { translateCurrency, translateNumber } from "@/utils/helpers";
 import {
   Table,
   TableBody,
@@ -41,14 +41,18 @@ export function LoanSummary({ data }) {
 
                   return (
                     <TableRow key={i}>
-                      <TableCell className="font-medium">{serial}</TableCell>
+                      <TableCell className="font-medium">
+                        {translateNumber(serial)}
+                      </TableCell>
                       <TableCell className="font-medium">
                         {data?.loanName}
                       </TableCell>
                       <TableCell className="font-medium">
                         {new Date(installment?.date).toDateString()}
                       </TableCell>
-                      <TableCell>{formatNumber(installment?.amount)}</TableCell>
+                      <TableCell>
+                        {translateCurrency(installment?.amount)}
+                      </TableCell>
                       <TableCell
                         className={`flex justify-center ${
                           installment?.status === "paid"
