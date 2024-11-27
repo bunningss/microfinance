@@ -26,7 +26,7 @@ export function SalaryTable({ salaries }) {
                 scope="col"
                 className="p-2 border-r border-primary md:border-secondary"
               >
-                সি নং
+                সি. নং
               </th>
               <th
                 scope="col"
