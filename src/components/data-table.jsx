@@ -42,7 +42,10 @@ export function DataTable({ columns, data, printable = false }) {
             {data.map((row, rowIndex) => (
               <TableRow key={rowIndex} className="text-center even:bg-muted">
                 {columns.map((column) => (
-                  <TableCell key={column.header}>
+                  <TableCell
+                    key={column.header}
+                    className="min-w-[150px] lg:min-w-0 print:min-w-0 border-r last:border-r-0"
+                  >
                     {column.cell
                       ? column.cell(row, rowIndex)
                       : getNestedValue(row, column.accessorKey)}
