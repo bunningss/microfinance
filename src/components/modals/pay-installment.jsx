@@ -65,7 +65,7 @@ export function PayInstallment({ installments, label, type }) {
       description="Add installment information here. Click save when you're done."
       triggerIcon={label ? "" : "plus"}
       triggerSize={label ? "" : "icon"}
-      className={label ? "" : "rounded-full"}
+      className={label ? "h-6 text-xs" : "rounded-full"}
       triggerLabel={label}
       isOpen={isModalOpen}
       onClose={() => setIsModalOpen(false)}
