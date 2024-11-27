@@ -1,6 +1,7 @@
 import {
   ArrowLeft,
   CalendarArrowDown,
+  Check,
   ChevronDown,
   ChevronUp,
   Edit,
@@ -38,6 +39,7 @@ const Icons = {
   logout: LogOut,
   installment: CalendarArrowDown,
   save: Save,
+  done: Check,
 };
 
 export function Icon({
