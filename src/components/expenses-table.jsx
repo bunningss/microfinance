@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import { Button } from "./ui/button";
 import { useReactToPrint } from "react-to-print";
-import { formatNumber } from "@/utils/helpers";
+import { translateCurrency } from "@/utils/helpers";
 
 export function ExpensesTable({ expenses }) {
   const contentRef = useRef(null);
@@ -68,7 +68,7 @@ export function ExpensesTable({ expenses }) {
                   {new Date(expense.createdAt).toDateString()}
                 </td>
                 <td className="p-2 border-r border-primary md:border-secondary">
-                  {formatNumber(expense?.amount)}
+                  {translateCurrency(expense?.amount)}
                 </td>
                 <td className="p-2 border-r border-primary md:border-secondary">
                   {expense.addedBy?.name}

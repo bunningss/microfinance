@@ -104,7 +104,7 @@ export async function POST(request) {
     await session.commitTransaction();
 
     return NextResponse.json(
-      { msg: "নতুন ঋণ সফলভাবে তৈরি হয়েছে" },
+      { msg: "নতুন ঋণ সফলভাবে তৈরি হয়েছে", payload: newLoan._id },
       { status: 200 }
     );
   } catch (err) {

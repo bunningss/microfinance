@@ -69,7 +69,7 @@ export async function POST(request) {
     await session.commitTransaction();
 
     return NextResponse.json(
-      { msg: "নতুন সঞ্চয় সফলভাবে তৈরি হয়েছে" },
+      { msg: "নতুন সঞ্চয় সফলভাবে তৈরি হয়েছে", payload: newSavings._id },
       { status: 200 }
     );
   } catch (err) {

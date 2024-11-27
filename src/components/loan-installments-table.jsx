@@ -1,4 +1,4 @@
-import { formatNumber } from "@/utils/helpers";
+import { translateCurrency } from "@/utils/helpers";
 import { PayInstallment } from "./modals/pay-installment";
 
 export function LoanInstallmentsTable({ installments }) {
@@ -89,10 +89,10 @@ export function LoanInstallmentsTable({ installments }) {
                 {installment?.loanType}
               </td>
               <td className="p-2 border-r border-primary md:border-secondary">
-                {formatNumber(installment?.loanAmount)}
+                {translateCurrency(installment?.loanAmount)}
               </td>
               <td className="p-2 border-r border-primary md:border-secondary">
-                {formatNumber(installment?.installments[0].amount)}
+                {translateCurrency(installment?.installments[0].amount)}
               </td>
               <td className="p-2 border-r border-primary md:border-secondary">
                 {new Date(installment?.installments[0]?.date).toDateString()}

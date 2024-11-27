@@ -84,7 +84,7 @@ export function AddNewSavings({ member }) {
       successNotification(response.msg);
       setIsModalOpen(false);
       form.reset();
-      router.refresh();
+      router.push(`/dashboard/members/savings/${response.payload}`);
     } catch (err) {
     } finally {
       setIsLoading(false);

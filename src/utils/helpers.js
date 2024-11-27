@@ -64,8 +64,8 @@ export function generateSavingsName() {
   return randomItem;
 }
 
-export function formatNumber(number) {
-  return new Intl.NumberFormat("en-IN", {
+export function translateCurrency(number) {
+  return new Intl.NumberFormat("bn-BD", {
     style: "currency",
     currency: "BDT",
   }).format(number);
@@ -142,4 +142,17 @@ export function generateLoanInstallments(
   }
 
   return installments;
+}
+
+export function translateDate(date) {
+  let formatter = new Intl.DateTimeFormat("bn-BD", {
+    weekday: "long", // e.g., "শনিবার"
+    year: "numeric", // e.g., "2024"
+    month: "long", // e.g., "নভেম্বর"
+    day: "numeric", // e.g., "২৭"
+  });
+
+  const formattedDate = formatter.format(new Date(date));
+
+  return formattedDate;
 }

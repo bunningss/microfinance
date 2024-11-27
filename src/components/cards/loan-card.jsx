@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Card, CardContent, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
-import { formatNumber } from "@/utils/helpers";
+import { translateCurrency } from "@/utils/helpers";
 import { PayInstallment } from "../modals/pay-installment";
 
 export function LoanCard({ data, installments }) {
@@ -31,12 +31,12 @@ export function LoanCard({ data, installments }) {
             ঋণ পরিশোধের ধরণ: <b>{data?.loanType}</b>
           </span>
           <span className="capitalize">
-            ঋণের পরিমাণ: <b>{formatNumber(data?.loanAmount)}</b>
+            ঋণের পরিমাণ: <b>{translateCurrency(data?.loanAmount)}</b>
           </span>
           <span className="capitalize">
             পরিশোধ করবে:{" "}
             <b>
-              {formatNumber(data?.repayAmount)} (+{data.rate}%)
+              {translateCurrency(data?.repayAmount)} (+{data.rate}%)
             </b>
           </span>
 
@@ -44,7 +44,7 @@ export function LoanCard({ data, installments }) {
             <span className="capitalize">
               {data?.loanType} পরিশোধ করবে:{" "}
               <span className="text-primary font-bold uppercase">
-                {formatNumber(data?.installmentAmount)}
+                {translateCurrency(data?.installmentAmount)}
               </span>
             </span>
             <div className="space-x-2">

@@ -1,4 +1,4 @@
-import { formatNumber } from "@/utils/helpers";
+import { translateCurrency, translateDate } from "@/utils/helpers";
 import {
   Table,
   TableBody,
@@ -46,9 +46,11 @@ export function SavingsSummary({ data }) {
                         {data?.savingsName}
                       </TableCell>
                       <TableCell className="font-medium">
-                        {new Date(installment?.date).toDateString()}
+                        {translateDate(installment?.date)}
                       </TableCell>
-                      <TableCell>{formatNumber(installment?.amount)}</TableCell>
+                      <TableCell>
+                        {translateCurrency(installment?.amount)}
+                      </TableCell>
                       <TableCell
                         className={`flex justify-center ${
                           installment?.status === "paid"

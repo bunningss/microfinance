@@ -7,7 +7,7 @@ import { formatNumber } from "@/utils/helpers";
 export function LoanInstallmentReceipt({ data }) {
   const contentRef = useRef(null);
   const reactToPrintFn = useReactToPrint({ contentRef });
-  console.log(data);
+
   return (
     <div className="space-y-4">
       <Button onClick={reactToPrintFn}>print receipt</Button>
@@ -23,12 +23,12 @@ export function LoanInstallmentReceipt({ data }) {
           <p>সদস্যের নাম: {data?.owner?.name}</p>
           <p>ফোন নম্বর: {data?.owner?.phone}</p>
           <p>
+            ঋণের নাম: <b>{data?.loan?.loanName}</b>
+          </p>
+          <p>
             মোট ঋণ: <b>{formatNumber(data?.loan.repayAmount)}</b>
           </p>
 
-          <p>
-            ঋণের নাম: <b>{data?.loan?.loanName}</b>
-          </p>
           <p>
             কিস্তির পরিমাণ: <b>{formatNumber(data.loan?.installmentAmount)}</b>
           </p>

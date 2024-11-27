@@ -9,7 +9,7 @@ import { payInstallmentSchema } from "@/lib/schema";
 import { errorNotification, successNotification } from "@/utils/toast";
 import { putData } from "@/utils/api-calls";
 import { useRouter } from "next/navigation";
-import { formatNumber } from "@/utils/helpers";
+import { translateCurrency } from "@/utils/helpers";
 
 export function PayInstallment({ installments, label, type }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -91,7 +91,7 @@ export function PayInstallment({ installments, label, type }) {
         />
         <p>
           <span className="text-muted-foreground">Amount:</span>{" "}
-          {formatNumber(installments ? installments[0]?.amount : "")}
+          {translateCurrency(installments ? installments[0]?.amount : "")}
         </p>
       </FormModal>
     </Modal>

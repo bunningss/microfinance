@@ -79,7 +79,7 @@ export function AddNewLoan({ member }) {
       successNotification(response.msg);
       setIsModalOpen(false);
       form.reset();
-      router.refresh();
+      router.push(`/dashboard/members/loan/${response.payload}`);
     } catch (err) {
     } finally {
       setIsLoading(false);
