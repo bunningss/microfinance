@@ -2,12 +2,7 @@ import { cn } from "@/lib/utils";
 
 export function CardView({ children, className }) {
   return (
-    <div
-      className={cn(
-        "grid md:grid-cols-[repeat(auto-fit,_minmax(400px,_.5fr))] gap-4",
-        className
-      )}
-    >
+    <div className={cn("grid md:grid-cols-2 xl:grid-cols-3 gap-4", className)}>
       {children}
     </div>
   );
