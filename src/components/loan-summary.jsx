@@ -11,6 +11,9 @@ import {
 import { Icon } from "./icon";
 
 export function LoanSummary({ data }) {
+  const midpoint = Math.ceil(data?.installments?.length / 2);
+  let serialNumber = 1;
+
   return (
     <section>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -21,6 +24,7 @@ export function LoanSummary({ data }) {
             </TableCaption>
             <TableHeader>
               <TableRow>
+                <TableHead>সি. নং</TableHead>
                 <TableHead>ঋণের নাম</TableHead>
                 <TableHead>কিস্তির তারিখ</TableHead>
                 <TableHead>কিস্তির পরিমান</TableHead>
@@ -31,29 +35,36 @@ export function LoanSummary({ data }) {
             </TableHeader>
             <TableBody>
               {data?.installments
-                ?.filter((_, index) => index % 2 === columnIndex)
-                .map((installment, i) => (
-                  <TableRow key={i}>
-                    <TableCell className="font-medium">
-                      {data?.loanName}
-                    </TableCell>
-                    <TableCell className="font-medium">
-                      {new Date(installment?.date).toDateString()}
-                    </TableCell>
-                    <TableCell>{formatNumber(installment?.amount)}</TableCell>
-                    <TableCell
-                      className={`flex justify-center ${
-                        installment?.status === "paid"
-                          ? "text-green-800"
-                          : "text-destructive"
-                      }`}
-                    >
-                      <Icon
-                        icon={installment?.status === "paid" ? "done" : "close"}
-                      />
-                    </TableCell>
-                  </TableRow>
-                ))}
+                ?.slice(columnIndex * midpoint, (columnIndex + 1) * midpoint)
+                .map((installment, i) => {
+                  const serial = serialNumber++;
+
+                  return (
+                    <TableRow key={i}>
+                      <TableCell className="font-medium">{serial}</TableCell>
+                      <TableCell className="font-medium">
+                        {data?.loanName}
+                      </TableCell>
+                      <TableCell className="font-medium">
+                        {new Date(installment?.date).toDateString()}
+                      </TableCell>
+                      <TableCell>{formatNumber(installment?.amount)}</TableCell>
+                      <TableCell
+                        className={`flex justify-center ${
+                          installment?.status === "paid"
+                            ? "text-green-800"
+                            : "text-destructive"
+                        }`}
+                      >
+                        <Icon
+                          icon={
+                            installment?.status === "paid" ? "done" : "close"
+                          }
+                        />
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
             </TableBody>
           </Table>
         ))}
