@@ -41,7 +41,7 @@ export function SavingsCard({ data, installments }) {
               {installments && (
                 <PayInstallment installments={installments} type="savings" />
               )}
-              <Link href="">
+              <Link href={`/dashboard/members/savings/${data?._id}`}>
                 <Button icon="view" size="icon" className="rounded-full" />
               </Link>
             </div>

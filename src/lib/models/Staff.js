@@ -21,7 +21,7 @@ const staffSchema = new mongoose.Schema(
     },
     phone: {
       type: String,
-      required: [false, "Please enter a phone number"],
+      required: [true, "Please enter a phone number"],
       trim: true,
       minlength: [11, "Phone number must be at least 11 characters"],
       maxlength: [14, "Phone number must not exceed 14 characters"],

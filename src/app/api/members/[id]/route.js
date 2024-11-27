@@ -26,10 +26,18 @@ export async function GET(request, { params }) {
       .populate({
         path: "savings",
         options: { sort: { createdAt: -1 } },
+        populate: {
+          path: "approvedBy",
+          select: "name role phone",
+        },
       })
       .populate({
         path: "loans",
         options: { sort: { createdAt: -1 } },
+        populate: {
+          path: "approvedBy",
+          select: "name role phone",
+        },
       });
 
     if (!member) {

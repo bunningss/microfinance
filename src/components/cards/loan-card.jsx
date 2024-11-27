@@ -51,7 +51,7 @@ export function LoanCard({ data, installments }) {
               {installments && (
                 <PayInstallment installments={installments} type="loan" />
               )}
-              <Link href="">
+              <Link href={`/dashboard/members/loan/${data?._id}`}>
                 <Button icon="view" size="icon" className="rounded-full" />
               </Link>
             </div>
