@@ -4,7 +4,7 @@ import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
 
-// Fetch single loan data
+// Fetch single savings data
 export async function GET(request, { params }) {
   try {
     await connectDb();
@@ -21,7 +21,10 @@ export async function GET(request, { params }) {
     )
       return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
 
-    const savings = await Savings.findById(params.id);
+    const savings = await Savings.findById(params.id)
+      .populate("owner", "name phone")
+      .populate("approvedBy", "name")
+      .lean();
 
     return NextResponse.json(
       { msg: "Data Found", payload: savings },

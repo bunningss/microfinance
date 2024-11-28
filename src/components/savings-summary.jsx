@@ -60,15 +60,25 @@ export function SavingsSummary({ data }) {
   ];
 
   return (
-    <section>
-      <div>
-        <DataTable
-          columns={columns}
-          data={data.installments}
-          printable
-          withAction
-        />
+    <section className="space-y-4">
+      <div className="grid grid-cols-3 gap-2">
+        <span>শুরুর তারিখ: {translateDate(data?.startDate)}</span>
+        <span>শেষের তারিখ: {translateDate(data?.endDate)}</span>
+        <span>সদস্যের নাম: {data?.owner?.name}</span>
+        <span>ফোন নম্বর: {data?.owner?.phone}</span>
+        <span>সঞ্চয়ের নাম: {data?.savingsName}</span>
+        <span>প্রদানকারীর নাম: {data?.approvedBy?.name}</span>
+        <span>সঞ্চয়ের ধরণ: {data?.savingsType}</span>
+        <span>সঞ্চয়ের সময়: {translateNumber(data?.savingsDuration)} মাস</span>
+        <span>সঞ্চয়ের পরিমান: {data?.savingsAmount}</span>
+        <span>সঞ্চয়ের অবস্থা: {data?.savingsStatus}</span>
       </div>
+      <DataTable
+        columns={columns}
+        data={data.installments}
+        printable
+        withAction
+      />
     </section>
   );
 }
