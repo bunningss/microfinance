@@ -13,7 +13,7 @@ const columns = [
     cell: (_, index) => translateNumber(index + 1),
   },
   {
-    header: "কর্মচারীর নাম",
+    header: "কর্মীর নাম",
     accessorKey: "staff.name",
   },
   {

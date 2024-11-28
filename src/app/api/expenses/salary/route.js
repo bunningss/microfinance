@@ -82,6 +82,7 @@ export async function GET(request) {
     const salaries = await Salary.find()
       .populate("staff", "name")
       .populate("addedBy", "name")
+      .sort({ createdAt: -1 })
       .lean();
 
     return NextResponse.json(
