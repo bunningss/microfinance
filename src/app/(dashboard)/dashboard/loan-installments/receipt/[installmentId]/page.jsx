@@ -1,7 +1,7 @@
 import React from "react";
 import { Block } from "@/components/block";
-import { LoanInstallmentReceipt } from "@/components/loan-installment-receipt";
 import { getData } from "@/utils/api-calls";
+import { LoanInstallmentReceipt } from "@/components/receipts/loan-installment-receipt";
 
 async function Receipt({ installmentId }) {
   const { response } = await getData(

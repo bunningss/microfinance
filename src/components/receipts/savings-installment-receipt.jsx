@@ -1,7 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { translateCurrency, translateDate } from "@/utils/helpers";
 
 export function SavingsInstallmentReceipt({ data }) {
