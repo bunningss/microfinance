@@ -1,8 +1,10 @@
+import React from "react";
 import { InfoCard } from "@/components/info-card";
 import { getData } from "@/utils/api-calls";
 import { translateCurrency, translateNumber } from "@/utils/helpers";
+import { Block } from "@/components/block";
 
-export default async function Page() {
+async function SummaryData() {
   const { response } = await getData("dashboard-data");
 
   const summary = [
@@ -46,12 +48,22 @@ export default async function Page() {
   ];
 
   return (
-    <div>
+    <Block title="Summary">
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {summary?.map((item, index) => (
           <InfoCard key={index} data={item} />
         ))}
       </div>
+    </Block>
+  );
+}
+
+export default async function Page() {
+  return (
+    <div className="space-y-4">
+      <React.Suspense fallback={<p>Loading...</p>}>
+        <SummaryData />
+      </React.Suspense>
     </div>
   );
 }
