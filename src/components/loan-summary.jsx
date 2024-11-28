@@ -1,74 +1,71 @@
-import { translateCurrency, translateNumber } from "@/utils/helpers";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "./ui/table";
-import { Icon } from "./icon";
+"use client";
 import Link from "next/link";
+import {
+  translateCurrency,
+  translateDate,
+  translateNumber,
+} from "@/utils/helpers";
+import { DataTable } from "@/components/data-table";
+import { Icon } from "@/components/icon";
 
 export function LoanSummary({ data }) {
+  const columns = [
+    {
+      header: "সি. নং",
+      accessorKey: "index",
+      cell: (_, index) => translateNumber(index + 1),
+    },
+    {
+      header: "ঋণের নাম",
+      accessorKey: "loanName",
+      cell: () => data.loanName,
+    },
+    {
+      header: "কিস্তির তারিখ",
+      accessorKey: "date",
+      cell: (item) => translateDate(item.date),
+    },
+    {
+      header: "কিস্তির পরিমান",
+      accessorKey: "amount",
+      cell: (item) => translateCurrency(item.amount),
+    },
+    {
+      header: "কিস্তির বর্তমান অবস্থা",
+      accessorKey: "status",
+      cell: (item) => (
+        <div
+          className={`flex justify-center ${
+            item.status === "paid" ? "text-green-800" : "text-destructive"
+          }`}
+        >
+          <Icon icon={item.status === "paid" ? "done" : "close"} />
+        </div>
+      ),
+    },
+    {
+      header: "",
+      accessorKey: "_id",
+      cell: (item) => (
+        <Link
+          className="underline text-cyan-800 font-bold"
+          href={`/dashboard/loan-installments/receipt/${item._id}`}
+        >
+          বিস্তারিত
+        </Link>
+      ),
+    },
+  ];
+
   return (
     <section>
       <div>
-        <Table>
-          <TableCaption>
-            <b>{data?.loanName}</b> ঋণের কিস্তিসমূহের তালিকা
-          </TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead>সি. নং</TableHead>
-              <TableHead>ঋণের নাম</TableHead>
-              <TableHead>কিস্তির তারিখ</TableHead>
-              <TableHead>কিস্তির পরিমান</TableHead>
-              <TableHead className="text-center">
-                কিস্তির বর্তমান অবস্থা
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {data?.installments?.map((installment, i) => {
-              return (
-                <TableRow key={i}>
-                  <TableCell className="font-medium">
-                    {translateNumber(i + 1)}
-                  </TableCell>
-                  <TableCell className="font-medium">
-                    {data?.loanName}
-                  </TableCell>
-                  <TableCell className="font-medium">
-                    {new Date(installment?.date).toDateString()}
-                  </TableCell>
-                  <TableCell>
-                    {translateCurrency(installment?.amount)}
-                  </TableCell>
-                  <TableCell
-                    className={`flex justify-center ${
-                      installment?.status === "paid"
-                        ? "text-green-800"
-                        : "text-destructive"
-                    }`}
-                  >
-                    <Icon
-                      icon={installment?.status === "paid" ? "done" : "close"}
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <Link
-                      href={`/dashboard/loan-installments/receipt/${installment?._id}`}
-                    >
-                      details
-                    </Link>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+        <DataTable
+          columns={columns}
+          data={data.installments}
+          printable
+          withAction
+        />
       </div>
     </section>
   );
