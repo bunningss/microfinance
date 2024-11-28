@@ -1,5 +1,6 @@
 import {
   ArrowLeft,
+  Banknote,
   CalendarArrowDown,
   Check,
   ChevronDown,
@@ -7,6 +8,7 @@ import {
   Edit,
   Eye,
   HandCoins,
+  Landmark,
   LayoutDashboard,
   LogIn,
   LogOut,
@@ -40,6 +42,8 @@ const Icons = {
   installment: CalendarArrowDown,
   save: Save,
   done: Check,
+  loan: Landmark,
+  note: Banknote,
 };
 
 export function Icon({

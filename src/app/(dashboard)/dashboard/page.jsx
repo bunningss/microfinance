@@ -1,3 +1,57 @@
-export default function Page() {
-  return <div>Page</div>;
+import { InfoCard } from "@/components/info-card";
+import { getData } from "@/utils/api-calls";
+import { translateCurrency, translateNumber } from "@/utils/helpers";
+
+export default async function Page() {
+  const { response } = await getData("dashboard-data");
+
+  const summary = [
+    {
+      icon: "members",
+      dataKey: "মোট সদস্য সংখ্যা",
+      dataValue: translateNumber(response.payload.totalMembers),
+    },
+    {
+      icon: "expense",
+      dataKey: "মোট ঋণ দেয়া হয়েছে",
+      dataValue: translateCurrency(response.payload.totalLoans),
+    },
+    {
+      icon: "loan",
+      dataKey: "মোট ঋণ পরিশোধ করবে",
+      dataValue: translateCurrency(response.payload.repayableLoans),
+    },
+    {
+      icon: "note",
+      dataKey: "মোট ঋণ পরিশোধ করেছে",
+      dataValue: translateCurrency(response.payload.loanRepaid),
+    },
+    {
+      icon: "note",
+      dataKey: "ঋণ পরিশোধ বাকি আছে",
+      dataValue: translateCurrency(
+        response.payload.repayableLoans - response.payload.loanRepaid
+      ),
+    },
+    {
+      icon: "money",
+      dataKey: "মোট সঞ্চয়",
+      dataValue: translateCurrency(response.payload.totalSavings),
+    },
+    {
+      icon: "money",
+      dataKey: "সদস্যরা মোট জমা করেছে",
+      dataValue: translateCurrency(response.payload.currentAmountByMembers),
+    },
+  ];
+
+  return (
+    <div>
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        {summary?.map((item, index) => (
+          <InfoCard key={index} data={item} />
+        ))}
+      </div>
+    </div>
+  );
 }
