@@ -57,5 +57,7 @@ const columns = [
 ];
 
 export function SavingsInstallmentsTable({ installments }) {
-  return <DataTable columns={columns} data={installments} printable />;
+  return (
+    <DataTable columns={columns} data={installments} printable withAction />
+  );
 }

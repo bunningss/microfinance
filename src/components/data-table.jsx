@@ -12,7 +12,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { useReactToPrint } from "react-to-print";
 
-export function DataTable({ columns, data, printable = false }) {
+export function DataTable({
+  columns,
+  data,
+  printable = false,
+  withAction = false,
+}) {
   const contentRef = React.useRef(null);
   const reactToPrintFn = useReactToPrint({ contentRef });
 
@@ -32,7 +37,12 @@ export function DataTable({ columns, data, printable = false }) {
           <TableHeader>
             <TableRow>
               {columns.map((column) => (
-                <TableHead key={column.header} className="text-center">
+                <TableHead
+                  key={column.header}
+                  className={`text-center ${
+                    withAction ? "print:last:hidden" : ""
+                  }`}
+                >
                   {column.header}
                 </TableHead>
               ))}
@@ -41,10 +51,12 @@ export function DataTable({ columns, data, printable = false }) {
           <TableBody>
             {data.map((row, rowIndex) => (
               <TableRow key={rowIndex} className="text-center even:bg-muted">
-                {columns.map((column) => (
+                {columns.map((column, i) => (
                   <TableCell
-                    key={column.header}
-                    className="min-w-[150px] lg:min-w-0 print:min-w-0 border-r last:border-r-0"
+                    key={i}
+                    className={`min-w-[100px] lg:min-w-0 print:min-w-0 border-r last:border-r-0 ${
+                      withAction ? "print:last:hidden" : ""
+                    }`}
                   >
                     {column.cell
                       ? column.cell(row, rowIndex)
