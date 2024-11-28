@@ -135,6 +135,7 @@ export async function PUT(request) {
     // Update savings properties
     installment.status = "paid";
     installment.receivedBy = id;
+    installment.paymentDate = new Date(Date.now());
     loan.amountPaid += installment.amount;
 
     const allPaid = loan.installments.every((inst) => inst.status === "paid");

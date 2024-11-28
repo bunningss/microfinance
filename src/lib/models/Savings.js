@@ -39,6 +39,10 @@ const savingsSchema = new mongoose.Schema(
           type: Date,
           required: true,
         },
+        paymentDate: {
+          type: Date,
+          required: false,
+        },
         status: {
           type: String,
           required: true,

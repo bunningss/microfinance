@@ -41,7 +41,8 @@ export function SavingsInstallmentReceipt({ data }) {
             কিস্তির তারিখ: <b>{translateDate(data?.installment?.date)}</b>
           </p>
           <p>
-            কিস্তি পরিশোধের তারিখ: <b>{translateDate(Date.now())}</b>
+            কিস্তি পরিশোধের তারিখ:{" "}
+            <b>{translateDate(data?.installment?.paymentDate)}</b>
           </p>
           <p>
             কিস্তি গ্রহণকারী কর্মকর্তা:{" "}

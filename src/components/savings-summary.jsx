@@ -13,69 +13,67 @@ import {
   TableRow,
 } from "./ui/table";
 import { Icon } from "./icon";
+import Link from "next/link";
 
 export function SavingsSummary({ data }) {
-  const midpoint = Math.ceil(data?.installments?.length / 2);
-  let serialNumber = 1;
-
   return (
     <section>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {[0, 1].map((columnIndex) => (
-          <Table key={columnIndex}>
-            <TableCaption>
-              <b>{data?.savingsName}</b> সঞ্চয়ের কিস্তিসমূহের তালিকা
-            </TableCaption>
-            <TableHeader>
-              <TableRow>
-                <TableHead>সি. নং</TableHead>
-                <TableHead>সঞ্চয়ের নাম</TableHead>
-                <TableHead>কিস্তির তারিখ</TableHead>
-                <TableHead>কিস্তির পরিমান</TableHead>
-                <TableHead className="text-center">
-                  কিস্তির বর্তমান অবস্থা
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {data?.installments
-                ?.slice(columnIndex * midpoint, (columnIndex + 1) * midpoint)
-                .map((installment, i) => {
-                  const serial = serialNumber++;
-
-                  return (
-                    <TableRow key={i}>
-                      <TableCell className="font-medium">
-                        {translateNumber(serial)}
-                      </TableCell>
-                      <TableCell className="font-medium">
-                        {data?.savingsName}
-                      </TableCell>
-                      <TableCell className="font-medium">
-                        {translateDate(installment?.date)}
-                      </TableCell>
-                      <TableCell>
-                        {translateCurrency(installment?.amount)}
-                      </TableCell>
-                      <TableCell
-                        className={`flex justify-center ${
-                          installment?.status === "paid"
-                            ? "text-green-800"
-                            : "text-destructive"
-                        }`}
-                      >
-                        <Icon
-                          icon={
-                            installment?.status === "paid" ? "done" : "close"
-                          }
-                        />
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        ))}
+      <div>
+        <Table>
+          <TableCaption>
+            <b>{data?.savingsName}</b> সঞ্চয়ের কিস্তিসমূহের তালিকা
+          </TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="text-center">সি. নং</TableHead>
+              <TableHead className="text-center">সঞ্চয়ের নাম</TableHead>
+              <TableHead className="text-center">কিস্তির তারিখ</TableHead>
+              <TableHead className="text-center">কিস্তির পরিমান</TableHead>
+              <TableHead className="text-center">
+                কিস্তির বর্তমান অবস্থা
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {data?.installments?.map((installment, i) => {
+              return (
+                <TableRow key={i}>
+                  <TableCell className="text-center">
+                    {translateNumber(i + 1)}
+                  </TableCell>
+                  <TableCell className="text-center">
+                    {data?.savingsName}
+                  </TableCell>
+                  <TableCell className="text-center">
+                    {translateDate(installment?.date)}
+                  </TableCell>
+                  <TableCell className="text-center">
+                    {translateCurrency(installment?.amount)}
+                  </TableCell>
+                  <TableCell
+                    className={`flex justify-center ${
+                      installment?.status === "paid"
+                        ? "text-green-800"
+                        : "text-destructive"
+                    }`}
+                  >
+                    <Icon
+                      icon={installment?.status === "paid" ? "done" : "close"}
+                    />
+                  </TableCell>
+                  <TableCell className="text-center print:hidden">
+                    <Link
+                      className="underline text-cyan-800 font-bold"
+                      href={`/dashboard/savings-installments/receipt/${installment?._id}`}
+                    >
+                      details
+                    </Link>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
       </div>
     </section>
   );

@@ -147,11 +147,13 @@ export function generateLoanInstallments(
 }
 
 export function translateDate(date) {
+  if (!date) return;
+
   let formatter = new Intl.DateTimeFormat("bn-BD", {
-    weekday: "long", // e.g., "শনিবার"
-    year: "numeric", // e.g., "2024"
-    month: "long", // e.g., "নভেম্বর"
-    day: "numeric", // e.g., "২৭"
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   });
 
   const formattedDate = formatter.format(new Date(date));

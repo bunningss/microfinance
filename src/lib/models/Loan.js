@@ -53,6 +53,10 @@ const loanSchema = new mongoose.Schema(
           default: "unpaid",
           enum: ["paid", "unpaid"],
         },
+        paymentDate: {
+          type: Date,
+          required: false,
+        },
         totalAmount: {
           type: Number,
           required: true,
