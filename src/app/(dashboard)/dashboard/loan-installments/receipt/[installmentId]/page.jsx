@@ -1,3 +1,4 @@
+import React from "react";
 import { Block } from "@/components/block";
 import { LoanInstallmentReceipt } from "@/components/loan-installment-receipt";
 import { getData } from "@/utils/api-calls";
@@ -15,7 +16,9 @@ export default async function Page({ params }) {
   return (
     <div className="space-y-4">
       <Block title="Receipt" />
-      <Receipt installmentId={params.installmentId} />
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <Receipt installmentId={params.installmentId} />
+      </React.Suspense>
     </div>
   );
 }

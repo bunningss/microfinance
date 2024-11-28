@@ -37,5 +37,12 @@ const columns = [
 ];
 
 export function SalaryTable({ salaries }) {
-  return <DataTable columns={columns} data={salaries} printable />;
+  return (
+    <DataTable
+      columns={columns}
+      data={salaries}
+      header="কর্মীদের বেতনের তালিকা"
+      printable
+    />
+  );
 }

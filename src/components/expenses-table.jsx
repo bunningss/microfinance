@@ -46,5 +46,13 @@ const columns = [
 ];
 
 export function ExpensesTable({ expenses }) {
-  return <DataTable columns={columns} data={expenses} printable withAction />;
+  return (
+    <DataTable
+      columns={columns}
+      data={expenses}
+      header="খরচের তালিকা"
+      printable
+      withAction
+    />
+  );
 }

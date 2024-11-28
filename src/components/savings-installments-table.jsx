@@ -56,8 +56,16 @@ const columns = [
   },
 ];
 
-export function SavingsInstallmentsTable({ installments }) {
+export function SavingsInstallmentsTable({ installments, date }) {
   return (
-    <DataTable columns={columns} data={installments} printable withAction />
+    <DataTable
+      columns={columns}
+      data={installments}
+      header={`সঞ্চয় কিস্তিসমূহের তালিকা - ${
+        date ? translateDate(date) : translateDate(new Date())
+      }`}
+      printable
+      withAction
+    />
   );
 }

@@ -11,10 +11,12 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { useReactToPrint } from "react-to-print";
+import { Heading } from "./heading";
 
 export function DataTable({
   columns,
   data,
+  header,
   printable = false,
   withAction = false,
 }) {
@@ -26,13 +28,18 @@ export function DataTable({
   };
 
   return (
-    <div>
+    <div ref={contentRef} className="print:px-2">
       {printable && (
         <Button onClick={reactToPrintFn} className="mb-4 print:hidden">
           Print Data
         </Button>
       )}
-      <div ref={contentRef} className="rounded-md border">
+      {header && (
+        <Heading className="text-center mb-2 text-xl underline decoration-secondary text-muted-foreground">
+          {header}
+        </Heading>
+      )}
+      <div className="rounded-md border">
         <Table>
           <TableHeader>
             <TableRow>

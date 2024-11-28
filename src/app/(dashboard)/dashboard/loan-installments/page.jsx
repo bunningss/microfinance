@@ -21,7 +21,7 @@ async function Installments({ searchParams }) {
         <EmptyItem message="কোন তথ্য পাওয়া যায়নি" />
       )}
       {response.payload?.length > 0 && (
-        <LoanInstallmentsTable installments={response.payload} />
+        <LoanInstallmentsTable installments={response.payload} date={date} />
       )}
     </>
   );
