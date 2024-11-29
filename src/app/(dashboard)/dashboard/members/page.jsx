@@ -19,8 +19,10 @@ async function Members({ searchParams }) {
   }).toString();
 
   // Data fetching
-  const res = await getData(`members?${queryString}`, 0);
-  const members = res.response.payload;
+  const { error, response } = await getData(`members?${queryString}`, 0);
+  const members = response.payload;
+
+  if (error) throw new Error(response.msg);
 
   return (
     <>
@@ -33,8 +35,8 @@ async function Members({ searchParams }) {
       </CardView>
 
       <PaginationControls
-        isLastPage={res.response.isLastPage}
-        totalPages={res.response.totalPages}
+        isLastPage={response?.isLastPage}
+        totalPages={response?.totalPages}
       />
     </>
   );

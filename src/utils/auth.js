@@ -40,7 +40,7 @@ export async function getSession() {
 
 export async function verifyToken(request, action) {
   try {
-    if (!action) throw new Error("Action is required");
+    if (!action) throw new Error("আপনি অনুমোদিত নন।");
 
     const token = await request.headers.get("auth-token");
     const sessionKey = token?.split(" ")[1];
@@ -81,7 +81,7 @@ export const checkPermission = async (action, id) => {
 
   const rolePermissions = roles[user.role];
   if (!rolePermissions) {
-    throw new Error(`Unknown role: ${user.role}`);
+    throw new Error(`"আপনি অনুমোদিত নন।"`);
   }
 
   if (rolePermissions.can?.includes("manage:all")) {
@@ -93,8 +93,8 @@ export const checkPermission = async (action, id) => {
   }
 
   if (rolePermissions.cannot?.includes(action)) {
-    throw new Error(`Permission denied for action: ${action}`);
+    throw new Error(`"আপনি অনুমোদিত নন।"`);
   }
 
-  throw new Error(`Permission denied for action: ${action}`);
+  throw new Error(`"আপনি অনুমোদিত নন।"`);
 };

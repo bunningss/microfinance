@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import Member from "@/lib/models/Member";
-import Staff from "@/lib/models/Staff";
 import Savings from "@/lib/models/Savings";
 import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
@@ -14,13 +13,7 @@ export async function POST(request) {
   session.startTransaction();
 
   try {
-    const { error, id } = await verifyToken(request);
-    if (error)
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
-
-    const user = await Staff.findById(id);
-    if (user.role !== "admin")
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+    const { id } = await verifyToken(request, "add:member");
 
     const body = await request.json();
 
@@ -106,7 +99,6 @@ export async function POST(request) {
       { status: 200 }
     );
   } catch (err) {
-    console.log(err);
     await session.abortTransaction();
     return NextResponse.json({ msg: err.message }, { status: 400 });
   } finally {
@@ -117,19 +109,7 @@ export async function POST(request) {
 // Get all members
 export async function GET(request) {
   try {
-    const { error, id } = await verifyToken(request);
-    if (error)
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
-
-    await connectDb();
-
-    const user = await Staff.findById(id);
-    if (
-      user.role !== "admin" &&
-      user.role !== "marketing officer" &&
-      user.role !== "staff"
-    )
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+    await verifyToken(request, "view:members-list");
 
     const reqUrl = new URL(request.url);
     const page = reqUrl.searchParams.get("page");

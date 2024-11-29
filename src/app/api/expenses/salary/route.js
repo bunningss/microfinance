@@ -12,13 +12,7 @@ export async function POST(request) {
   session.startTransaction();
 
   try {
-    const { error, id } = await verifyToken(request);
-    if (error)
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
-
-    const user = await Staff.findById(id);
-    if (user.role !== "admin")
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+    const { id } = await verifyToken(request, "add:salary");
 
     const body = await request.json();
 
@@ -70,14 +64,7 @@ export async function POST(request) {
 // Get all salary records
 export async function GET(request) {
   try {
-    const { error, id } = await verifyToken(request);
-    if (error)
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
-
-    await connectDb();
-    const user = await Staff.findById(id).lean();
-    if (user.role !== "admin")
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+    await verifyToken(request, "view:salary");
 
     const salaries = await Salary.find()
       .populate("staff", "name")

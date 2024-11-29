@@ -313,25 +313,37 @@ export const savingsNames = [
 
 export const roles = {
   staff: {
-    can: [],
+    can: ["view:dashboard-data"],
     cannot: ["view:expense", "view:employees"],
   },
   "marketing manager": {
-    can: [, "update:installments", "add:installments"],
+    can: ["view:dashboard-data", "update:installments", "add:installments"],
     cannot: ["view:expense", "view:employees"],
   },
   "marketing officer": {
-    can: [, "update:installments", "add:installments"],
+    can: ["view:dashboard-data", "update:installments", "add:installments"],
     cannot: ["view:expense", "view:employees"],
   },
   "field officer": {
-    can: [, "update:installments", "add:installments"],
+    can: ["view:dashboard-data", "update:installments", "add:installments"],
     cannot: ["view:expense", "view:employees"],
   },
   "office manager": {
-    can: ["custom:permissions"],
+    can: ["view:dashboard-data", "add:expense"],
   },
   admin: {
     can: ["manage:all"],
   },
 };
+
+// view:dashboard-data
+// view:expense
+// add:expense
+// view:salary
+// add:salary
+// add:staff
+// view:staff
+// update:staff
+// add:member
+// view:members-list
+// view:member

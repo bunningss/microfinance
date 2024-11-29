@@ -1,24 +1,11 @@
 import Expense from "@/lib/models/Expense";
-import Staff from "@/lib/models/Staff";
-import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
 
 // Add new expense
 export async function POST(request) {
   try {
-    const { error, id } = await verifyToken(request);
-    if (error)
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
-
-    await connectDb();
-    const user = await Staff.findById(id).lean();
-    if (
-      user.role !== "admin" &&
-      user.role !== "marketing officer" &&
-      user.role !== "staff"
-    )
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+    const { id } = await verifyToken(request, "add:expense");
 
     const body = await request.json();
 
