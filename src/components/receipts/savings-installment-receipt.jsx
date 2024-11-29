@@ -2,7 +2,11 @@
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { Button } from "@/components/ui/button";
-import { translateCurrency, translateDate } from "@/utils/helpers";
+import {
+  translateCurrency,
+  translateDate,
+  translateNumber,
+} from "@/utils/helpers";
 
 export function SavingsInstallmentReceipt({ data }) {
   const contentRef = useRef(null);
@@ -50,14 +54,18 @@ export function SavingsInstallmentReceipt({ data }) {
           </p>
 
           <p>
-            মোট কিস্তি: <b>{data.totalInstallments} টি</b>
+            মোট কিস্তি: <b>{translateNumber(data.totalInstallments)} টি</b>
           </p>
           <p>
-            কিস্তি পরিশোধ করা হয়েছে: <b>{data.paidInstallments} টি</b>
+            কিস্তি পরিশোধ করা হয়েছে:{" "}
+            <b>{translateNumber(data.paidInstallments)} টি</b>
           </p>
           <p>
             কিস্তি বাকি:{" "}
-            <b>{data.totalInstallments - data.paidInstallments} টি</b>
+            <b>
+              {translateNumber(data.totalInstallments - data.paidInstallments)}{" "}
+              টি
+            </b>
           </p>
           <p>
             <b>{data?.savings?.savingsName}</b> এর অধীনে সঞ্চয়:{" "}

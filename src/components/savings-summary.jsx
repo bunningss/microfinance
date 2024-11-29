@@ -100,7 +100,7 @@ export function SavingsSummary({ data }) {
           সঞ্চয়ের সময়: <b>{translateNumber(data?.savingsDuration)} মাস</b>
         </span>
         <span>
-          সঞ্চয়ের পরিমান: <b>{data?.savingsAmount}</b>
+          সঞ্চয়ের পরিমান: <b>{translateCurrency(data?.savingsAmount)}</b>
         </span>
         <span>
           সঞ্চয়ের অবস্থা: <b>{data?.savingsStatus}</b>
