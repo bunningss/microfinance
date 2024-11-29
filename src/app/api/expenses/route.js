@@ -41,18 +41,7 @@ export async function POST(request) {
 // Get all expense
 export async function GET(request) {
   try {
-    const { error, id } = await verifyToken(request);
-    if (error)
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
-
-    await connectDb();
-    const user = await Staff.findById(id).lean();
-    if (
-      user.role !== "admin" &&
-      user.role !== "marketing officer" &&
-      user.role !== "staff"
-    )
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+    await verifyToken(request, "view:expense");
 
     const expenses = await Expense.find()
       .sort({ createdAt: -1 })

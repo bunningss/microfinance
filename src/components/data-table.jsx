@@ -56,7 +56,7 @@ export function DataTable({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data.map((row, rowIndex) => (
+            {data?.map((row, rowIndex) => (
               <TableRow key={rowIndex} className="text-center even:bg-muted">
                 {columns.map((column, i) => (
                   <TableCell

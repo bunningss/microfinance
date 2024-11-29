@@ -11,39 +11,39 @@ async function SummaryData() {
     {
       icon: "members",
       dataKey: "মোট সদস্য সংখ্যা",
-      dataValue: translateNumber(response.payload.totalMembers),
+      dataValue: translateNumber(response.payload?.totalMembers),
     },
     {
       icon: "expense",
       dataKey: "মোট ঋণ দেয়া হয়েছে",
-      dataValue: translateCurrency(response.payload.totalLoans),
+      dataValue: translateCurrency(response.payload?.totalLoans),
     },
     {
       icon: "loan",
       dataKey: "মোট ঋণ পরিশোধ করবে",
-      dataValue: translateCurrency(response.payload.repayableLoans),
+      dataValue: translateCurrency(response.payload?.repayableLoans),
     },
     {
       icon: "note",
       dataKey: "মোট ঋণ পরিশোধ করেছে",
-      dataValue: translateCurrency(response.payload.loanRepaid),
+      dataValue: translateCurrency(response.payload?.loanRepaid),
     },
     {
       icon: "note",
       dataKey: "ঋণ পরিশোধ বাকি আছে",
       dataValue: translateCurrency(
-        response.payload.repayableLoans - response.payload.loanRepaid
+        response.payload?.repayableLoans - response.payload?.loanRepaid
       ),
     },
     {
       icon: "money",
       dataKey: "মোট সঞ্চয়",
-      dataValue: translateCurrency(response.payload.totalSavings),
+      dataValue: translateCurrency(response.payload?.totalSavings),
     },
     {
       icon: "money",
       dataKey: "সদস্যরা মোট জমা করেছে",
-      dataValue: translateCurrency(response.payload.currentAmountByMembers),
+      dataValue: translateCurrency(response.payload?.currentAmountByMembers),
     },
   ];
 

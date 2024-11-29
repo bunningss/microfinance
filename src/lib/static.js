@@ -310,3 +310,28 @@ export const savingsNames = [
   "গড়াই-মধুমতি",
   "কপোতাক্ষ",
 ];
+
+export const roles = {
+  staff: {
+    can: [],
+    cannot: ["view:expense", "view:employees"],
+  },
+  "marketing manager": {
+    can: [, "update:installments", "add:installments"],
+    cannot: ["view:expense", "view:employees"],
+  },
+  "marketing officer": {
+    can: [, "update:installments", "add:installments"],
+    cannot: ["view:expense", "view:employees"],
+  },
+  "field officer": {
+    can: [, "update:installments", "add:installments"],
+    cannot: ["view:expense", "view:employees"],
+  },
+  "office manager": {
+    can: ["custom:permissions"],
+  },
+  admin: {
+    can: ["manage:all"],
+  },
+};

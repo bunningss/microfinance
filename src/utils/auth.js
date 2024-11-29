@@ -1,6 +1,9 @@
 "use server";
+import Staff from "@/lib/models/Staff";
 import { jwtVerify } from "jose";
 import { getCookie, setCookie } from "./cookie";
+import { roles } from "@/lib/static";
+import { connectDb } from "@/lib/db/connectDb";
 
 export async function getSession() {
   const session = await getCookie("ze-session");
@@ -35,10 +38,14 @@ export async function getSession() {
   }
 }
 
-export async function verifyToken(request) {
+export async function verifyToken(request, action) {
   try {
+    if (!action) throw new Error("Action is required");
+
     const token = await request.headers.get("auth-token");
     const sessionKey = token?.split(" ")[1];
+
+    await connectDb();
 
     if (!sessionKey)
       return {
@@ -53,19 +60,41 @@ export async function verifyToken(request) {
       }
     );
 
+    await checkPermission(action, verifiedToken.payload?._id);
+
     return {
       error: false,
       payload: verifiedToken.payload,
       id: verifiedToken.payload?._id,
     };
   } catch (err) {
-    return {
-      error: true,
-      payload: null,
-    };
+    throw new Error(err.message);
   }
 }
 
 export async function logout() {
   await setCookie("ze-session", "", 0);
 }
+
+export const checkPermission = async (action, id) => {
+  const user = await Staff.findById(id).lean();
+
+  const rolePermissions = roles[user.role];
+  if (!rolePermissions) {
+    throw new Error(`Unknown role: ${user.role}`);
+  }
+
+  if (rolePermissions.can?.includes("manage:all")) {
+    return true;
+  }
+
+  if (rolePermissions.can?.includes(action)) {
+    return true;
+  }
+
+  if (rolePermissions.cannot?.includes(action)) {
+    throw new Error(`Permission denied for action: ${action}`);
+  }
+
+  throw new Error(`Permission denied for action: ${action}`);
+};
