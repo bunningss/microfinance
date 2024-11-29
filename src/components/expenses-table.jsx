@@ -36,7 +36,7 @@ const columns = [
     header: "",
     accessorKey: "id",
     cell: () => (
-      <div className="print:hidden">
+      <div>
         <Link href="" className="underline text-cyan-800 font-bold">
           বিস্তারিত
         </Link>
