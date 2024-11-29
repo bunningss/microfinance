@@ -5,8 +5,8 @@ import { EdgeStoreProvider } from "@/lib/edgestore";
 import { font } from "@/lib/fonts";
 
 export const metadata = {
-  title: "tt",
-  description: "Shopnotori Sromojibi Somobay Somiti Limited",
+  title: "স্বপ্নতরী",
+  description: "স্বপ্নতরী শ্রমজীবী সমবায় সমিতি লিমিটেড",
 };
 
 export default function RootLayout({ children }) {
