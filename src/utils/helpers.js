@@ -164,3 +164,56 @@ export function translateDate(date) {
 export function translateNumber(number) {
   return new Intl.NumberFormat("bn-BD").format(number);
 }
+
+// Loan installments
+export function generateLoanFineInstallments(
+  startDate,
+  type,
+  durationInMonths,
+  amount
+) {
+  // Parse the start date
+  const start = new Date(startDate);
+  if (isNaN(start)) {
+    console.error("Invalid startDate provided.");
+    return [];
+  }
+
+  const installments = [];
+
+  // Calculate total number of installments and max daily installments 120
+  let totalInstallments;
+  if (type === "daily") {
+    totalInstallments = Math.min(durationInMonths * 30, 120);
+  } else if (type === "weekly") {
+    totalInstallments = durationInMonths * 4;
+  } else if (type === "monthly") {
+    totalInstallments = durationInMonths;
+  }
+
+  const amountPerInstallment = parseFloat(
+    (amount / totalInstallments).toFixed(2)
+  );
+
+  let currentDate = new Date(start);
+
+  for (let i = 0; i < totalInstallments; i++) {
+    installments.push({
+      date: currentDate.toISOString().split("T")[0], // Format date as YYYY-MM-DD
+      status: "unpaid",
+      totalAmount: amount,
+      amount: amountPerInstallment,
+    });
+
+    // Increment the currentDate based on the type
+    if (type === "daily") {
+      currentDate.setDate(currentDate.getDate() + 1);
+    } else if (type === "weekly") {
+      currentDate.setDate(currentDate.getDate() + 7);
+    } else if (type === "monthly") {
+      currentDate.setMonth(currentDate.getMonth() + 1);
+    }
+  }
+
+  return installments;
+}

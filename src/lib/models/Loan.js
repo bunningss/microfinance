@@ -23,6 +23,11 @@ const loanSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    fine: {
+      type: Number,
+      required: false,
+      default: 0,
+    },
     loanDuration: {
       type: String,
       required: true,
