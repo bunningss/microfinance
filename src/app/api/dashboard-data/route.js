@@ -61,7 +61,6 @@ export async function GET(request) {
       { status: 200 }
     );
   } catch (err) {
-    console.error("Error in dashboard route:", err);
     return NextResponse.json({ msg: err.message }, { status: 500 });
   }
 }

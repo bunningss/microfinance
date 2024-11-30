@@ -90,11 +90,11 @@ export function generateLoanInstallments(
 
   // Calculate repay amount based on savings type
   if (type === "daily") {
-    repayAmount = amount + (amount * 32) / 100;
+    repayAmount = amount + (amount * 20) / 100;
   } else if (type === "weekly") {
-    repayAmount = amount + (amount * 20) / 100;
+    repayAmount = amount + (amount * 32) / 100;
   } else if (type === "monthly") {
-    repayAmount = amount + (amount * 20) / 100;
+    repayAmount = amount + (amount * 32) / 100;
   } else {
     console.error("Invalid type provided.");
     return [];
