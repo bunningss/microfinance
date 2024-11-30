@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const addMemberFormSchema = z.object({
   name: z.string().min(1, "Applicant Name is required"),
+  memberNumber: z.string().min(1, "Member Number is required"),
   fathersName: z.string().optional().nullable(),
   husbandsName: z.string().optional().nullable(),
   mothersName: z.string().min(1, "Mother's Name is required"),

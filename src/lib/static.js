@@ -101,20 +101,32 @@ export const savingsTypes = [
 
 export const designations = [
   {
-    name: "user",
-    value: "user",
+    name: "admin",
+    value: "admin",
   },
   {
-    name: "staff",
-    value: "staff",
+    name: "office manager",
+    value: "office manager",
+  },
+  {
+    name: "marketing manager",
+    value: "marketing manager",
   },
   {
     name: "marketing officer",
     value: "marketing officer",
   },
   {
-    name: "admin",
-    value: "admin",
+    name: "field officer",
+    value: "field officer",
+  },
+  {
+    name: "office staff",
+    value: "office staff",
+  },
+  {
+    name: "user",
+    value: "user",
   },
 ];
 
@@ -317,7 +329,7 @@ export const savingsNames = [
 ];
 
 export const roles = {
-  staff: {
+  "office staff": {
     can: [
       "view:dashboard-data",
       "view:members-list",
@@ -399,6 +411,7 @@ export const roles = {
       "update:loan-installment",
       "update:saving-installment",
       "add:expense",
+      "view:expense",
       "view:salary",
       "view:staff",
     ],

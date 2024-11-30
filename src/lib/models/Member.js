@@ -6,6 +6,10 @@ const memberSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    memberNumber: {
+      type: String,
+      required: true,
+    },
     fathersName: {
       type: String,
       required: false,

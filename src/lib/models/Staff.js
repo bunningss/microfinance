@@ -63,7 +63,16 @@ const staffSchema = new mongoose.Schema(
     role: {
       type: String,
       default: "staff",
-      enum: ["user", "staff", "admin", "marketing officer"],
+      enum: [
+        "user",
+        "office staff",
+        "admin",
+        "marketing officer",
+        "marketing manager",
+        "field officer",
+        "marketing officer",
+        "office manager",
+      ],
     },
     salary: {
       type: Number,

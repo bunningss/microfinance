@@ -35,6 +35,7 @@ export function AddMember() {
     resolver: zodResolver(addMemberFormSchema),
     defaultValues: {
       name: "",
+      memberNumber: "",
       fathersName: "",
       husbandsName: "",
       mothersName: "",
@@ -152,13 +153,22 @@ export function AddMember() {
           setFile={setUserImage}
           label="Applicant photo / আবেদনকারীর ছবি"
         />
-        <FormInput
-          form={form}
-          name="name"
-          label="Applicant Name / আবেদনকারীর নাম"
-          placeholder=""
-          required
-        />
+        <div className="flex flex-col lg:flex-row gap-2">
+          <FormInput
+            form={form}
+            name="name"
+            label="Applicant Name / আবেদনকারীর নাম"
+            placeholder=""
+            required
+          />
+          <FormInput
+            form={form}
+            name="memberNumber"
+            label="Member Number / সদস্য নম্বর"
+            placeholder=""
+            required
+          />
+        </div>
         <div className="flex flex-col lg:flex-row gap-2">
           <FormInput
             form={form}
