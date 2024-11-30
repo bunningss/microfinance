@@ -1,24 +1,13 @@
 import Member from "@/lib/models/Member";
-import Staff from "@/lib/models/Staff";
 import { connectDb } from "@/lib/db/connectDb";
 import { NextResponse } from "next/server";
 import { verifyToken } from "@/utils/auth";
 
+// View single loan installment
 export async function GET(request, { params }) {
   try {
     await connectDb();
-
-    const { error, id } = await verifyToken(request);
-    if (error)
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
-
-    const user = await Staff.findById(id);
-    if (
-      user.role !== "admin" &&
-      user.role !== "marketing officer" &&
-      user.role !== "staff"
-    )
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+    await verifyToken(request, "view:loan-installment");
 
     const member = await Member.aggregate([
       { $match: { nidNumber: params.id } },

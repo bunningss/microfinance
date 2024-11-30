@@ -109,6 +109,7 @@ export async function POST(request) {
 // Get all members
 export async function GET(request) {
   try {
+    await connectDb();
     await verifyToken(request, "view:members-list");
 
     const reqUrl = new URL(request.url);

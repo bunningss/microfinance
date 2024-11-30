@@ -347,3 +347,15 @@ export const roles = {
 // add:member
 // view:members-list
 // view:member
+// add:loan
+// view:loan
+// view:loan-installment
+// view:loan-receipt
+// view:loan-installments
+// update:loan-installment
+// add:saving
+// view:saving
+// view:saving-installment
+// view:saving-receipt
+// update:saving-installment
+// view:saving-installments

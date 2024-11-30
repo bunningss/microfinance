@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import Staff from "@/lib/models/Staff";
 import Member from "@/lib/models/Member";
 import Loan from "@/lib/models/Loan";
 import { connectDb } from "@/lib/db/connectDb";
@@ -14,13 +13,7 @@ export async function POST(request) {
   session.startTransaction();
 
   try {
-    const { error, id } = await verifyToken(request);
-    if (error)
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
-
-    const user = await Staff.findById(id);
-    if (user.role !== "admin")
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+    const { id } = await verifyToken(request, "add:loan");
 
     const body = await request.json();
 

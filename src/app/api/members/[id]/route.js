@@ -3,10 +3,12 @@ import Savings from "@/lib/models/Savings";
 import Loan from "@/lib/models/Loan";
 import { NextResponse } from "next/server";
 import { verifyToken } from "@/utils/auth";
+import { connectDb } from "@/lib/db/connectDb";
 
 // Get member data
 export async function GET(request, { params }) {
   try {
+    await connectDb();
     await verifyToken(request, "view:member");
 
     const member = await Member.findOne({ nidNumber: params.id })

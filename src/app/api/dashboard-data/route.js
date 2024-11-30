@@ -3,9 +3,11 @@ import Member from "@/lib/models/Member";
 import Savings from "@/lib/models/Savings";
 import { NextResponse } from "next/server";
 import { verifyToken } from "@/utils/auth";
+import { connectDb } from "@/lib/db/connectDb";
 
 export async function GET(request) {
   try {
+    await connectDb();
     await verifyToken(request, "view:dashboard-data");
 
     const [

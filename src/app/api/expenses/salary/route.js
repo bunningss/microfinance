@@ -64,6 +64,7 @@ export async function POST(request) {
 // Get all salary records
 export async function GET(request) {
   try {
+    await connectDb();
     await verifyToken(request, "view:salary");
 
     const salaries = await Salary.find()

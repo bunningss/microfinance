@@ -13,13 +13,7 @@ export async function PUT(request) {
   session.startTransaction();
 
   try {
-    const { error, id } = await verifyToken(request);
-    if (error)
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
-
-    const user = await Staff.findById(id);
-    if (user.role !== "admin" && user.role !== "marketing officer")
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+    const { id } = await verifyToken(request, "update:saving-installment");
 
     const { installmentId } = await request.json();
 
@@ -100,19 +94,8 @@ export async function PUT(request) {
 // Get savings installments (Today by default)
 export async function GET(request) {
   try {
-    const { error, id } = await verifyToken(request);
-    if (error)
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
-
     await connectDb();
-
-    const user = await Staff.findById(id);
-    if (
-      user.role !== "admin" &&
-      user.role !== "marketing officer" &&
-      user.role !== "staff"
-    )
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+    await verifyToken(request, "view:saving-installments");
 
     const reqUrl = new URL(request.url);
     const date = reqUrl.searchParams.get("date");

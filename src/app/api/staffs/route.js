@@ -2,10 +2,12 @@ import bcrypt from "bcrypt";
 import Staff from "@/lib/models/Staff";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
+import { connectDb } from "@/lib/db/connectDb";
 
 // Get all staffs
 export async function GET(request) {
   try {
+    await connectDb();
     await verifyToken(request, "view:staffs");
 
     const staffs = await Staff.find()
@@ -25,6 +27,7 @@ export async function GET(request) {
 // Add a staff
 export async function POST(request) {
   try {
+    await connectDb();
     const { id } = await verifyToken(request, "add:staffs"); // Add addedBy in the future
 
     const { name, email, phone, password, confirmPassword, role, salary } =

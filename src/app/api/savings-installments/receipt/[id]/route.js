@@ -1,6 +1,5 @@
 import Member from "@/lib/models/Member";
 import Savings from "@/lib/models/Savings";
-import Staff from "@/lib/models/Staff";
 import { connectDb } from "@/lib/db/connectDb";
 import { NextResponse } from "next/server";
 import { verifyToken } from "@/utils/auth";
@@ -8,14 +7,7 @@ import { verifyToken } from "@/utils/auth";
 export async function GET(request, { params }) {
   try {
     await connectDb();
-
-    const { error, id } = await verifyToken(request);
-    if (error)
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
-
-    const user = await Staff.findById(id);
-    if (user.role !== "admin" && user.role !== "marketing officer")
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+    await verifyToken(request, "view:saving-receipt");
 
     // Find the savings document
     const savings = await Savings.findOne({

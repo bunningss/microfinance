@@ -1,10 +1,12 @@
 import Staff from "@/lib/models/Staff";
+import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
 
 // Update employee details
 export async function PUT(request, { params }) {
   try {
+    await connectDb();
     await verifyToken(request, "update:staff");
 
     const body = await request.json();

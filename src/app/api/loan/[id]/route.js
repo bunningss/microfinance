@@ -1,5 +1,4 @@
 import Loan from "@/lib/models/Loan";
-import Staff from "@/lib/models/Staff";
 import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
@@ -8,18 +7,7 @@ import { NextResponse } from "next/server";
 export async function GET(request, { params }) {
   try {
     await connectDb();
-
-    const { error, id } = await verifyToken(request);
-    if (error)
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
-
-    const user = await Staff.findById(id);
-    if (
-      user.role !== "admin" &&
-      user.role !== "marketing officer" &&
-      user.role !== "staff"
-    )
-      return NextResponse.json({ msg: "আপনি অনুমোদিত নন।" }, { status: 401 });
+    await verifyToken(request, "view:loan");
 
     const loan = await Loan.findById(params.id);
 

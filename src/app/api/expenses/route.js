@@ -1,10 +1,12 @@
 import Expense from "@/lib/models/Expense";
+import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
 
 // Add new expense
 export async function POST(request) {
   try {
+    await connectDb();
     const { id } = await verifyToken(request, "add:expense");
 
     const body = await request.json();
@@ -28,6 +30,7 @@ export async function POST(request) {
 // Get all expense
 export async function GET(request) {
   try {
+    await connectDb();
     await verifyToken(request, "view:expense");
 
     const expenses = await Expense.find()
