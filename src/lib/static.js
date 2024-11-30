@@ -6,28 +6,40 @@ export const sidebarItems = [
   },
   {
     label: "দৈনিক হিসাব",
-    href: "/daily-report",
+    href: "daily-report",
     icon: "calendar",
   },
   {
-    label: "সঞ্চয় কিস্তিসমূহ",
-    href: "/dashboard/savings-installments",
+    label: "সঞ্চয়",
+    href: "",
     icon: "installment",
+    children: [
+      {
+        label: "সঞ্চয় কিস্তিসমূহ",
+        href: "savings-installments",
+      },
+      {
+        label: "সঞ্চয় কিস্তি পরিশোধ",
+        href: "search-savings-installment",
+      },
+    ],
   },
   {
-    label: "ঋণের কিস্তিসমূহ",
-    href: "/dashboard/loan-installments",
+    label: "ঋণ",
+    href: "",
     icon: "installment",
-  },
-  {
-    label: "সঞ্চয় কিস্তি পরিশোধ",
-    href: "/dashboard/search-savings-installment",
-    icon: "money",
-  },
-  {
-    label: "ঋণের কিস্তি পরিশোধ",
-    href: "/dashboard/search-loan-installment",
-    icon: "expense",
+    children: [
+      {
+        label: "ঋণের কিস্তিসমূহ",
+        href: "loan-installments",
+        icon: "",
+      },
+      {
+        label: "ঋণের কিস্তি পরিশোধ",
+        href: "search-loan-installment",
+        icon: "",
+      },
+    ],
   },
   {
     label: "সদস্য তথ্য",
@@ -41,6 +53,23 @@ export const sidebarItems = [
       {
         label: "সদস্য যোগ করুন",
         href: "members/add",
+      },
+    ],
+  },
+  {
+    label: "জমা",
+    href: "",
+    icon: "expense",
+    children: [
+      {
+        label: "জমার তালিকা দেখুন",
+        href: "deposits",
+        icon: "",
+      },
+      {
+        label: "জমা করুন",
+        href: "deposit/add",
+        icon: "",
       },
     ],
   },
