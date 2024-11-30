@@ -5,6 +5,11 @@ export const sidebarItems = [
     icon: "dashboard",
   },
   {
+    label: "দৈনিক হিসাব",
+    href: "/daily-report",
+    icon: "calendar",
+  },
+  {
     label: "সঞ্চয় কিস্তিসমূহ",
     href: "/dashboard/savings-installments",
     icon: "installment",

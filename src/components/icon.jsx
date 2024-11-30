@@ -2,6 +2,7 @@ import {
   ArrowLeft,
   Banknote,
   CalendarArrowDown,
+  CalendarDays,
   Check,
   ChevronDown,
   ChevronUp,
@@ -44,6 +45,7 @@ const Icons = {
   done: Check,
   loan: Landmark,
   note: Banknote,
+  calendar: CalendarDays,
 };
 
 export function Icon({
