@@ -1,9 +1,8 @@
 "use server";
-import Staff from "@/lib/models/Staff";
 import { jwtVerify } from "jose";
 import { getCookie, setCookie } from "./cookie";
 import { roles } from "@/lib/static";
-import { connectDb } from "@/lib/db/connectDb";
+import { getData } from "./api-calls";
 
 export async function getSession() {
   const session = await getCookie("ze-session");
@@ -45,13 +44,12 @@ export async function verifyToken(request, action) {
     const token = await request.headers.get("auth-token");
     const sessionKey = token?.split(" ")[1];
 
-    await connectDb();
-
     if (!sessionKey)
       return {
         error: true,
         payload: null,
       };
+
     const verifiedToken = await jwtVerify(
       sessionKey,
       new TextEncoder().encode(process.env.TOKEN_SECRET),
@@ -77,9 +75,9 @@ export async function logout() {
 }
 
 export const checkPermission = async (action, id) => {
-  const user = await Staff.findById(id).lean();
+  const { response } = await getData(`get-role/${id}`, 0);
 
-  const rolePermissions = roles[user.role];
+  const rolePermissions = roles[response.payload.role];
   if (!rolePermissions) {
     throw new Error(`"আপনি অনুমোদিত নন।"`);
   }
