@@ -25,7 +25,7 @@ export function SearchMemberInstallments({ setData, type }) {
       requestUrl = "loan/loan-installments";
       break;
     case "savings":
-      requestUrl = "savings-installments";
+      requestUrl = "savings/savings-installments";
       break;
     default:
       break;

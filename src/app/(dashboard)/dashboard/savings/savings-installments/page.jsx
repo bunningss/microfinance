@@ -10,7 +10,10 @@ async function Installments({ searchParams }) {
   const queryParams = new URLSearchParams({
     ...(date && { date }),
   }).toString();
-  const { response } = await getData(`savings-installments?${queryParams}`, 0);
+  const { response } = await getData(
+    `savings/savings-installments?${queryParams}`,
+    0
+  );
 
   return (
     <>

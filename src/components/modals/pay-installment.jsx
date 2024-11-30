@@ -30,12 +30,12 @@ export function PayInstallment({ installments, label, type }) {
 
   switch (type) {
     case "loan":
-      urls.redirectUrl = "/dashboard/loan-installments/receipt";
+      urls.redirectUrl = "/dashboard/loan/loan-installments/receipt";
       urls.requestUrl = "loan/loan-installments";
       break;
     case "savings":
-      urls.redirectUrl = "/dashboard/savings-installments/receipt";
-      urls.requestUrl = "savings-installments";
+      urls.redirectUrl = "/dashboard/savings/savings-installments/receipt";
+      urls.requestUrl = "savings/savings-installments";
       break;
     default:
       break;

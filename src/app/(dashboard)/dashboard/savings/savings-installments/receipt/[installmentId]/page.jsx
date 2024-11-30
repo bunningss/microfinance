@@ -5,7 +5,7 @@ import { SavingsInstallmentReceipt } from "@/components/receipts/savings-install
 
 async function Receipt({ installmentId }) {
   const { response } = await getData(
-    `savings-installments/receipt/${installmentId}`,
+    `savings/savings-installments/receipt/${installmentId}`,
     0
   );
 

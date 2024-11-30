@@ -6,7 +6,7 @@ export const sidebarItems = [
   },
   {
     label: "দৈনিক হিসাব",
-    href: "daily-report",
+    href: "/dashboard/daily-report",
     icon: "calendar",
   },
   {
@@ -16,11 +16,11 @@ export const sidebarItems = [
     children: [
       {
         label: "সঞ্চয় কিস্তিসমূহ",
-        href: "savings-installments",
+        href: "savings/savings-installments",
       },
       {
         label: "সঞ্চয় কিস্তি পরিশোধ",
-        href: "search-savings-installment",
+        href: "savings/search-savings-installment",
       },
     ],
   },
@@ -31,12 +31,12 @@ export const sidebarItems = [
     children: [
       {
         label: "ঋণের কিস্তিসমূহ",
-        href: "loan-installments",
+        href: "loan/loan-installments",
         icon: "",
       },
       {
         label: "ঋণের কিস্তি পরিশোধ",
-        href: "search-loan-installment",
+        href: "loan/search-loan-installment",
         icon: "",
       },
     ],

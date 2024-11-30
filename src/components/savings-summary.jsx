@@ -57,7 +57,7 @@ export function SavingsSummary({ data }) {
         <div className="print:hidden">
           <Link
             className="underline text-cyan-800 font-bold"
-            href={`/dashboard/savings-installments/receipt/${item._id}`}
+            href={`/dashboard/savings/savings-installments/receipt/${item._id}`}
           >
             বিস্তারিত
           </Link>

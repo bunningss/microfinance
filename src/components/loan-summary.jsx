@@ -49,7 +49,7 @@ export function LoanSummary({ data }) {
       cell: (item) => (
         <Link
           className="underline text-cyan-800 font-bold"
-          href={`/dashboard/loan-installments/receipt/${item._id}`}
+          href={`/dashboard/loan/loan-installments/receipt/${item._id}`}
         >
           বিস্তারিত
         </Link>
