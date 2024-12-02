@@ -3,7 +3,7 @@ import { connectDb } from "@/lib/db/connectDb";
 import { generateLoanFineInstallments } from "@/utils/helpers";
 import { NextResponse } from "next/server";
 
-export async function PUT() {
+export async function GET() {
   try {
     await connectDb();
     const today = new Date();
