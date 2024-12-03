@@ -3,6 +3,7 @@ import { InfoCard } from "@/components/info-card";
 import { getData } from "@/utils/api-calls";
 import { translateCurrency, translateNumber } from "@/utils/helpers";
 import { Block } from "@/components/block";
+import { Preloader } from "@/components/preloader";
 
 async function SummaryData() {
   const { response } = await getData("dashboard-data");
@@ -61,7 +62,7 @@ async function SummaryData() {
 export default async function Page() {
   return (
     <div className="space-y-4">
-      <React.Suspense fallback={<p>Loading...</p>}>
+      <React.Suspense fallback={<Preloader />}>
         <SummaryData />
       </React.Suspense>
     </div>
