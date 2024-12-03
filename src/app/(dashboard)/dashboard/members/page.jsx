@@ -3,6 +3,7 @@ import { CardView } from "@/components/card-view";
 import { MemberCard } from "@/components/cards/member-card";
 import { MembersFilters } from "@/components/filters/members-filters";
 import { PaginationControls } from "@/components/pagination-controls";
+import { Preloader } from "@/components/preloader";
 import { getData } from "@/utils/api-calls";
 import { Suspense } from "react";
 
@@ -47,7 +48,7 @@ export default async function Page({ searchParams }) {
     <div className="space-y-4">
       <Block title="View members" />
 
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<Preloader />}>
         <Members searchParams={searchParams} />
       </Suspense>
     </div>

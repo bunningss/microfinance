@@ -6,6 +6,7 @@ const MemberDetails = dynamic(
 import { Block } from "@/components/block";
 import { getData } from "@/utils/api-calls";
 import { Suspense } from "react";
+import { Preloader } from "@/components/preloader";
 
 async function Member({ id }) {
   const { response } = await getData(`members/${id}`, 0);
@@ -19,7 +20,7 @@ export default async function Page({ params }) {
       <Block title="Member details" />
 
       {/* Member information */}
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<Preloader />}>
         <Member id={params.id} />
       </Suspense>
     </div>

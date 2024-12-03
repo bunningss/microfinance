@@ -1,5 +1,6 @@
 import { Block } from "@/components/block";
 import { ExpensesTable } from "@/components/expenses-table";
+import { Preloader } from "@/components/preloader";
 import { getData } from "@/utils/api-calls";
 import { Suspense } from "react";
 
@@ -13,7 +14,7 @@ export default function Page() {
   return (
     <div className="space-y-4">
       <Block title="view expenses" />
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<Preloader />}>
         <Expenses />
       </Suspense>
     </div>

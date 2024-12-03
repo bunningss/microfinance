@@ -1,6 +1,7 @@
 import { Block } from "@/components/block";
 import { CardView } from "@/components/card-view";
 import { StaffCard } from "@/components/cards/staff-card";
+import { Preloader } from "@/components/preloader";
 import { getData } from "@/utils/api-calls";
 import { Suspense } from "react";
 
@@ -21,7 +22,7 @@ export default function Page() {
   return (
     <div className="space-y-4">
       <Block title="staff members" />
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<Preloader />}>
         <Staffs />
       </Suspense>
     </div>

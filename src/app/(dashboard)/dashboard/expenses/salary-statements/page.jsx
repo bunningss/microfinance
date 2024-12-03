@@ -1,6 +1,7 @@
 import { Block } from "@/components/block";
 import { SalaryFilters } from "@/components/filters/salary-filters";
 import { PaginationControls } from "@/components/pagination-controls";
+import { Preloader } from "@/components/preloader";
 import { SalaryTable } from "@/components/salary-table";
 import { getData } from "@/utils/api-calls";
 import { Suspense } from "react";
@@ -19,7 +20,7 @@ export default function Page() {
     <div className="space-y-4">
       <Block title="salary statements" />
       <SalaryFilters />
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<Preloader />}>
         <Salaries />
         <PaginationControls />
       </Suspense>

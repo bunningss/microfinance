@@ -1,6 +1,7 @@
+import React from "react";
+import { Preloader } from "@/components/preloader";
 import { SavingsSummary } from "@/components/savings-summary";
 import { getData } from "@/utils/api-calls";
-import React from "react";
 
 async function Summary({ id }) {
   const { response } = await getData(`savings/${id}`, 0);
@@ -11,7 +12,7 @@ async function Summary({ id }) {
 export default async function Page({ params }) {
   return (
     <div>
-      <React.Suspense fallback={<p>Loading...</p>}>
+      <React.Suspense fallback={<Preloader />}>
         <Summary id={params.id} />
       </React.Suspense>
     </div>
