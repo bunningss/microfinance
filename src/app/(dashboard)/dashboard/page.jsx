@@ -4,6 +4,7 @@ import { getData } from "@/utils/api-calls";
 import { translateCurrency, translateNumber } from "@/utils/helpers";
 import { Block } from "@/components/block";
 import { Preloader } from "@/components/preloader";
+import { PrintPad } from "@/components/print-pad";
 
 async function SummaryData() {
   const { response } = await getData("dashboard-data");
@@ -61,10 +62,12 @@ async function SummaryData() {
 
 export default async function Page() {
   return (
-    <div className="space-y-4">
-      <React.Suspense fallback={<Preloader />}>
-        <SummaryData />
-      </React.Suspense>
-    </div>
+    <PrintPad>
+      <div className="space-y-4">
+        <React.Suspense fallback={<Preloader />}>
+          <SummaryData />
+        </React.Suspense>
+      </div>
+    </PrintPad>
   );
 }

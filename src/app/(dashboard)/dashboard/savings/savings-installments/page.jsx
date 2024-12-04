@@ -1,6 +1,7 @@
 import { Block } from "@/components/block";
 import { EmptyItem } from "@/components/empty-item";
 import { InstallmentsFilters } from "@/components/filters/installment-filters";
+import { Preloader } from "@/components/preloader";
 import { SavingsInstallmentsTable } from "@/components/savings-installments-table";
 import { getData } from "@/utils/api-calls";
 import { Suspense } from "react";
@@ -31,7 +32,7 @@ export default async function Page({ searchParams }) {
   return (
     <div className="space-y-4">
       <Block title="Savings Installments / সঞ্চয় কিস্তিসমূহ" />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Preloader />}>
         <InstallmentsFilters />
         <Installments searchParams={searchParams} />
       </Suspense>
