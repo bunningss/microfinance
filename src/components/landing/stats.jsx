@@ -23,10 +23,7 @@ export function Stats() {
   ];
 
   return (
-    <Section
-      title="Our Product & Quantity"
-      subtitle="we provide services to people of all social spectrum"
-    >
+    <Section title="Our Product & Quantity" className="underline">
       <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8 mb-8">
         {stats.map((stat) => (
           <div key={stat.label} className="text-center">

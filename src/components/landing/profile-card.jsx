@@ -4,7 +4,7 @@ import person from "@/assets/person.jpg";
 export function ProfileCard() {
   return (
     <div className="text-center">
-      <figure className="w-44 h-44 mx-auto mb-4 relative">
+      <figure className="w-32 h-32 md:w-44 md:h-44 mx-auto mb-4 relative">
         <Image
           src={person}
           alt="Mr. John Doe"

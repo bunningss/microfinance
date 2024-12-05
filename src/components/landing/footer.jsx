@@ -1,5 +1,3 @@
-// import { SocialLinks } from "./social-links";
-
 export function Footer() {
   return (
     <footer className="py-12">
