@@ -13,7 +13,10 @@ export default async function DashboardLayout({ children }) {
       <Container>
         <div className="flex gap-2">
           <DashboardSidebar />
-          <MobileDashboardSidebar />
+          <MobileDashboardSidebar
+            title={payload.name}
+            subtitle={payload.role}
+          />
           <main className="w-full">{children}</main>
         </div>
       </Container>

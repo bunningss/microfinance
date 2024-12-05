@@ -62,12 +62,10 @@ async function SummaryData() {
 
 export default async function Page() {
   return (
-    <PrintPad>
-      <div className="space-y-4">
-        <React.Suspense fallback={<Preloader />}>
-          <SummaryData />
-        </React.Suspense>
-      </div>
-    </PrintPad>
+    <div className="space-y-4">
+      <React.Suspense fallback={<Preloader />}>
+        <SummaryData />
+      </React.Suspense>
+    </div>
   );
 }

@@ -7,6 +7,7 @@ import {
 } from "@/utils/helpers";
 import { DataTable } from "@/components/data-table";
 import { Icon } from "@/components/icon";
+import { PrintPad } from "./print-pad";
 
 export function LoanSummary({ data }) {
   const columns = [
@@ -59,14 +60,9 @@ export function LoanSummary({ data }) {
 
   return (
     <section>
-      <div>
-        <DataTable
-          columns={columns}
-          data={data.installments}
-          printable
-          withAction
-        />
-      </div>
+      <PrintPad>
+        <DataTable columns={columns} data={data.installments} withAction />
+      </PrintPad>
     </section>
   );
 }

@@ -51,7 +51,6 @@ export function ExpensesTable({ expenses }) {
       columns={columns}
       data={expenses}
       header="খরচের তালিকা"
-      printable
       withAction
     />
   );

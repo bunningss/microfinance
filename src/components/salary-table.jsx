@@ -42,7 +42,6 @@ export function SalaryTable({ salaries }) {
       columns={columns}
       data={salaries}
       header="কর্মীদের বেতনের তালিকা"
-      printable
     />
   );
 }

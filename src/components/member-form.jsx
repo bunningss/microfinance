@@ -1,16 +1,9 @@
+import { PrintPad } from "./print-pad";
+
 export function MemberForm({ member }) {
   return (
     <section className="bg-secondary p-2 rounded-md text-lg leading-loose">
-      <header className="pb-2 border-b border-green-700">
-        <div className="flex justify-between items-center">
-          <span>সঞ্চয়ই</span>
-          <span className="text-green-700">বিসমিল্লাহির রাহমানির রাহিম</span>
-          <span>সম্পদ</span>
-        </div>
-        {/* Company Information */}
-        <div className=""></div>
-      </header>
-      <div className="border-t border-green-700 mt-1">
+      <PrintPad>
         {/* Header */}
         <div className="flex justify-between mt-2">
           <div>
@@ -98,7 +91,7 @@ export function MemberForm({ member }) {
             আবেদনকারীর নমিনীঃ
           </h2>
         </div>
-      </div>
+      </PrintPad>
     </section>
   );
 }

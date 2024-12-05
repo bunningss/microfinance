@@ -17,7 +17,7 @@ export function SidebarItem({ item }) {
   return (
     <>
       <Link
-        href={item?.href ? item?.href : "#"}
+        href={item?.href ? item?.href : ""}
         role="button"
         onClick={() => {
           setIsOpen(!isOpen);

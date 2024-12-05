@@ -6,6 +6,7 @@ import {
 } from "@/utils/helpers";
 import { PayInstallment } from "./modals/pay-installment";
 import { DataTable } from "./data-table";
+import { PrintPad } from "./print-pad";
 
 const columns = [
   {
@@ -58,14 +59,15 @@ const columns = [
 
 export function SavingsInstallmentsTable({ installments, date }) {
   return (
-    <DataTable
-      columns={columns}
-      data={installments}
-      header={`সঞ্চয় কিস্তিসমূহের তালিকা - ${
-        date ? translateDate(date) : translateDate(new Date())
-      }`}
-      printable
-      withAction
-    />
+    <PrintPad>
+      <DataTable
+        columns={columns}
+        data={installments}
+        header={`সঞ্চয় কিস্তিসমূহের তালিকা - ${
+          date ? translateDate(date) : translateDate(new Date())
+        }`}
+        withAction
+      />
+    </PrintPad>
   );
 }

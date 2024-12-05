@@ -28,7 +28,7 @@ export function DataTable({
   };
 
   return (
-    <div ref={contentRef} className="print:px-2">
+    <div ref={contentRef}>
       {printable && (
         <Button onClick={reactToPrintFn} className="mb-4 print:hidden">
           Print Data
