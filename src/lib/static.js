@@ -66,11 +66,6 @@ export const sidebarItems = [
         href: "deposits",
         icon: "",
       },
-      {
-        label: "জমা করুন",
-        href: "deposit/add",
-        icon: "",
-      },
     ],
   },
   {

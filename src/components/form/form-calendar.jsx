@@ -1,5 +1,4 @@
 import { CalendarIcon } from "lucide-react";
-import { format } from "date-fns";
 import { Calendar } from "../ui/calendar";
 import {
   FormControl,
@@ -11,6 +10,7 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
+import { translateDate } from "@/utils/helpers";
 
 export function FormCalendar({
   name,
@@ -24,20 +24,20 @@ export function FormCalendar({
       control={form.control}
       name={name || ""}
       render={({ field }) => (
-        <FormItem className="flex flex-col">
+        <FormItem className="flex flex-col" gap={label}>
           <FormLabel>{label}</FormLabel>
           <Popover>
             <PopoverTrigger asChild>
               <FormControl>
                 <Button
-                  variant={"outline"}
+                  variant="outline"
                   className={cn(
                     "pl-3 text-left font-normal",
                     !field.value && "text-muted-foreground"
                   )}
                 >
                   {field.value ? (
-                    format(field.value, "PPP")
+                    translateDate(field.value, "PPP")
                   ) : (
                     <span>{placeholder}</span>
                   )}

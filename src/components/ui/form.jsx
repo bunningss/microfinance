@@ -43,15 +43,21 @@ const useFormField = () => {
 
 const FormItemContext = React.createContext({});
 
-const FormItem = React.forwardRef(({ className, ...props }, ref) => {
-  const id = React.useId();
+const FormItem = React.forwardRef(
+  ({ gap = true, className, ...props }, ref) => {
+    const id = React.useId();
 
-  return (
-    <FormItemContext.Provider value={{ id }}>
-      <div ref={ref} className={cn("space-y-2 w-full", className)} {...props} />
-    </FormItemContext.Provider>
-  );
-});
+    return (
+      <FormItemContext.Provider value={{ id }}>
+        <div
+          ref={ref}
+          className={cn(`${!gap ? "space-y-2" : ""} w-full`, className)}
+          {...props}
+        />
+      </FormItemContext.Provider>
+    );
+  }
+);
 FormItem.displayName = "FormItem";
 
 const FormLabel = React.forwardRef(({ className, ...props }, ref) => {
