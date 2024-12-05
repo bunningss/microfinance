@@ -51,7 +51,7 @@ const FormItem = React.forwardRef(
       <FormItemContext.Provider value={{ id }}>
         <div
           ref={ref}
-          className={cn(`${!gap ? "space-y-2" : ""} w-full`, className)}
+          className={cn(`${gap ? "space-y-2" : ""} w-full`, className)}
           {...props}
         />
       </FormItemContext.Provider>

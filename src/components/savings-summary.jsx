@@ -7,16 +7,10 @@ import {
 } from "@/utils/helpers";
 import { DataTable } from "@/components/data-table";
 import { Icon } from "@/components/icon";
-import { Button } from "./ui/button";
-import { useRef } from "react";
-import { useReactToPrint } from "react-to-print";
 import { Heading } from "./heading";
 import { PrintPad } from "./print-pad";
 
 export function SavingsSummary({ data }) {
-  const contentRef = useRef(null);
-  const reactToPrintFn = useReactToPrint({ contentRef });
-
   const columns = [
     {
       header: "সি. নং",
@@ -55,14 +49,12 @@ export function SavingsSummary({ data }) {
       header: "",
       accessorKey: "_id",
       cell: (item) => (
-        <div className="print:hidden">
-          <Link
-            className="underline text-cyan-800 font-bold"
-            href={`/dashboard/savings/savings-installments/receipt/${item._id}`}
-          >
-            বিস্তারিত
-          </Link>
-        </div>
+        <Link
+          className="underline text-cyan-800 font-bold"
+          href={`/dashboard/savings/savings-installments/receipt/${item._id}`}
+        >
+          বিস্তারিত
+        </Link>
       ),
     },
   ];

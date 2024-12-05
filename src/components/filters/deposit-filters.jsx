@@ -7,7 +7,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "../ui/button";
 import { formatDate, translateDate } from "@/utils/helpers";
 import { errorNotification } from "@/utils/toast";
-import { AddNewDeposit } from "../modals/add-new-deposit";
 
 export function DepositFilters() {
   const form = useForm({});
@@ -29,28 +28,18 @@ export function DepositFilters() {
   };
 
   return (
-    <div>
-      <section className="grid md:grid-cols-2 gap-2 md:gap-4">
-        <div className="space-y-2">
-          <FormModal
-            form={form}
-            onSubmit={handleSubmit}
-            formLabel="খুজুন"
-            icon="search"
-          >
-            <FormCalendar
-              form={form}
-              allowFuture
-              name="date"
-              placeholder={placeholderText}
-            />
-          </FormModal>
-          <Button variant="destructive" onClick={handleClear}>
-            Clear
-          </Button>
-        </div>
-        <AddNewDeposit />
-      </section>
-    </div>
+    <section className="space-y-2">
+      <FormModal
+        form={form}
+        onSubmit={handleSubmit}
+        formLabel="খুজুন"
+        icon="search"
+      >
+        <FormCalendar form={form} name="date" placeholder={placeholderText} />
+      </FormModal>
+      <Button variant="destructive" onClick={handleClear}>
+        Clear
+      </Button>
+    </section>
   );
 }

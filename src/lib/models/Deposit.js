@@ -7,8 +7,8 @@ const depositSchema = new mongoose.Schema(
       required: true,
     },
     amount: {
-      type: String,
-      required: true,
+      type: Number,
+      required: [true, "Invalid amount."],
     },
     date: {
       type: Date,

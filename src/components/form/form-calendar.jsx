@@ -18,6 +18,7 @@ export function FormCalendar({
   label,
   placeholder = "Pick a date / তারিখ নির্বাচন করুন",
   allowFuture,
+  required,
 }) {
   return (
     <FormField
@@ -25,7 +26,17 @@ export function FormCalendar({
       name={name || ""}
       render={({ field }) => (
         <FormItem className="flex flex-col" gap={label}>
-          <FormLabel>{label}</FormLabel>
+          {label && (
+            <FormLabel
+              className={`capitalize relative ${
+                required
+                  ? "after:content-['*'] after:absolute after:text-destructive after:text-lg after:-bottom-2"
+                  : ""
+              }`}
+            >
+              {label}
+            </FormLabel>
+          )}
           <Popover>
             <PopoverTrigger asChild>
               <FormControl>

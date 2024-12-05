@@ -126,9 +126,7 @@ export const addExpenseSchema = z.object({
   amount: z.string().min(1, {
     message: "Amount is required.",
   }),
-  description: z.string().min(3, {
-    message: "Description is required.",
-  }),
+  description: z.string().optional().nullable(),
   date: z.date({
     message: "Please select date.",
   }),
@@ -139,4 +137,18 @@ export const filterInstallmentsSchema = z.object({
   date: z.date({
     message: "Please select date.",
   }),
+});
+
+// Add new deposit schema
+export const addDepositSchema = z.object({
+  title: z.string().min(1, {
+    message: "Title is required.",
+  }),
+  amount: z.string({
+    message: "Please enter amount.",
+  }),
+  date: z.date({
+    message: "Please select date.",
+  }),
+  description: z.string().optional().nullable(),
 });

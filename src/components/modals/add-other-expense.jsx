@@ -11,6 +11,7 @@ import { addExpenseSchema } from "@/lib/schema";
 import { errorNotification, successNotification } from "@/utils/toast";
 import { postData } from "@/utils/api-calls";
 import { useRouter } from "next/navigation";
+import { formatDate } from "@/utils/helpers";
 
 export function AddOtherExpense() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -65,9 +66,14 @@ export function AddOtherExpense() {
         setIsModalOpen={setIsModalOpen}
         withCancelButton
       >
-        <FormInput form={form} name="name" label="Name / নাম" />
-        <FormInput form={form} name="amount" label="Amount / টাকার পরিমাণ" />
-        <FormCalendar form={form} name="date" label="Date / তারিখ" />
+        <FormInput form={form} name="name" label="Title / নাম" required />
+        <FormInput
+          form={form}
+          name="amount"
+          label="Amount / টাকার পরিমাণ"
+          required
+        />
+        <FormCalendar form={form} name="date" label="Date / তারিখ" required />
         <FormTextarea
           form={form}
           name="description"

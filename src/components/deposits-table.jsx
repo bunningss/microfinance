@@ -16,17 +16,17 @@ const columns = [
   },
   {
     header: "নাম",
-    accessorKey: "name",
+    accessorKey: "title",
   },
   {
     header: "তারিখ",
     accessorKey: "createdAt",
-    cell: (expense) => translateDate(expense.createdAt),
+    cell: (deposit) => translateDate(deposit.date),
   },
   {
     header: "পরিমাণ",
     accessorKey: "amount",
-    cell: (expense) => translateCurrency(expense.amount),
+    cell: (deposit) => translateCurrency(deposit.amount),
   },
   {
     header: "যোগ করেছেন",
@@ -35,12 +35,13 @@ const columns = [
   {
     header: "",
     accessorKey: "id",
-    cell: () => (
-      <div>
-        <Link href="" className="underline text-cyan-800 font-bold">
-          বিস্তারিত
-        </Link>
-      </div>
+    cell: (deposit) => (
+      <Link
+        className="underline text-cyan-800 font-bold"
+        href={`/dashboard/savings/savings-installments/receipt/${deposit._id}`}
+      >
+        বিস্তারিত
+      </Link>
     ),
   },
 ];
