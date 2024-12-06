@@ -45,13 +45,14 @@ const columns = [
   },
 ];
 
-export function ExpensesTable({ expenses }) {
+export function ExpensesTable({ expenses, footer }) {
   return (
     <DataTable
       columns={columns}
       data={expenses}
       header="খরচের তালিকা"
       withAction
+      footer={footer}
     />
   );
 }

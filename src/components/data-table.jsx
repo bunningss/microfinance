@@ -5,6 +5,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -19,6 +20,7 @@ export function DataTable({
   header,
   printable = false,
   withAction = false,
+  footer,
 }) {
   const contentRef = React.useRef(null);
   const reactToPrintFn = useReactToPrint({ contentRef });
@@ -73,6 +75,7 @@ export function DataTable({
               </TableRow>
             ))}
           </TableBody>
+          {footer}
         </Table>
       </div>
     </div>

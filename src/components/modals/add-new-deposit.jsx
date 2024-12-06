@@ -70,27 +70,27 @@ export function AddNewDeposit() {
           name="title"
           placeholder=""
           required
-          label="Title"
+          label="Title / নাম"
         />
         <FormInput
           form={form}
           name="amount"
           placeholder=""
           required
-          label="Amount"
+          label="Amount / টাকার পরিমান"
         />
         <FormCalendar
           form={form}
           name="date"
-          placeholder="Select Date"
+          placeholder="Select Date / তারিখ নির্বাচন করুন"
           required
-          label="Date"
+          label="Date / তারিখ নির্বাচন করুন"
         />
         <FormTextarea
           form={form}
           name="description"
           placeholder=""
-          label="Description"
+          label="Description / বর্ণনা"
         />
       </FormModal>
     </Modal>

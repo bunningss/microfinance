@@ -67,7 +67,19 @@ export async function GET(request) {
     await connectDb();
     await verifyToken(request, "view:salary");
 
-    const salaries = await Salary.find()
+    const reqUrl = new URL(request.url);
+    const date = reqUrl.searchParams.get("date");
+
+    let query = {};
+
+    if (date) {
+      const currentDate = new Date(date);
+      const startOfDay = new Date(currentDate.setHours(0, 0, 0, 0));
+      const endOfDay = new Date(currentDate.setHours(23, 59, 59, 999));
+      query.createdAt = { $gte: startOfDay, $lte: endOfDay };
+    }
+
+    const salaries = await Salary.find(query)
       .populate("staff", "name")
       .populate("addedBy", "name")
       .sort({ createdAt: -1 })

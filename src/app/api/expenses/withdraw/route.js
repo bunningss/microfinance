@@ -61,3 +61,36 @@ export async function POST(request) {
     session.endSession();
   }
 }
+
+// Get all withdrawals
+export async function GET(request) {
+  try {
+    await connectDb();
+    await verifyToken(request, "view:withdrawals");
+
+    const reqUrl = new URL(request.url);
+    const date = reqUrl.searchParams.get("date");
+
+    let query = {};
+
+    if (date) {
+      const currentDate = new Date(date);
+      const startOfDay = new Date(currentDate.setHours(0, 0, 0, 0));
+      const endOfDay = new Date(currentDate.setHours(23, 59, 59, 999));
+      query.createdAt = { $gte: startOfDay, $lte: endOfDay };
+    }
+
+    const withdrawals = await Withdrawal.find(query)
+      .sort({ createdAt: -1 })
+      .populate("owner", "name")
+      .populate("approvedBy", "name")
+      .lean();
+
+    return NextResponse.json(
+      { msg: "Data Found.", payload: withdrawals },
+      { status: 200 }
+    );
+  } catch (err) {
+    return NextResponse.json({ msg: err.message }, { status: 400 });
+  }
+}

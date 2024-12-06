@@ -468,3 +468,9 @@ export const roles = {
 // view:saving-receipt
 // update:saving-installment
 // view:saving-installments
+
+// inquiry
+// add:withdrawal
+// view:withdrawals
+// add:deposit
+// view:deposit

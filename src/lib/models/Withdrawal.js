@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const withdrawalSchema = new mongoose.Schema(
   {
     amount: {
-      type: String,
+      type: Number,
       required: true,
     },
     owner: {

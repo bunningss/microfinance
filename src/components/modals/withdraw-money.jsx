@@ -19,12 +19,15 @@ export function WithdrawMoney({ id }) {
     try {
       setIsLoading(true);
 
-      const { error, response } = await postData("withdraw", {
+      const { error, response } = await postData("expenses/withdraw", {
         ...data,
         userId: id,
       });
       if (error) return errorNotification(response.msg);
 
+      form.reset();
+      setIsModalOpen(false);
+      router.refresh();
       return successNotification(response.msg);
     } catch (err) {
       errorNotification(err.message);

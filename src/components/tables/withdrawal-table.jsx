@@ -1,7 +1,6 @@
 "use client";
-
 import Link from "next/link";
-import { DataTable } from "@/components/data-table";
+import { DataTable } from "../data-table";
 import {
   translateCurrency,
   translateDate,
@@ -16,29 +15,29 @@ const columns = [
   },
   {
     header: "নাম",
-    accessorKey: "title",
+    accessorKey: "owner.name",
   },
   {
     header: "তারিখ",
     accessorKey: "createdAt",
-    cell: (deposit) => translateDate(deposit.date),
+    cell: (withdrawal) => translateDate(withdrawal.createdAt),
   },
   {
     header: "পরিমাণ",
     accessorKey: "amount",
-    cell: (deposit) => translateCurrency(deposit.amount),
+    cell: (withdrawal) => translateCurrency(withdrawal.amount),
   },
   {
-    header: "যোগ করেছেন",
-    accessorKey: "addedBy.name",
+    header: "প্রদানকারী কর্মকর্তা",
+    accessorKey: "approvedBy.name",
   },
   {
     header: "",
     accessorKey: "id",
-    cell: (deposit) => (
+    cell: (withdrawal) => (
       <Link
         className="underline text-cyan-800 font-bold"
-        href={`/dashboard/savings/savings-installments/receipt/${deposit._id}`}
+        href={`/dashboard/savings/savings-installments/receipt/${withdrawal._id}`}
       >
         বিস্তারিত
       </Link>
@@ -46,12 +45,12 @@ const columns = [
   },
 ];
 
-export function DepositsTable({ deposits, footer }) {
+export function WithdrawalTable({ withdrawals, footer }) {
   return (
     <DataTable
       columns={columns}
-      data={deposits}
-      header="জমার তালিকা"
+      data={withdrawals}
+      header="টাকা উত্তোলন তালিকা"
       withAction
       footer={footer}
     />
