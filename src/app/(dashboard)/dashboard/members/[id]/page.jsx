@@ -17,7 +17,7 @@ async function Member({ id }) {
 export default async function Page({ params }) {
   return (
     <div className="space-y-4">
-      <Block title="Member details" />
+      <Block title="Member details / সদস্য তথ্য" />
 
       {/* Member information */}
       <Suspense fallback={<Preloader />}>

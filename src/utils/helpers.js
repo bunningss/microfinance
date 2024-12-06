@@ -74,7 +74,8 @@ export function translateCurrency(number) {
 }
 
 export function formatDate(date) {
-  const localISO = new Date(date).toLocaleString("sv-SE").replace(" ", "T");
+  const localISO = new Date(date);
+  localISO.setHours(localISO.getHours() + 6);
 
   return localISO;
 }

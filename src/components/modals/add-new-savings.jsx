@@ -86,6 +86,7 @@ export function AddNewSavings({ member }) {
       form.reset();
       router.push(`/dashboard/members/savings/${response.payload}`);
     } catch (err) {
+      errorNotification(err.message);
     } finally {
       setIsLoading(false);
     }

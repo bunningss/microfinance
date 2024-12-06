@@ -8,7 +8,7 @@ const memberSchema = new mongoose.Schema(
     },
     memberNumber: {
       type: String,
-      required: true,
+      required: false,
     },
     fathersName: {
       type: String,

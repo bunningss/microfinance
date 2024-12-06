@@ -2,6 +2,7 @@ import Deposit from "@/lib/models/Deposit";
 import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
+import { formatDate } from "@/utils/helpers";
 
 // Create new deposit
 export async function POST(request) {
@@ -18,7 +19,7 @@ export async function POST(request) {
       title,
       amount,
       description,
-      date,
+      date: formatDate(date),
       addedBy: id,
     });
 
@@ -46,7 +47,7 @@ export async function GET(request) {
     const deposits = await Deposit.find({
       date: { $gte: startOfDay, $lte: endOfDay },
     })
-      .sort({ createdAt: -1 })
+      .sort({ date: -1 })
       .populate("addedBy", "name")
       .lean();
 

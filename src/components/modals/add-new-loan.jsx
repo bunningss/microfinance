@@ -81,6 +81,7 @@ export function AddNewLoan({ member }) {
       form.reset();
       router.push(`/dashboard/members/loan/${response.payload}`);
     } catch (err) {
+      errorNotification(err.message);
     } finally {
       setIsLoading(false);
     }
@@ -110,20 +111,20 @@ export function AddNewLoan({ member }) {
         <FormInput
           form={form}
           name="loanAmount"
-          label="loan amount / ঋণ পরিমাণ"
+          label="loan amount / ঋণের পরিমাণ"
           placeholder=""
           required
         />
         <FormInput
           form={form}
           name="loanDuration"
-          label="loan Duration / ঋণ সময়কাল (মাসের সংখ্যা)"
+          label="loan Duration / ঋণের সময়কাল (মাসের সংখ্যা)"
           placeholder=""
           required
         />
         <FormSelect
           form={form}
-          label="loan type / ঋণ ধরণ"
+          label="loan type / ঋণের ধরণ"
           name="loanType"
           placeholder="select type"
           options={savingsTypes}

@@ -1,7 +1,6 @@
 import { Block } from "@/components/block";
 import { AddOtherExpense } from "@/components/modals/add-other-expense";
 import { AddSalary } from "@/components/modals/add-salary";
-import { WithdrawMoneyModal } from "@/components/modals/withdraw-money-modal";
 import { getData } from "@/utils/api-calls";
 import { Suspense } from "react";
 
@@ -20,7 +19,6 @@ export default function Page() {
           <SalaryForm />
         </Suspense>
         <AddOtherExpense />
-        <WithdrawMoneyModal />
       </div>
     </div>
   );

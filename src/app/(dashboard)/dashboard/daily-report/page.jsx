@@ -8,7 +8,7 @@ async function Reports() {
 
   const deposits = await getData("deposits");
   const expenses = await getData(`expenses?date=${today}`);
-  console.log(expenses.response.payload);
+
   return <div>Daily report</div>;
 }
 

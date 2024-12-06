@@ -4,6 +4,7 @@ import { AddNewLoan } from "./modals/add-new-loan";
 import { AddNewSavings } from "./modals/add-new-savings";
 import { ViewLoans } from "./modals/view-loans";
 import { ViewSavings } from "./modals/view-savings";
+import { WithdrawMoney } from "./modals/withdraw-money";
 
 export function MemberDetails({ data }) {
   return (
@@ -14,6 +15,7 @@ export function MemberDetails({ data }) {
         <ViewLoans loans={data.loans} />
         <AddNewSavings member={data} />
         <AddNewLoan member={data} />
+        <WithdrawMoney id={data?._id} />
       </div>
       <MemberFinancialDetails data={data} />
       <MemberForm member={data} />
