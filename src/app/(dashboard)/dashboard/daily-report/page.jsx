@@ -9,40 +9,23 @@ import { WithdrawalTable } from "@/components/tables/withdrawal-table";
 import { DateFilter } from "@/components/filters/date-filter";
 
 async function Reports() {
-  const today = new Date().toISOString();
-
-  const deposits = await getData("deposits");
-  const expenses = await getData(`expenses?date=${today}`);
-  const withdrawals = await getData(`expenses/withdraw?date=${today}`, 0);
-
-  const totalDeposits = deposits.response.payload.reduce(
-    (a, c) => a + c.amount,
-    0
-  );
-  const totalExpenses = expenses.response.payload.reduce(
-    (a, c) => a + c.amount,
-    0
-  );
-  const totalWithdrawals = withdrawals.response.payload.reduce(
-    (a, c) => a + c.amount,
-    0
-  );
+  const { response } = await getData("daily-report", 0);
 
   return (
     <div className="space-y-8">
       <DepositsTable
-        deposits={deposits.response.payload}
-        footer={<TableTotal total={totalDeposits} />}
+        deposits={response.payload?.deposits}
+        footer={<TableTotal />}
       />
 
       <ExpensesTable
-        expenses={expenses.response.payload}
-        footer={<TableTotal total={totalExpenses} />}
+        expenses={response.payload?.expenses}
+        footer={<TableTotal />}
       />
 
       <WithdrawalTable
-        withdrawals={withdrawals.response.payload}
-        footer={<TableTotal total={totalWithdrawals} />}
+        withdrawals={response.payload?.withdrawals}
+        footer={<TableTotal />}
       />
     </div>
   );

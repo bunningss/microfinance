@@ -479,3 +479,4 @@ export const roles = {
 // view:withdrawals
 // add:deposit
 // view:deposit
+// view:daily-report
