@@ -19,7 +19,7 @@ async function Deposits({ searchParams }) {
   return (
     <>
       {response.payload?.length <= 0 && <EmptyItem />}
-      {response.payload.length > 0 && (
+      {response.payload?.length > 0 && (
         <DepositsTable deposits={response.payload} />
       )}
     </>
