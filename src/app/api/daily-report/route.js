@@ -22,24 +22,59 @@ export async function GET(request) {
     const endOfDay = new Date(currentDate.setHours(23, 59, 59, 999));
 
     const [
-      deposits,
-      expenses,
-      withdrawals,
+      depositsData,
       savingsInstallments,
       loanInstallments,
+      expensesData,
+      withdrawalsData,
     ] = await Promise.all([
-      Deposit.find({ date: { $gte: startOfDay, $lte: endOfDay } })
-        .populate("addedBy", "name")
-        .lean(),
-      Expense.find({ createdAt: { $gte: startOfDay, $lte: endOfDay } })
-        .populate("addedBy", "name")
-        .lean(),
-      Withdrawal.find({
-        createdAt: { $gte: startOfDay, $lte: endOfDay },
-      })
-        .populate("owner", "name memberNumber phone")
-        .populate("approvedBy", "name")
-        .lean(),
+      Deposit.aggregate([
+        {
+          $match: {
+            date: { $gte: startOfDay, $lte: endOfDay },
+          },
+        },
+        {
+          $lookup: {
+            from: "staffs",
+            localField: "addedBy",
+            foreignField: "_id",
+            as: "addedBy",
+          },
+        },
+        {
+          $unwind: "$addedBy",
+        },
+        {
+          $group: {
+            _id: null,
+            deposits: { $push: "$$ROOT" },
+            totalAmount: { $sum: "$amount" },
+            count: { $sum: 1 },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            deposits: {
+              $map: {
+                input: "$deposits",
+                as: "deposit",
+                in: {
+                  _id: "$$deposit._id",
+                  title: "$$deposit.title",
+                  amount: "$$deposit.amount",
+                  date: "$$deposit.date",
+                  description: "$$deposit.description",
+                  addedBy: { name: "$$deposit.addedBy.name" },
+                },
+              },
+            },
+            totalAmount: 1,
+            count: 1,
+          },
+        },
+      ]),
       Savings.aggregate([
         {
           $match: {
@@ -108,7 +143,120 @@ export async function GET(request) {
           },
         },
       ]),
+      Expense.aggregate([
+        {
+          $match: {
+            date: { $gte: startOfDay, $lte: endOfDay },
+          },
+        },
+        {
+          $lookup: {
+            from: "staffs",
+            localField: "addedBy",
+            foreignField: "_id",
+            as: "addedBy",
+          },
+        },
+        {
+          $unwind: "$addedBy",
+        },
+        {
+          $group: {
+            _id: null,
+            expenses: { $push: "$$ROOT" },
+            totalAmount: { $sum: "$amount" },
+            count: { $sum: 1 },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            expenses: {
+              $map: {
+                input: "$expenses",
+                as: "expense",
+                in: {
+                  _id: "$$expense._id",
+                  name: "$$expense.name",
+                  amount: "$$expense.amount",
+                  date: "$$expense.date",
+                  description: "$$expense.description",
+                  addedBy: { name: "$$expense.addedBy.name" },
+                },
+              },
+            },
+            totalAmount: 1,
+            count: 1,
+          },
+        },
+      ]),
+      Withdrawal.aggregate([
+        {
+          $match: {
+            createdAt: { $gte: startOfDay, $lte: endOfDay },
+          },
+        },
+        {
+          $lookup: {
+            from: "members",
+            localField: "owner",
+            foreignField: "_id",
+            as: "owner",
+          },
+        },
+        {
+          $unwind: "$owner",
+        },
+        {
+          $lookup: {
+            from: "staffs",
+            localField: "approvedBy",
+            foreignField: "_id",
+            as: "approvedBy",
+          },
+        },
+        {
+          $unwind: "$approvedBy",
+        },
+        {
+          $group: {
+            _id: null,
+            withdrawals: { $push: "$$ROOT" },
+            totalAmount: { $sum: "$amount" },
+            count: { $sum: 1 },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            withdrawals: {
+              $map: {
+                input: "$withdrawals",
+                as: "withdrawal",
+                in: {
+                  _id: "$$withdrawal._id",
+                  amount: "$$withdrawal.amount",
+                  createdAt: "$$withdrawal.createdAt",
+                  owner: {
+                    name: "$$withdrawal.owner.name",
+                    memberNumber: "$$withdrawal.owner.memberNumber",
+                    phone: "$$withdrawal.owner.phone",
+                  },
+                  approvedBy: { name: "$$withdrawal.approvedBy.name" },
+                  comment: "$$withdrawal.comment",
+                },
+              },
+            },
+            totalAmount: 1,
+            count: 1,
+          },
+        },
+      ]),
     ]);
+
+    const deposits = depositsData[0] ? depositsData[0].deposits : [];
+    const depositTotal = depositsData[0] ? depositsData[0].totalAmount : 0;
+    const depositCount = depositsData[0] ? depositsData[0].count : 0;
 
     const savingsTotal = savingsInstallments[0]
       ? savingsInstallments[0].totalAmount
@@ -118,6 +266,18 @@ export async function GET(request) {
       : 0;
     const loanTotal = loanInstallments[0] ? loanInstallments[0].totalAmount : 0;
     const loanCount = loanInstallments[0] ? loanInstallments[0].count : 0;
+
+    const expenses = expensesData[0] ? expensesData[0].expenses : [];
+    const expenseTotal = expensesData[0] ? expensesData[0].totalAmount : 0;
+    const expenseCount = expensesData[0] ? expensesData[0].count : 0;
+
+    const withdrawals = withdrawalsData[0]
+      ? withdrawalsData[0].withdrawals
+      : [];
+    const withdrawalTotal = withdrawalsData[0]
+      ? withdrawalsData[0].totalAmount
+      : 0;
+    const withdrawalCount = withdrawalsData[0] ? withdrawalsData[0].count : 0;
 
     return NextResponse.json(
       {
@@ -135,6 +295,18 @@ export async function GET(request) {
               total: loanTotal,
               count: loanCount,
             },
+          },
+          totalDeposits: {
+            total: depositTotal,
+            count: depositCount,
+          },
+          totalWithdrawals: {
+            total: withdrawalTotal,
+            count: withdrawalCount,
+          },
+          totalExpenses: {
+            total: expenseTotal,
+            count: expenseCount,
           },
         },
       },
