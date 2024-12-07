@@ -1,10 +1,12 @@
 import { NextResponse } from "next/server";
 import { getSession } from "./utils/auth";
+import { roles } from "./lib/static";
 
 const SIGN_IN_URL = "/sign-in";
 
 export async function middleware(request) {
   const { error, role } = await getSession();
+  const rolesPermissions = roles[role];
 
   const { pathname } = request.nextUrl;
 
@@ -22,9 +24,7 @@ export async function middleware(request) {
 
   // Redirect non-admin users from dashboard
   if (
-    role?.toLowerCase() !== "admin" &&
-    role?.toLowerCase() !== "marketing officer" &&
-    role?.toLowerCase() !== "staff" &&
+    !rolesPermissions?.can?.includes("visit:dashboard") &&
     pathname.startsWith("/dashboard")
   ) {
     return NextResponse.redirect(new URL("/", request.url));

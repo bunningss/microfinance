@@ -370,6 +370,7 @@ export const savingsNames = [
 export const roles = {
   "office staff": {
     can: [
+      "visit:dashboard",
       "view:dashboard-data",
       "view:members-list",
       "view:member",
@@ -385,6 +386,7 @@ export const roles = {
   },
   "marketing manager": {
     can: [
+      "visit:dashboard",
       "view:dashboard-data",
       "view:members-list",
       "view:member",
@@ -402,6 +404,7 @@ export const roles = {
   },
   "marketing officer": {
     can: [
+      "visit:dashboard",
       "view:dashboard-data",
       "view:members-list",
       "view:member",
@@ -419,6 +422,7 @@ export const roles = {
   },
   "field officer": {
     can: [
+      "visit:dashboard",
       "view:dashboard-data",
       "view:members-list",
       "view:member",
@@ -436,6 +440,7 @@ export const roles = {
   },
   "office manager": {
     can: [
+      "visit:dashboard",
       "view:dashboard-data",
       "view:members-list",
       "view:member",
@@ -456,10 +461,11 @@ export const roles = {
     ],
   },
   admin: {
-    can: ["manage:all"],
+    can: ["visit:dashboard", "manage:all"],
   },
 };
 
+// visit:dashboard,
 // view:dashboard-data
 // view:expense
 // add:expense
