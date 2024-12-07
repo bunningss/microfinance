@@ -83,7 +83,7 @@ export async function GET(request) {
 
     const withdrawals = await Withdrawal.find(query)
       .sort({ createdAt: -1 })
-      .populate("owner", "name")
+      .populate("owner", "name memberNumber phone")
       .populate("approvedBy", "name")
       .lean();
 

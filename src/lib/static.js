@@ -83,6 +83,11 @@ export const sidebarItems = [
         href: "expenses/salary-statements",
       },
       {
+        label: "টাকা উত্তলোন এর তালিকা",
+        href: "withdraw",
+        icon: "",
+      },
+      {
         label: "খরচ যোগ করুন",
         href: "expenses/add",
         icon: "",

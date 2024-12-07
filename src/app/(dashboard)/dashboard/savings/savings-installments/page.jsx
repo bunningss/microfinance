@@ -1,6 +1,6 @@
 import { Block } from "@/components/block";
 import { EmptyItem } from "@/components/empty-item";
-import { InstallmentsFilters } from "@/components/filters/installment-filters";
+import { DateFilter } from "@/components/filters/date-filter";
 import { Preloader } from "@/components/preloader";
 import { SavingsInstallmentsTable } from "@/components/savings-installments-table";
 import { getData } from "@/utils/api-calls";
@@ -33,7 +33,7 @@ export default async function Page({ searchParams }) {
     <div className="space-y-4">
       <Block title="Savings Installments / সঞ্চয় কিস্তিসমূহ" />
       <Suspense fallback={<Preloader />}>
-        <InstallmentsFilters />
+        <DateFilter />
         <Installments searchParams={searchParams} />
       </Suspense>
     </div>

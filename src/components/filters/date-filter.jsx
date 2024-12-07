@@ -8,7 +8,7 @@ import { Button } from "../ui/button";
 import { formatDate, translateDate } from "@/utils/helpers";
 import { errorNotification } from "@/utils/toast";
 
-export function DepositFilters() {
+export function DateFilter() {
   const form = useForm({});
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -18,7 +18,7 @@ export function DepositFilters() {
     : translateDate(new Date(Date.now()).toDateString());
 
   const handleSubmit = (data) => {
-    if (!data.date) return errorNotification("Please select date.");
+    if (!data.date) return errorNotification("তারিখ নির্বাচন করুন");
     router.push(`?date=${formatDate(data.date)}`);
   };
 

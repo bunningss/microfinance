@@ -14,8 +14,16 @@ const columns = [
     cell: (_, index) => translateNumber(index + 1),
   },
   {
-    header: "নাম",
+    header: "সদস্যের নাম",
     accessorKey: "owner.name",
+  },
+  {
+    header: "সদস্য নম্বর",
+    accessorKey: "owner.memberNumber",
+  },
+  {
+    header: "মোবাইল নম্বর",
+    accessorKey: "owner.phone",
   },
   {
     header: "তারিখ",

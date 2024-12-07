@@ -6,6 +6,7 @@ import { DepositsTable } from "@/components/deposits-table";
 import { ExpensesTable } from "@/components/expenses-table";
 import { TableTotal } from "@/components/table-total";
 import { WithdrawalTable } from "@/components/tables/withdrawal-table";
+import { DateFilter } from "@/components/filters/date-filter";
 
 async function Reports() {
   const today = new Date().toISOString();
@@ -51,6 +52,7 @@ export default async function Page() {
   return (
     <div className="space-y-4">
       <Block title="daily report / দৈনিক হিসাব" />
+      <DateFilter />
       <React.Suspense fallback={<Preloader />}>
         <Reports />
       </React.Suspense>
