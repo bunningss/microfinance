@@ -25,7 +25,7 @@ async function Reports() {
 
       <WithdrawalTable
         withdrawals={response.payload?.withdrawals}
-        footer={<TableTotal />}
+        footer={<TableTotal colspan={7} />}
       />
     </div>
   );

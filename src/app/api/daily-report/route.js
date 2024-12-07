@@ -15,15 +15,14 @@ export async function GET(request) {
     const reqUrl = new URL(request.url);
     const date = reqUrl.searchParams.get("date");
 
-    let query = {};
-
     const currentDate = date ? formatDate(date) : formatDate(new Date());
     const startOfDay = new Date(currentDate.setHours(0, 0, 0, 0));
     const endOfDay = new Date(currentDate.setHours(23, 59, 59, 999));
-    query.date = { $gte: startOfDay, $lte: endOfDay };
 
     const [deposits, expenses, withdrawals] = await Promise.all([
-      Deposit.find(query).populate("addedBy", "name").lean(),
+      Deposit.find({ date: { $gte: startOfDay, $lte: endOfDay } })
+        .populate("addedBy", "name")
+        .lean(),
       Expense.find({ createdAt: { $gte: startOfDay, $lte: endOfDay } })
         .populate("addedBy", "name")
         .lean(),
