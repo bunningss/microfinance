@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 import Savings from "@/lib/models/Savings";
 import Member from "@/lib/models/Member";
-import Staff from "@/lib/models/Staff";
 import { connectDb } from "@/lib/db/connectDb";
 import { NextResponse } from "next/server";
 import { verifyToken } from "@/utils/auth";
+import { formatDate } from "@/utils/helpers";
 
 // Pay savings installment
 export async function PUT(request) {
@@ -54,7 +54,7 @@ export async function PUT(request) {
     // Update savings properties
     installment.status = "paid";
     installment.receivedBy = id;
-    installment.paymentDate = new Date(Date.now());
+    installment.paymentDate = formatDate(Date.now());
     savings.amountSaved += installment.amount;
 
     const allPaid = savings.installments.every(

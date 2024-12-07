@@ -8,8 +8,13 @@ import { TableTotal } from "@/components/table-total";
 import { WithdrawalTable } from "@/components/tables/withdrawal-table";
 import { DateFilter } from "@/components/filters/date-filter";
 
-async function Reports() {
-  const { response } = await getData("daily-report", 0);
+async function Reports({ searchParams }) {
+  const { date } = searchParams;
+  const queryParams = new URLSearchParams({
+    ...(date && { date }),
+  }).toString();
+
+  const { response } = await getData(`daily-report?${queryParams}`, 0);
 
   return (
     <div className="space-y-8">
@@ -31,13 +36,13 @@ async function Reports() {
   );
 }
 
-export default async function Page() {
+export default async function Page({ searchParams }) {
   return (
     <div className="space-y-4">
       <Block title="daily report / দৈনিক হিসাব" />
       <DateFilter />
       <React.Suspense fallback={<Preloader />}>
-        <Reports />
+        <Reports searchParams={searchParams} />
       </React.Suspense>
     </div>
   );

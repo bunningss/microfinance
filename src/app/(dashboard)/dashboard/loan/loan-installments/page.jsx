@@ -33,7 +33,7 @@ export default async function Page({ searchParams }) {
     <div className="space-y-4">
       <Block title="Loan Installments / ঋণের কিস্তিসমূহ" />
       <Suspense fallback={<Preloader />}>
-        <DateFilter />
+        <DateFilter allowFuture />
         <Installments searchParams={searchParams} />
       </Suspense>
     </div>

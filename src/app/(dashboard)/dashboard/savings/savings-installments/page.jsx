@@ -11,6 +11,7 @@ async function Installments({ searchParams }) {
   const queryParams = new URLSearchParams({
     ...(date && { date }),
   }).toString();
+
   const { response } = await getData(
     `savings/savings-installments?${queryParams}`,
     0
@@ -33,7 +34,7 @@ export default async function Page({ searchParams }) {
     <div className="space-y-4">
       <Block title="Savings Installments / সঞ্চয় কিস্তিসমূহ" />
       <Suspense fallback={<Preloader />}>
-        <DateFilter />
+        <DateFilter allowFuture />
         <Installments searchParams={searchParams} />
       </Suspense>
     </div>

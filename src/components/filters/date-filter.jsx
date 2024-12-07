@@ -8,7 +8,7 @@ import { Button } from "../ui/button";
 import { formatDate, translateDate } from "@/utils/helpers";
 import { errorNotification } from "@/utils/toast";
 
-export function DateFilter() {
+export function DateFilter({ allowFuture }) {
   const form = useForm({});
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -35,7 +35,12 @@ export function DateFilter() {
         formLabel="খুজুন"
         icon="search"
       >
-        <FormCalendar form={form} name="date" placeholder={placeholderText} />
+        <FormCalendar
+          form={form}
+          name="date"
+          placeholder={placeholderText}
+          allowFuture={allowFuture}
+        />
       </FormModal>
       <Button variant="destructive" onClick={handleClear}>
         Clear
