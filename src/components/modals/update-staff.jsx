@@ -22,10 +22,21 @@ const formSchema = z.object({
   phone: z.string().min(11, {
     message: "Phone Number is required.",
   }),
-  role: z.enum(["user", "admin", "staff", "marketing officer"], {
-    required_error: "Please select a role.",
-    message: "Please select a role.",
-  }),
+  role: z.enum(
+    [
+      "user",
+      "admin",
+      "office manager",
+      "marketing manager",
+      "marketing officer",
+      "field officer",
+      "office staff",
+    ],
+    {
+      required_error: "Please select a role.",
+      message: "Please select a role.",
+    }
+  ),
   salary: z.union([z.string(), z.number()]),
 });
 
