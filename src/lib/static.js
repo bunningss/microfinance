@@ -159,6 +159,16 @@ export const designations = [
   },
 ];
 
+export const availableRoles = [
+  "user",
+  "admin",
+  "office manager",
+  "marketing manager",
+  "marketing officer",
+  "field officer",
+  "office staff",
+];
+
 // List of savings names
 export const savingsNames = [
   "রজনীগন্ধা",

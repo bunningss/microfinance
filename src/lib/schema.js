@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { availableRoles } from "./static";
 
 export const addMemberFormSchema = z.object({
   name: z.string().min(1, "Applicant Name is required"),
@@ -55,7 +56,7 @@ export const addStaffFormSchema = z.object({
   phone: z.string().min(11, "Phone number is required"),
   password: z.string().min(1, "Password is required"),
   confirmPassword: z.string().min(1, "Confirm password is required"),
-  role: z.enum(["staff", "marketing officer", "admin"], {
+  role: z.enum(availableRoles, {
     message: "Invalid role",
   }),
   salary: z.string().min(1, "Salary is required"),
