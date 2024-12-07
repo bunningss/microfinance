@@ -1,7 +1,7 @@
 import { TableCell, TableFooter, TableRow } from "@/components/ui/table";
 import { translateCurrency } from "@/utils/helpers";
 
-export function TableTotal({ text = "মোট", total, colspan = 5 }) {
+export function TableTotal({ text = "মোট", total, colspan = 3 }) {
   return (
     <TableFooter>
       <TableRow>

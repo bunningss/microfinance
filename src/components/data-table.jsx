@@ -37,7 +37,7 @@ export function DataTable({
         </Button>
       )}
       {header && (
-        <Heading className="text-center mb-2 text-xl underline decoration-secondary text-muted-foreground">
+        <Heading className="text-center mb-2 text-lg underline decoration-secondary text-muted-foreground">
           {header}
         </Heading>
       )}

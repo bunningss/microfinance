@@ -20,8 +20,8 @@ const columns = [
   },
   {
     header: "তারিখ",
-    accessorKey: "createdAt",
-    cell: (expense) => translateDate(expense.createdAt),
+    accessorKey: "date",
+    cell: (expense) => translateDate(expense.date),
   },
   {
     header: "পরিমাণ",

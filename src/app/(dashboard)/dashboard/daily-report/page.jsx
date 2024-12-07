@@ -22,26 +22,38 @@ async function Reports({ searchParams }) {
 
   const { response } = await getData(`daily-report?${queryParams}`, 0);
 
+  const positives =
+    response.payload?.paidInstallments?.savings?.total +
+    response.payload?.paidInstallments?.loans?.total +
+    response.payload?.totalDeposits?.total;
+
+  const negatives =
+    response.payload?.totalExpenses?.total +
+    response.payload?.totalWithdrawals?.total;
+
   return (
     <div className="space-y-2">
-      <div>
-        <p>
-          {translateDate(date ? date : new Date())}
-          {" - "}
-          {translateNumber(
-            response.payload?.paidInstallments?.savings?.count
-          )}{" "}
+      <h4 className="text-center text-lg underline decoration-double">
+        {translateDate(date ? date : new Date())}
+      </h4>
+      <div className="space-y-2">
+        <p className="flex justify-between">
+          {translateNumber(response.payload?.paidInstallments?.savings?.count)}{" "}
           টি সঞ্চয় কিস্তি তোলা হয়েছে সর্বমোট:{" "}
-          {translateCurrency(
-            response.payload?.paidInstallments?.savings?.total
-          )}
+          <b>
+            {translateCurrency(
+              response.payload?.paidInstallments?.savings?.total
+            )}
+          </b>
         </p>
-        <p>
-          {translateDate(date ? date : new Date())}
-          {" - "}
+        <p className="flex justify-between">
           {translateNumber(response.payload?.paidInstallments?.loans?.count)} টি
           ঋণের কিস্তি তোলা হয়েছে সর্বমোট:{" "}
-          {translateCurrency(response.payload?.paidInstallments?.loans?.total)}
+          <b>
+            {translateCurrency(
+              response.payload?.paidInstallments?.loans?.total
+            )}
+          </b>
         </p>
       </div>
       <DepositsTable
@@ -58,14 +70,21 @@ async function Reports({ searchParams }) {
         withdrawals={response.payload?.withdrawals}
         footer={
           <TableTotal
-            colspan={7}
+            colspan={5}
             total={response.payload?.totalWithdrawals?.total}
           />
         }
       />
-      <Block title="মোট হিসাব">
-        <p>মোট জমা: </p>
-        <p>মোট খরছ: </p>
+      <Block title="total / মোট হিসাব">
+        <p className="flex justify-between text-lg">
+          মোট জমা: <b>{translateCurrency(positives)}</b>
+        </p>
+        <p className="flex justify-between text-lg">
+          মোট খরছ: <b>{translateCurrency(negatives)}</b>
+        </p>
+        <p className="flex justify-between text-lg border-t border-primary">
+          বাকি আছে: <b>{translateCurrency(positives - negatives)}</b>
+        </p>
       </Block>
     </div>
   );
