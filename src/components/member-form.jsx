@@ -1,3 +1,4 @@
+import { translateDate } from "@/utils/helpers";
 import { PrintPad } from "./print-pad";
 
 export function MemberForm({ member }) {
@@ -18,8 +19,12 @@ export function MemberForm({ member }) {
           </div>
 
           <div className="border border-primary p-2 h-fit">
-            <p>সদস্য নং: {member?.nidNumber}</p>
-            <p>ভর্তি তারিখ: {new Date(member?.createdAt).toDateString()}</p>
+            <p>
+              সদস্য নং: <b>{member?.memberNumber}</b>
+            </p>
+            <p>
+              ভর্তি তারিখ: <b>{translateDate(member?.createdAt)}</b>
+            </p>
           </div>
         </div>
 
