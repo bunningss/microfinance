@@ -22,7 +22,11 @@ export function LoanInstallmentReceipt({ data }) {
       </p>
 
       <p>
-        কিস্তির পরিমাণ: <b>{translateCurrency(data.loan?.installmentAmount)}</b>
+        জরিমানা: <b>{translateCurrency(data.loan?.fine)}</b>
+      </p>
+
+      <p>
+        কিস্তির পরিমাণ: <b>{translateCurrency(data.installment?.amount)}</b>
       </p>
       <p>
         কিস্তির তারিখ: <b>{translateDate(data?.installment?.date)}</b>

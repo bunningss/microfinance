@@ -61,7 +61,7 @@ export function LoanSummary({ data }) {
   return (
     <section>
       <PrintPad>
-        <DataTable columns={columns} data={data.installments} withAction />
+        <DataTable columns={columns} data={data?.installments} withAction />
       </PrintPad>
     </section>
   );

@@ -15,7 +15,7 @@ export async function GET() {
     });
 
     for (const loan of overdueLoans) {
-      // Calculate the amount left with a 10% penalty
+      // Calculate the amount left with a 10% fine
       const amountLeft = loan.repayAmount - loan.amountPaid;
       const newAmountLeft = amountLeft + Math.floor((amountLeft * 10) / 100);
 
@@ -25,23 +25,22 @@ export async function GET() {
 
       // Generate new installments
       const newInstallments = generateLoanFineInstallments(
-        loan.endDate, // New start date is the previous endDate
+        loan.endDate,
         loan.loanType,
-        1, // Extend by 1 month
-        newAmountLeft // New amount to repay
+        1,
+        newAmountLeft
       );
 
-      // Remove existing unpaid installments and set the new ones
       loan.installments = loan.installments.filter(
         (installment) => installment.status !== "unpaid"
-      ); // Remove unpaid installments
+      );
 
-      loan.installments.push(...newInstallments); // Add new installments
+      loan.installments.push(...newInstallments);
 
-      // Update the loan document
-      loan.repayAmount += Math.floor((amountLeft * 10) / 100); // Add the penalty to the total repay amount
-      loan.endDate = newEndDate; // Update the endDate
+      loan.repayAmount += Math.floor((amountLeft * 10) / 100);
+      loan.endDate = newEndDate;
       loan.fine += Math.floor((amountLeft * 10) / 100);
+      loan.installmentAmount = newInstallments[0]?.amount;
 
       await loan.save();
     }

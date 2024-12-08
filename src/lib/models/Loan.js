@@ -29,7 +29,7 @@ const loanSchema = new mongoose.Schema(
       default: 0,
     },
     loanDuration: {
-      type: String,
+      type: Number,
       required: true,
     },
     startDate: {
