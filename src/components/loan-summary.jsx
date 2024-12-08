@@ -106,7 +106,12 @@ export function LoanSummary({ data }) {
         </span>
       </div>
       <section className="space-y-4 print:px-2">
-        <DataTable columns={columns} data={data?.installments} withAction />
+        <DataTable
+          columns={columns}
+          data={data?.installments}
+          withAction
+          header="ঋণের কিস্তিসমূহের তালিকা"
+        />
       </section>
     </PrintPad>
   );
