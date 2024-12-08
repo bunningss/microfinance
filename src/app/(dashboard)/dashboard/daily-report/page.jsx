@@ -32,7 +32,7 @@ async function Reports({ searchParams }) {
     response.payload?.totalWithdrawals?.total;
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-8">
       <h4 className="text-center text-lg underline decoration-double">
         {translateDate(date ? date : new Date())}
       </h4>

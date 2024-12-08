@@ -62,7 +62,7 @@ const staffSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      default: "staff",
+      default: "user",
       enum: [
         "user",
         "office staff",

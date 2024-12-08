@@ -28,6 +28,7 @@ export async function POST(request) {
       name: body.name,
       fathersName: body.fathersName,
       mothersName: body.mothersName,
+      memberNumber: body.memberNumber,
       permVillage: body.permVillage,
       permPostOffice: body.permPostOffice,
       permPoliceStation: body.permPoliceStation,

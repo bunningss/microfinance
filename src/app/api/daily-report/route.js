@@ -81,7 +81,7 @@ export async function GET(request) {
             installments: {
               $elemMatch: {
                 status: "paid",
-                date: {
+                paymentDate: {
                   $gte: startOfDay,
                   $lte: endOfDay,
                 },
@@ -95,7 +95,7 @@ export async function GET(request) {
         {
           $match: {
             "installments.status": "paid",
-            "installments.date": {
+            "installments.paymentDate": {
               $gte: startOfDay,
               $lte: endOfDay,
             },
