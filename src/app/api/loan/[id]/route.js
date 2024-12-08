@@ -9,7 +9,10 @@ export async function GET(request, { params }) {
     await connectDb();
     await verifyToken(request, "view:loan");
 
-    const loan = await Loan.findById(params.id);
+    const loan = await Loan.findById(params.id)
+      .populate("owner", "name phone memberNumber")
+      .populate("approvedBy", "name")
+      .lean();
 
     return NextResponse.json(
       { msg: "Data Found", payload: loan },
