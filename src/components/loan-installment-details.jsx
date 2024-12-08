@@ -1,5 +1,9 @@
 import { cn } from "@/lib/utils";
-import { translateCurrency } from "@/utils/helpers";
+import {
+  translateCurrency,
+  translateDate,
+  translateNumber,
+} from "@/utils/helpers";
 
 export function LoanInstallmentDetails({ installmentDetails, className }) {
   return (
@@ -12,19 +16,19 @@ export function LoanInstallmentDetails({ installmentDetails, className }) {
       <ul>
         <li>
           <span className="text-muted-foreground">কিস্তির সংখ্যা:</span>{" "}
-          {installmentDetails.count}
+          {translateNumber(installmentDetails?.count)}
         </li>
         <li>
           <span className="text-muted-foreground">মোট পরিশোধ করবে:</span>{" "}
-          {translateCurrency(installmentDetails.totalAmount)}
+          {translateCurrency(installmentDetails?.totalAmount)}
         </li>
         <li>
           <span className="text-muted-foreground">কিস্তিতে পরিমাণ:</span>{" "}
-          {translateCurrency(installmentDetails.amountPerInstallment)}
+          {translateCurrency(installmentDetails?.amountPerInstallment)}
         </li>
         <li>
           <span className="text-muted-foreground">শেষ কিস্তির তারিখ:</span>{" "}
-          {new Date(installmentDetails.lastDate).toDateString()}
+          {translateDate(installmentDetails?.lastDate)}
         </li>
       </ul>
     </div>
