@@ -23,16 +23,16 @@ export function MemberCard({ data }) {
           </CardTitle>
           <div className="flex gap-2 text-xs md:text-sm lg:text-sm xl:text-base">
             <span>
-              Member No: <b>{data.memberNumber}</b>
+              সদস্য নম্বর: <b>{data.memberNumber}</b>
             </span>
             <span>
-              Mobile No: <b>{data.phone}</b>
+              ফোন নম্বর: <b>{data.phone}</b>
             </span>
           </div>
           <div className="flex gap-2 text-xs md:text-sm lg:text-sm xl:text-base">
             <p>
-              Area: <b>{data?.currArea}</b>,Village: <b>{data?.currVillage}</b>,
-              Post Office: <b>{data?.currPostOffice}</b>, Police Station:{" "}
+              এলাকা: <b>{data?.currArea}</b>, গ্রাম: <b>{data?.currVillage}</b>,
+              পোস্ট অফিস: <b>{data?.currPostOffice}</b>, থানা:{" "}
               <b>{data?.currPoliceStation}</b>
             </p>
           </div>
