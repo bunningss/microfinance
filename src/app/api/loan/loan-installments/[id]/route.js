@@ -10,7 +10,11 @@ export async function GET(request, { params }) {
     await verifyToken(request, "view:loan-installment");
 
     const member = await Member.aggregate([
-      { $match: { nidNumber: params.id } },
+      {
+        $match: {
+          $or: [{ nidNumber: params.id }, { memberNumber: params.id }],
+        },
+      },
       {
         $lookup: {
           from: "loans",

@@ -59,7 +59,11 @@ export function SearchMemberInstallments({ setData, type }) {
       loading={isLoading}
       disabled={isLoading}
     >
-      <FormInput form={form} name="nidNumber" placeholder="সদস্যের NID নম্বর" />
+      <FormInput
+        form={form}
+        name="nidNumber"
+        placeholder="সদস্য নম্বর অথবা জাতীয় পরিচয়পত্র নম্বর"
+      />
     </FormModal>
   );
 }

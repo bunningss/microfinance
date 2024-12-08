@@ -109,8 +109,8 @@ export const addNewLoanSchema = z.object({
 
 // search installment schema
 export const savingInstallmentSchema = z.object({
-  nidNumber: z.string().min(3, {
-    message: "NID number is required",
+  nidNumber: z.string().min(1, {
+    message: "সদস্য নম্বর অথবা জাতীয় পরিচয়পত্র নম্বর প্রদান করুন",
   }),
 });
 

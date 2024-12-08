@@ -126,6 +126,7 @@ export async function GET(request) {
         $or: [
           { name: { $regex: searchRegex } },
           { nidNumber: { $regex: searchRegex } },
+          { memberNumber: { $regex: searchRegex } },
         ],
       };
     }

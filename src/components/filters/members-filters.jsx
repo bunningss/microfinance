@@ -48,7 +48,7 @@ export function MembersFilters() {
           <FormInput
             form={form}
             name="searchKey"
-            placeholder="সদস্যের নাম বা NID নম্বর"
+            placeholder="সদস্যের নাম অথবা সদস্য নম্বর অথবা জাতীয় পরিচয়পত্র নম্বর"
           />
         </div>
       </FormModal>
