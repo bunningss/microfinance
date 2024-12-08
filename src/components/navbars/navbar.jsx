@@ -5,6 +5,7 @@ import { Container } from "../container";
 import { Logo } from "../logo";
 import { logout } from "@/utils/auth";
 import { useRouter } from "next/navigation";
+import { ThemeToggle } from "../theme-toggle";
 
 export function Navbar({ isLoggedIn, user }) {
   const sidebar = useDashboardSidebar();
@@ -32,6 +33,7 @@ export function Navbar({ isLoggedIn, user }) {
                 </span>
               </div>
             )}
+            <ThemeToggle />
             {isLoggedIn && (
               <Button
                 icon="logout"
