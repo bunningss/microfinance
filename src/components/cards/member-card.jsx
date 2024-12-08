@@ -23,7 +23,7 @@ export function MemberCard({ data }) {
           </CardTitle>
           <div className="flex gap-2 text-xs md:text-sm lg:text-sm xl:text-base">
             <span>
-              Member No: <b>{data.nidNumber}</b>
+              Member No: <b>{data.memberNumber}</b>
             </span>
             <span>
               Mobile No: <b>{data.phone}</b>
