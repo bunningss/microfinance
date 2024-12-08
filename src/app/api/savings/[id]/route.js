@@ -10,7 +10,7 @@ export async function GET(request, { params }) {
     await verifyToken(request, "view:saving");
 
     const savings = await Savings.findById(params.id)
-      .populate("owner", "name phone")
+      .populate("owner", "name phone memberNumber")
       .populate("approvedBy", "name")
       .lean();
 

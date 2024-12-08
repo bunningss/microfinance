@@ -70,6 +70,9 @@ export function SavingsSummary({ data }) {
             সদস্যের নাম: <b>{data?.owner?.name}</b>
           </span>
           <span>
+            সদস্য নম্বর: <b>{data?.owner?.memberNumber}</b>
+          </span>
+          <span>
             ফোন নম্বর: <b>{data?.owner?.phone}</b>
           </span>
           <span>
