@@ -33,7 +33,7 @@ async function Reports({ searchParams }) {
 
   return (
     <div className="space-y-8">
-      <h4 className="text-center text-lg underline decoration-double">
+      <h4 className="text-center text-lg text-primary underline decoration-double">
         {translateDate(date ? date : new Date())}
       </h4>
       <div className="space-y-2">
