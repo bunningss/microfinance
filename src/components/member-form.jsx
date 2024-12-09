@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { translateDate } from "@/utils/helpers";
 import { PrintPad } from "./print-pad";
 
@@ -18,13 +19,42 @@ export function MemberForm({ member }) {
             <p>জনাব,</p>
           </div>
 
-          <div className="border border-primary p-2 h-fit">
-            <p>
-              সদস্য নং: <b>{member?.memberNumber}</b>
-            </p>
-            <p>
-              ভর্তি তারিখ: <b>{translateDate(member?.createdAt)}</b>
-            </p>
+          <div className="space-y-2">
+            <div className="flex gap-12">
+              {/* Member Picture */}
+              <div className="space-y-1">
+                <figure className="relative w-24 h-28">
+                  <Image
+                    src={member?.memberImage}
+                    alt={member?.name}
+                    fill
+                    className="object-cover"
+                  />
+                </figure>
+                <p className="text-center text-xs">সদস্যের ছবি</p>
+              </div>
+              {/* Nominee Picture */}
+              <div className="space-y-1">
+                <figure className="relative w-24 h-28">
+                  <Image
+                    src={member?.nomineeImage}
+                    alt={member?.nomineeName}
+                    fill
+                    className="object-cover"
+                  />
+                  <figcaption>mem pic</figcaption>
+                </figure>
+                <p className="text-center text-xs">নমিনীর ছবি</p>
+              </div>
+            </div>
+            <div className="border border-primary p-2">
+              <p>
+                সদস্য নম্বর: <b>{member?.memberNumber}</b>
+              </p>
+              <p>
+                ভর্তির তারিখ: <b>{translateDate(member?.createdAt)}</b>
+              </p>
+            </div>
           </div>
         </div>
 
@@ -93,8 +123,45 @@ export function MemberForm({ member }) {
           </p>
 
           <h2 className="text-center text-2xl my-4 p-2 border rounded-md">
-            আবেদনকারীর নমিনীঃ
+            নমিনীর তথ্য
           </h2>
+          <div className="grid md:grid-cols-2">
+            <p>
+              নমিনীর নাম: <b>{member?.nomineeName}</b>
+            </p>
+            <p>
+              সম্পর্ক: <b>{member?.relationWithNominee}</b>
+            </p>
+            <p>
+              জন্ম তারিখ: <b>{translateDate(member?.nomineeBirthDate)}</b>
+            </p>
+            <p>
+              জাতীয় পরিচয় পত্র নম্বর: <b>{member?.nomineeNidNumber}</b>
+            </p>
+            <p>
+              বয়স: <b>{member?.nomineeAge}</b>
+            </p>
+            <p>
+              পরিচয় দানকারীর নাম: <b>{member?.introducersName}</b>
+            </p>
+          </div>
+          <section className="grid grid-cols-4 mt-16">
+            <p className="overline decoration-dashed text-center">
+              সভাপতির স্বাক্ষর
+            </p>
+
+            <p className="overline decoration-dashed text-center">
+              সাধারণ সম্পাদকের স্বাক্ষর
+            </p>
+
+            <p className="overline decoration-dashed text-center">
+              কোষাধ্যক্ষের স্বাক্ষর
+            </p>
+
+            <p className="overline decoration-dashed text-center">
+              আবেদনকারীর স্বাক্ষর
+            </p>
+          </section>
         </div>
       </PrintPad>
     </section>

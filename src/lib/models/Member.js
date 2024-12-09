@@ -140,6 +140,10 @@ const memberSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    nomineeAge: {
+      type: Number,
+      required: true,
+    },
   },
   {
     timestamps: true,
