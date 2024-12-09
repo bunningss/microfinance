@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "../ui/calendar";
 import {
@@ -11,6 +12,14 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { translateDate } from "@/utils/helpers";
+import { getYear, setMonth, setYear, getMonth } from "date-fns";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 export function FormCalendar({
   name,
@@ -19,7 +28,32 @@ export function FormCalendar({
   placeholder = "Pick a date / তারিখ নির্বাচন করুন",
   allowFuture,
   required,
+  startYear = getYear(new Date()) - 100,
+  endYear = getYear(new Date()) + 100,
 }) {
+  const currentDate = new Date();
+  const [selectedDate, setSelectedDate] = useState(currentDate);
+
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const years = Array.from(
+    { length: endYear - startYear + 1 },
+    (_, i) => startYear + i
+  );
+
   return (
     <FormField
       control={form.control}
@@ -57,10 +91,58 @@ export function FormCalendar({
               </FormControl>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
+              <div className="grid grid-cols-2 gap-2 p-2 ">
+                <Select
+                  defaultValue={months[getMonth(currentDate)]}
+                  onValueChange={(value) => {
+                    const newDate = setMonth(
+                      selectedDate,
+                      months.indexOf(value)
+                    );
+                    setSelectedDate(newDate);
+                  }}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Month" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {months.map((month, i) => (
+                      <SelectItem key={i} value={month}>
+                        {month}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Select
+                  defaultValue={getYear(currentDate).toString()}
+                  onValueChange={(value) => {
+                    const newDate = setYear(selectedDate, parseInt(value));
+                    setSelectedDate(newDate);
+                  }}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Year" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {years.map((year, i) => (
+                      <SelectItem key={i} value={year.toString()}>
+                        {year}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
               <Calendar
                 mode="single"
                 selected={field.value}
-                onSelect={field.onChange}
+                onSelect={(date) => {
+                  field.onChange(date);
+                  if (date) {
+                    setSelectedDate(date);
+                  }
+                }}
+                month={selectedDate}
+                onMonthChange={setSelectedDate}
                 disabled={
                   !allowFuture
                     ? (date) =>
@@ -71,7 +153,6 @@ export function FormCalendar({
               />
             </PopoverContent>
           </Popover>
-
           <FormMessage />
         </FormItem>
       )}

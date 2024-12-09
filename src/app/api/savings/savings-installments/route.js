@@ -15,7 +15,7 @@ export async function PUT(request) {
   try {
     const { id } = await verifyToken(request, "update:saving-installment");
 
-    const { installmentId } = await request.json();
+    const { installmentId, date } = await request.json();
 
     if (!installmentId) {
       return NextResponse.json(
@@ -54,7 +54,7 @@ export async function PUT(request) {
     // Update savings properties
     installment.status = "paid";
     installment.receivedBy = id;
-    installment.paymentDate = formatDate(Date.now());
+    installment.paymentDate = formatDate(date); // Update to current date once they finish adding old data.
     savings.amountSaved += installment.amount;
 
     const allPaid = savings.installments.every(

@@ -10,6 +10,7 @@ import { errorNotification, successNotification } from "@/utils/toast";
 import { putData } from "@/utils/api-calls";
 import { useRouter } from "next/navigation";
 import { translateCurrency } from "@/utils/helpers";
+import { FormCalendar } from "../form/form-calendar";
 
 export function PayInstallment({ installments, label, type }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,6 +21,7 @@ export function PayInstallment({ installments, label, type }) {
     resolver: zodResolver(payInstallmentSchema),
     defaultValues: {
       installmentId: "",
+      date: new Date(),
     },
   });
 
@@ -89,6 +91,7 @@ export function PayInstallment({ installments, label, type }) {
           keyType="date"
           placeholder="select installment"
         />
+        <FormCalendar name="date" required form={form} />
         <p>
           <span className="text-muted-foreground">Amount:</span>{" "}
           {translateCurrency(installments ? installments[0]?.amount : "")}

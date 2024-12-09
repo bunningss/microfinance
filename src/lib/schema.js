@@ -117,6 +117,9 @@ export const savingInstallmentSchema = z.object({
 // Pay installment schema
 export const payInstallmentSchema = z.object({
   installmentId: z.string(),
+  date: z.date({
+    message: "তারিখ নির্বাচন করুন",
+  }),
 });
 
 // Add expense schema

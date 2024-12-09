@@ -18,6 +18,7 @@ import { useEdgeStore } from "@/lib/edgestore";
 import { useRouter } from "next/navigation";
 import { SavingsInstallmentDetails } from "../savings-installment-details";
 import { generateInstallments } from "@/utils/helpers";
+import { FormCalendar } from "../form/form-calendar";
 
 export function AddMember() {
   const [userImage, setUserImage] = useState(null);
@@ -357,13 +358,12 @@ export function AddMember() {
             required
           />
         </div>
-        <FormInput
+        <FormCalendar
           form={form}
           name="startDate"
           label="start date / শুরুর তারিখ"
-          placeholder=""
           required
-          type="date"
+          allowFuture
         />
 
         <div className="space-y-4 bg-accent p-2 rounded-md">
@@ -392,13 +392,11 @@ export function AddMember() {
               required
             />
           </div>
-          <FormInput
+          <FormCalendar
             form={form}
             name="nomineeBirthDate"
             label="birth date / জন্ম তারিখ"
-            placeholder=""
             required
-            type="date"
           />
           <div className="flex flex-col lg:flex-row gap-2">
             <FormInput
