@@ -105,7 +105,7 @@ export function LoanSummary({ data }) {
           ঋণের অবস্থা: <b>{data?.loanStatus}</b>
         </span>
       </div>
-      <section className="space-y-4 print:px-2">
+      <section className="space-y-4">
         <DataTable
           columns={columns}
           data={data?.installments}

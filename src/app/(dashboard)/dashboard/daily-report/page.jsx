@@ -77,6 +77,9 @@ async function Reports({ searchParams }) {
       />
       <Block title="total / মোট হিসাব">
         <p className="flex justify-between text-lg">
+          হাতে আছে: <b></b>
+        </p>
+        <p className="flex justify-between text-lg">
           মোট জমা: <b>{translateCurrency(positives)}</b>
         </p>
         <p className="flex justify-between text-lg">
