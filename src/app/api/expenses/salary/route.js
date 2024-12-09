@@ -27,7 +27,7 @@ export async function POST(request) {
 
     if (existingSalary)
       return NextResponse.json(
-        { msg: `ইতিমধ্যে ${body.month} বেতন প্রদান করেছে` },
+        { msg: `ইতিমধ্যে ${body.month} বেতন প্রদান করা হয়েছে` },
         { status: 400 }
       );
 
@@ -36,6 +36,7 @@ export async function POST(request) {
       month: body.month,
       amount: body.amount,
       addedBy: id,
+      paymentDate: formatDate(body.paymentDate),
     });
 
     await newSalary.save({ session });

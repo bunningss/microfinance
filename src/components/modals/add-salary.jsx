@@ -11,6 +11,7 @@ import { getMonthNamesWithYear } from "@/utils/helpers";
 import { errorNotification, successNotification } from "@/utils/toast";
 import { postData } from "@/utils/api-calls";
 import { useRouter } from "next/navigation";
+import { FormCalendar } from "../form/form-calendar";
 
 export function AddSalary({ staffs }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,6 +23,7 @@ export function AddSalary({ staffs }) {
       staff: "",
       month: "",
       amount: "",
+      paymentDate: new Date(),
     },
   });
 
@@ -99,6 +101,7 @@ export function AddSalary({ staffs }) {
           options={monthNamesWithYear}
         />
         <FormInput form={form} name="amount" label="salary / বেতন" required />
+        <FormCalendar form={form} name="paymentDate" required />
       </FormModal>
     </Modal>
   );

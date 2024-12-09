@@ -15,6 +15,10 @@ const salarySchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    paymentDate: {
+      type: Date,
+      required: true,
+    },
     addedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "staff",

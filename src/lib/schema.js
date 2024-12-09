@@ -73,6 +73,9 @@ export const addSalarySchema = z.object({
   amount: z.string().min(2, {
     message: "Please select amount.",
   }),
+  paymentDate: z.date({
+    message: "তারিখ নির্বাচন করুন",
+  }),
 });
 
 // Add savings schema
