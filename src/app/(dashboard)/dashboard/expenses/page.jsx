@@ -1,5 +1,5 @@
 import { Block } from "@/components/block";
-import { ExpensesTable } from "@/components/expenses-table";
+import { ExpensesTable } from "@/components/tables/expenses-table";
 import { Preloader } from "@/components/preloader";
 import { PrintPad } from "@/components/print-pad";
 import { getData } from "@/utils/api-calls";

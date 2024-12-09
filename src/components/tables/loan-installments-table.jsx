@@ -1,12 +1,12 @@
 "use client";
-import { DataTable } from "@/components/data-table";
 import {
   translateCurrency,
   translateDate,
   translateNumber,
 } from "@/utils/helpers";
-import { PayInstallment } from "./modals/pay-installment";
-import { PrintPad } from "./print-pad";
+import { DataTable } from "./data-table";
+import { PayInstallment } from "../modals/pay-installment";
+import { PrintPad } from "../print-pad";
 
 const columns = [
   {

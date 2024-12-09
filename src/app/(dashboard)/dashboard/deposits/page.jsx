@@ -1,7 +1,7 @@
 import React from "react";
 import { Block } from "@/components/block";
 import { PrintPad } from "@/components/print-pad";
-import { DepositsTable } from "@/components/deposits-table";
+import { DepositsTable } from "@/components/tables/deposits-table";
 import { Preloader } from "@/components/preloader";
 import { getData } from "@/utils/api-calls";
 import { EmptyItem } from "@/components/empty-item";

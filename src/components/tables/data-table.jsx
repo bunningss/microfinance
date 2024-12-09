@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { useReactToPrint } from "react-to-print";
-import { Heading } from "./heading";
+import { Heading } from "../heading";
 
 export function DataTable({
   columns,

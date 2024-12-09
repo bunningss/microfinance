@@ -1,10 +1,10 @@
 "use client";
-import { DataTable } from "@/components/data-table";
 import {
   translateCurrency,
   translateDate,
   translateNumber,
 } from "@/utils/helpers";
+import { DataTable } from "./tables/data-table";
 
 const columns = [
   {

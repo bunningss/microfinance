@@ -4,9 +4,9 @@ import {
   translateCurrency,
   translateDate,
 } from "@/utils/helpers";
-import { PayInstallment } from "./modals/pay-installment";
+import { PayInstallment } from "../modals/pay-installment";
+import { PrintPad } from "../print-pad";
 import { DataTable } from "./data-table";
-import { PrintPad } from "./print-pad";
 
 const columns = [
   {

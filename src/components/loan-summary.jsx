@@ -5,10 +5,10 @@ import {
   translateDate,
   translateNumber,
 } from "@/utils/helpers";
-import { DataTable } from "@/components/data-table";
 import { Icon } from "@/components/icon";
 import { PrintPad } from "./print-pad";
 import { Heading } from "./heading";
+import { DataTable } from "./tables/data-table";
 
 export function LoanSummary({ data }) {
   const columns = [

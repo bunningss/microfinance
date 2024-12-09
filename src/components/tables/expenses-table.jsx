@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { DataTable } from "@/components/data-table";
 import {
   translateCurrency,
   translateDate,
   translateNumber,
 } from "@/utils/helpers";
+import { DataTable } from "./data-table";
 
 const columns = [
   {
@@ -16,17 +16,17 @@ const columns = [
   },
   {
     header: "নাম",
-    accessorKey: "title",
+    accessorKey: "name",
   },
   {
     header: "তারিখ",
-    accessorKey: "createdAt",
-    cell: (deposit) => translateDate(deposit.date),
+    accessorKey: "date",
+    cell: (expense) => translateDate(expense.date),
   },
   {
     header: "পরিমাণ",
     accessorKey: "amount",
-    cell: (deposit) => translateCurrency(deposit.amount),
+    cell: (expense) => translateCurrency(expense.amount),
   },
   {
     header: "যোগ করেছেন",
@@ -35,23 +35,22 @@ const columns = [
   {
     header: "",
     accessorKey: "id",
-    cell: (deposit) => (
-      <Link
-        className="underline text-cyan-800 font-bold"
-        href={`/dashboard/savings/savings-installments/receipt/${deposit._id}`}
-      >
-        বিস্তারিত
-      </Link>
+    cell: () => (
+      <div>
+        <Link href="" className="underline text-cyan-800 font-bold">
+          বিস্তারিত
+        </Link>
+      </div>
     ),
   },
 ];
 
-export function DepositsTable({ deposits, footer }) {
+export function ExpensesTable({ expenses, footer }) {
   return (
     <DataTable
       columns={columns}
-      data={deposits}
-      header="জমার তালিকা"
+      data={expenses}
+      header="খরচের তালিকা"
       withAction
       footer={footer}
     />

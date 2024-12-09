@@ -5,10 +5,10 @@ import {
   translateDate,
   translateNumber,
 } from "@/utils/helpers";
-import { DataTable } from "@/components/data-table";
 import { Icon } from "@/components/icon";
 import { Heading } from "./heading";
 import { PrintPad } from "./print-pad";
+import { DataTable } from "./tables/data-table";
 
 export function SavingsSummary({ data }) {
   const columns = [

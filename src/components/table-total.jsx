@@ -3,7 +3,7 @@ import { translateCurrency } from "@/utils/helpers";
 
 export function TableTotal({ text = "মোট", total, colspan = 3 }) {
   return (
-    <TableFooter>
+    <TableFooter className="bg-transparent">
       <TableRow>
         <TableCell colSpan={colspan} className="font-bold">
           {text}

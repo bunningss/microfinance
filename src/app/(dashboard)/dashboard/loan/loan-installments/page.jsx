@@ -1,8 +1,8 @@
 import { Block } from "@/components/block";
 import { EmptyItem } from "@/components/empty-item";
 import { DateFilter } from "@/components/filters/date-filter";
-import { LoanInstallmentsTable } from "@/components/loan-installments-table";
 import { Preloader } from "@/components/preloader";
+import { LoanInstallmentsTable } from "@/components/tables/loan-installments-table";
 import { getData } from "@/utils/api-calls";
 import { Suspense } from "react";
 

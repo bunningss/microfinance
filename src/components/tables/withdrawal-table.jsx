@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
-import { DataTable } from "../data-table";
 import {
   translateCurrency,
   translateDate,
   translateNumber,
 } from "@/utils/helpers";
+import { DataTable } from "./data-table";
 
 const columns = [
   {

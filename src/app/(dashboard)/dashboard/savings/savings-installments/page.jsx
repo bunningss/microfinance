@@ -2,7 +2,7 @@ import { Block } from "@/components/block";
 import { EmptyItem } from "@/components/empty-item";
 import { DateFilter } from "@/components/filters/date-filter";
 import { Preloader } from "@/components/preloader";
-import { SavingsInstallmentsTable } from "@/components/savings-installments-table";
+import { SavingsInstallmentsTable } from "@/components/tables/savings-installments-table";
 import { getData } from "@/utils/api-calls";
 import { Suspense } from "react";
 
