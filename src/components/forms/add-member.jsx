@@ -54,7 +54,6 @@ export function AddMember() {
       nidNumber: "",
       birthCertificateNumber: "",
       nationality: "",
-      age: "",
       occupation: "",
       religion: "",
       savingsType: "",
@@ -308,13 +307,6 @@ export function AddMember() {
             name="nationality"
             label="nationality / জাতীয়তা"
             placeholder=""
-          />
-          <FormInput
-            form={form}
-            name="age"
-            label="age / বয়স"
-            placeholder=""
-            required
           />
         </div>
         <div className="flex gap-2">
