@@ -4,7 +4,6 @@ import { getData } from "@/utils/api-calls";
 import { translateCurrency, translateNumber } from "@/utils/helpers";
 import { Block } from "@/components/block";
 import { Preloader } from "@/components/preloader";
-import { PrintPad } from "@/components/print-pad";
 
 async function SummaryData() {
   const { response } = await getData("dashboard-data");
