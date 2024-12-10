@@ -18,6 +18,10 @@ const withdrawalSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    withdrawalDate: {
+      type: Date,
+      required: true,
+    },
   },
   {
     timestamps: true,

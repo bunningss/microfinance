@@ -5,6 +5,7 @@ import { connectDb } from "@/lib/db/connectDb";
 import { NextResponse } from "next/server";
 import { verifyToken } from "@/utils/auth";
 import { generateLoanInstallments, generateSavingsName } from "@/utils/helpers";
+import { updateDailyBalance } from "@/utils/update-daily-balance";
 
 // create new loan
 export async function POST(request) {
@@ -94,6 +95,8 @@ export async function POST(request) {
     );
 
     await newLoan.save({ session });
+    await updateDailyBalance("minus", body.loanAmount, body.startDate);
+
     await session.commitTransaction();
 
     return NextResponse.json(

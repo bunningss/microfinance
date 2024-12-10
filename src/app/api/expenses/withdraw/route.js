@@ -42,6 +42,7 @@ export async function POST(request) {
       owner: userId,
       comment,
       approvedBy: id,
+      withdrawalDate: formatDate(date),
     });
 
     member.totalSaved -= amount;

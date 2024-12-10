@@ -8,12 +8,22 @@ import { FormInput } from "../form/form-input";
 import { FormTextarea } from "../form/form-textarea";
 import { postData } from "@/utils/api-calls";
 import { errorNotification, successNotification } from "@/utils/toast";
+import { FormCalendar } from "../form/form-calendar";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { withdrawMoneySchema } from "@/lib/schema";
 
 export function WithdrawMoney({ id }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const form = useForm({});
+  const form = useForm({
+    resolver: zodResolver(withdrawMoneySchema),
+    defaultValues: {
+      amount: "",
+      date: new Date(),
+      comment: "",
+    },
+  });
 
   const handleSubmit = async (data) => {
     try {
@@ -63,6 +73,12 @@ export function WithdrawMoney({ id }) {
           label="Amount / টাকার পরিমান"
           placeholder=""
           required
+        />
+        <FormCalendar
+          name="date"
+          form={form}
+          required
+          label="Withdrawal date / টাকা উত্তোলনের তারিখ"
         />
         <FormTextarea
           form={form}

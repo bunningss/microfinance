@@ -158,3 +158,14 @@ export const addDepositSchema = z.object({
   }),
   description: z.string().optional().nullable(),
 });
+
+// Withdraw money
+export const withdrawMoneySchema = z.object({
+  amount: z.string({
+    message: "Amount is required.",
+  }),
+  date: z.date({
+    message: "Please select date.",
+  }),
+  comment: z.string().nullable().optional(),
+});
