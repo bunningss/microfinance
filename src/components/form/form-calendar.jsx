@@ -28,8 +28,8 @@ export function FormCalendar({
   placeholder = "Pick a date / তারিখ নির্বাচন করুন",
   allowFuture,
   required,
-  startYear = getYear(new Date()) - 100,
-  endYear = getYear(new Date()) + 100,
+  startYear = getYear(new Date()) - 20,
+  endYear = getYear(new Date()) + 20,
 }) {
   const currentDate = new Date();
   const [selectedDate, setSelectedDate] = React.useState(currentDate);
