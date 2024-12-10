@@ -4,6 +4,7 @@ import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
 import { formatDate } from "@/utils/helpers";
+import { updateDailyBalance } from "@/utils/update-daily-balance";
 
 // Get loan installments (Today by default)
 export async function GET(request) {
@@ -126,6 +127,8 @@ export async function PUT(request) {
     if (allPaid) {
       loan.loanStatus = "complete";
     }
+
+    await updateDailyBalance("plus", installment.amount, date);
 
     await loan.save({ session });
 

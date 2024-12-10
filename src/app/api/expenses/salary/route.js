@@ -5,6 +5,7 @@ import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
 import { formatDate } from "@/utils/helpers";
+import { updateDailyBalance } from "@/utils/update-daily-balance";
 
 // Create salary record
 export async function POST(request) {
@@ -51,6 +52,8 @@ export async function POST(request) {
         session,
       }
     );
+
+    await updateDailyBalance("minus", body.amount, body.paymentDate);
 
     await session.commitTransaction();
 

@@ -5,6 +5,7 @@ import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
 import { formatDate } from "@/utils/helpers";
+import { updateDailyBalance } from "@/utils/update-daily-balance";
 
 // New Withdrawal
 export async function POST(request) {
@@ -15,7 +16,7 @@ export async function POST(request) {
   try {
     const { id } = await verifyToken(request, "add:withdrawal");
 
-    const { amount, userId, comment } = await request.json();
+    const { amount, userId, comment, date } = await request.json();
 
     if (!Number(amount))
       return NextResponse.json({ msg: "টাকার পরিমান ভুল" }, { status: 400 });
@@ -48,6 +49,8 @@ export async function POST(request) {
 
     await member.save({ session });
     await newWithdrawal.save({ session });
+
+    await updateDailyBalance("minus", amount, date);
 
     await session.commitTransaction();
 

@@ -3,6 +3,7 @@ import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
 import { formatDate } from "@/utils/helpers";
+import { updateDailyBalance } from "@/utils/update-daily-balance";
 
 // Add new expense
 export async function POST(request) {
@@ -19,6 +20,8 @@ export async function POST(request) {
       date: formatDate(body.date),
       addedBy: id,
     });
+
+    await updateDailyBalance("minus", body.amount, body.date);
 
     await newExpense.save();
 
