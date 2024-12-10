@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "../ui/calendar";
 import {
@@ -32,7 +32,7 @@ export function FormCalendar({
   endYear = getYear(new Date()) + 100,
 }) {
   const currentDate = new Date();
-  const [selectedDate, setSelectedDate] = useState(currentDate);
+  const [selectedDate, setSelectedDate] = React.useState(currentDate);
 
   const months = [
     "January",
@@ -49,9 +49,10 @@ export function FormCalendar({
     "December",
   ];
 
-  const years = Array.from(
-    { length: endYear - startYear + 1 },
-    (_, i) => startYear + i
+  const years = React.useMemo(
+    () =>
+      Array.from({ length: endYear - startYear + 1 }, (_, i) => startYear + i),
+    [endYear, startYear]
   );
 
   return (
