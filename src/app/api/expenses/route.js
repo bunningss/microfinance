@@ -2,7 +2,6 @@ import Expense from "@/lib/models/Expense";
 import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
-import { formatDate } from "@/utils/helpers";
 import { updateDailyBalance } from "@/utils/update-daily-balance";
 
 // Add new expense
@@ -17,7 +16,7 @@ export async function POST(request) {
       name: body.name,
       description: body.description,
       amount: body.amount,
-      date: formatDate(body.date),
+      date: new Date(body.date),
       addedBy: id,
     });
 
@@ -42,7 +41,7 @@ export async function GET(request) {
     let query = {};
 
     if (date) {
-      const currentDate = formatDate(date);
+      const currentDate = new Date(date);
       const startOfDay = new Date(currentDate.setHours(0, 0, 0, 0));
       const endOfDay = new Date(currentDate.setHours(23, 59, 59, 999));
       query.date = { $gte: startOfDay, $lte: endOfDay };

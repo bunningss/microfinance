@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
-import { formatDate } from "@/utils/helpers";
 import { updateDailyBalance } from "@/utils/update-daily-balance";
 
 // Get loan installments (Today by default)
@@ -119,7 +118,7 @@ export async function PUT(request) {
     // Update savings properties
     installment.status = "paid";
     installment.receivedBy = id;
-    installment.paymentDate = formatDate(date); // Update to current date once old data is added.
+    installment.paymentDate = new Date(date); // Update to current date once old data is added.
     loan.amountPaid += installment.amount;
 
     const allPaid = loan.installments.every((inst) => inst.status === "paid");

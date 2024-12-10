@@ -11,7 +11,6 @@ import { addExpenseSchema } from "@/lib/schema";
 import { errorNotification, successNotification } from "@/utils/toast";
 import { postData } from "@/utils/api-calls";
 import { useRouter } from "next/navigation";
-import { formatDate } from "@/utils/helpers";
 
 export function AddOtherExpense() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,7 +21,7 @@ export function AddOtherExpense() {
     defaultValues: {
       name: "",
       description: "",
-      date: "",
+      date: new Date(),
       amount: "",
     },
   });

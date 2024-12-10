@@ -4,7 +4,6 @@ import Member from "@/lib/models/Member";
 import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
-import { formatDate } from "@/utils/helpers";
 import { updateDailyBalance } from "@/utils/update-daily-balance";
 
 // New Withdrawal
@@ -42,7 +41,7 @@ export async function POST(request) {
       owner: userId,
       comment,
       approvedBy: id,
-      withdrawalDate: formatDate(date),
+      withdrawalDate: new Date(date),
     });
 
     member.totalSaved -= amount;
@@ -79,7 +78,7 @@ export async function GET(request) {
     let query = {};
 
     if (date) {
-      const currentDate = formatDate(date);
+      const currentDate = new Date(date);
       const startOfDay = new Date(currentDate.setHours(0, 0, 0, 0));
       const endOfDay = new Date(currentDate.setHours(23, 59, 59, 999));
       query.createdAt = { $gte: startOfDay, $lte: endOfDay };

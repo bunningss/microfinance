@@ -4,7 +4,6 @@ import Member from "@/lib/models/Member";
 import { connectDb } from "@/lib/db/connectDb";
 import { NextResponse } from "next/server";
 import { verifyToken } from "@/utils/auth";
-import { formatDate } from "@/utils/helpers";
 import { updateDailyBalance } from "@/utils/update-daily-balance";
 
 // Pay savings installment
@@ -55,7 +54,7 @@ export async function PUT(request) {
     // Update savings properties
     installment.status = "paid";
     installment.receivedBy = id;
-    installment.paymentDate = formatDate(date); // Update to current date once they finish adding old data.
+    installment.paymentDate = new Date(date); // Update to current date once they finish adding old data.
     savings.amountSaved += installment.amount;
 
     const allPaid = savings.installments.every(

@@ -73,13 +73,6 @@ export function translateCurrency(number) {
   }).format(number);
 }
 
-export function formatDate(date) {
-  const localISO = new Date(date);
-  localISO.setHours(localISO.getHours() + 6);
-
-  return localISO;
-}
-
 // Loan installments
 export function generateLoanInstallments(
   startDate,

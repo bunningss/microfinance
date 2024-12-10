@@ -3,11 +3,10 @@ import Expense from "@/lib/models/Expense";
 import Withdrawal from "@/lib/models/Withdrawal";
 import Savings from "@/lib/models/Savings";
 import Loan from "@/lib/models/Loan";
+import DailyBalance from "@/lib/models/DailyBalance";
 import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
-import { formatDate } from "@/utils/helpers";
 import { NextResponse } from "next/server";
-import DailyBalance from "@/lib/models/DailyBalance";
 
 // Get daily report
 export async function GET(request) {
@@ -18,7 +17,7 @@ export async function GET(request) {
     const reqUrl = new URL(request.url);
     const date = reqUrl.searchParams.get("date");
 
-    const currentDate = date ? formatDate(date) : new Date();
+    const currentDate = date ? new Date(date) : new Date();
     const startOfDay = new Date(currentDate.setHours(0, 0, 0, 0));
     const endOfDay = new Date(currentDate.setHours(23, 59, 59, 999));
 
