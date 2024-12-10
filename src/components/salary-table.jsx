@@ -22,8 +22,8 @@ const columns = [
   },
   {
     header: "প্রদানের তারিখ",
-    accessorKey: "createdAt",
-    cell: (item) => translateDate(item.createdAt),
+    accessorKey: "paymentDate",
+    cell: (item) => translateDate(item.paymentDate),
   },
   {
     header: "বেতন",

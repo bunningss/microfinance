@@ -22,7 +22,7 @@ export function AddNewDeposit() {
     defaultValues: {
       title: "",
       amount: "",
-      date: "",
+      date: new Date(),
       description: "",
     },
   });

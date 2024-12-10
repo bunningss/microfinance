@@ -4,6 +4,7 @@ import Withdrawal from "@/lib/models/Withdrawal";
 import Savings from "@/lib/models/Savings";
 import Loan from "@/lib/models/Loan";
 import DailyBalance from "@/lib/models/DailyBalance";
+import Salary from "@/lib/models/Salary";
 import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
@@ -28,6 +29,7 @@ export async function GET(request) {
       expensesData,
       withdrawalsData,
       dailyBalances,
+      salariesData,
     ] = await Promise.all([
       Deposit.aggregate([
         {
@@ -51,7 +53,6 @@ export async function GET(request) {
             _id: null,
             deposits: { $push: "$$ROOT" },
             totalAmount: { $sum: "$amount" },
-            count: { $sum: 1 },
           },
         },
         {
@@ -166,7 +167,6 @@ export async function GET(request) {
             _id: null,
             expenses: { $push: "$$ROOT" },
             totalAmount: { $sum: "$amount" },
-            count: { $sum: 1 },
           },
         },
         {
@@ -224,7 +224,6 @@ export async function GET(request) {
             _id: null,
             withdrawals: { $push: "$$ROOT" },
             totalAmount: { $sum: "$amount" },
-            count: { $sum: 1 },
           },
         },
         {
@@ -268,13 +267,77 @@ export async function GET(request) {
           },
         },
       ]),
+      Salary.aggregate([
+        {
+          $match: {
+            paymentDate: {
+              $gte: startOfDay,
+              $lte: endOfDay,
+            },
+          },
+        },
+        {
+          $lookup: {
+            from: "staffs",
+            localField: "staff",
+            foreignField: "_id",
+            as: "staff",
+          },
+        },
+        {
+          $unwind: "$staff",
+        },
+        {
+          $lookup: {
+            from: "staffs",
+            localField: "addedBy",
+            foreignField: "_id",
+            as: "addedBy",
+          },
+        },
+        {
+          $unwind: "$addedBy",
+        },
+        {
+          $group: {
+            _id: null,
+            salaries: { $push: "$$ROOT" },
+            totalAmount: { $sum: "$amount" },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            salaries: {
+              $map: {
+                input: "$salaries",
+                as: "salary",
+                in: {
+                  _id: "$$salary._id",
+                  amount: "$$salary.amount",
+                  paymentDate: "$$salary.paymentDate",
+                  staff: {
+                    name: "$$salary.staff.name",
+                    _id: "$$salary.staff._id",
+                  },
+                  addedBy: {
+                    name: "$$salary.addedBy.name",
+                  },
+                  month: "$$salary.month",
+                },
+              },
+            },
+            totalAmount: 1,
+            count: 1,
+          },
+        },
+      ]),
     ]);
 
     const cashAtHand = dailyBalances[0] ? dailyBalances[0].cashAtHand : 0;
 
     const deposits = depositsData[0] ? depositsData[0].deposits : [];
     const depositTotal = depositsData[0] ? depositsData[0].totalAmount : 0;
-    const depositCount = depositsData[0] ? depositsData[0].count : 0;
 
     const savingsTotal = savingsInstallments[0]
       ? savingsInstallments[0].totalAmount
@@ -282,12 +345,15 @@ export async function GET(request) {
     const savingsCount = savingsInstallments[0]
       ? savingsInstallments[0].count
       : 0;
+
     const loanTotal = loanInstallments[0] ? loanInstallments[0].totalAmount : 0;
     const loanCount = loanInstallments[0] ? loanInstallments[0].count : 0;
 
     const expenses = expensesData[0] ? expensesData[0].expenses : [];
     const expenseTotal = expensesData[0] ? expensesData[0].totalAmount : 0;
-    const expenseCount = expensesData[0] ? expensesData[0].count : 0;
+
+    const salaries = salariesData[0] ? salariesData[0].salaries : [];
+    const salaryTotal = salariesData[0] ? salariesData[0].totalAmount : 0;
 
     const withdrawals = withdrawalsData[0]
       ? withdrawalsData[0].withdrawals
@@ -295,7 +361,6 @@ export async function GET(request) {
     const withdrawalTotal = withdrawalsData[0]
       ? withdrawalsData[0].totalAmount
       : 0;
-    const withdrawalCount = withdrawalsData[0] ? withdrawalsData[0].count : 0;
 
     return NextResponse.json(
       {
@@ -305,6 +370,11 @@ export async function GET(request) {
           deposits,
           expenses,
           withdrawals,
+          salaries,
+          totalDeposits: depositTotal,
+          totalWithdrawals: withdrawalTotal,
+          totalExpenses: expenseTotal,
+          totalSalaries: salaryTotal,
           paidInstallments: {
             savings: {
               total: savingsTotal,
@@ -314,18 +384,6 @@ export async function GET(request) {
               total: loanTotal,
               count: loanCount,
             },
-          },
-          totalDeposits: {
-            total: depositTotal,
-            count: depositCount,
-          },
-          totalWithdrawals: {
-            total: withdrawalTotal,
-            count: withdrawalCount,
-          },
-          totalExpenses: {
-            total: expenseTotal,
-            count: expenseCount,
           },
         },
       },

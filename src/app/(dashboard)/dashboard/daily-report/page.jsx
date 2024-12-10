@@ -13,6 +13,7 @@ import {
   translateNumber,
 } from "@/utils/helpers";
 import { PrintPad } from "@/components/print-pad";
+import { SalaryTable } from "@/components/salary-table";
 
 async function Reports({ searchParams }) {
   const { date } = searchParams;
@@ -25,11 +26,12 @@ async function Reports({ searchParams }) {
   const positives =
     response.payload?.paidInstallments?.savings?.total +
     response.payload?.paidInstallments?.loans?.total +
-    response.payload?.totalDeposits?.total;
+    response.payload?.totalDeposits;
 
   const negatives =
-    response.payload?.totalExpenses?.total +
-    response.payload?.totalWithdrawals?.total;
+    response.payload?.totalExpenses +
+    response.payload?.totalWithdrawals +
+    response.payload?.totalSalaries;
 
   return (
     <div className="space-y-8">
@@ -59,14 +61,14 @@ async function Reports({ searchParams }) {
       {response.payload?.deposits?.length > 0 && (
         <DepositsTable
           deposits={response.payload?.deposits}
-          footer={<TableTotal total={response.payload?.totalDeposits?.total} />}
+          footer={<TableTotal total={response.payload?.totalDeposits} />}
         />
       )}
 
       {response.payload?.expenses?.length > 0 && (
         <ExpensesTable
           expenses={response.payload?.expenses}
-          footer={<TableTotal total={response.payload?.totalExpenses?.total} />}
+          footer={<TableTotal total={response.payload?.totalExpenses} />}
         />
       )}
       {response.payload?.withdrawals?.length > 0 && (
@@ -75,8 +77,17 @@ async function Reports({ searchParams }) {
           footer={
             <TableTotal
               colspan={5}
-              total={response.payload?.totalWithdrawals?.total}
+              total={response.payload?.totalWithdrawals}
             />
+          }
+        />
+      )}
+
+      {response.payload?.salaries?.length > 0 && (
+        <SalaryTable
+          salaries={response.payload?.salaries}
+          footer={
+            <TableTotal colspan={5} total={response.payload?.totalSalaries} />
           }
         />
       )}
