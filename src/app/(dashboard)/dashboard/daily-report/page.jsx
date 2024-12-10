@@ -56,37 +56,49 @@ async function Reports({ searchParams }) {
           </b>
         </p>
       </div>
-      <DepositsTable
-        deposits={response.payload?.deposits}
-        footer={<TableTotal total={response.payload?.totalDeposits?.total} />}
-      />
+      {response.payload?.deposits?.length > 0 && (
+        <DepositsTable
+          deposits={response.payload?.deposits}
+          footer={<TableTotal total={response.payload?.totalDeposits?.total} />}
+        />
+      )}
 
-      <ExpensesTable
-        expenses={response.payload?.expenses}
-        footer={<TableTotal total={response.payload?.totalExpenses?.total} />}
-      />
+      {response.payload?.expenses?.length > 0 && (
+        <ExpensesTable
+          expenses={response.payload?.expenses}
+          footer={<TableTotal total={response.payload?.totalExpenses?.total} />}
+        />
+      )}
+      {response.payload?.withdrawals?.length > 0 && (
+        <WithdrawalTable
+          withdrawals={response.payload?.withdrawals}
+          footer={
+            <TableTotal
+              colspan={5}
+              total={response.payload?.totalWithdrawals?.total}
+            />
+          }
+        />
+      )}
 
-      <WithdrawalTable
-        withdrawals={response.payload?.withdrawals}
-        footer={
-          <TableTotal
-            colspan={5}
-            total={response.payload?.totalWithdrawals?.total}
-          />
-        }
-      />
       <Block title="total / মোট হিসাব">
         <p className="flex justify-between text-lg">
-          হাতে আছে: <b></b>
+          পূর্ববর্তী ব্যালান্স:{" "}
+          <b>{translateCurrency(response.payload?.cashAtHand)}</b>
         </p>
         <p className="flex justify-between text-lg">
-          মোট জমা: <b>{translateCurrency(positives)}</b>
+          আজকের জমা: <b>{translateCurrency(positives)}</b>
         </p>
         <p className="flex justify-between text-lg">
-          মোট খরছ: <b>{translateCurrency(negatives)}</b>
+          আজকের ব্যয়: <b>{translateCurrency(negatives)}</b>
         </p>
         <p className="flex justify-between text-lg border-t border-primary">
-          বাকি আছে: <b>{translateCurrency(positives - negatives)}</b>
+          বর্তমান ব্যালান্স:{" "}
+          <b>
+            {translateCurrency(
+              response.payload?.cashAtHand + positives - negatives
+            )}
+          </b>
         </p>
       </Block>
     </div>

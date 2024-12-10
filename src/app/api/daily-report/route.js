@@ -7,6 +7,7 @@ import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { formatDate } from "@/utils/helpers";
 import { NextResponse } from "next/server";
+import DailyBalance from "@/lib/models/DailyBalance";
 
 // Get daily report
 export async function GET(request) {
@@ -17,7 +18,7 @@ export async function GET(request) {
     const reqUrl = new URL(request.url);
     const date = reqUrl.searchParams.get("date");
 
-    const currentDate = date ? formatDate(date) : formatDate(new Date());
+    const currentDate = date ? formatDate(date) : new Date();
     const startOfDay = new Date(currentDate.setHours(0, 0, 0, 0));
     const endOfDay = new Date(currentDate.setHours(23, 59, 59, 999));
 
@@ -27,6 +28,7 @@ export async function GET(request) {
       loanInstallments,
       expensesData,
       withdrawalsData,
+      dailyBalances,
     ] = await Promise.all([
       Deposit.aggregate([
         {
@@ -252,7 +254,24 @@ export async function GET(request) {
           },
         },
       ]),
+      DailyBalance.aggregate([
+        {
+          $match: {
+            date: {
+              $lt: startOfDay,
+            },
+          },
+        },
+        {
+          $group: {
+            _id: null,
+            cashAtHand: { $sum: "$balance" },
+          },
+        },
+      ]),
     ]);
+
+    const cashAtHand = dailyBalances[0] ? dailyBalances[0].cashAtHand : 0;
 
     const deposits = depositsData[0] ? depositsData[0].deposits : [];
     const depositTotal = depositsData[0] ? depositsData[0].totalAmount : 0;
@@ -283,6 +302,7 @@ export async function GET(request) {
       {
         msg: "Data Found.",
         payload: {
+          cashAtHand,
           deposits,
           expenses,
           withdrawals,

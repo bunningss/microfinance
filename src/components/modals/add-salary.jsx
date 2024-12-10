@@ -100,8 +100,15 @@ export function AddSalary({ staffs }) {
           required
           options={monthNamesWithYear}
         />
+
+        <FormCalendar
+          form={form}
+          name="paymentDate"
+          required
+          label="Payment Date / বেতন প্রদানের তারিখ"
+        />
+
         <FormInput form={form} name="amount" label="salary / বেতন" required />
-        <FormCalendar form={form} name="paymentDate" required />
       </FormModal>
     </Modal>
   );
