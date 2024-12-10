@@ -128,9 +128,8 @@ export async function PUT(request) {
       loan.loanStatus = "complete";
     }
 
-    await updateDailyBalance("plus", installment.amount, date);
-
     await loan.save({ session });
+    await updateDailyBalance("plus", installment.amount, date);
 
     await session.commitTransaction();
     return NextResponse.json({

@@ -5,7 +5,7 @@ import { FormModal } from "../form/form-modal";
 import { FormCalendar } from "../form/form-calendar";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "../ui/button";
-import { translateDate } from "@/utils/helpers";
+import { formatDate, translateDate } from "@/utils/helpers";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -30,7 +30,7 @@ export function DateFilter({ allowFuture }) {
     : translateDate(new Date(Date.now()));
 
   const handleSubmit = (data) => {
-    router.push(`?date=${new Date(data.date).toISOString()}`);
+    router.push(`?date=${formatDate(data.date)}`);
   };
 
   const handleClear = () => {

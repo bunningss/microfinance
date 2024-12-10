@@ -24,9 +24,8 @@ export async function POST(request) {
       addedBy: id,
     });
 
-    await updateDailyBalance("plus", amount, date);
-
     await newDeposit.save();
+    await updateDailyBalance("plus", amount, date);
 
     return NextResponse.json({ msg: "তথ্য সফলভাবে সংরক্ষিত" }, { status: 200 });
   } catch (err) {

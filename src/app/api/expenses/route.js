@@ -21,9 +21,8 @@ export async function POST(request) {
       addedBy: id,
     });
 
-    await updateDailyBalance("minus", body.amount, body.date);
-
     await newExpense.save();
+    await updateDailyBalance("minus", body.amount, body.date);
 
     return NextResponse.json({ msg: "তথ্য সফলভাবে সংরক্ষিত" }, { status: 200 });
   } catch (err) {

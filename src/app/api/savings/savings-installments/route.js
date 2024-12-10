@@ -78,9 +78,8 @@ export async function PUT(request) {
       }
     );
 
-    await updateDailyBalance("plus", installment.amount, date);
-
     await savings.save({ session });
+    await updateDailyBalance("plus", installment.amount, date);
 
     await session.commitTransaction();
     return NextResponse.json({
