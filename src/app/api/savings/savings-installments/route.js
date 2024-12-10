@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Savings from "@/lib/models/Savings";
 import Member from "@/lib/models/Member";
+import DailyBalance from "@/lib/models/DailyBalance";
 import { connectDb } from "@/lib/db/connectDb";
 import { NextResponse } from "next/server";
 import { verifyToken } from "@/utils/auth";
@@ -73,6 +74,21 @@ export async function PUT(request) {
       },
       {
         new: true,
+        session,
+      }
+    );
+
+    await DailyBalance.findOneAndUpdate(
+      {
+        date: formatDate(date),
+      },
+      {
+        $inc: { balance: installment.amount },
+      },
+      {
+        new: true,
+        upsert: true,
+        setDefaultsOnInsert: true,
         session,
       }
     );
