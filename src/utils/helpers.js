@@ -213,8 +213,9 @@ export function generateLoanFineInstallments(
 }
 
 export function formatDate(date) {
-  const currentDate = date ? new Date(date) : new Date();
-  currentDate.setDate(currentDate.getDate() - 1);
+  const currentDate = date
+    ? new Date(date).setDate(new Date(date).getDate() - 1)
+    : new Date();
 
   const startOfDay = new Date(currentDate);
   startOfDay.setUTCHours(0, 0, 0, 0);
