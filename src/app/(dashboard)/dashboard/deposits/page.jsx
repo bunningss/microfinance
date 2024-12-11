@@ -30,7 +30,7 @@ export default async function Page({ searchParams }) {
   return (
     <div className="space-y-4">
       <Block title="Deposits / জমার তালিকা" />
-      <div className="grid grid-cols-2 gap-2 md:gap-4">
+      <div className="grid md:grid-cols-2 gap-2 md:gap-4">
         <DateFilter />
         <AddNewDeposit />
       </div>
