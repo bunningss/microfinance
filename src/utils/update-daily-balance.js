@@ -6,13 +6,11 @@ export async function updateDailyBalance(type, amount, date, session) {
     throw new Error("Invalid type");
   }
 
-  const transactionDate = new Date(date).setHours(0, 0, 0, 0);
-
   try {
     if (type === "plus") {
       await DailyBalance.findOneAndUpdate(
         {
-          date: new Date(transactionDate),
+          date: new Date(date),
         },
         {
           $inc: { balance: amount },
@@ -27,7 +25,7 @@ export async function updateDailyBalance(type, amount, date, session) {
     } else {
       await DailyBalance.findOneAndUpdate(
         {
-          date: new Date(transactionDate),
+          date: new Date(date),
         },
         {
           $inc: { balance: -amount },

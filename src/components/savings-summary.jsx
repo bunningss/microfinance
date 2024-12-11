@@ -102,7 +102,7 @@ export function SavingsSummary({ data }) {
         </div>
         <DataTable
           columns={columns}
-          data={data.installments}
+          data={data?.installments}
           header="সঞ্চয় কিস্তিসমূহের তালিকা"
           withAction
         />
