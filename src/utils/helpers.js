@@ -213,19 +213,20 @@ export function generateLoanFineInstallments(
 }
 
 export function formatDate(date) {
-  const currentDate = date
-    ? new Date(
-        new Date(new Date(date).toISOString().split("T")[0]).setHours(
-          0,
-          0,
-          0,
-          0
-        )
-      )
-    : new Date();
+  const inputDate = date ? new Date(date) : new Date();
 
-  const startOfDay = new Date(currentDate.setHours(0, 0, 0, 0));
-  const endOfDay = new Date(currentDate.setHours(23, 59, 59, 999));
+  // Ensure the date is set to midnight UTC
+  const utcDate = new Date(
+    Date.UTC(
+      inputDate.getUTCFullYear(),
+      inputDate.getUTCMonth(),
+      inputDate.getUTCDate()
+    )
+  );
 
-  return { currentDate, startOfDay, endOfDay };
+  const startOfDay = new Date(utcDate);
+  const endOfDay = new Date(utcDate);
+  endOfDay.setUTCHours(23, 59, 59, 999);
+
+  return { currentDate: utcDate, startOfDay, endOfDay };
 }

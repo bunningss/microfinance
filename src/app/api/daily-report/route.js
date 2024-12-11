@@ -20,8 +20,7 @@ export async function GET(request) {
     const date = reqUrl.searchParams.get("date");
 
     const { startOfDay, endOfDay } = formatDate(date);
-    console.log("start of day:", startOfDay);
-    console.log("end of day:", endOfDay);
+
     const [
       depositsData,
       savingsInstallments,

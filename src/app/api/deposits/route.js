@@ -22,7 +22,7 @@ export async function POST(request) {
       title,
       amount,
       description,
-      date,
+      date: new Date(date),
       addedBy: id,
     });
 
