@@ -19,8 +19,28 @@ export async function GET(request) {
     const date = reqUrl.searchParams.get("date");
 
     const currentDate = date ? new Date(date) : new Date();
-    const startOfDay = new Date(currentDate.setUTCHours(0, 0, 0, 0));
-    const endOfDay = new Date(currentDate.setUTCHours(23, 59, 59, 999));
+    const startOfDay = new Date(
+      Date.UTC(
+        currentDate.getUTCFullYear(),
+        currentDate.getUTCMonth(),
+        currentDate.getUTCDate(),
+        0,
+        0,
+        0,
+        0
+      )
+    );
+    const endOfDay = new Date(
+      Date.UTC(
+        currentDate.getUTCFullYear(),
+        currentDate.getUTCMonth(),
+        currentDate.getUTCDate(),
+        23,
+        59,
+        59,
+        999
+      )
+    );
 
     const [
       depositsData,
