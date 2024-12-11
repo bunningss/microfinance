@@ -28,18 +28,10 @@ export const addMemberFormSchema = z.object({
   }),
   savingsAmount: z.string().min(1, "Savings amount is required"),
   savingsDuration: z.string().min(1, "Savings duration is required"),
-  startDate: z
-    .string()
-    .min(1, "Start date is required")
-    .refine((val) => {
-      const date = new Date(val);
-      return !isNaN(date.getTime());
-    }, "Invalid date format"),
+  startDate: z.date(),
   nomineeName: z.string().min(1, "Nominee name is required"),
   relationWithNominee: z.string().min(1, "Relation with nominee is required"),
-  nomineeBirthDate: z.string().min(1, {
-    message: "Nominee birth date is required",
-  }),
+  nomineeBirthDate: z.date(),
   nomineeNidNumber: z.string().min(1, {
     message: "Nominee NID number is required",
   }),
