@@ -1,5 +1,6 @@
 "use server";
 import DailyBalance from "@/lib/models/DailyBalance";
+import { setTimezone } from "./helpers";
 
 export async function updateDailyBalance(type, amount, date, session) {
   if (type !== "plus" && type !== "minus") {
@@ -10,7 +11,7 @@ export async function updateDailyBalance(type, amount, date, session) {
     if (type === "plus") {
       await DailyBalance.findOneAndUpdate(
         {
-          date: new Date(date),
+          date: setTimezone(date),
         },
         {
           $inc: { balance: amount },
@@ -25,7 +26,7 @@ export async function updateDailyBalance(type, amount, date, session) {
     } else {
       await DailyBalance.findOneAndUpdate(
         {
-          date: new Date(date),
+          date: setTimezone(date),
         },
         {
           $inc: { balance: -amount },
