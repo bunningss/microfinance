@@ -20,7 +20,7 @@ export function ViewLoans({ loans }) {
       onOpen={() => setIsModalOpen(true)}
     >
       <CardView className="md:grid-cols-1 xl:grid-cols-1">
-        {loans.map((loan, index) => (
+        {loans?.map((loan, index) => (
           <LoanCard key={index} data={loan} />
         ))}
       </CardView>
