@@ -5,14 +5,14 @@ import { useReactToPrint } from "react-to-print";
 import { Button } from "./ui/button";
 import { Logo } from "./logo";
 
-export function PrintPad({ children }) {
+export function PrintPad({ children, label = "প্রিন্ট করুন" }) {
   const contentRef = useRef(null);
   const reactToPrintFn = useReactToPrint({ contentRef });
 
   return (
     <div ref={contentRef} className="print:px-2 space-y-4">
       <Button onClick={reactToPrintFn} className="print:hidden">
-        প্রিন্ট করুন
+        {label}
       </Button>
       <header className="p-2 border-b-4 border-green-700 bg-green-50 hidden print:block">
         <div className="flex justify-between items-center">

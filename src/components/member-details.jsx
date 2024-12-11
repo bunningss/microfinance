@@ -1,5 +1,4 @@
 import { MemberFinancialDetails } from "./member-financial-details";
-import { MemberForm } from "./member-form";
 import { AddNewLoan } from "./modals/add-new-loan";
 import { AddNewSavings } from "./modals/add-new-savings";
 import { ViewLoans } from "./modals/view-loans";
@@ -18,7 +17,6 @@ export function MemberDetails({ data }) {
         <WithdrawMoney id={data?._id} />
       </div>
       <MemberFinancialDetails data={data} />
-      <MemberForm member={data} />
     </>
   );
 }

@@ -101,7 +101,7 @@ export async function POST(request) {
 
     await session.commitTransaction();
     return NextResponse.json(
-      { msg: "সদস্য তথ্য সফলভাবে সংরক্ষিত", payload: newMember.nidNumber },
+      { msg: "সদস্য তথ্য সফলভাবে সংরক্ষিত", payload: newSavings._id },
       { status: 200 }
     );
   } catch (err) {

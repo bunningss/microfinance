@@ -128,7 +128,7 @@ export function AddMember() {
         }),
       ]);
 
-      router.push(`/dashboard/members/${res.response.payload}`);
+      router.push(`/dashboard/members/savings/${res.response.payload}`);
       successNotification(res.response.msg);
     } catch (err) {
       errorNotification(err.message);
