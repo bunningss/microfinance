@@ -5,6 +5,7 @@ import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
 import { updateDailyBalance } from "@/utils/update-daily-balance";
+import { formatDate } from "@/utils/helpers";
 
 // New Withdrawal
 export async function POST(request) {
@@ -77,9 +78,8 @@ export async function GET(request) {
     let query = {};
 
     if (date) {
-      const currentDate = new Date(date);
-      const startOfDay = new Date(currentDate.setHours(0, 0, 0, 0));
-      const endOfDay = new Date(currentDate.setHours(23, 59, 59, 999));
+      const { startOfDay, endOfDay } = formatDate(date);
+
       query.createdAt = { $gte: startOfDay, $lte: endOfDay };
     }
 

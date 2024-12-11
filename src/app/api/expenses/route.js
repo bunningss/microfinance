@@ -4,6 +4,7 @@ import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
 import { updateDailyBalance } from "@/utils/update-daily-balance";
 import mongoose from "mongoose";
+import { formatDate } from "@/utils/helpers";
 
 // Add new expense
 export async function POST(request) {
@@ -50,9 +51,8 @@ export async function GET(request) {
     let query = {};
 
     if (date) {
-      const currentDate = new Date(date);
-      const startOfDay = new Date(currentDate.setHours(0, 0, 0, 0));
-      const endOfDay = new Date(currentDate.setHours(23, 59, 59, 999));
+      const { startOfDay, endOfDay } = formatDate(date);
+
       query.date = { $gte: startOfDay, $lte: endOfDay };
     }
 

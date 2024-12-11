@@ -4,6 +4,7 @@ import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
 import { updateDailyBalance } from "@/utils/update-daily-balance";
+import { formatDate } from "@/utils/helpers";
 
 // Get loan installments (Today by default)
 export async function GET(request) {
@@ -14,9 +15,7 @@ export async function GET(request) {
     const reqUrl = new URL(request.url);
     const date = reqUrl.searchParams.get("date");
 
-    const currentDate = date ? new Date(date) : new Date();
-    const startOfDay = new Date(currentDate.setHours(0, 0, 0, 0));
-    const endOfDay = new Date(currentDate.setHours(23, 59, 59, 999));
+    const { startOfDay, endOfDay } = formatDate(date);
 
     const results = await Loan.aggregate([
       { $unwind: "$installments" },
