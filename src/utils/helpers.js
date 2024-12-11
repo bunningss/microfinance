@@ -213,21 +213,10 @@ export function generateLoanFineInstallments(
 }
 
 export function formatDate(date) {
-  const inputDate = date ? new Date(date) : new Date();
+  const currentDate = date ? new Date(date) : new Date();
 
-  const localMidnight = new Date(
-    inputDate.getFullYear(),
-    inputDate.getMonth(),
-    inputDate.getDate()
-  );
+  const startOfDay = new Date(currentDate.setHours(0, 0, 0, 0));
+  const endOfDay = new Date(currentDate.setHours(23, 59, 59, 999));
 
-  const startOfDay = new Date(localMidnight.toUTCString());
-
-  const endOfDay = new Date(startOfDay);
-  endOfDay.setUTCHours(23, 59, 59, 999);
-
-  return {
-    startOfDay: new Date(startOfDay.toISOString()),
-    endOfDay: new Date(endOfDay.toISOString()),
-  };
+  return { startOfDay, endOfDay };
 }
