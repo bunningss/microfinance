@@ -30,6 +30,7 @@ export function MemberForm({ member, nominee }) {
                       alt={member?.name}
                       fill
                       className="object-cover"
+                      loading="eager"
                     />
                   </figure>
                   <p className="text-center text-xs">সদস্যের ছবি</p>
@@ -42,6 +43,7 @@ export function MemberForm({ member, nominee }) {
                       alt={nominee?.nomineeName}
                       fill
                       className="object-cover"
+                      loading="eager"
                     />
                   </figure>
                   <p className="text-center text-xs">নমিনীর ছবি</p>
