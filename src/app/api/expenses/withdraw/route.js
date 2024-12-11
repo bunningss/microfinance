@@ -5,7 +5,7 @@ import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
 import { updateDailyBalance } from "@/utils/update-daily-balance";
-import { formatDate } from "@/utils/helpers";
+import { formatDate, setTimezone } from "@/utils/helpers";
 
 // New Withdrawal
 export async function POST(request) {
@@ -42,7 +42,7 @@ export async function POST(request) {
       owner: userId,
       comment,
       approvedBy: id,
-      withdrawalDate: new Date(date),
+      withdrawalDate: setTimezone(date),
     });
 
     member.totalSaved -= amount;

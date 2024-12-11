@@ -4,7 +4,7 @@ import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
 import { updateDailyBalance } from "@/utils/update-daily-balance";
 import mongoose from "mongoose";
-import { formatDate } from "@/utils/helpers";
+import { formatDate, setTimezone } from "@/utils/helpers";
 
 // Add new expense
 export async function POST(request) {
@@ -21,7 +21,7 @@ export async function POST(request) {
       name: body.name,
       description: body.description,
       amount: body.amount,
-      date: new Date(body.date),
+      date: setTimezone(body.date),
       addedBy: id,
     });
 

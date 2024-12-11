@@ -212,16 +212,17 @@ export function generateLoanFineInstallments(
   return installments;
 }
 
+export function setTimezone(date) {
+  const localISO = new Date(date);
+  localISO.setHours(localISO.getHours() + 6);
+  return localISO;
+}
+
 export function formatDate(date) {
-  const currentDate = date
-    ? new Date(date).setDate(new Date(date).getDate() - 1)
-    : new Date();
+  const currentDate = date ? setTimezone(date) : new Date();
 
-  const startOfDay = new Date(currentDate);
-  startOfDay.setUTCHours(0, 0, 0, 0);
-
-  const endOfDay = new Date(currentDate);
-  endOfDay.setUTCHours(23, 59, 59, 999);
+  const startOfDay = new Date(currentDate.setHours(0, 0, 0, 0));
+  const endOfDay = new Date(currentDate.setHours(23, 59, 59, 999));
 
   return { startOfDay, endOfDay };
 }

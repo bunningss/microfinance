@@ -4,7 +4,7 @@ import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
 import { updateDailyBalance } from "@/utils/update-daily-balance";
-import { formatDate } from "@/utils/helpers";
+import { formatDate, setTimezone } from "@/utils/helpers";
 
 // Create new deposit
 export async function POST(request) {
@@ -23,7 +23,7 @@ export async function POST(request) {
       title,
       amount,
       description,
-      date: new Date(date),
+      date: setTimezone(date),
       addedBy: id,
     });
 

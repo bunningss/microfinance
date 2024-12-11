@@ -5,7 +5,7 @@ import { connectDb } from "@/lib/db/connectDb";
 import { NextResponse } from "next/server";
 import { verifyToken } from "@/utils/auth";
 import { updateDailyBalance } from "@/utils/update-daily-balance";
-import { formatDate } from "@/utils/helpers";
+import { formatDate, setTimezone } from "@/utils/helpers";
 
 // Pay savings installment
 export async function PUT(request) {
@@ -55,7 +55,7 @@ export async function PUT(request) {
     // Update savings properties
     installment.status = "paid";
     installment.receivedBy = id;
-    installment.paymentDate = new Date(date); // Update to current date once they finish adding old data.
+    installment.paymentDate = setTimezone(date); // Update to current date once they finish adding old data.
     savings.amountSaved += installment.amount;
 
     const allPaid = savings.installments.every(

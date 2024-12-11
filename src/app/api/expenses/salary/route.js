@@ -5,7 +5,7 @@ import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
 import { updateDailyBalance } from "@/utils/update-daily-balance";
-import { formatDate } from "@/utils/helpers";
+import { formatDate, setTimezone } from "@/utils/helpers";
 
 // Create salary record
 export async function POST(request) {
@@ -37,7 +37,7 @@ export async function POST(request) {
       month: body.month,
       amount: body.amount,
       addedBy: id,
-      paymentDate: new Date(body.paymentDate),
+      paymentDate: setTimezone(body.paymentDate),
     });
 
     await newSalary.save({ session });
