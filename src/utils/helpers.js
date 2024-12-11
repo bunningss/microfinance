@@ -214,12 +214,13 @@ export function generateLoanFineInstallments(
 
 export function formatDate(date) {
   const currentDate = date ? new Date(date) : new Date();
+  currentDate.setDate(currentDate.getDate() - 1);
 
   const startOfDay = new Date(currentDate);
-  startOfDay.setHours(0, 0, 0, 0);
+  startOfDay.setUTCHours(0, 0, 0, 0);
 
   const endOfDay = new Date(currentDate);
-  endOfDay.setHours(23, 59, 59, 999);
+  endOfDay.setUTCHours(23, 59, 59, 999);
 
   return { startOfDay, endOfDay };
 }
