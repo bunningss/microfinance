@@ -2,6 +2,30 @@ import mongoose from "mongoose";
 
 const savingsSchema = new mongoose.Schema(
   {
+    nomineeName: {
+      type: String,
+      required: true,
+    },
+    relationWithNominee: {
+      type: String,
+      required: true,
+    },
+    nomineeBirthDate: {
+      type: Date,
+      required: true,
+    },
+    nomineeNidNumber: {
+      type: String,
+      required: true,
+    },
+    nomineeImage: {
+      type: String,
+      required: true,
+    },
+    nomineeAge: {
+      type: Number,
+      required: true,
+    },
     savingsName: {
       type: String,
       required: true,

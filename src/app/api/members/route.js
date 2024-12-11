@@ -50,15 +50,9 @@ export async function POST(request) {
       age: memberAge,
       occupation: body.occupation,
       religion: body.religion,
-      nomineeName: body.nomineeName,
-      relationWithNominee: body.relationWithNominee,
-      nomineeBirthDate: body.nomineeBirthDate,
-      nomineeNidNumber: body.nomineeNidNumber,
       introducersName: body.introducersName,
       memberImage: body.memberImage,
-      nomineeImage: body.nomineeImage,
       totalSaved: 0,
-      nomineeAge,
     });
 
     // Generate user installments
@@ -72,6 +66,12 @@ export async function POST(request) {
     const savingsName = generateSavingsName();
 
     const newSavings = new Savings({
+      nomineeName: body.nomineeName,
+      relationWithNominee: body.relationWithNominee,
+      nomineeBirthDate: body.nomineeBirthDate,
+      nomineeNidNumber: body.nomineeNidNumber,
+      nomineeImage: body.nomineeImage,
+      nomineeAge,
       savingsName,
       savingsStatus: "incomplete",
       savingsType: body.savingsType,

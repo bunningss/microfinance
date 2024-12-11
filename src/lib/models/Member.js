@@ -112,36 +112,12 @@ const memberSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    nomineeName: {
-      type: String,
-      required: true,
-    },
-    relationWithNominee: {
-      type: String,
-      required: true,
-    },
-    nomineeBirthDate: {
-      type: Date,
-      required: true,
-    },
-    nomineeNidNumber: {
-      type: String,
-      required: true,
-    },
     introducersName: {
       type: String,
       required: true,
     },
     memberImage: {
       type: String,
-      required: true,
-    },
-    nomineeImage: {
-      type: String,
-      required: true,
-    },
-    nomineeAge: {
-      type: Number,
       required: true,
     },
   },
