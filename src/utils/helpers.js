@@ -211,3 +211,21 @@ export function generateLoanFineInstallments(
 
   return installments;
 }
+
+export function formatDate(date) {
+  const currentDate = date
+    ? new Date(
+        new Date(new Date(date).toISOString().split("T")[0]).setHours(
+          0,
+          0,
+          0,
+          0
+        )
+      )
+    : new Date();
+
+  const startOfDay = new Date(currentDate.setHours(0, 0, 0, 0));
+  const endOfDay = new Date(currentDate.setHours(23, 59, 59, 999));
+
+  return { currentDate, startOfDay, endOfDay };
+}
