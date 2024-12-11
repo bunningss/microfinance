@@ -1,7 +1,7 @@
 "use server";
 import DailyBalance from "@/lib/models/DailyBalance";
 
-export async function updateDailyBalance(type, amount, date) {
+export async function updateDailyBalance(type, amount, date, session) {
   if (type !== "plus" && type !== "minus") {
     throw new Error("Invalid type");
   }
@@ -21,6 +21,7 @@ export async function updateDailyBalance(type, amount, date) {
           new: true,
           upsert: true,
           setDefaultsOnInsert: true,
+          session,
         }
       );
     } else {
@@ -35,6 +36,7 @@ export async function updateDailyBalance(type, amount, date) {
           new: true,
           upsert: true,
           setDefaultsOnInsert: true,
+          session,
         }
       );
     }

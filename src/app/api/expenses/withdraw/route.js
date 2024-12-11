@@ -49,8 +49,7 @@ export async function POST(request) {
 
     await member.save({ session });
     await newWithdrawal.save({ session });
-
-    await updateDailyBalance("minus", amount, date);
+    await updateDailyBalance("minus", amount, date, session);
 
     await session.commitTransaction();
 

@@ -95,7 +95,7 @@ export async function POST(request) {
     );
 
     await newLoan.save({ session });
-    await updateDailyBalance("minus", body.loanAmount, body.startDate);
+    await updateDailyBalance("minus", body.loanAmount, body.startDate, session);
 
     await session.commitTransaction();
 

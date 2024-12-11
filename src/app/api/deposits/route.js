@@ -3,11 +3,14 @@ import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
 import { updateDailyBalance } from "@/utils/update-daily-balance";
+import mongoose from "mongoose";
 
 // Create new deposit
 export async function POST(request) {
+  await connectDb();
+  const session = await mongoose.startSession();
+  session.startTransaction();
   try {
-    await connectDb();
     const { id } = await verifyToken(request, "add:deposit");
 
     const { title, description, amount, date } = await request.json();
@@ -23,12 +26,17 @@ export async function POST(request) {
       addedBy: id,
     });
 
-    await newDeposit.save();
-    await updateDailyBalance("plus", amount, date);
+    await newDeposit.save({ session });
+    await updateDailyBalance("plus", amount, date, session);
+
+    await session.commitTransaction();
 
     return NextResponse.json({ msg: "তথ্য সফলভাবে সংরক্ষিত" }, { status: 200 });
   } catch (err) {
+    await session.abortTransaction();
     return NextResponse.json({ msg: err.message }, { status: 400 });
+  } finally {
+    session.endSession();
   }
 }
 

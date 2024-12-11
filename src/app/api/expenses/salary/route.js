@@ -52,7 +52,7 @@ export async function POST(request) {
       }
     );
 
-    await updateDailyBalance("minus", body.amount, body.paymentDate);
+    await updateDailyBalance("minus", body.amount, body.paymentDate, session);
 
     await session.commitTransaction();
 
