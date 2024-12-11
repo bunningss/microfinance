@@ -76,12 +76,8 @@ export async function GET(request) {
     const date = reqUrl.searchParams.get("date");
 
     let query = {};
-
-    if (date) {
-      const { startOfDay, endOfDay } = formatDate(date);
-
-      query.createdAt = { $gte: startOfDay, $lte: endOfDay };
-    }
+    const { startOfDay, endOfDay } = formatDate(date);
+    query.createdAt = { $gte: startOfDay, $lte: endOfDay };
 
     const withdrawals = await Withdrawal.find(query)
       .sort({ createdAt: -1 })

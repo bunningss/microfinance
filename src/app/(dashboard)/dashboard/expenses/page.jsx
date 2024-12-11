@@ -4,20 +4,37 @@ import { Preloader } from "@/components/preloader";
 import { PrintPad } from "@/components/print-pad";
 import { getData } from "@/utils/api-calls";
 import { Suspense } from "react";
+import { EmptyItem } from "@/components/empty-item";
+import { DateFilter } from "@/components/filters/date-filter";
 
-async function Expenses() {
-  const { response } = await getData("expenses", 0);
+async function Expenses({ searchParams }) {
+  const { date } = searchParams;
+  const queryParams = new URLSearchParams({
+    ...(date && { date }),
+  }).toString();
 
-  return <ExpensesTable expenses={response.payload} />;
+  const { response } = await getData(`expenses?${queryParams}`, 0);
+
+  return (
+    <>
+      {response.payload?.length <= 0 && (
+        <EmptyItem message="কোন তথ্য পাওয়া যায়নি" />
+      )}
+      {response.payload?.length > 0 && (
+        <ExpensesTable expenses={response.payload} />
+      )}
+    </>
+  );
 }
 
-export default function Page() {
+export default function Page({ searchParams }) {
   return (
     <div className="space-y-4">
       <Block title="view expenses" />
+      <DateFilter />
       <Suspense fallback={<Preloader />}>
         <PrintPad>
-          <Expenses />
+          <Expenses searchParams={searchParams} />
         </PrintPad>
       </Suspense>
     </div>

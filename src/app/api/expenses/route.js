@@ -1,9 +1,9 @@
 import Expense from "@/lib/models/Expense";
+import mongoose from "mongoose";
 import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
 import { updateDailyBalance } from "@/utils/update-daily-balance";
-import mongoose from "mongoose";
 import { formatDate, setTimezone } from "@/utils/helpers";
 
 // Add new expense
@@ -50,11 +50,8 @@ export async function GET(request) {
 
     let query = {};
 
-    if (date) {
-      const { startOfDay, endOfDay } = formatDate(date);
-
-      query.date = { $gte: startOfDay, $lte: endOfDay };
-    }
+    const { startOfDay, endOfDay } = formatDate(date);
+    query.date = { $gte: startOfDay, $lte: endOfDay };
 
     const expenses = await Expense.find(query)
       .sort({ createdAt: -1 })

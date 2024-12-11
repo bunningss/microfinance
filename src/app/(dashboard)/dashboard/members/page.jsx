@@ -1,6 +1,7 @@
 import { Block } from "@/components/block";
 import { CardView } from "@/components/card-view";
 import { MemberCard } from "@/components/cards/member-card";
+import { EmptyItem } from "@/components/empty-item";
 import { MembersFilters } from "@/components/filters/members-filters";
 import { PaginationControls } from "@/components/pagination-controls";
 import { Preloader } from "@/components/preloader";
@@ -28,13 +29,14 @@ async function Members({ searchParams }) {
   return (
     <>
       <MembersFilters />
-
-      <CardView className="xl:grid-cols-2">
-        {members?.map((member, index) => (
-          <MemberCard key={index} data={member} />
-        ))}
-      </CardView>
-
+      {members?.length <= 0 && <EmptyItem message="কোন তথ্য পাওয়া যায়নি" />}
+      {members?.length > 0 && (
+        <CardView className="xl:grid-cols-2">
+          {members?.map((member, index) => (
+            <MemberCard key={index} data={member} />
+          ))}
+        </CardView>
+      )}
       <PaginationControls
         isLastPage={response?.isLastPage}
         totalPages={response?.totalPages}

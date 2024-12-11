@@ -18,7 +18,9 @@ async function Deposits({ searchParams }) {
 
   return (
     <>
-      {response.payload?.length <= 0 && <EmptyItem />}
+      {response.payload?.length <= 0 && (
+        <EmptyItem message="কোন তথ্য পাওয়া যায়নি" />
+      )}
       {response.payload?.length > 0 && (
         <DepositsTable deposits={response.payload} />
       )}
