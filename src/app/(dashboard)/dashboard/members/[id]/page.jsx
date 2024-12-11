@@ -1,17 +1,30 @@
-import dynamic from "next/dynamic";
-const MemberDetails = dynamic(
-  () => import("@/components/member-details").then((mod) => mod.MemberDetails),
-  { ssr: false }
-);
 import { Block } from "@/components/block";
 import { getData } from "@/utils/api-calls";
 import { Suspense } from "react";
 import { Preloader } from "@/components/preloader";
+import { ViewSavings } from "@/components/modals/view-savings";
+import { ViewLoans } from "@/components/modals/view-loans";
+import { AddNewSavings } from "@/components/modals/add-new-savings";
+import { AddNewLoan } from "@/components/modals/add-new-loan";
+import { WithdrawMoney } from "@/components/modals/withdraw-money";
+import { MemberFinancialDetails } from "@/components/member-financial-details";
 
 async function Member({ id }) {
   const { response } = await getData(`members/${id}`, 0);
 
-  return <MemberDetails data={response.payload} />;
+  return (
+    <>
+      {/* Modal Buttons for new Savings and Loans */}
+      <div className="grid grid-cols-2 gap-2">
+        <ViewSavings savings={response.payload?.savings} />
+        <ViewLoans loans={response.payload?.loans} />
+        <AddNewSavings member={response.payload} />
+        <AddNewLoan member={response.payload} />
+        <WithdrawMoney id={response.payload?._id} />
+      </div>
+      <MemberFinancialDetails data={response.payload} />
+    </>
+  );
 }
 
 export default async function Page({ params }) {

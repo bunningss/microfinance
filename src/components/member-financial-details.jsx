@@ -16,7 +16,9 @@ export async function MemberFinancialDetails({ data }) {
     {
       icon: "expense",
       dataKey: "বর্তমান ঋণের পরিমান",
-      dataValue: translateCurrency(currentLoan?.repayAmount),
+      dataValue: translateCurrency(
+        currentLoan?.repayAmount ? currentLoan?.repayAmount : 0
+      ),
     },
   ];
 
