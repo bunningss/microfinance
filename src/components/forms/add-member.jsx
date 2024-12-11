@@ -219,7 +219,7 @@ export function AddMember() {
               required
             />
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-col md:flex-row gap-2">
             <FormInput
               form={form}
               name="permDistrict"

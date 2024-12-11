@@ -24,6 +24,10 @@ export async function POST(request) {
         { status: 400 }
       );
 
+    const memberAge = 25;
+    const nomineeAge =
+      new Date().getFullYear() - new Date(body.nomineeBirthDate).getFullYear();
+
     const newMember = new Member({
       name: body.name,
       fathersName: body.fathersName,
@@ -43,7 +47,7 @@ export async function POST(request) {
       nidNumber: body.nidNumber,
       birthCertificateNumber: body.birthCertificateNumber,
       nationality: body.nationality ? body.nationality : "Bangladeshi",
-      age: body.age,
+      age: memberAge,
       occupation: body.occupation,
       religion: body.religion,
       nomineeName: body.nomineeName,
@@ -54,6 +58,7 @@ export async function POST(request) {
       memberImage: body.memberImage,
       nomineeImage: body.nomineeImage,
       totalSaved: 0,
+      nomineeAge,
     });
 
     // Generate user installments
