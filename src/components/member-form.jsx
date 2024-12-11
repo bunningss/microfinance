@@ -109,7 +109,7 @@ export function MemberForm({ member, nominee }) {
             <p>জাতীয় পরিচয় পত্র নং: {member?.nidNumber}</p>
             <p>জাতীয়তা: {member?.nationality}</p>
             <p>জন্ম নিবন্ধন নং: {member?.birthCertificateNumber}</p>
-            <p>বয়স: {member?.age}</p>
+            <p>বয়স: {translateNumber(member?.age)}</p>
             <p>পেশা: {member?.occupation}</p>
             <p>ধর্ম: {member?.religion}</p>
 
