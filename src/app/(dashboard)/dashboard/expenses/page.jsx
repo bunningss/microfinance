@@ -14,7 +14,7 @@ async function Expenses({ searchParams }) {
   }).toString();
 
   const { response } = await getData(`expenses?${queryParams}`, 0);
-
+  console.log(response);
   return (
     <>
       {response.payload?.length <= 0 && (
@@ -27,7 +27,7 @@ async function Expenses({ searchParams }) {
   );
 }
 
-export default function Page({ searchParams }) {
+export default async function Page({ searchParams }) {
   return (
     <div className="space-y-4">
       <Block title="view expenses" />

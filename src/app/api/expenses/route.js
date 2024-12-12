@@ -56,7 +56,8 @@ export async function GET(request) {
     const expenses = await Expense.find(query)
       .sort({ createdAt: -1 })
       .populate("addedBy", "name")
-      .lean();
+      .lean()
+      .exec();
 
     return NextResponse.json(
       { msg: "তথ্য পাওয়া গেছে।", payload: expenses },
