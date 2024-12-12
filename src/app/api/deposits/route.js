@@ -1,5 +1,6 @@
 import Deposit from "@/lib/models/Deposit";
 import mongoose from "mongoose";
+import Staff from "@/lib/models/Staff";
 import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";

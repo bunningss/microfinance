@@ -1,6 +1,7 @@
 import Member from "@/lib/models/Member";
 import Savings from "@/lib/models/Savings";
 import Loan from "@/lib/models/Loan";
+import Staff from "@/lib/models/Staff";
 import { NextResponse } from "next/server";
 import { verifyToken } from "@/utils/auth";
 import { connectDb } from "@/lib/db/connectDb";

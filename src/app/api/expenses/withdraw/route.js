@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Withdrawal from "@/lib/models/Withdrawal";
 import Member from "@/lib/models/Member";
+import Staff from "@/lib/models/Staff";
 import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";

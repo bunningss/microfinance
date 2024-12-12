@@ -1,5 +1,6 @@
 import Member from "@/lib/models/Member";
 import Loan from "@/lib/models/Loan";
+import Staff from "@/lib/models/Staff";
 import { connectDb } from "@/lib/db/connectDb";
 import { NextResponse } from "next/server";
 import { verifyToken } from "@/utils/auth";
