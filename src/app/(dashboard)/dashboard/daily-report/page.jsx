@@ -58,9 +58,9 @@ async function Reports({ searchParams }) {
           </b>
         </p>
       </div>
+
       {response.payload?.deposits?.length > 0 && (
         <DepositsTable
-          date={translateDate(date ? date : new Date())}
           deposits={response.payload?.deposits}
           footer={<TableTotal total={response.payload?.totalDeposits} />}
         />
@@ -69,13 +69,12 @@ async function Reports({ searchParams }) {
       {response.payload?.expenses?.length > 0 && (
         <ExpensesTable
           expenses={response.payload?.expenses}
-          date={translateDate(date ? date : new Date())}
           footer={<TableTotal total={response.payload?.totalExpenses} />}
         />
       )}
+
       {response.payload?.withdrawals?.length > 0 && (
         <WithdrawalTable
-          date={translateDate(date ? date : new Date())}
           withdrawals={response.payload?.withdrawals}
           footer={
             <TableTotal

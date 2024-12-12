@@ -58,7 +58,7 @@ export function WithdrawalTable({ withdrawals, footer, date }) {
     <DataTable
       columns={columns}
       data={withdrawals}
-      header={`টাকা উত্তোলনের তালিকা - ${date}`}
+      header={`টাকা উত্তোলনের তালিকা ${date ? `- ${translateDate(date)}` : ""}`}
       withAction
       footer={footer}
     />

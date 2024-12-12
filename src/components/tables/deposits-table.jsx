@@ -51,7 +51,7 @@ export function DepositsTable({ deposits, footer, date }) {
     <DataTable
       columns={columns}
       data={deposits}
-      header={`জমার তালিকা - ${date}`}
+      header={`জমার তালিকা ${date ? `- ${translateDate(date)}` : ""}`}
       withAction
       footer={footer}
     />

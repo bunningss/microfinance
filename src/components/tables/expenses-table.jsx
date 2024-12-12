@@ -50,7 +50,7 @@ export function ExpensesTable({ expenses, footer, date }) {
     <DataTable
       columns={columns}
       data={expenses}
-      header={`খরচের তালিকা - ${date}`}
+      header={`খরচের তালিকা ${date ? `- ${translateDate(date)}` : ""}`}
       withAction
       footer={footer}
     />

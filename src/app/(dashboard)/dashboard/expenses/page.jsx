@@ -24,7 +24,7 @@ async function Expenses({ searchParams }) {
       {response.payload?.length > 0 && (
         <ExpensesTable
           expenses={response.payload}
-          date={translateDate(date ? date : new Date())}
+          date={date ? date : new Date()}
         />
       )}
     </>
