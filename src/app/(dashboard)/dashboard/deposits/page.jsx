@@ -7,6 +7,7 @@ import { getData } from "@/utils/api-calls";
 import { EmptyItem } from "@/components/empty-item";
 import { AddNewDeposit } from "@/components/modals/add-new-deposit";
 import { DateFilter } from "@/components/filters/date-filter";
+import { translateDate } from "@/utils/helpers";
 
 async function Deposits({ searchParams }) {
   const { date } = searchParams;
@@ -22,7 +23,10 @@ async function Deposits({ searchParams }) {
         <EmptyItem message="কোন তথ্য পাওয়া যায়নি" />
       )}
       {response.payload?.length > 0 && (
-        <DepositsTable deposits={response.payload} />
+        <DepositsTable
+          deposits={response.payload}
+          date={translateDate(date ? date : new Date())}
+        />
       )}
     </>
   );

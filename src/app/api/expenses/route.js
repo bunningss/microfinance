@@ -55,13 +55,15 @@ export async function GET(request) {
     query.date = { $gte: startOfDay, $lte: endOfDay };
 
     const expenses = await Expense.find(query)
-      .sort({ createdAt: -1 })
+      .sort({ date: -1 })
       .populate("addedBy", "name")
-      .lean()
-      .exec();
+      .lean();
 
     return NextResponse.json(
-      { msg: "তথ্য পাওয়া গেছে।", payload: expenses },
+      {
+        msg: "তথ্য পাওয়া গেছে।",
+        payload: expenses,
+      },
       { status: 200 }
     );
   } catch (err) {

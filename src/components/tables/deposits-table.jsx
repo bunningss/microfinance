@@ -46,12 +46,12 @@ const columns = [
   },
 ];
 
-export function DepositsTable({ deposits, footer }) {
+export function DepositsTable({ deposits, footer, date }) {
   return (
     <DataTable
       columns={columns}
       data={deposits}
-      header="জমার তালিকা"
+      header={`জমার তালিকা - ${date}`}
       withAction
       footer={footer}
     />

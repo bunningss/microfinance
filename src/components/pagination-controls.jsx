@@ -7,14 +7,20 @@ export function PaginationControls({ isLastPage, totalPages }) {
   const router = useRouter();
   const page = searchParams.get("page") ?? "1";
 
+  const updateUrl = (newPage) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", newPage);
+    router.push(`?${params.toString()}`);
+  };
+
   const handleNextPage = () => {
     if (isLastPage) return;
-    router.push(`?page=${Number(page) + 1}`);
+    updateUrl(Number(page) + 1);
   };
 
   const handlePrevPage = () => {
     if (Number(page) === 1) return;
-    router.push(`?page=${Number(page) - 1}`);
+    updateUrl(Number(page) - 1);
   };
 
   return (

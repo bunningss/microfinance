@@ -30,11 +30,15 @@ export function DateFilter({ allowFuture }) {
     : translateDate(new Date(Date.now()));
 
   const handleSubmit = (data) => {
-    router.push(`?date=${setTimezone(data.date)}`);
+    const params = new URLSearchParams(searchParams);
+    params.set("date", setTimezone(data.date));
+    router.push(`?${params.toString()}`);
   };
 
   const handleClear = () => {
-    router.push(`?`);
+    const params = new URLSearchParams(searchParams);
+    params.delete("date");
+    router.push(`?${params.toString()}`);
     form.reset();
   };
 

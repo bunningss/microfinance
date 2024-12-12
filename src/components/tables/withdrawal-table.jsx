@@ -53,12 +53,12 @@ const columns = [
   },
 ];
 
-export function WithdrawalTable({ withdrawals, footer }) {
+export function WithdrawalTable({ withdrawals, footer, date }) {
   return (
     <DataTable
       columns={columns}
       data={withdrawals}
-      header="টাকা উত্তোলন তালিকা"
+      header={`টাকা উত্তোলনের তালিকা - ${date}`}
       withAction
       footer={footer}
     />
