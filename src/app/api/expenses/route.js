@@ -50,8 +50,10 @@ export async function GET(request) {
 
     let query = {};
 
-    const { startOfDay, endOfDay } = formatDate(date);
-    query.date = { $gte: startOfDay, $lte: endOfDay };
+    if (date) {
+      const { startOfDay, endOfDay } = formatDate(date);
+      query.date = { $gte: startOfDay, $lte: endOfDay };
+    }
 
     const expenses = await Expense.find(query)
       .sort({ createdAt: -1 })
