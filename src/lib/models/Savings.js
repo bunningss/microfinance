@@ -29,6 +29,7 @@ const savingsSchema = new mongoose.Schema(
     savingsName: {
       type: String,
       required: true,
+      unique: true,
     },
     savingsType: {
       type: String,

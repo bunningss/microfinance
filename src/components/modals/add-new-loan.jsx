@@ -13,6 +13,7 @@ import { addNewLoanSchema } from "@/lib/schema";
 import { useRouter } from "next/navigation";
 import { generateLoanInstallments } from "@/utils/helpers";
 import { LoanInstallmentDetails } from "../loan-installment-details";
+import { FormCalendar } from "../form/form-calendar";
 
 export function AddNewLoan({ member }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -130,13 +131,11 @@ export function AddNewLoan({ member }) {
           options={savingsTypes}
           required
         />
-        <FormInput
+        <FormCalendar
           form={form}
           name="startDate"
           label="start date / শুরুর তারিখ"
-          placeholder=""
           required
-          type="date"
         />
       </FormModal>
       <LoanInstallmentDetails

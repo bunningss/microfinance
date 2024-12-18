@@ -20,6 +20,15 @@ export async function MemberFinancialDetails({ data }) {
         currentLoan?.repayAmount ? currentLoan?.repayAmount : 0
       ),
     },
+    {
+      icon: "expense",
+      dataKey: "ঋণ পরিশোধ বাকি আছে",
+      dataValue: translateCurrency(
+        currentLoan?.amountPaid
+          ? currentLoan?.repayAmount - currentLoan?.amountPaid
+          : currentLoan?.repayAmount
+      ),
+    },
   ];
 
   return (

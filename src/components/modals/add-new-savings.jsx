@@ -13,6 +13,7 @@ import { addNewSavingsSchema } from "@/lib/schema";
 import { useRouter } from "next/navigation";
 import { generateInstallments } from "@/utils/helpers";
 import { SavingsInstallmentDetails } from "../savings-installment-details";
+import { FormCalendar } from "../form/form-calendar";
 
 export function AddNewSavings({ member }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -135,13 +136,11 @@ export function AddNewSavings({ member }) {
           options={savingsTypes}
           required
         />
-        <FormInput
+        <FormCalendar
           form={form}
           name="startDate"
           label="start date / শুরুর তারিখ"
-          placeholder=""
           required
-          type="date"
         />
       </FormModal>
       <SavingsInstallmentDetails

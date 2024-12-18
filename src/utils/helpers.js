@@ -58,8 +58,13 @@ export function getMonthNamesWithYear() {
 }
 
 export function generateSavingsName() {
-  const randomItem =
-    savingsNames[Math.floor(Math.random() * savingsNames.length)];
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
+  let randomItem = "";
+
+  for (let i = 0; i < 9; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    randomItem += characters[randomIndex];
+  }
 
   return randomItem;
 }
@@ -121,7 +126,7 @@ export function generateLoanInstallments(
 
   for (let i = 0; i < totalInstallments; i++) {
     installments.push({
-      date: currentDate.toISOString().split("T")[0], // Format date as YYYY-MM-DD
+      date: currentDate.toISOString().split("T")[0],
       status: "unpaid",
       totalAmount: repayAmount,
       amount: amountPerInstallment,
