@@ -4,7 +4,11 @@ import Loan from "@/lib/models/Loan";
 import { connectDb } from "@/lib/db/connectDb";
 import { NextResponse } from "next/server";
 import { verifyToken } from "@/utils/auth";
-import { generateLoanInstallments, generateSavingsName } from "@/utils/helpers";
+import {
+  generateLoanInstallments,
+  generateSavingsName,
+  setTimezone,
+} from "@/utils/helpers";
 import { updateDailyBalance } from "@/utils/update-daily-balance";
 
 // create new loan
@@ -74,7 +78,7 @@ export async function POST(request) {
       loanAmount: body.loanAmount,
       repayAmount: installments[0].totalAmount,
       loanDuration: body.loanDuration,
-      startDate: body.startDate,
+      startDate: setTimezone(body.startDate),
       endDate: installments.at(-1).date,
       owner: body.owner,
       installments,

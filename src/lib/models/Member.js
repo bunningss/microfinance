@@ -22,6 +22,10 @@ const memberSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    birthDate: {
+      type: Date,
+      required: true,
+    },
     permVillage: {
       type: String,
       required: true,

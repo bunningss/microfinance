@@ -4,7 +4,11 @@ import Member from "@/lib/models/Member";
 import { connectDb } from "@/lib/db/connectDb";
 import { NextResponse } from "next/server";
 import { verifyToken } from "@/utils/auth";
-import { generateInstallments, generateSavingsName } from "@/utils/helpers";
+import {
+  generateInstallments,
+  generateSavingsName,
+  setTimezone,
+} from "@/utils/helpers";
 
 // create new savings
 export async function POST(request) {
@@ -33,18 +37,27 @@ export async function POST(request) {
       parseInt(body.savingsAmount)
     );
 
+    const nomineeAge =
+      new Date().getFullYear() - new Date(body.nomineeBirthDate).getFullYear();
+
     const newSavings = new Savings({
       savingsName,
       savingsStatus: "incomplete",
       savingsType: body.savingsType,
       savingsAmount: body.savingsAmount,
       savingsDuration: body.savingsDuration,
-      startDate: body.startDate,
+      startDate: setTimezone(body.startDate),
       endDate: installments.at(-1).date,
       owner: body.owner,
       installments,
       amountSaved: 0,
       approvedBy: id,
+      nomineeName: body.nomineeName,
+      relationWithNominee: body.relationWithNominee,
+      nomineeNidNumber: body.nomineeNidNumber,
+      nomineeBirthDate: setTimezone(body.nomineeBirthDate),
+      nomineeAge,
+      nomineeImage: body.nomineeImage,
     });
 
     await Member.findByIdAndUpdate(

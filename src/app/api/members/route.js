@@ -4,7 +4,11 @@ import Savings from "@/lib/models/Savings";
 import { connectDb } from "@/lib/db/connectDb";
 import { verifyToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
-import { generateInstallments, generateSavingsName } from "@/utils/helpers";
+import {
+  generateInstallments,
+  generateSavingsName,
+  setTimezone,
+} from "@/utils/helpers";
 
 // Add new member
 export async function POST(request) {
@@ -24,7 +28,8 @@ export async function POST(request) {
         { status: 400 }
       );
 
-    const memberAge = 25;
+    const memberAge =
+      new Date().getFullYear() - new Date(body.birthDate).getFullYear();
     const nomineeAge =
       new Date().getFullYear() - new Date(body.nomineeBirthDate).getFullYear();
 
@@ -33,6 +38,7 @@ export async function POST(request) {
       fathersName: body.fathersName,
       mothersName: body.mothersName,
       memberNumber: body.memberNumber,
+      birthDate: setTimezone(body.birthDate),
       permVillage: body.permVillage,
       permPostOffice: body.permPostOffice,
       permPoliceStation: body.permPoliceStation,

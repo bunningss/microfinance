@@ -7,6 +7,9 @@ export const addMemberFormSchema = z.object({
   fathersName: z.string().optional().nullable(),
   husbandsName: z.string().optional().nullable(),
   mothersName: z.string().min(1, "Mother's Name is required"),
+  birthDate: z.date({
+    message: "Please select birth date.",
+  }),
   permVillage: z.string().min(1, "Permanent village is required"),
   permPostOffice: z.string().min(1, "Permanent post office is required"),
   permPoliceStation: z.string().min(1, "Permanent police station is required"),
@@ -76,13 +79,21 @@ export const addNewSavingsSchema = z.object({
   }),
   savingsAmount: z.string().min(1, "Savings amount is required"),
   savingsDuration: z.string().min(1, "Savings duration is required"),
-  startDate: z
-    .string()
-    .min(1, "Start date is required")
-    .refine((val) => {
-      const date = new Date(val);
-      return !isNaN(date.getTime());
-    }, "Invalid date format"),
+  startDate: z.date({
+    message: "Select date.",
+  }),
+  nomineeName: z.string().min(3, {
+    message: "Please enter nominee name",
+  }),
+  relationWithNominee: z.string().min(3, {
+    message: "Please enter relation.",
+  }),
+  nomineeBirthDate: z.date({
+    message: "Please select date",
+  }),
+  nomineeNidNumber: z.string().min(3, {
+    message: "Enter nominee NID number.",
+  }),
 });
 
 // Add loan schema
@@ -92,13 +103,9 @@ export const addNewLoanSchema = z.object({
   }),
   loanAmount: z.string().min(1, "Loan amount is required"),
   loanDuration: z.string().min(1, "Loan duration is required"),
-  startDate: z
-    .string()
-    .min(1, "Start date is required")
-    .refine((val) => {
-      const date = new Date(val);
-      return !isNaN(date.getTime());
-    }, "Invalid date format"),
+  startDate: z.date({
+    message: "Please select date.",
+  }),
 });
 
 // search installment schema

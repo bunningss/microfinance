@@ -1,22 +1,27 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Modal } from "./modal";
 import { FormModal } from "../form/form-modal";
 import { FormInput } from "../form/form-input";
 import { useForm, useWatch } from "react-hook-form";
 import { FormSelect } from "../form/form-select";
 import { savingsTypes } from "@/lib/static";
 import { postData } from "@/utils/api-calls";
-import { errorNotification, successNotification } from "@/utils/toast";
+import {
+  errorNotification,
+  successNotification,
+  warningNotification,
+} from "@/utils/toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addNewSavingsSchema } from "@/lib/schema";
 import { useRouter } from "next/navigation";
 import { generateInstallments } from "@/utils/helpers";
 import { SavingsInstallmentDetails } from "../savings-installment-details";
 import { FormCalendar } from "../form/form-calendar";
+import { ImageDropzone } from "../dropzone";
+import { useEdgeStore } from "@/lib/edgestore";
 
 export function AddNewSavings({ member }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [nomineeImage, setNomineeImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [installmentDetails, setInstallmentDetails] = useState({
     count: 0,
@@ -24,6 +29,7 @@ export function AddNewSavings({ member }) {
     lastDate: "",
   });
   const router = useRouter();
+  const { edgestore } = useEdgeStore();
 
   const form = useForm({
     resolver: zodResolver(addNewSavingsSchema),
@@ -32,6 +38,10 @@ export function AddNewSavings({ member }) {
       savingsAmount: "",
       savingsDuration: "",
       startDate: "",
+      nomineeName: "",
+      relationWithNominee: "",
+      nomineeBirthDate: "",
+      nomineeNidNumber: "",
     },
   });
 
@@ -75,15 +85,21 @@ export function AddNewSavings({ member }) {
 
   const handleSubmit = async (data) => {
     setIsLoading(true);
+
     try {
+      if (!nomineeImage) return warningNotification("ছবি যোগ করুন");
       const { error, response } = await postData("savings", {
         ...data,
+        nomineeImage,
         owner: member?._id,
       });
       if (error) return errorNotification(response.msg);
 
+      await edgestore.publicImages.confirmUpload({
+        url: nomineeImage,
+      });
+
       successNotification(response.msg);
-      setIsModalOpen(false);
       form.reset();
       router.push(`/dashboard/members/savings/${response.payload}`);
     } catch (err) {
@@ -94,16 +110,7 @@ export function AddNewSavings({ member }) {
   };
 
   return (
-    <Modal
-      title="add savings"
-      description="Add savings information here. Click save when you're done."
-      triggerLabel="নতুন সঞ্চয়"
-      triggerIcon="plus"
-      className="w-full"
-      isOpen={isModalOpen}
-      onClose={() => setIsModalOpen(false)}
-      onOpen={() => setIsModalOpen(true)}
-    >
+    <div>
       <FormModal
         form={form}
         onSubmit={handleSubmit}
@@ -111,42 +118,73 @@ export function AddNewSavings({ member }) {
         icon="save"
         loading={isLoading}
         disabled={isLoading}
-        setIsModalOpen={setIsModalOpen}
-        withCancelButton
       >
-        <FormInput
-          form={form}
-          name="savingsAmount"
-          label="savings amount / সঞ্চয়ের পরিমাণ"
-          placeholder=""
-          required
+        <ImageDropzone
+          className="bg-background"
+          setFile={setNomineeImage}
+          file={nomineeImage}
+          label="Nominee's photo / মনোনীত ব্যক্তির ছবি"
         />
-        <FormInput
-          form={form}
-          name="savingsDuration"
-          label="savings Duration / সঞ্চয়ের সময়কাল (মাসের সংখ্যা)"
-          placeholder=""
-          required
-        />
-        <FormSelect
-          form={form}
-          label="Savings type / সঞ্চয়ের ধরণ"
-          name="savingsType"
-          placeholder="select type"
-          options={savingsTypes}
-          required
-        />
-        <FormCalendar
-          form={form}
-          name="startDate"
-          label="start date / শুরুর তারিখ"
-          required
-        />
+
+        <div className="grid md:grid-cols-2 gap-4 items-end">
+          <FormInput
+            form={form}
+            name="savingsAmount"
+            label="savings amount / সঞ্চয়ের পরিমাণ"
+            required
+          />
+          <FormInput
+            form={form}
+            name="savingsDuration"
+            label="savings Duration / সঞ্চয়ের সময়কাল (মাসের সংখ্যা)"
+            required
+          />
+
+          <FormSelect
+            form={form}
+            label="Savings type / সঞ্চয়ের ধরণ"
+            name="savingsType"
+            placeholder="select type"
+            options={savingsTypes}
+            required
+          />
+          <FormCalendar
+            form={form}
+            name="startDate"
+            label="start date / শুরুর তারিখ"
+            required
+          />
+
+          <FormInput
+            form={form}
+            name="nomineeName"
+            label="Nominee Name / নমিনির নাম"
+            required
+          />
+          <FormInput
+            form={form}
+            name="relationWithNominee"
+            label="relation with nominee / নমিনির সাথে সম্পর্ক"
+            required
+          />
+          <FormInput
+            form={form}
+            name="nomineeNidNumber"
+            label="nominee NID number / নমিনির জাতীয় পরিচয় পত্র নং"
+            required
+          />
+          <FormCalendar
+            form={form}
+            name="nomineeBirthDate"
+            label="birth date / জন্ম তারিখ"
+            required
+          />
+        </div>
       </FormModal>
       <SavingsInstallmentDetails
         installmentDetails={installmentDetails}
         className="static mt-4"
       />
-    </Modal>
+    </div>
   );
 }

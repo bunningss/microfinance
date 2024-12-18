@@ -40,6 +40,7 @@ export function AddMember() {
       fathersName: "",
       husbandsName: "",
       mothersName: "",
+      birthDate: "",
       permVillage: "",
       permPostOffice: "",
       permPoliceStation: "",
@@ -166,6 +167,12 @@ export function AddMember() {
             name="memberNumber"
             label="Member Number / সদস্য নম্বর"
             placeholder=""
+            required
+          />
+          <FormCalendar
+            form={form}
+            name="birthDate"
+            label="birth date / জন্ম তারিখ"
             required
           />
         </div>

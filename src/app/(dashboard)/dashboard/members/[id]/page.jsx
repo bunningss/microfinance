@@ -1,13 +1,14 @@
+import Link from "next/link";
 import { Block } from "@/components/block";
 import { getData } from "@/utils/api-calls";
 import { Suspense } from "react";
 import { Preloader } from "@/components/preloader";
 import { ViewSavings } from "@/components/modals/view-savings";
 import { ViewLoans } from "@/components/modals/view-loans";
-import { AddNewSavings } from "@/components/modals/add-new-savings";
 import { AddNewLoan } from "@/components/modals/add-new-loan";
 import { WithdrawMoney } from "@/components/modals/withdraw-money";
 import { MemberFinancialDetails } from "@/components/member-financial-details";
+import { Button } from "@/components/ui/button";
 
 async function Member({ id }) {
   const { response } = await getData(`members/${id}`, 0);
@@ -18,7 +19,11 @@ async function Member({ id }) {
       <div className="grid grid-cols-2 gap-2">
         <ViewSavings savings={response.payload?.savings} />
         <ViewLoans loans={response.payload?.loans} />
-        <AddNewSavings member={response.payload} />
+        <Link href={`/dashboard/members/${id}/add-savings`}>
+          <Button icon="plus" className="w-full">
+            নতুন সঞ্চয়
+          </Button>
+        </Link>
         <AddNewLoan member={response.payload} />
         <WithdrawMoney id={response.payload?._id} />
       </div>

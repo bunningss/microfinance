@@ -8,7 +8,7 @@ export function generateInstallments(
   amount
 ) {
   // Parse the start date
-  const start = new Date(startDate);
+  const start = setTimezone(startDate);
   const installments = [];
 
   // Calculate the end date based on duration in months
@@ -100,7 +100,7 @@ export function generateLoanInstallments(
   }
 
   // Parse the start date
-  const start = new Date(startDate);
+  const start = setTimezone(startDate);
   if (isNaN(start)) {
     console.error("Invalid startDate provided.");
     return [];
@@ -172,7 +172,7 @@ export function generateLoanFineInstallments(
   amount
 ) {
   // Parse the start date
-  const start = new Date(startDate);
+  const start = setTimezone(startDate);
   if (isNaN(start)) {
     console.error("Invalid startDate provided.");
     return [];
