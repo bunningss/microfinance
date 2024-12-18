@@ -1,15 +1,23 @@
 import { Block } from "@/components/block";
 import { AddNewSavings } from "@/components/forms/add-new-savings";
+import { Preloader } from "@/components/preloader";
 import { getData } from "@/utils/api-calls";
+import React from "react";
+
+async function AddSavings({ id }) {
+  const { response } = await getData(`members/${id}`, 0);
+
+  return <AddNewSavings member={response.payload} />;
+}
 
 export default async function Page({ params }) {
-  const { response } = await getData(`members/${params.id}`, 0);
-
   return (
     <div className="space-y-4">
       <Block title="নতুন সঞ্চয় যোগ করুন" />
 
-      <AddNewSavings member={response.payload} />
+      <React.Suspense fallback={<Preloader />}>
+        <AddSavings id={params.id} />
+      </React.Suspense>
     </div>
   );
 }

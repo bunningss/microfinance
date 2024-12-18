@@ -126,7 +126,7 @@ export function AddNewSavings({ member }) {
           label="Nominee's photo / মনোনীত ব্যক্তির ছবি"
         />
 
-        <div className="grid md:grid-cols-2 gap-4 items-end">
+        <div className="grid md:grid-cols-2 gap-4">
           <FormInput
             form={form}
             name="savingsAmount"

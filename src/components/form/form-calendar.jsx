@@ -60,12 +60,12 @@ export function FormCalendar({
       control={form.control}
       name={name || ""}
       render={({ field }) => (
-        <FormItem className="flex flex-col" gap={label}>
+        <FormItem className="grid gap-3">
           {label && (
             <FormLabel
               className={`capitalize relative ${
                 required
-                  ? "after:content-['*'] after:absolute after:text-destructive after:text-lg after:-bottom-2"
+                  ? "after:content-['*'] after:absolute after:text-destructive after:text-lg after:-bottom-1"
                   : ""
               }`}
             >

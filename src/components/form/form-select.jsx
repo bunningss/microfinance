@@ -34,12 +34,12 @@ export function FormSelect({
       control={form.control}
       name={name || ""}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className="grid gap-3">
           {label && (
             <FormLabel
               className={`capitalize relative ${
                 required
-                  ? "after:content-['*'] after:absolute after:text-destructive after:text-lg"
+                  ? "after:content-['*'] after:absolute after:text-destructive after:text-lg after:-bottom-1"
                   : ""
               }`}
             >
