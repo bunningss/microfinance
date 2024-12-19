@@ -5,9 +5,21 @@ import { roles } from "./lib/static";
 const SIGN_IN_URL = "/sign-in";
 
 export async function middleware(request) {
+  // Site status validation
+  const siteStatus = await fetch(
+    `${process.env.SITE_VERIFICATION_URL}site/verify-site-status/${process.env.SITE_ID}`,
+    {
+      method: "GET",
+    }
+  );
+  const data = await siteStatus.json();
+
+  if (!data.payload) {
+    return NextResponse.redirect(new URL("/not-found", request.url));
+  }
+
   const { error, role } = await getSession();
   const rolesPermissions = roles[role];
-
   const { pathname } = request.nextUrl;
 
   // Redirect authenticated users from auth pages
