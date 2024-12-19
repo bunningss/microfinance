@@ -16,7 +16,7 @@ export async function middleware(request) {
   const data = await siteStatus.json();
 
   if (!data.payload) {
-    return NextResponse.redirect(new URL("/not-found", request.url));
+    throw new Error("Site is not active");
   }
 
   const { error, role } = await getSession();
