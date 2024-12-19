@@ -10,6 +10,7 @@ export async function middleware(request) {
     `${process.env.SITE_VERIFICATION_URL}site/verify-site-status/${process.env.SITE_ID}`,
     {
       method: "GET",
+      cache: "no-store",
     }
   );
   const data = await siteStatus.json();
